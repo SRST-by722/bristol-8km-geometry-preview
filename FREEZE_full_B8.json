@@ -1,0 +1,4220 @@
+{
+ "freeze_id": "full_B8",
+ "frozen_at_utc": "2026-11-10T11:40:00Z",
+ "supersedes": "full_B7",
+ "role": "stage candidate (close-out window ends 12:13:43 UTC)",
+ "scope": "Whole 8 km AOI: 256 tiles + overview + viewer (?diag=1) with the same 10 inspection buttons",
+ "manifest_tiles": 256,
+ "manifest_files_missing": [],
+ "stale_web_copies": 0,
+ "changes_since_full_B7": [
+  "approach ramps end where DSM - DTM < 0.4 m (was 0.8 m). Evidence for CD_BROWSER_CHECK_008 inspection 8: in the full_B7 compressed GLB the ramp top fell 22.26 -> 21.63 m in 12 m while the ordinary road beyond was at 22.24 m (0.6 m dip + step); in full_B8 the ramp top is 22.26-22.27 m for 14 m and the road beyond 22.24 m (output/data/inspection8_profile.json, measured from web/tiles/t12_07_base.glb)",
+  "the wall-like faces at that bridge end are the sides/end of the inferred ramp solid standing on the DTM, which drops to 14.57 m under the bridge end (EA DTM removes the bridge structure) and recovers to 22.1 m 14 m further on; the ordinary road drawn on that DTM slope lies inside the solid",
+  "Clifton west approach: extra abutment width tapers from 11.4 m at the pylon to the 6.4 m road width at the outer end; ramp 49.9 m, ending at 80.37 m on the ground road",
+  "landmark shapes unchanged"
+ ],
+ "bridge_connection_check": {
+  "shared_nodes_between_bridge_segments": {
+   "before_(independent_estimates)": {
+    "count": 100,
+    "over_0.3m": 44,
+    "max_m": 8.83,
+    "median_m": 0.12
+   },
+   "after_(GLB_vertices)": {
+    "count": 100,
+    "over_0.3m": 2,
+    "max_m": 0.86,
+    "median_m": 0.0
+   }
+  },
+  "bridge_end_to_ground_road": {
+   "before_(deck_estimate_vs_DTM_road)": {
+    "count": 842,
+    "over_0.6m": 369,
+    "max_m": 30.88,
+    "median_m": 0.4
+   },
+   "after_(deck_vs_ramp_top_or_DTM_road)": {
+    "count": 842,
+    "over_0.6m": 25,
+    "max_m": 9.69,
+    "median_m": 0.0
+   }
+  },
+  "inferred_approach_ramps": {
+   "count": 341,
+   "length_m_median": 6.0,
+   "length_m_max": 118.0,
+   "shorter_than_4m": 46,
+   "max_gradient": 0.488,
+   "steeper_than_10pct": 30,
+   "steeper_than_15pct": 9,
+   "outer_end_step_vs_ground_2m_beyond_(straight_extrapolation;_crude)": {
+    "count": 341,
+    "over_0.3m": 42,
+    "max_m": 1.52,
+    "median_m": 0.08
+   },
+   "steep_examples": [
+    [
+     0.488,
+     "way/444827910#approach_234",
+     10.0
+    ],
+    [
+     0.372,
+     "way/1451373831#approach_336",
+     30.0
+    ],
+    [
+     0.311,
+     "way/108050073#approach_129",
+     118.0
+    ],
+    [
+     0.297,
+     "way/4827535#approach_11",
+     18.0
+    ],
+    [
+     0.199,
+     "way/159015731#approach_187",
+     8.0
+    ],
+    [
+     0.19,
+     "way/102809134#approach_119",
+     5.9
+    ],
+    [
+     0.162,
+     "way/26239789#approach_52",
+     6.0
+    ],
+    [
+     0.153,
+     "way/156877722#approach_185",
+     20.0
+    ],
+    [
+     0.151,
+     "way/522118409#approach_254",
+     57.8
+    ]
+   ]
+  },
+  "not_verified": "This compares model heights with each other. It does not verify real-world deck heights; connections are not individually inspected."
+ },
+ "unresolved_connections_count_measured": 25,
+ "node_rule_counts": {
+  "inferred approach ramp": 331,
+  "flush with ground": 492,
+  "bridge-to-bridge or free node": 162,
+  "unresolved (kept DSM level, flagged)": 28,
+  "lowered to DTM (gap <= 2 m, unsupported)": 8
+ },
+ "node_matching": "nodes are way end points merged when their projected XY agree to 0.01 m (not matched by OSM node id; end points of the same OSM node always agree, the converse is assumed, not verified). Ways crossing at different levels without a common end point are never tied together.",
+ "inspection8_profile_from_compressed_glb": {
+  "source": "final compressed web GLB web/tiles/t12_07_base.glb",
+  "ramp": "way/1061025415#approach_300",
+  "along_ground_road": [
+   {
+    "s_m": 0,
+    "dtm": 14.57,
+    "dsm": 22.26,
+    "ramp_top_z_in_glb": 22.26,
+    "ordinary_road_z_in_glb": 15.03
+   },
+   {
+    "s_m": 2,
+    "dtm": 15.26,
+    "dsm": 22.24,
+    "ramp_top_z_in_glb": 22.26,
+    "ordinary_road_z_in_glb": 15.03
+   },
+   {
+    "s_m": 4,
+    "dtm": 16.2,
+    "dsm": 22.23,
+    "ramp_top_z_in_glb": 22.26,
+    "ordinary_road_z_in_glb": 16.84
+   },
+   {
+    "s_m": 6,
+    "dtm": 17.24,
+    "dsm": 22.21,
+    "ramp_top_z_in_glb": 22.26,
+    "ordinary_road_z_in_glb": 16.84
+   },
+   {
+    "s_m": 8,
+    "dtm": 18.27,
+    "dsm": 22.2,
+    "ramp_top_z_in_glb": 22.26,
+    "ordinary_road_z_in_glb": null
+   },
+   {
+    "s_m": 10,
+    "dtm": 19.67,
+    "dsm": 22.18,
+    "ramp_top_z_in_glb": 22.27,
+    "ordinary_road_z_in_glb": 19.99
+   },
+   {
+    "s_m": 12,
+    "dtm": 21.47,
+    "dsm": 22.17,
+    "ramp_top_z_in_glb": 22.27,
+    "ordinary_road_z_in_glb": 19.99
+   },
+   {
+    "s_m": 14,
+    "dtm": 22.12,
+    "dsm": 22.15,
+    "ramp_top_z_in_glb": 22.27,
+    "ordinary_road_z_in_glb": 22.24
+   },
+   {
+    "s_m": 16,
+    "dtm": 22.14,
+    "dsm": 22.14,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.32
+   },
+   {
+    "s_m": 18,
+    "dtm": 22.12,
+    "dsm": 22.12,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.23
+   },
+   {
+    "s_m": 20,
+    "dtm": 22.11,
+    "dsm": 22.11,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.23
+   },
+   {
+    "s_m": 22,
+    "dtm": 22.09,
+    "dsm": 22.09,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": null
+   },
+   {
+    "s_m": 24,
+    "dtm": 22.08,
+    "dsm": 22.08,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.21
+   },
+   {
+    "s_m": 26,
+    "dtm": 22.07,
+    "dsm": 22.07,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.21
+   },
+   {
+    "s_m": 28,
+    "dtm": 22.06,
+    "dsm": 22.06,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": null
+   },
+   {
+    "s_m": 30,
+    "dtm": 22.05,
+    "dsm": 22.05,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.21
+   },
+   {
+    "s_m": 32,
+    "dtm": 22.04,
+    "dsm": 22.04,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.21
+   },
+   {
+    "s_m": 34,
+    "dtm": 22.03,
+    "dsm": 22.03,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.15
+   },
+   {
+    "s_m": 36,
+    "dtm": 22.02,
+    "dsm": 22.02,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.24
+   },
+   {
+    "s_m": 38,
+    "dtm": 22.01,
+    "dsm": 22.01,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.14
+   },
+   {
+    "s_m": 40,
+    "dtm": 22,
+    "dsm": 22,
+    "ramp_top_z_in_glb": null,
+    "ordinary_road_z_in_glb": 22.14
+   }
+  ],
+  "along_bridge_from_node": [
+   {
+    "s_m": 0,
+    "dtm": 14.57,
+    "deck_top_z_in_glb": 22.26
+   },
+   {
+    "s_m": 4,
+    "dtm": 13.92,
+    "deck_top_z_in_glb": 22.3
+   },
+   {
+    "s_m": 8,
+    "dtm": 13.76,
+    "deck_top_z_in_glb": 22.34
+   },
+   {
+    "s_m": 12,
+    "dtm": 12.82,
+    "deck_top_z_in_glb": null
+   },
+   {
+    "s_m": 16,
+    "dtm": 10.63,
+    "deck_top_z_in_glb": 22.38
+   },
+   {
+    "s_m": 20,
+    "dtm": 10.6,
+    "deck_top_z_in_glb": 22.43
+   }
+  ]
+ },
+ "not_passed_claims": "The unresolved connections, the ramps steeper than 10%/15% and the ramps with an outer-end difference > 0.3 m in the crude test are NOT claimed as passed.",
+ "co_check_level": "automatic checks on the final files (round trip 0 problems, drape 0 failures, web copies all_ok, bridge connection check) and the inspection-8 profile measured from the compressed GLB; not opened in a browser by CO; no offline render of full_B8",
+ "how_to_open": "cd <this folder> && python3 -m http.server 8000  ->  http://localhost:8000/viewer/?diag=1",
+ "files_count": 782,
+ "bytes_total": 881027589,
+ "files": [
+  {
+   "path": "viewer/index.html",
+   "bytes": 3975,
+   "sha256": "5c474850cc058d7bab59a27ad58bae403fa792135a9b7a0985728de7caf6b511"
+  },
+  {
+   "path": "viewer/inspect_views.example.json",
+   "bytes": 10750,
+   "sha256": "cf8bcb2a3e8eff06946dc26ac676c6602ab8d3ce1d36658a6a33357be404cb11"
+  },
+  {
+   "path": "viewer/inspect_views.json",
+   "bytes": 10752,
+   "sha256": "7e599eb7dbeba3adefc1492534564a7d534e817566c77c85f5adacba3c5de9f9"
+  },
+  {
+   "path": "viewer/manifest.json",
+   "bytes": 85008,
+   "sha256": "b10c0c2676f63fb56d142f9466c1ad5f6035cc41fdf91613808ffd51bcd4d83d"
+  },
+  {
+   "path": "viewer/vendor/THREE_LICENSE.txt",
+   "bytes": 1081,
+   "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
+  },
+  {
+   "path": "viewer/vendor/VERSION.json",
+   "bytes": 50,
+   "sha256": "2ff9c66ddf55a9aa7e30d06dd5caab299c4d4306b1cb809f078420fd6cd67443"
+  },
+  {
+   "path": "viewer/vendor/addons/controls/MapControls.js",
+   "bytes": 863,
+   "sha256": "83d22280adf0d68db4ca02e6ccafda13936a2aa11ed2ed9427bbb31c0f883772"
+  },
+  {
+   "path": "viewer/vendor/addons/controls/OrbitControls.js",
+   "bytes": 32134,
+   "sha256": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e"
+  },
+  {
+   "path": "viewer/vendor/addons/libs/meshopt_decoder.module.js",
+   "bytes": 24850,
+   "sha256": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468"
+  },
+  {
+   "path": "viewer/vendor/addons/loaders/GLTFLoader.js",
+   "bytes": 110273,
+   "sha256": "45139faddd5aaf48ed2d62203d976e5cbd703db1a592de40527f9f6cf58abd44"
+  },
+  {
+   "path": "viewer/vendor/addons/utils/BufferGeometryUtils.js",
+   "bytes": 31768,
+   "sha256": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6"
+  },
+  {
+   "path": "viewer/vendor/three.module.js",
+   "bytes": 691648,
+   "sha256": "08fd7545d13d2c7fb65ab691530a802dafefd638596501854f267d0fb13c39e7"
+  },
+  {
+   "path": "viewer/viewer.js",
+   "bytes": 15857,
+   "sha256": "19987798c98e2e3d177352fe1dc5654bcec33020a71a960036237bd421c9f3a0"
+  },
+  {
+   "path": "web/overview_b0.glb",
+   "bytes": 19036752,
+   "sha256": "5779cf62d3fb6695613487a4d60a0f66068bfdce44b5d43e40661c4b5814a49a"
+  },
+  {
+   "path": "web/tiles/t00_00_b1.glb",
+   "bytes": 3696,
+   "sha256": "91bee6a29a0a875ea7ff22f0665c7008e5fafdc1d6e75509ce2789fc8ce67df3"
+  },
+  {
+   "path": "web/tiles/t00_00_b2.glb",
+   "bytes": 6708,
+   "sha256": "01cdadfa10f5e66bccdf6d7247f98fddc83c8dc5886f51e9827515d5754e393e"
+  },
+  {
+   "path": "web/tiles/t00_00_base.glb",
+   "bytes": 695052,
+   "sha256": "a2c31210a4b6abafc97836f0fa23285069995ce189c558b378819731cc0f3d7c"
+  },
+  {
+   "path": "web/tiles/t00_01_b1.glb",
+   "bytes": 37736,
+   "sha256": "b21e0289aed1125e961bb67c59394b0d50dc74abf1c57fc32a4f6abb8f333845"
+  },
+  {
+   "path": "web/tiles/t00_01_b2.glb",
+   "bytes": 114256,
+   "sha256": "5898eaaf4cc89a7c6b6df21d00498f8124cd6bf941cc996dfa913e79548e6885"
+  },
+  {
+   "path": "web/tiles/t00_01_base.glb",
+   "bytes": 668648,
+   "sha256": "87a823a3ca0cf10d3fddb5349501924f2f69e21961c5f673be2159b61f49a256"
+  },
+  {
+   "path": "web/tiles/t00_02_b1.glb",
+   "bytes": 369860,
+   "sha256": "084b1452f794f9e9a9283c72a6476f797c91809e45165123a16824f1b4fae81d"
+  },
+  {
+   "path": "web/tiles/t00_02_b2.glb",
+   "bytes": 801364,
+   "sha256": "6f9532dc4474dafbbb7c85aa90c3a14f8d0f080e34c42c677f419c8a7b48a6ed"
+  },
+  {
+   "path": "web/tiles/t00_02_base.glb",
+   "bytes": 508172,
+   "sha256": "df78c19f3b0077bbf6fd010bbe11c08c121986e5deac016ca96a2c8b875b9243"
+  },
+  {
+   "path": "web/tiles/t00_03_b1.glb",
+   "bytes": 460196,
+   "sha256": "5a8348223f691fd8e9cbbb05acef9f4fe120a0a92699a6c7f143d2a0b14f36de"
+  },
+  {
+   "path": "web/tiles/t00_03_b2.glb",
+   "bytes": 1261304,
+   "sha256": "f2387a40a5ddbc9d87bd2c452e61eac6f4f05d439a882ca9e5116a88624df04c"
+  },
+  {
+   "path": "web/tiles/t00_03_base.glb",
+   "bytes": 285080,
+   "sha256": "92bc5a79e5217bcc7dae9bb4ffcf2787dd1b3f1fb040f833468e10c525f8a079"
+  },
+  {
+   "path": "web/tiles/t00_04_b1.glb",
+   "bytes": 5152,
+   "sha256": "457937b199c6bbf103cae386afc3384ef6f06646e4113ddc5224379cb3ee20b0"
+  },
+  {
+   "path": "web/tiles/t00_04_b2.glb",
+   "bytes": 11448,
+   "sha256": "b6a47cb828992a8f0791e4c2397184fccd5b00be2e3cafd3b89efcc203d4b0a7"
+  },
+  {
+   "path": "web/tiles/t00_04_base.glb",
+   "bytes": 1021452,
+   "sha256": "0ff9b99c32f12340fabef0c4d0475b3d3ebe97085a4606cb4a66aa64d000781d"
+  },
+  {
+   "path": "web/tiles/t00_05_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_05_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_05_base.glb",
+   "bytes": 1331140,
+   "sha256": "c85de68978e7bc888bdb82ec9837b1f2bf6380899c00fe95667230c16d9da42b"
+  },
+  {
+   "path": "web/tiles/t00_06_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_06_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_06_base.glb",
+   "bytes": 991616,
+   "sha256": "ce794a079fabf20e236e7e7b12ccb00e3790004ac169657e9f96e186b1e0b76b"
+  },
+  {
+   "path": "web/tiles/t00_07_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_07_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_07_base.glb",
+   "bytes": 938060,
+   "sha256": "ee51cd8530e6f39f9aebc2de864eb6ec867edb1e4cdf2a9e18fec8eda138c20e"
+  },
+  {
+   "path": "web/tiles/t00_08_b1.glb",
+   "bytes": 40396,
+   "sha256": "a9b6634319d7d622d0b9c800fe4b71b494e047009bc5537c87ed14cecf91badd"
+  },
+  {
+   "path": "web/tiles/t00_08_b2.glb",
+   "bytes": 165356,
+   "sha256": "910f64b3cb9da74824b67bb67a5625db34cdd306a0e3ee9e32be7e67f9cf2d08"
+  },
+  {
+   "path": "web/tiles/t00_08_base.glb",
+   "bytes": 527116,
+   "sha256": "1e3ad08e2f216a9d5b657f544663a5941b352cf05c25c806c0c16f3ae7e7dd8d"
+  },
+  {
+   "path": "web/tiles/t00_09_b1.glb",
+   "bytes": 7560,
+   "sha256": "5650dac2e52218226619d8951e08fff82ebbcf4a1b7d9cecd61f2098dd824479"
+  },
+  {
+   "path": "web/tiles/t00_09_b2.glb",
+   "bytes": 81444,
+   "sha256": "6045b69dffb705dabdc07f08ce7845c5c2118aa7aae7ab5c44d7d67e06eb9651"
+  },
+  {
+   "path": "web/tiles/t00_09_base.glb",
+   "bytes": 427656,
+   "sha256": "2d0c9cae2bb54c91ee975a9abb805532c39e39723443c21ebf8980baa79b09dc"
+  },
+  {
+   "path": "web/tiles/t00_10_b1.glb",
+   "bytes": 59940,
+   "sha256": "4292650fc05c4b95a3871afb03f120514ac6b417a46b8b3c30c28453743b9a39"
+  },
+  {
+   "path": "web/tiles/t00_10_b2.glb",
+   "bytes": 181752,
+   "sha256": "a932384d4c577054574a41ed03fc4037b09be8343145fa3fd21c8488200670b4"
+  },
+  {
+   "path": "web/tiles/t00_10_base.glb",
+   "bytes": 951160,
+   "sha256": "ac1f8eaa0d6176a7d3e2618deda48bd3b3916968e09cd055fa904c00fc36b0f9"
+  },
+  {
+   "path": "web/tiles/t00_11_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_11_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t00_11_base.glb",
+   "bytes": 1751916,
+   "sha256": "25ade44c0775388acca4e0edd8d32dc49941166d08cb691a4b8092be1cda0a95"
+  },
+  {
+   "path": "web/tiles/t00_12_b1.glb",
+   "bytes": 3656,
+   "sha256": "c7cdac8f7012865d73ec056a4cbe5a71b3ec50ad3511ab639bebd380048e2ac5"
+  },
+  {
+   "path": "web/tiles/t00_12_b2.glb",
+   "bytes": 7152,
+   "sha256": "2923b4e6600db6ab4742319626f84391131815b43bed4bb73fd5ee617d025e68"
+  },
+  {
+   "path": "web/tiles/t00_12_base.glb",
+   "bytes": 959756,
+   "sha256": "36f20810f4373bbb35983cfc4b61b45966d1bde8eb3ab654308cf1a9c7be9806"
+  },
+  {
+   "path": "web/tiles/t00_13_b1.glb",
+   "bytes": 128544,
+   "sha256": "5d23b581622abc542d318909c97e546e97b746f45fc551a4bdb485e4fc1f3809"
+  },
+  {
+   "path": "web/tiles/t00_13_b2.glb",
+   "bytes": 250088,
+   "sha256": "a38584c9da5bdc75b9df14a7a99f84694916589281d8758b38aacf9c10542031"
+  },
+  {
+   "path": "web/tiles/t00_13_base.glb",
+   "bytes": 666264,
+   "sha256": "d9a7a95322cc0f1890e69ceccca7abc57312346f3d886899d71579a060f177b6"
+  },
+  {
+   "path": "web/tiles/t00_14_b1.glb",
+   "bytes": 371444,
+   "sha256": "01a8b11c92866798fae212d8f6581ee0db4808e0b13464e3aebe849bbc865933"
+  },
+  {
+   "path": "web/tiles/t00_14_b2.glb",
+   "bytes": 859760,
+   "sha256": "5ff32c0b664062075d27bc366997b7a7bd3864681aa64011a8881e07167b3c12"
+  },
+  {
+   "path": "web/tiles/t00_14_base.glb",
+   "bytes": 402188,
+   "sha256": "06349a80cae4aa1bcade77aaa69aa48f1f1207e83810cf83a1ff5cedb3d1bd92"
+  },
+  {
+   "path": "web/tiles/t00_15_b1.glb",
+   "bytes": 739484,
+   "sha256": "9af6d2eaaa264632004833220e1696aa655b71a0abde2de6801bade16a19693c"
+  },
+  {
+   "path": "web/tiles/t00_15_b2.glb",
+   "bytes": 1340188,
+   "sha256": "670a43fdd9c0fb01f083a6c36c7250506ebc12cb3b49cb54437ba59c640ddec2"
+  },
+  {
+   "path": "web/tiles/t00_15_base.glb",
+   "bytes": 460052,
+   "sha256": "646b8f3fdbc860e3b12a2b764aeb9060b6b0e436d1c899a1a6490ca86f402faf"
+  },
+  {
+   "path": "web/tiles/t01_00_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_00_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_00_base.glb",
+   "bytes": 590256,
+   "sha256": "59958faa419c8e592ee10bc0d5413d8b9b38ccdc002575f410d93a9f6ea4a130"
+  },
+  {
+   "path": "web/tiles/t01_01_b1.glb",
+   "bytes": 5084,
+   "sha256": "77804bd4177cc8b745d4a36c46aa8dba2ad9658bfa6402a19cb4eb01846a5715"
+  },
+  {
+   "path": "web/tiles/t01_01_b2.glb",
+   "bytes": 7268,
+   "sha256": "af6f33d63ca58166907089ddb702f707731ddd4b4e050b14c97b3a9a0402caec"
+  },
+  {
+   "path": "web/tiles/t01_01_base.glb",
+   "bytes": 783688,
+   "sha256": "620777f3894f29672a9713dd8f30514104d2331684de2cb655830fe367c3f229"
+  },
+  {
+   "path": "web/tiles/t01_02_b1.glb",
+   "bytes": 9656,
+   "sha256": "7de3752c61569fdba3e752022af554c8e7d9dcbdb079766789c4928bf4849755"
+  },
+  {
+   "path": "web/tiles/t01_02_b2.glb",
+   "bytes": 26284,
+   "sha256": "5e361462c08a7544e72d05cafef2315d9dbf3e0697df5d78c436238551c77a04"
+  },
+  {
+   "path": "web/tiles/t01_02_base.glb",
+   "bytes": 549260,
+   "sha256": "cfaeb0bddecab2fdc28692f05f7e0f079234ba82ea5f99e0092fd9915d5bff88"
+  },
+  {
+   "path": "web/tiles/t01_03_b1.glb",
+   "bytes": 205224,
+   "sha256": "ba16a6e1fab5bebd3c694974ab9396bcab5586ce7931447472d9dfd1735681a5"
+  },
+  {
+   "path": "web/tiles/t01_03_b2.glb",
+   "bytes": 533072,
+   "sha256": "e448c542fd6f5be68cd1591c0e1383a576806db954ddc7fcbd453caac552d0ff"
+  },
+  {
+   "path": "web/tiles/t01_03_base.glb",
+   "bytes": 502616,
+   "sha256": "30f6a4dbf6037d58539757cfe36443c7a3117cdccb93655d2591456fdd841637"
+  },
+  {
+   "path": "web/tiles/t01_04_b1.glb",
+   "bytes": 66588,
+   "sha256": "7f0c7e1a79a3c05ea4a037cfc85e5950a6b5acab99d946f34d141d920e9aedba"
+  },
+  {
+   "path": "web/tiles/t01_04_b2.glb",
+   "bytes": 186888,
+   "sha256": "8f9316c38566401a020742774b75b6a2d7dcfb5e927523c11f503fc608a7883b"
+  },
+  {
+   "path": "web/tiles/t01_04_base.glb",
+   "bytes": 680124,
+   "sha256": "131d08f6b33d438cf7b03942470cf4f8f851ce3ec2b7a819935d2fc6aa86c498"
+  },
+  {
+   "path": "web/tiles/t01_05_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_05_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_05_base.glb",
+   "bytes": 924164,
+   "sha256": "dfdbf98040a38fc6a4ae7c976a16f726f2c8d80ef88c98d658e4f00104c74ece"
+  },
+  {
+   "path": "web/tiles/t01_06_b1.glb",
+   "bytes": 9700,
+   "sha256": "e97afbcf8ba9d3c4dd097f2ee214724b3210626384e26910ec8f3c0f2e1951b5"
+  },
+  {
+   "path": "web/tiles/t01_06_b2.glb",
+   "bytes": 17192,
+   "sha256": "0ca9547460aa1b3ffbc1c145c3e3ac95f3b3fd92effc5be66422e373b51eb876"
+  },
+  {
+   "path": "web/tiles/t01_06_base.glb",
+   "bytes": 942416,
+   "sha256": "7ed95052734e5e6815accc66f0046b73c9a272ee34012f2bc33ec5543d53ff3e"
+  },
+  {
+   "path": "web/tiles/t01_07_b1.glb",
+   "bytes": 23896,
+   "sha256": "5bdc4c5e5d503121c957cb09e90d3533cc1d95e90a29d79a7cee5b46957432ee"
+  },
+  {
+   "path": "web/tiles/t01_07_b2.glb",
+   "bytes": 94352,
+   "sha256": "f3417c47a80f962ca342273d6db36ae875f67bf8a0441fc7b201a4d5a4e7ed8a"
+  },
+  {
+   "path": "web/tiles/t01_07_base.glb",
+   "bytes": 862516,
+   "sha256": "7550fbc8b6aabab115f782ad15277088e5666f649405b3e57b136f5f1abcfbe2"
+  },
+  {
+   "path": "web/tiles/t01_08_b1.glb",
+   "bytes": 32476,
+   "sha256": "4bb4ebf063b059be48a99d3f9c8271aa27b229c0358370a99b60132e8061c8af"
+  },
+  {
+   "path": "web/tiles/t01_08_b2.glb",
+   "bytes": 106372,
+   "sha256": "9e22b38aceea9930b3c7019179333bf5e6ae52da0ef6428286c4c7d9a11ade1e"
+  },
+  {
+   "path": "web/tiles/t01_08_base.glb",
+   "bytes": 1020004,
+   "sha256": "1cbb79626787ad4d4a22123f802ea7b9c4d77c0d732f22b30d5f4992597ae564"
+  },
+  {
+   "path": "web/tiles/t01_09_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_09_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_09_base.glb",
+   "bytes": 1463844,
+   "sha256": "d52f7141b2ce543c10694c06429ad334fdcdcf585305ae9a42aeff174a757684"
+  },
+  {
+   "path": "web/tiles/t01_10_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_10_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t01_10_base.glb",
+   "bytes": 1698404,
+   "sha256": "882d75a0d8375514d2d91277234504c457135ba0c67ded3874d9cea279f87584"
+  },
+  {
+   "path": "web/tiles/t01_11_b1.glb",
+   "bytes": 5236,
+   "sha256": "c0e19f32f61ed588ee8e3670f19996809a985d7ce903cd6332fc69f0f8aafe50"
+  },
+  {
+   "path": "web/tiles/t01_11_b2.glb",
+   "bytes": 7892,
+   "sha256": "3852426c4f93453d2fb7c6bfe55f01f2347deca4d23207f285fd13189f061f39"
+  },
+  {
+   "path": "web/tiles/t01_11_base.glb",
+   "bytes": 1284124,
+   "sha256": "c57bfe10ae3228b9d2843119deb5554059f435cd94435416956916347c5fe080"
+  },
+  {
+   "path": "web/tiles/t01_12_b1.glb",
+   "bytes": 143920,
+   "sha256": "f2b68970ad8b182e9a4576ecc52b36a96b64c6ecfc1f3aa2ca9ed1da3ea5bad7"
+  },
+  {
+   "path": "web/tiles/t01_12_b2.glb",
+   "bytes": 568220,
+   "sha256": "ecc381fe86d51ae970115adf847cc36cec7b27ee81904caf884f115c60782907"
+  },
+  {
+   "path": "web/tiles/t01_12_base.glb",
+   "bytes": 761248,
+   "sha256": "31d042635a72143246e22332aa08011f478cf1bd7ce9aa054d578ad386ba7f9b"
+  },
+  {
+   "path": "web/tiles/t01_13_b1.glb",
+   "bytes": 537528,
+   "sha256": "44b48837ad61664ef17e5d5cdcef3b39b1b992f0a90008250c27c4c0ad671586"
+  },
+  {
+   "path": "web/tiles/t01_13_b2.glb",
+   "bytes": 1523128,
+   "sha256": "1fe1dd6b0992e7d59bb71d12433e90e86683cd756e8d18732a06d2b5da3a5b82"
+  },
+  {
+   "path": "web/tiles/t01_13_base.glb",
+   "bytes": 423396,
+   "sha256": "21be6fc89c89663d129bc7794b8c5f6d712d19a1292bbd738bdf6397d2bf4b5d"
+  },
+  {
+   "path": "web/tiles/t01_14_b1.glb",
+   "bytes": 652180,
+   "sha256": "e4e164d9d854f2cd349788c37a377093e57069a625d62cbfa1ad2da1a9a73c5e"
+  },
+  {
+   "path": "web/tiles/t01_14_b2.glb",
+   "bytes": 1473060,
+   "sha256": "dc5830f0448a6bc1a2ed27a66fbda7c292f9eaa886394c947b3fe4e529ce5c7d"
+  },
+  {
+   "path": "web/tiles/t01_14_base.glb",
+   "bytes": 494716,
+   "sha256": "06ecbd7601b887a10e07e092c4c1d95e1844ee39eda61b1ba62bade9b4245d07"
+  },
+  {
+   "path": "web/tiles/t01_15_b1.glb",
+   "bytes": 807580,
+   "sha256": "76de157d5509cff31e569346c5376a0e343d9586aa8d4a97b60354fc8076c475"
+  },
+  {
+   "path": "web/tiles/t01_15_b2.glb",
+   "bytes": 1676140,
+   "sha256": "bb88e05d203444395b7ba2497453f098dec9c8e483b8c85f14142dfdf822434b"
+  },
+  {
+   "path": "web/tiles/t01_15_base.glb",
+   "bytes": 626876,
+   "sha256": "9b8b7d85529082f3095b4d6706576d0b4da54c241eb64bf901e8ac8023a76a3c"
+  },
+  {
+   "path": "web/tiles/t02_00_b1.glb",
+   "bytes": 17236,
+   "sha256": "840b433e5b1c78f8fca7b50222ab4e8305177d0a64c789521c49e3021e748cae"
+  },
+  {
+   "path": "web/tiles/t02_00_b2.glb",
+   "bytes": 34384,
+   "sha256": "5a0c45041c8fef35e6ed321ad629506be62e048c2e91c60d410f2669bf29ed86"
+  },
+  {
+   "path": "web/tiles/t02_00_base.glb",
+   "bytes": 782544,
+   "sha256": "ff21769a00b34fef0775d0d159ea2bc9675665d5f1921d5a82bcbede7d580b8d"
+  },
+  {
+   "path": "web/tiles/t02_01_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_01_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_01_base.glb",
+   "bytes": 821904,
+   "sha256": "bb7c9e9a3fce3793184fdc99a6b3bf9e99f0026a159329f8e8c9ba769a9448b9"
+  },
+  {
+   "path": "web/tiles/t02_02_b1.glb",
+   "bytes": 3768,
+   "sha256": "a8ed88653b671711918b3f16ab3ea707f0dab530e9bc89ddb83b011961f1ba27"
+  },
+  {
+   "path": "web/tiles/t02_02_b2.glb",
+   "bytes": 37692,
+   "sha256": "8e9260a0f356667672a2edcff2b2c00256fe7dc83a6177bbf30388f8f325da36"
+  },
+  {
+   "path": "web/tiles/t02_02_base.glb",
+   "bytes": 508220,
+   "sha256": "e66767fc2c659b611f2956ea62e26b78e0bd902759f66c60576a7afba00f930e"
+  },
+  {
+   "path": "web/tiles/t02_03_b1.glb",
+   "bytes": 3712,
+   "sha256": "2adf4f3802d77c91348615496441d9a7ffa6520436813c536f27465b6427cf2b"
+  },
+  {
+   "path": "web/tiles/t02_03_b2.glb",
+   "bytes": 8716,
+   "sha256": "e62468d895b39050f472771adc119fc08e83827958b1f3d4cad8314e7394e53b"
+  },
+  {
+   "path": "web/tiles/t02_03_base.glb",
+   "bytes": 651872,
+   "sha256": "21bbc931ed9e394b2420b60050dc2bdf82d28c6e58e33cd1a5b7ed95d04eb2c5"
+  },
+  {
+   "path": "web/tiles/t02_04_b1.glb",
+   "bytes": 3740,
+   "sha256": "09118971cd3f1ce808b8d28c32528e64b76499cf3a84bb9ab1aded5a7d57e037"
+  },
+  {
+   "path": "web/tiles/t02_04_b2.glb",
+   "bytes": 13844,
+   "sha256": "614ea589cbe631ed338bd52506030fd4229402a775234000bc754ccebffd4247"
+  },
+  {
+   "path": "web/tiles/t02_04_base.glb",
+   "bytes": 713104,
+   "sha256": "7240696524ede394caaf4245040b9b6cb02a5bf859433be0298f0bad06e69f00"
+  },
+  {
+   "path": "web/tiles/t02_05_b1.glb",
+   "bytes": 20044,
+   "sha256": "b90928bdb7847b835ddc5300c9c9476a56c07ac6498d51a10862e0fc6f51ae72"
+  },
+  {
+   "path": "web/tiles/t02_05_b2.glb",
+   "bytes": 151864,
+   "sha256": "449368b961e107c278398422ea501f9d19b7c357ef581a30ef42cd4a064bdadb"
+  },
+  {
+   "path": "web/tiles/t02_05_base.glb",
+   "bytes": 795812,
+   "sha256": "48de6848f5cb3e7af98131ec122a4986edc575f61d4fd7b16901644198aa2b71"
+  },
+  {
+   "path": "web/tiles/t02_06_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_06_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_06_base.glb",
+   "bytes": 880920,
+   "sha256": "b4d1ec4cc218c54bb6cdfa2de1c5e4daa7e56751c2d62c02e82fa25ab9890f99"
+  },
+  {
+   "path": "web/tiles/t02_07_b1.glb",
+   "bytes": 138268,
+   "sha256": "90b3d228dd1152245b12abc6873f07a43f76ceda9d4821b09dfad6ba5641f1f4"
+  },
+  {
+   "path": "web/tiles/t02_07_b2.glb",
+   "bytes": 671104,
+   "sha256": "380aea4a7c6dd1a4acbec7d55663edafd22e7730531fdb9c764e2792253d5b34"
+  },
+  {
+   "path": "web/tiles/t02_07_base.glb",
+   "bytes": 622072,
+   "sha256": "db32b4578696161bd915a701e4df2225a9e67ffb1c81adace1b712902e6dbdb1"
+  },
+  {
+   "path": "web/tiles/t02_08_b1.glb",
+   "bytes": 33248,
+   "sha256": "d37f122136fde3c86ee2b9a5d7216a700271a3dc77518f72c1630265799750bc"
+  },
+  {
+   "path": "web/tiles/t02_08_b2.glb",
+   "bytes": 250952,
+   "sha256": "af710ce8e3470d4a898164f3ccc9f6f936cb1c719ff23ebd639bd345002d08dc"
+  },
+  {
+   "path": "web/tiles/t02_08_base.glb",
+   "bytes": 1568736,
+   "sha256": "e647fc785c9c9ac00bbcfc8dc6ca623ebd5ec689d5e74385e04e948ae24a9a3f"
+  },
+  {
+   "path": "web/tiles/t02_09_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_09_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_09_base.glb",
+   "bytes": 1726760,
+   "sha256": "cc3dd749d3c80fafc84ed8a32c6f31b0401d89bc2fa96bdf148cbcdc434477ea"
+  },
+  {
+   "path": "web/tiles/t02_10_b1.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_10_b2.glb",
+   "bytes": 468,
+   "sha256": "193663f836aab433f9d7e237f9342d9e61c3862043a46c002911c5724ec0f6db"
+  },
+  {
+   "path": "web/tiles/t02_10_base.glb",
+   "bytes": 1695752,
+   "sha256": "142c3379503c2662276a6b2e44b47a5a13ebaa1e91504dee1d83b04b7c864180"
+  },
+  {
+   "path": "web/tiles/t02_11_b1.glb",
+   "bytes": 120680,
+   "sha256": "eca2fc54f91e8cd51350ef552cd9d10e262842b9eb3e199f322cde1092e10f82"
+  },
+  {
+   "path": "web/tiles/t02_11_b2.glb",
+   "bytes": 496684,
+   "sha256": "bdd5a22c8f07e8e69ef1dcdb052e54100b4776fb118ba8c517bf3c83b544d6d1"
+  },
+  {
+   "path": "web/tiles/t02_11_base.glb",
+   "bytes": 675340,
+   "sha256": "db10c2be6af5386be3e45b5384383400b6944368ab4a7eb0589bd3d00801c0f4"
+  },
+  {
+   "path": "web/tiles/t02_12_b1.glb",
+   "bytes": 352408,
+   "sha256": "f1b8e2403714135c43065e2dac2dd8df543e72b38d833f72747071a20babdf5e"
+  },
+  {
+   "path": "web/tiles/t02_12_b2.glb",
+   "bytes": 1491632,
+   "sha256": "0e751b5b915d8cc2f1f6c0c5b3ce769a116e035b091b592fe558d03de599c722"
+  },
+  {
+   "path": "web/tiles/t02_12_base.glb",
+   "bytes": 277076,
+   "sha256": "3d0e6f67705e73f780ba5e6ef0d14b864ef28ab447567a064cd1c62eb14c23a6"
+  },
+  {
+   "path": "web/tiles/t02_13_b1.glb",
+   "bytes": 496180,
+   "sha256": "61405344908a61f9be612a8a9e8c2dc4aeead6240b2d9fb35959bf2e0b86b5ac"
+  },
+  {
+   "path": "web/tiles/t02_13_b2.glb",
+   "bytes": 1512144,
+   "sha256": "fcc829768894613d7c648df2c54218e889312d11661f94ec96304c34eb6e2764"
+  },
+  {
+   "path": "web/tiles/t02_13_base.glb",
+   "bytes": 237012,
+   "sha256": "d8a4fabf08ef92a0f13ba3a4208e95f45a2d4c02d4ea2451d2b0d6c788377471"
+  },
+  {
+   "path": "web/tiles/t02_14_b1.glb",
+   "bytes": 441096,
+   "sha256": "f76dadd4b0de16008e82592acb8e13504c6ad758f44995e950c1e41d48150420"
+  },
+  {
+   "path": "web/tiles/t02_14_b2.glb",
+   "bytes": 1430228,
+   "sha256": "518a44cbfceafa76ddab2f3f8699845a09c30d28432363ac32a4222d101f0fe5"
+  },
+  {
+   "path": "web/tiles/t02_14_base.glb",
+   "bytes": 354880,
+   "sha256": "a21bbe1ece9c9e4f698628fd33061548fcc76679ffb790d3d8a4268612e52428"
+  },
+  {
+   "path": "web/tiles/t02_15_b1.glb",
+   "bytes": 551272,
+   "sha256": "e56ef4bc620efb31108a29f7125ba59fee5e38c772ccde49175f4ed299dbf76c"
+  },
+  {
+   "path": "web/tiles/t02_15_b2.glb",
+   "bytes": 1425772,
+   "sha256": "9719ec55386ef9d2f254a5719694b8e9dee7ec3eb4df84f95ecc08933050beb8"
+  },
+  {
+   "path": "web/tiles/t02_15_base.glb",
+   "bytes": 371504,
+   "sha256": "5d7a4f25c8d523ded747871d961704748225c311680a606ec92945dd4449e149"
+  },
+  {
+   "path": "web/tiles/t03_00_b1.glb",
+   "bytes": 624940,
+   "sha256": "5ab29732e695bef2b99575d17a3ff0ed582d75557c22fb1f4e89bf7fc9f3c84b"
+  },
+  {
+   "path": "web/tiles/t03_00_b2.glb",
+   "bytes": 1300376,
+   "sha256": "0318cd5b783f1a781ef6309e9c68cabe74f4304f291a55725812d810c93104fc"
+  },
+  {
+   "path": "web/tiles/t03_00_base.glb",
+   "bytes": 428396,
+   "sha256": "315a79f4c04a995b640be309ea47523f2d122642c40304a58d141b2f00e807d5"
+  },
+  {
+   "path": "web/tiles/t03_01_b1.glb",
+   "bytes": 11700,
+   "sha256": "9a259ade1efc82110ae31812a84e932be96b685c530064822981f6c8aa9f86a7"
+  },
+  {
+   "path": "web/tiles/t03_01_b2.glb",
+   "bytes": 202876,
+   "sha256": "cf26139b8fd5503f4c91b1d4222fd23607d809ff11fd1397852e1edee4362dba"
+  },
+  {
+   "path": "web/tiles/t03_01_base.glb",
+   "bytes": 595204,
+   "sha256": "3935b7a4cf04ac25b2196494238c2d3fd32897bd279006692f2b5573165e36ca"
+  },
+  {
+   "path": "web/tiles/t03_02_b1.glb",
+   "bytes": 420780,
+   "sha256": "e47443e8cb451a2baebeb605d0f77010ddcc743dcfd809cccedd8cfc6dbac3ee"
+  },
+  {
+   "path": "web/tiles/t03_02_b2.glb",
+   "bytes": 1247420,
+   "sha256": "b03ffe34b0db6f23dd4fcbeb94dbcd1e24accafacd89aa9199c657c31b26bf24"
+  },
+  {
+   "path": "web/tiles/t03_02_base.glb",
+   "bytes": 454380,
+   "sha256": "042494f668693b2350b1b2a030c9a4cf2fe1ffc8d28feaf09bc0cd640187b5fa"
+  },
+  {
+   "path": "web/tiles/t03_03_b1.glb",
+   "bytes": 403792,
+   "sha256": "6cb5ba3d5b4ba9f8c3450cb292e9205f107dce845f957bfe69077e350f6d5a2b"
+  },
+  {
+   "path": "web/tiles/t03_03_b2.glb",
+   "bytes": 770184,
+   "sha256": "3accbc2c481dfdd87be82fa35566a8a2b505799197352afca6edf9d9e1b9c335"
+  },
+  {
+   "path": "web/tiles/t03_03_base.glb",
+   "bytes": 497088,
+   "sha256": "2a4826652c29a2f34ccb474605332bd30394d6ece02a1d431d554e1a9378b2b2"
+  },
+  {
+   "path": "web/tiles/t03_04_b1.glb",
+   "bytes": 56892,
+   "sha256": "14462b60abc4968116878645836dc853e64a1b11e269fda6cb128cfbd5c825e9"
+  },
+  {
+   "path": "web/tiles/t03_04_b2.glb",
+   "bytes": 583880,
+   "sha256": "0cd49e02155ebb44eedcf3ed7a5b662bf43ebd63901139286e6f1d8b202dafdd"
+  },
+  {
+   "path": "web/tiles/t03_04_base.glb",
+   "bytes": 483820,
+   "sha256": "4340247dd6b4459543ba3eccbbd42d298b16e331dc640f76980d636bc60f2036"
+  },
+  {
+   "path": "web/tiles/t03_05_b1.glb",
+   "bytes": 237956,
+   "sha256": "03f87090e8833c2ab9945ec8937ecfb3a90abdf8bfe99fabc46638c3d374956f"
+  },
+  {
+   "path": "web/tiles/t03_05_b2.glb",
+   "bytes": 929716,
+   "sha256": "65920db7358d295626327236cd10acfb22c8e0ca396cc3c14283ac38f1781e3d"
+  },
+  {
+   "path": "web/tiles/t03_05_base.glb",
+   "bytes": 558156,
+   "sha256": "44e6858fcb04aba80c0a6ae8365adb0377c9bc14632bbf63ca05ffd9f566245a"
+  },
+  {
+   "path": "web/tiles/t03_06_b1.glb",
+   "bytes": 6716,
+   "sha256": "f0fe3fe8783dbfb3c93d13c2480ee9d4ec1b90020f0d6a6c7e0e00ea3ffcdd11"
+  },
+  {
+   "path": "web/tiles/t03_06_b2.glb",
+   "bytes": 22644,
+   "sha256": "f18eca215124f7d3aa94584fac6a8b1940fc94c6aec7bdc8f4a0775a5bf85511"
+  },
+  {
+   "path": "web/tiles/t03_06_base.glb",
+   "bytes": 893080,
+   "sha256": "651aa83b7fd077460daddc1479d9ca903c4ceb56b8c0a47eaa5dcfd931117b8f"
+  },
+  {
+   "path": "web/tiles/t03_07_b1.glb",
+   "bytes": 133952,
+   "sha256": "062b533e2f5a03b29b5af3e2d85f9e147c29c7bd2a656c09787287feaa431da4"
+  },
+  {
+   "path": "web/tiles/t03_07_b2.glb",
+   "bytes": 555428,
+   "sha256": "6ce3027ec412f9524d31e324e9b307451ae68b31c5e6f63a6af80c108f2a38ff"
+  },
+  {
+   "path": "web/tiles/t03_07_base.glb",
+   "bytes": 767684,
+   "sha256": "a8a94dc8dfdf29d2f1d4623601fa41cf37f1b65ea982ed3ae3d5605300396701"
+  },
+  {
+   "path": "web/tiles/t03_08_b1.glb",
+   "bytes": 27236,
+   "sha256": "49ae864cd55f3e866fdaab129853c6b6085f4cf2821d5b4c471be76ffc29723d"
+  },
+  {
+   "path": "web/tiles/t03_08_b2.glb",
+   "bytes": 150036,
+   "sha256": "afb1967e4436bf6697e270aeb741e40a5f8ef5a88e7dfd9caa06fce90e453b7f"
+  },
+  {
+   "path": "web/tiles/t03_08_base.glb",
+   "bytes": 1120264,
+   "sha256": "e1e348d7403be40931e35654ce9ff09b56d30873417024f6ddc5c959bdab10b4"
+  },
+  {
+   "path": "web/tiles/t03_09_b1.glb",
+   "bytes": 12344,
+   "sha256": "55d51b9240e7f01ce0fdce5166a2f0cdf1724d22d2a0d87940a032d5f172fe6f"
+  },
+  {
+   "path": "web/tiles/t03_09_b2.glb",
+   "bytes": 180632,
+   "sha256": "d4367ed514a4028776464ba67eee8048782c075aae4bcc13f349f50241fa5cc8"
+  },
+  {
+   "path": "web/tiles/t03_09_base.glb",
+   "bytes": 1185272,
+   "sha256": "aa6ccc33643a62a6dc4c9db144ba5425a77ed674eca3f1af2395aaa4cd24a8da"
+  },
+  {
+   "path": "web/tiles/t03_10_b1.glb",
+   "bytes": 3724,
+   "sha256": "a89f6613d0fe6ac23a546473ce1f29e80997a7377a0eeeff028eb6b26352882f"
+  },
+  {
+   "path": "web/tiles/t03_10_b2.glb",
+   "bytes": 5412,
+   "sha256": "82fab0f4a72b03988e59b722f9044e3f0971116113e6f5524ad61f28be666dff"
+  },
+  {
+   "path": "web/tiles/t03_10_base.glb",
+   "bytes": 907316,
+   "sha256": "c095887b51b04f8abf98499906e52cfc08f7840c6b625ba083e235f60144c34b"
+  },
+  {
+   "path": "web/tiles/t03_11_b1.glb",
+   "bytes": 20212,
+   "sha256": "3d1cbce924566918352065d9d58d795a02495b3c16bb4277b7e71524615c74c3"
+  },
+  {
+   "path": "web/tiles/t03_11_b2.glb",
+   "bytes": 91084,
+   "sha256": "34bcd30497cd44d51c88988ce970749b41c2772d4f5b2ed0268f3459a20ad770"
+  },
+  {
+   "path": "web/tiles/t03_11_base.glb",
+   "bytes": 926676,
+   "sha256": "52f4398f584c67856269f162846613da5b6278f154481896a20d44243f429103"
+  },
+  {
+   "path": "web/tiles/t03_12_b1.glb",
+   "bytes": 511088,
+   "sha256": "0375aa197cd1e2f669f0b11bf69109dfabf2e40cf96f3fda89441d5ddaaeb817"
+  },
+  {
+   "path": "web/tiles/t03_12_b2.glb",
+   "bytes": 2233664,
+   "sha256": "81cb8b82f43ad742cf2c4fc0bd44b16e4befdcfee2cf54e32fdd193635afd592"
+  },
+  {
+   "path": "web/tiles/t03_12_base.glb",
+   "bytes": 263084,
+   "sha256": "61a5e9992e1ae7374f025544dd5fc8c5591851bf0caf88bd0898df051c19a75e"
+  },
+  {
+   "path": "web/tiles/t03_13_b1.glb",
+   "bytes": 426244,
+   "sha256": "b0e193045f00c91187469f76f75d7fe26e6ef1bbdb01618681f29b7e64fa6f86"
+  },
+  {
+   "path": "web/tiles/t03_13_b2.glb",
+   "bytes": 1614380,
+   "sha256": "687b78d198c8de377e09d5d83e035acf8aa76f565a92a2872533ded11c31cfb9"
+  },
+  {
+   "path": "web/tiles/t03_13_base.glb",
+   "bytes": 263508,
+   "sha256": "9fef9f35d4ec2606f3394fbc4256c08b0f3c88501f6d3e6cba4a96fa16d0c328"
+  },
+  {
+   "path": "web/tiles/t03_14_b1.glb",
+   "bytes": 921520,
+   "sha256": "d9be011e71a7050ee4a83a9b8b3f70a37eb2afa117cacc29358b096bcac2cb50"
+  },
+  {
+   "path": "web/tiles/t03_14_b2.glb",
+   "bytes": 2167516,
+   "sha256": "a02c274d43dcb830fdfa244b66c897ceae30ce0cbf80527e567fb784bb211bbe"
+  },
+  {
+   "path": "web/tiles/t03_14_base.glb",
+   "bytes": 274376,
+   "sha256": "2940f11efce4b88e2348d28f3f70b97ea521c4207fe3a09f0804a3148b45854d"
+  },
+  {
+   "path": "web/tiles/t03_15_b1.glb",
+   "bytes": 823524,
+   "sha256": "00e1aef642656db8e4f77e909422dd19cb1dee76d94d9b6f18f2b54833f4a127"
+  },
+  {
+   "path": "web/tiles/t03_15_b2.glb",
+   "bytes": 1857272,
+   "sha256": "b569b1ba2033887abf59aa522ccd7e8deb979e366f0e66a05c97eab565f0c5c8"
+  },
+  {
+   "path": "web/tiles/t03_15_base.glb",
+   "bytes": 300388,
+   "sha256": "cde2cbe19aee79459dc59be11204ec77bcf825718d9d1e7588bf8ebe3f4e3147"
+  },
+  {
+   "path": "web/tiles/t04_00_b1.glb",
+   "bytes": 953776,
+   "sha256": "87b8188251675d9359147e2ebf24bbea07a5df2977b4dc1310c837cfbc9740e4"
+  },
+  {
+   "path": "web/tiles/t04_00_b2.glb",
+   "bytes": 1826008,
+   "sha256": "9b62807dcc2dc71768dea1eed4ae6123e9cc66cd21919ddef904a151db8902bc"
+  },
+  {
+   "path": "web/tiles/t04_00_base.glb",
+   "bytes": 305760,
+   "sha256": "6ea51b4425be9a2024f1b612b50010fe4c0aea106bbcc5bb8fae1df224a1acee"
+  },
+  {
+   "path": "web/tiles/t04_01_b1.glb",
+   "bytes": 314864,
+   "sha256": "2e8693249f58a01710fb12e8c96cf1ece99f57556d45203ed7bb1d71e4283338"
+  },
+  {
+   "path": "web/tiles/t04_01_b2.glb",
+   "bytes": 655300,
+   "sha256": "6d7bb6d207505e2e7b8bd5f512680ff274ba1ebdaeda308fa6ee3707737a520b"
+  },
+  {
+   "path": "web/tiles/t04_01_base.glb",
+   "bytes": 564024,
+   "sha256": "be03d1d2bd4651c4372f7d4afb9cc6375eee7cbb6ebbb7f66da39db4c9643661"
+  },
+  {
+   "path": "web/tiles/t04_02_b1.glb",
+   "bytes": 510180,
+   "sha256": "62ad01bdfd23960741956cfcb4706531e47106124ba476b02d228f3521a7a09f"
+  },
+  {
+   "path": "web/tiles/t04_02_b2.glb",
+   "bytes": 1279464,
+   "sha256": "ac298a6897fda51dc4e8a64dc397698e3800e1764b82589d4392f978beaf649a"
+  },
+  {
+   "path": "web/tiles/t04_02_base.glb",
+   "bytes": 616076,
+   "sha256": "b4063d1b2c65f6767a86cd17c646ffeeed9cd81053a7023776dfd63de3dbcd5a"
+  },
+  {
+   "path": "web/tiles/t04_03_b1.glb",
+   "bytes": 763688,
+   "sha256": "dc68925540f537791861f2b8932daf03e8a453c1540c1f1026dd1dab55e8c4c0"
+  },
+  {
+   "path": "web/tiles/t04_03_b2.glb",
+   "bytes": 1638112,
+   "sha256": "9495ce0170058a6b8e0dade7fb7efc2606c4b8ee26f7dc85d558568036226481"
+  },
+  {
+   "path": "web/tiles/t04_03_base.glb",
+   "bytes": 350584,
+   "sha256": "0c985738f541e098117f5c38f5a64f6dce7e3ed465935f47ae77d900d89c913f"
+  },
+  {
+   "path": "web/tiles/t04_04_b1.glb",
+   "bytes": 180592,
+   "sha256": "e018dfb2cf613ddd0db825d355fc2f52ce65c99cc8baff88f0d21d7cdce77732"
+  },
+  {
+   "path": "web/tiles/t04_04_b2.glb",
+   "bytes": 1632436,
+   "sha256": "4bdcb2fbc1ca3aba6f7aedeb856a58bff7fe1b22ac7d37fec57109a16eb4da5a"
+  },
+  {
+   "path": "web/tiles/t04_04_base.glb",
+   "bytes": 416960,
+   "sha256": "a7eb10663c37f0a7b773d61c4c8bf37592bb5da51aa5dcfb5876951ba5d71808"
+  },
+  {
+   "path": "web/tiles/t04_05_b1.glb",
+   "bytes": 244840,
+   "sha256": "ca3ad2ae77a1895bce098585bbd8da437a79c8d713d76f6fb67e46b6561c888c"
+  },
+  {
+   "path": "web/tiles/t04_05_b2.glb",
+   "bytes": 1018712,
+   "sha256": "6be8898c4f2f2898a8d29f9d042effa717f623f19b3c703989679961fd9c8d27"
+  },
+  {
+   "path": "web/tiles/t04_05_base.glb",
+   "bytes": 677008,
+   "sha256": "dab92b65cfcc7672f17688ccf6ecf1c16bc3ecc0f0619058e3bbb6a6506adb17"
+  },
+  {
+   "path": "web/tiles/t04_06_b1.glb",
+   "bytes": 180884,
+   "sha256": "7c4e00536274ed85b7c427b27472a10b6b980c13e193fb3bd033e0c056c15e25"
+  },
+  {
+   "path": "web/tiles/t04_06_b2.glb",
+   "bytes": 870396,
+   "sha256": "8155a6a82a74b323e88367a9590117579ea0fec03a1ab4ad90de55dad1cef806"
+  },
+  {
+   "path": "web/tiles/t04_06_base.glb",
+   "bytes": 662236,
+   "sha256": "2a5a7d48c27b82ec14d85a70cc783f5b09b4c465bb533c4fe69ff63af920a87e"
+  },
+  {
+   "path": "web/tiles/t04_07_b1.glb",
+   "bytes": 801860,
+   "sha256": "64e1e9c03e0af1c8954accd3cc00adb0917acf8e957f568911a7531fc02dc90c"
+  },
+  {
+   "path": "web/tiles/t04_07_b2.glb",
+   "bytes": 4785740,
+   "sha256": "9fc95d3a0dd99a98262e41192afe2c7e66b53505ed3ea6f3979330e7b11cd53f"
+  },
+  {
+   "path": "web/tiles/t04_07_base.glb",
+   "bytes": 377496,
+   "sha256": "c04945f0a7438a05b331f81233fdb83591faf7f30830e811995210d8d0c45bba"
+  },
+  {
+   "path": "web/tiles/t04_08_b1.glb",
+   "bytes": 809552,
+   "sha256": "4320e95e628666c19988e0591b7c05bb9481f15183f99bb8c691935fbb18ab82"
+  },
+  {
+   "path": "web/tiles/t04_08_b2.glb",
+   "bytes": 4719472,
+   "sha256": "b19c30f51b3e23e90bdaf2bb6ac76fb6572f4a158cfa25e7ca218bc4121be73d"
+  },
+  {
+   "path": "web/tiles/t04_08_base.glb",
+   "bytes": 534376,
+   "sha256": "5f93302e74216da08530db4a6cb642d1abef0e57463df18021cf2ad70f78f7e6"
+  },
+  {
+   "path": "web/tiles/t04_09_b1.glb",
+   "bytes": 417036,
+   "sha256": "fc96e730e968705ea6b60e0276b63d42611cd642756bf3635e522f74a600d99f"
+  },
+  {
+   "path": "web/tiles/t04_09_b2.glb",
+   "bytes": 2652404,
+   "sha256": "c6eb72c33dd6d28cb6591fe3318bf7c5c401f7c1f379693a162ea743df1c3fd8"
+  },
+  {
+   "path": "web/tiles/t04_09_base.glb",
+   "bytes": 324804,
+   "sha256": "d0317933c4acd78c24e8ebe013fe293a348f409f26e673a7bf2c1df7985cc90b"
+  },
+  {
+   "path": "web/tiles/t04_10_b1.glb",
+   "bytes": 136920,
+   "sha256": "b1975663d97961353faf4e0f8f36656c264afa9c448683cb3502f6ab37f4fe1f"
+  },
+  {
+   "path": "web/tiles/t04_10_b2.glb",
+   "bytes": 794024,
+   "sha256": "9e50d776f8891ebdb08444c1ead56a911d9ff72af65dcef08774675771c9fb9a"
+  },
+  {
+   "path": "web/tiles/t04_10_base.glb",
+   "bytes": 570504,
+   "sha256": "64175d4b45c5ff5c2916f322b4b48587b5ffc73998ca749c9a8539014eef084e"
+  },
+  {
+   "path": "web/tiles/t04_11_b1.glb",
+   "bytes": 76760,
+   "sha256": "b8a4afe3bdefd89d1ecc9f3527c0cb93f44dfa24b3a29184c3d412c1382e93a4"
+  },
+  {
+   "path": "web/tiles/t04_11_b2.glb",
+   "bytes": 350212,
+   "sha256": "41718280a8482e3cb3c34fbfa27121d76827fc209fdff614b4ac9c0e50764873"
+  },
+  {
+   "path": "web/tiles/t04_11_base.glb",
+   "bytes": 753152,
+   "sha256": "fadc3b802360a3a50db13e7421b488d6bb6524b9e921cd34271e98e792836563"
+  },
+  {
+   "path": "web/tiles/t04_12_b1.glb",
+   "bytes": 44560,
+   "sha256": "7561980f95ba25ee67a196e0c412f4dca5749d27b3ec260e20e36b894014a280"
+  },
+  {
+   "path": "web/tiles/t04_12_b2.glb",
+   "bytes": 165176,
+   "sha256": "64bc74fce42c061035d81220452995f2609d176f71fa4bc64e2a4dd3b7bfc0ea"
+  },
+  {
+   "path": "web/tiles/t04_12_base.glb",
+   "bytes": 485648,
+   "sha256": "1fe443fa318d8c5a5d8e3b93008df128409a1f74140214adbd7d6d1553a3c913"
+  },
+  {
+   "path": "web/tiles/t04_13_b1.glb",
+   "bytes": 155440,
+   "sha256": "cfe4306564363752cf2ee7ccd6fc6e903a3d1a47e892957ced061dffb862c874"
+  },
+  {
+   "path": "web/tiles/t04_13_b2.glb",
+   "bytes": 969108,
+   "sha256": "72ca6c4562aa984a0f5361a0687bd0498a15d77a1d1b688969d0c044f9745fec"
+  },
+  {
+   "path": "web/tiles/t04_13_base.glb",
+   "bytes": 422776,
+   "sha256": "432b76d8a9c2ac34add57f67cdb7c749d51b505389f12b38d6a9d32f4394be8f"
+  },
+  {
+   "path": "web/tiles/t04_14_b1.glb",
+   "bytes": 435020,
+   "sha256": "3a6194018b2f4ae08c12e88c9a936de2cf65b799198a5f73c7365fe5b8b785aa"
+  },
+  {
+   "path": "web/tiles/t04_14_b2.glb",
+   "bytes": 1521640,
+   "sha256": "d8ef3e23e73f97fae71fcf214304d02c1beb2a66cb1a656733d8b81fc5f1fa05"
+  },
+  {
+   "path": "web/tiles/t04_14_base.glb",
+   "bytes": 240072,
+   "sha256": "8d209b4e6f59db390cde8dd8bf13d2493a90ca34583dd0537a76552314effe7c"
+  },
+  {
+   "path": "web/tiles/t04_15_b1.glb",
+   "bytes": 1082528,
+   "sha256": "9e7438baae837e7f9506494c82053c4490ad58e6eba88976a28b9c5dfffd3ff0"
+  },
+  {
+   "path": "web/tiles/t04_15_b2.glb",
+   "bytes": 2350484,
+   "sha256": "5f8c16891bcdfb8a9bfa04ea084a237a73564767d873513b2d86685586cb648e"
+  },
+  {
+   "path": "web/tiles/t04_15_base.glb",
+   "bytes": 258152,
+   "sha256": "09afae5760fc02f0955cf86d8343f36e4bf02ac3639d32c6d5952f1cd4f8fedf"
+  },
+  {
+   "path": "web/tiles/t05_00_b1.glb",
+   "bytes": 995672,
+   "sha256": "bc1461ac82503f1fccae136712cc9ccf9a8a278d87684a1c5d8aec4bcb8f2fb8"
+  },
+  {
+   "path": "web/tiles/t05_00_b2.glb",
+   "bytes": 1825728,
+   "sha256": "3a0b7b87614f2925fd105aa39491bf511a4b3c582ef1b328982bf9445bf5b60b"
+  },
+  {
+   "path": "web/tiles/t05_00_base.glb",
+   "bytes": 720372,
+   "sha256": "9d6f71cbf369280dc5595fcb108e7b68ab0da5fa73ba940d35249508e688e11f"
+  },
+  {
+   "path": "web/tiles/t05_01_b1.glb",
+   "bytes": 1117552,
+   "sha256": "54e45b92f38088e98c0d09c462414a596cbf0fde718cd527a69f55c6a6cbeef7"
+  },
+  {
+   "path": "web/tiles/t05_01_b2.glb",
+   "bytes": 2152768,
+   "sha256": "8f6803fe833e345a1bca69bc9b6a658defb9324c89d7ca7bea6b530ed43201e9"
+  },
+  {
+   "path": "web/tiles/t05_01_base.glb",
+   "bytes": 362792,
+   "sha256": "5d591a9c2dc09bba8db33ac3143b49b3a38e4e152c35335dff3e5d3764f77d18"
+  },
+  {
+   "path": "web/tiles/t05_02_b1.glb",
+   "bytes": 425612,
+   "sha256": "9ade76f65f33dc91bb298698d1b7b92e3ea3100bb1ba35ffe41ef01659965f38"
+  },
+  {
+   "path": "web/tiles/t05_02_b2.glb",
+   "bytes": 824684,
+   "sha256": "9191472743a53548f6aa5a18c0a57da0934c01e3eedc87bf3572e4a7009e9de2"
+  },
+  {
+   "path": "web/tiles/t05_02_base.glb",
+   "bytes": 714840,
+   "sha256": "b967d3a4c9ca7860ae88568f6664f3fd40687f1e831a07f3861323b1558822ea"
+  },
+  {
+   "path": "web/tiles/t05_03_b1.glb",
+   "bytes": 470128,
+   "sha256": "6341d8ef5d883f10261b5e0f748183f507c6204a08783a14ba9de40ac6475cad"
+  },
+  {
+   "path": "web/tiles/t05_03_b2.glb",
+   "bytes": 1681272,
+   "sha256": "797557ae3a94a2639f952629355dce361c0ad22bdf4dd9559385107e42c292aa"
+  },
+  {
+   "path": "web/tiles/t05_03_base.glb",
+   "bytes": 308988,
+   "sha256": "0bb8171964318ea0c1a3abb187fa3c09604346b29b93d5ff3cf421cf09bc97f3"
+  },
+  {
+   "path": "web/tiles/t05_04_b1.glb",
+   "bytes": 1432272,
+   "sha256": "649547f1e6b37c82120273a62e38b3601dd2fa86f1efcd117aebc64a43fc19f3"
+  },
+  {
+   "path": "web/tiles/t05_04_b2.glb",
+   "bytes": 3793880,
+   "sha256": "fab5987eca192206813d4e7352891cefde088ad0e87eed0630f0c2372828edba"
+  },
+  {
+   "path": "web/tiles/t05_04_base.glb",
+   "bytes": 309888,
+   "sha256": "08caf6108103619c626acacb197bc425413e306f63573da11c2d9ed1c0f6f579"
+  },
+  {
+   "path": "web/tiles/t05_05_b1.glb",
+   "bytes": 1338356,
+   "sha256": "5ee5b155b1136ab73fb3b0f0155c018f7c0f7a2fd152ed657fa7dcfcaaf8a355"
+  },
+  {
+   "path": "web/tiles/t05_05_b2.glb",
+   "bytes": 4776896,
+   "sha256": "e3e10bd28897db7036004c53dba9145e007c1d61e07753c131b32c77605a0d16"
+  },
+  {
+   "path": "web/tiles/t05_05_base.glb",
+   "bytes": 438064,
+   "sha256": "bebf5b99b67834b2e419947b91d92a759aecb59d325ee4840b6ae689a8c4496f"
+  },
+  {
+   "path": "web/tiles/t05_06_b1.glb",
+   "bytes": 560628,
+   "sha256": "1db7124e809ab2af6e253defc03863bd7e8b34fc27166c11c33e64d8de2c9e3e"
+  },
+  {
+   "path": "web/tiles/t05_06_b2.glb",
+   "bytes": 2090104,
+   "sha256": "e049db12c0c00e09826b26619a6815219653b2aaedfdae96d1955a92a327526c"
+  },
+  {
+   "path": "web/tiles/t05_06_base.glb",
+   "bytes": 462740,
+   "sha256": "360b1a27b429e05f120383c1dcb81527badb70062d934c27a6ef4d9c6b34b0a6"
+  },
+  {
+   "path": "web/tiles/t05_07_b1.glb",
+   "bytes": 793464,
+   "sha256": "62905ea863dd3f7d69860c8755d475dba14c1fa8f2e3ccb77885536aaad71767"
+  },
+  {
+   "path": "web/tiles/t05_07_b2.glb",
+   "bytes": 3625680,
+   "sha256": "a2f644e284538f3bbe3af3ddc1301662519eb5b4ed6880a12bb61a8f76a2cb5a"
+  },
+  {
+   "path": "web/tiles/t05_07_base.glb",
+   "bytes": 456424,
+   "sha256": "01e421c471458bd30c862403796d61923f892cdf4511ce885b83feb9398b1bb3"
+  },
+  {
+   "path": "web/tiles/t05_08_b1.glb",
+   "bytes": 792936,
+   "sha256": "aac59b6518ab3afa0d1569c2706cd257e3d0407376a9d8ce9d5132370bed67f9"
+  },
+  {
+   "path": "web/tiles/t05_08_b2.glb",
+   "bytes": 5324492,
+   "sha256": "b651cd8278f3b42da947f5c7191cb78592fe3464f9f6d2cf7efec9c5374c5794"
+  },
+  {
+   "path": "web/tiles/t05_08_base.glb",
+   "bytes": 364672,
+   "sha256": "b7b285806a8ea7aedb043aabcabc530430ec1afff755720e0bf4af6bdb6ebb7b"
+  },
+  {
+   "path": "web/tiles/t05_09_b1.glb",
+   "bytes": 695380,
+   "sha256": "59aac942597d5d949e605c65e5f5db71e5184ef3de0fe6633b0ed8f986724592"
+  },
+  {
+   "path": "web/tiles/t05_09_b2.glb",
+   "bytes": 3776948,
+   "sha256": "8c723bf05936c9c520f24d1fba9797956c648c7c4cade04f779f21eee295dd82"
+  },
+  {
+   "path": "web/tiles/t05_09_base.glb",
+   "bytes": 276684,
+   "sha256": "40e2295affeb7d7d2c91e980afb0d477df18b747938e286d953657867b38ea44"
+  },
+  {
+   "path": "web/tiles/t05_10_b1.glb",
+   "bytes": 804300,
+   "sha256": "c53986aa1b4701cc83b60d9b938d4e5924d782034fe6550ad398bb051456191f"
+  },
+  {
+   "path": "web/tiles/t05_10_b2.glb",
+   "bytes": 3831908,
+   "sha256": "815a49d905d79351234c43de749d6d8fe682240e27152b40384e07113ceec7f1"
+  },
+  {
+   "path": "web/tiles/t05_10_base.glb",
+   "bytes": 266116,
+   "sha256": "eec6e22b3ef04e613f0481d40a8e922f8c21f9e64f4d68c4faabcb8c7ef8c87d"
+  },
+  {
+   "path": "web/tiles/t05_11_b1.glb",
+   "bytes": 1020044,
+   "sha256": "0c0053fa9754b7195b85bf23d23cf01d89c260c54e069e04aad8037dc9d200ac"
+  },
+  {
+   "path": "web/tiles/t05_11_b2.glb",
+   "bytes": 3801888,
+   "sha256": "b5d90c2294886b1cdecbd29349dcb62c64820507445336ee11cb8f051a21e5b0"
+  },
+  {
+   "path": "web/tiles/t05_11_base.glb",
+   "bytes": 400832,
+   "sha256": "7d25de0e84251b1d748b561996a8db6deccf6d4c1a90d82888ff0d521462398a"
+  },
+  {
+   "path": "web/tiles/t05_12_b1.glb",
+   "bytes": 400028,
+   "sha256": "d7ff8ecdf477434d71d5931194878706a4c0fa7e702aec27b875483563a595a0"
+  },
+  {
+   "path": "web/tiles/t05_12_b2.glb",
+   "bytes": 1959716,
+   "sha256": "b9030e26a8369dcd9600d8b45c529e0e079e916d9d00987a86611656467dcdf1"
+  },
+  {
+   "path": "web/tiles/t05_12_base.glb",
+   "bytes": 450428,
+   "sha256": "3079419225dae98cb8601e8fee22a0f46b3f3722593d24ecf9e750270ef712d8"
+  },
+  {
+   "path": "web/tiles/t05_13_b1.glb",
+   "bytes": 725648,
+   "sha256": "89927d522e5f46d0dd98fc61e98ea4d012a0df0cbe42cbdf025e5b5b88f3b56b"
+  },
+  {
+   "path": "web/tiles/t05_13_b2.glb",
+   "bytes": 2668464,
+   "sha256": "6c7e2387a2a6e449f7c86f01a9c485315777d22fb979d20ed6563001b98effb6"
+  },
+  {
+   "path": "web/tiles/t05_13_base.glb",
+   "bytes": 425968,
+   "sha256": "dadf16d2d321314a038f7c550a1b3fcdf3bdef3fd1fcc2f3118fc4e5c97395e8"
+  },
+  {
+   "path": "web/tiles/t05_14_b1.glb",
+   "bytes": 759920,
+   "sha256": "1991bbf24fb54d3d0e832c88d0c94a66dc0fca4ec78f26652a1a110d2a2e004c"
+  },
+  {
+   "path": "web/tiles/t05_14_b2.glb",
+   "bytes": 3369080,
+   "sha256": "c329643007195fc077e8dfdf7b7fff53368f5f4f1b9bebbd157a2b16275ccb11"
+  },
+  {
+   "path": "web/tiles/t05_14_base.glb",
+   "bytes": 299916,
+   "sha256": "05e807fb7dc370ec3fb549f594e2c5fe69944ad148bd3c6b2427832463b1986e"
+  },
+  {
+   "path": "web/tiles/t05_15_b1.glb",
+   "bytes": 529432,
+   "sha256": "cf7fde72f2fcf376c21575b279f4ea53ac3caae58a387d2516298819dade1775"
+  },
+  {
+   "path": "web/tiles/t05_15_b2.glb",
+   "bytes": 1994372,
+   "sha256": "13596fc871be23e84e52e3c9cdc1bb1cf5f9402040baad60211edddb86c18976"
+  },
+  {
+   "path": "web/tiles/t05_15_base.glb",
+   "bytes": 246104,
+   "sha256": "a06825627832e7d71b9422ae3ba5aeff8db9c393401cfc954f5fcde3f3ed418f"
+  },
+  {
+   "path": "web/tiles/t06_00_b1.glb",
+   "bytes": 1298268,
+   "sha256": "e4371a37301c14772d9eafddc1b76f5e2dbc4a1fb23363c9364982964af991b0"
+  },
+  {
+   "path": "web/tiles/t06_00_b2.glb",
+   "bytes": 2327584,
+   "sha256": "e0cc0a1ff3f61f3d3f500a172ecca8e051fd76765a0906b3743b3eb8b51e6324"
+  },
+  {
+   "path": "web/tiles/t06_00_base.glb",
+   "bytes": 392304,
+   "sha256": "782cf7e732a8b56fdfb955bd1c59ea2b1b442f35c0fe6268662153956f3d63b7"
+  },
+  {
+   "path": "web/tiles/t06_01_b1.glb",
+   "bytes": 497304,
+   "sha256": "2a64f3d705c0ada857d87c4d13eab7b8bf975b6e0a785aa51bb49a2ff3137ef5"
+  },
+  {
+   "path": "web/tiles/t06_01_b2.glb",
+   "bytes": 909936,
+   "sha256": "307fbe90efa8cd96f0d7a82fc95da0f5aa08f81cf5a2006d9e1cef85b3279126"
+  },
+  {
+   "path": "web/tiles/t06_01_base.glb",
+   "bytes": 911080,
+   "sha256": "99f3947aea296cacaf3f322289f7adcadfaaab325be95f8c1cba1c35b084de46"
+  },
+  {
+   "path": "web/tiles/t06_02_b1.glb",
+   "bytes": 931684,
+   "sha256": "5359efb3ffdf46374867249cde8e5761a1bea38f9ed3f6a4446e4fe5842cbddb"
+  },
+  {
+   "path": "web/tiles/t06_02_b2.glb",
+   "bytes": 1715640,
+   "sha256": "daf4915a576944a577203ed5e6e78ebb4f23e0f0ff387bd3e44d9e19d33914e7"
+  },
+  {
+   "path": "web/tiles/t06_02_base.glb",
+   "bytes": 511580,
+   "sha256": "1c76334fb44e2798d0372e9df188d641e511cfc2dee2b4dcb8d3db4ccb6551de"
+  },
+  {
+   "path": "web/tiles/t06_03_b1.glb",
+   "bytes": 1328700,
+   "sha256": "daab162af1582145700886dac54de5662435add30f6777f4c25e18a414792f85"
+  },
+  {
+   "path": "web/tiles/t06_03_b2.glb",
+   "bytes": 3535648,
+   "sha256": "ff2214bc5f75012dcd8d7df5ec34ab5d683a2a3c675ddc02bdd493eed1f8a6bd"
+  },
+  {
+   "path": "web/tiles/t06_03_base.glb",
+   "bytes": 376668,
+   "sha256": "d7c49e6ef8880a3f39dd69b2461c24b0d8ed5e10b45b5704649d08bc833bb964"
+  },
+  {
+   "path": "web/tiles/t06_04_b1.glb",
+   "bytes": 2245620,
+   "sha256": "a8b892e349b9005658ce2eaabc4180587841f34d4fdb2798011b81c1dbf08571"
+  },
+  {
+   "path": "web/tiles/t06_04_b2.glb",
+   "bytes": 6875080,
+   "sha256": "0adc0059e66e5aebe646e980d87e0083c6e964e2303199aebcfd16aa74a29562"
+  },
+  {
+   "path": "web/tiles/t06_04_base.glb",
+   "bytes": 335116,
+   "sha256": "fd0c8b8591bb45f619713f61aebfc0c3e805565a4cb064825e64a93f6513b0fd"
+  },
+  {
+   "path": "web/tiles/t06_05_b1.glb",
+   "bytes": 1984872,
+   "sha256": "89d2ac986b31e888818edf4391d00ef4dff9f76b20a1e84e73603060092a0d27"
+  },
+  {
+   "path": "web/tiles/t06_05_b2.glb",
+   "bytes": 6938652,
+   "sha256": "dd0613152ed212fd8eccf69de28e9ab4cfe6c32d410ce833c82b4053c668c15b"
+  },
+  {
+   "path": "web/tiles/t06_05_base.glb",
+   "bytes": 273616,
+   "sha256": "c08a1395e0e7b2e6f42485b2898805b08da26f3eb7b4f76e13ff6f39c15ec885"
+  },
+  {
+   "path": "web/tiles/t06_06_b1.glb",
+   "bytes": 550916,
+   "sha256": "0a9dd8231224c425a3395165c85fc843899db2955f1b063b748f6e5c0d779e9a"
+  },
+  {
+   "path": "web/tiles/t06_06_b2.glb",
+   "bytes": 2612968,
+   "sha256": "9ccb5b2a4cbc7197c685de18b39b673beab939f9900f93e5d883e227d69a76b0"
+  },
+  {
+   "path": "web/tiles/t06_06_base.glb",
+   "bytes": 494580,
+   "sha256": "db46e1d9146d2d6c943b36ad7a84119906b65e9aecbdd1c2e20bad39fc771458"
+  },
+  {
+   "path": "web/tiles/t06_07_b1.glb",
+   "bytes": 606232,
+   "sha256": "7e6fabf75cae7d6840b5c0cf4764d59691ca8c70f2959f2ccf7df36f53d37de2"
+  },
+  {
+   "path": "web/tiles/t06_07_b2.glb",
+   "bytes": 3125080,
+   "sha256": "1aaa7be1423feb35f1553d7a5c5b8420c5383c8d03f20511ced1c887fdbb08b5"
+  },
+  {
+   "path": "web/tiles/t06_07_base.glb",
+   "bytes": 595416,
+   "sha256": "00bf33d3038e66fb0fcdfae9330a85b09d756a205d72efe846365283809be404"
+  },
+  {
+   "path": "web/tiles/t06_08_b1.glb",
+   "bytes": 734224,
+   "sha256": "4b50cbb24d169193059d65291e234ea9c9f792ec15d1c4a0d7f1c0a6760ce623"
+  },
+  {
+   "path": "web/tiles/t06_08_b2.glb",
+   "bytes": 5711400,
+   "sha256": "ddcc9c83cc7a75c6bc292b2e98f20ba2e4e3469f54fcce420d0d7220a17244c6"
+  },
+  {
+   "path": "web/tiles/t06_08_base.glb",
+   "bytes": 525052,
+   "sha256": "f656c1a8852c65098a8c9f1c3998dde21c25e7548ee03f6424def2c1d480213a"
+  },
+  {
+   "path": "web/tiles/t06_09_b1.glb",
+   "bytes": 684420,
+   "sha256": "3e398b87555de68cc7ea6bf15bf8a3b6e60f0b60a1cd9b2ffae2906d2519fde6"
+  },
+  {
+   "path": "web/tiles/t06_09_b2.glb",
+   "bytes": 4137656,
+   "sha256": "edc5086fd7eb45a6b9e6ff1d76d760c6900a7e873b13c30e42cae4bdb925b981"
+  },
+  {
+   "path": "web/tiles/t06_09_base.glb",
+   "bytes": 309444,
+   "sha256": "ac9dcc513b11dc0e530385cfa7645c0c2adaea7c1aaf07d7ef3ec9df19907ee8"
+  },
+  {
+   "path": "web/tiles/t06_10_b1.glb",
+   "bytes": 1162960,
+   "sha256": "855e97900de925802362537f0fbd631559d0809e9f4a7ae1c4919d7e64ec6d07"
+  },
+  {
+   "path": "web/tiles/t06_10_b2.glb",
+   "bytes": 5063912,
+   "sha256": "3ab63459f5672e0914ed7194fc09c5be362c2d06b4b4b498c158b314e976efeb"
+  },
+  {
+   "path": "web/tiles/t06_10_base.glb",
+   "bytes": 329252,
+   "sha256": "a8bdde0abb9d292a74886c974fb9a56df65173c8ace985bbb4729c6c3cdb1475"
+  },
+  {
+   "path": "web/tiles/t06_11_b1.glb",
+   "bytes": 1105276,
+   "sha256": "39fe0a25a08312a4c789a55b860df30160bf328e7e4d61188447c365ed44933a"
+  },
+  {
+   "path": "web/tiles/t06_11_b2.glb",
+   "bytes": 4200032,
+   "sha256": "fe52bea8a509bdf5956093772291663b71158cee951aaefd2d23eb3f46144e98"
+  },
+  {
+   "path": "web/tiles/t06_11_base.glb",
+   "bytes": 289476,
+   "sha256": "6893f146803a8a420af5d6521bde5eb604dd1fbf8c2abbdeffa5d3bc905345bf"
+  },
+  {
+   "path": "web/tiles/t06_12_b1.glb",
+   "bytes": 801464,
+   "sha256": "8c664de412d2f6d1d32f55e5de1e0109a57d4a43486be0f410c2633effc643b1"
+  },
+  {
+   "path": "web/tiles/t06_12_b2.glb",
+   "bytes": 2761444,
+   "sha256": "f7b1b90dedaf0baac1648561df9e7a58fc27af41ea244223dffc22c9184f706d"
+  },
+  {
+   "path": "web/tiles/t06_12_base.glb",
+   "bytes": 621520,
+   "sha256": "707cd47de2958a8b0513c344bc991b448ff1bccb319f2dafa4fd298296755581"
+  },
+  {
+   "path": "web/tiles/t06_13_b1.glb",
+   "bytes": 1500444,
+   "sha256": "18f98f7e160bbdfdec3a6ea147cc46c7e19c5ba02fa2188d08e68e51271b2653"
+  },
+  {
+   "path": "web/tiles/t06_13_b2.glb",
+   "bytes": 5006484,
+   "sha256": "e867a2396234c09f2bf824f41965d172d03375242da9dcab2adc3324c49399f3"
+  },
+  {
+   "path": "web/tiles/t06_13_base.glb",
+   "bytes": 296744,
+   "sha256": "290a672add8f7e559fe1d8fccaa84f91073d7e7807af74a24de80188a2e5ffad"
+  },
+  {
+   "path": "web/tiles/t06_14_b1.glb",
+   "bytes": 1100388,
+   "sha256": "8c0d018428344a6ac62fd057a1b207d865df3efb389c068682fcde29b27c563a"
+  },
+  {
+   "path": "web/tiles/t06_14_b2.glb",
+   "bytes": 2815856,
+   "sha256": "72b344b8b53af4027f27eabb9dbbb76abf3bab5f0bd40ce64848574bb4fdb371"
+  },
+  {
+   "path": "web/tiles/t06_14_base.glb",
+   "bytes": 264504,
+   "sha256": "78afd8ce755ce2eb6f3e278ef375024f6d56fdd98caa8ca3dd364a1169958a6d"
+  },
+  {
+   "path": "web/tiles/t06_15_b1.glb",
+   "bytes": 1040084,
+   "sha256": "c19deb37b8aa451fe0730f1802b6d489a459fa9bc9acc7bdbff8dd601dd9222b"
+  },
+  {
+   "path": "web/tiles/t06_15_b2.glb",
+   "bytes": 2553692,
+   "sha256": "5aa27a339478ee2c8a0a4414e7eaa1695d783d7e0ba3803d5d281f2199616424"
+  },
+  {
+   "path": "web/tiles/t06_15_base.glb",
+   "bytes": 243632,
+   "sha256": "4952cb6e790f37fb18ce9df762e76369539629272c42d5b3ac7bc422e39ca9ae"
+  },
+  {
+   "path": "web/tiles/t07_00_b1.glb",
+   "bytes": 262140,
+   "sha256": "2f0ced532ffd31d7be586753472ebde0676561d6882a8551273ebb742cb04392"
+  },
+  {
+   "path": "web/tiles/t07_00_b2.glb",
+   "bytes": 539228,
+   "sha256": "f30aa2a84ae82061ef1762ce207d3e545875e01392f2d480d1b21a6ed52f013e"
+  },
+  {
+   "path": "web/tiles/t07_00_base.glb",
+   "bytes": 625792,
+   "sha256": "ee4f620da025ce9db76ec52ad99ab40930d060ae822d754eb9d45b1cc7a0e178"
+  },
+  {
+   "path": "web/tiles/t07_01_b1.glb",
+   "bytes": 605284,
+   "sha256": "79d42fbab4c598a197c71560dce44fb7f2e239213534b937ad1ea320826fc3dc"
+  },
+  {
+   "path": "web/tiles/t07_01_b2.glb",
+   "bytes": 1036868,
+   "sha256": "f5003cf0bc526d6083ff0bc8d563f83f0cedb59d93664b234dc87f7e8f919396"
+  },
+  {
+   "path": "web/tiles/t07_01_base.glb",
+   "bytes": 505808,
+   "sha256": "88d5b8bb639f0e2cad14cccfff7b0ea2f34d3fc5f70255b058a396307df43caf"
+  },
+  {
+   "path": "web/tiles/t07_02_b1.glb",
+   "bytes": 574812,
+   "sha256": "677bbefad9066ae42b9fe7d26dff11ec2039c10851b98d4f398e1db4bfd3f4b1"
+  },
+  {
+   "path": "web/tiles/t07_02_b2.glb",
+   "bytes": 1314872,
+   "sha256": "4c2ec60319538f7f788951913e4cde622c6039cbfc5b20e8a91e8dd73a3c55f6"
+  },
+  {
+   "path": "web/tiles/t07_02_base.glb",
+   "bytes": 536964,
+   "sha256": "48c3d09b7461f70d9efadd304ea0133c8171d319ccb6b2eda22a7cb7b7c6b928"
+  },
+  {
+   "path": "web/tiles/t07_03_b1.glb",
+   "bytes": 1220072,
+   "sha256": "ea9b870da3d00e8b45877f7917761656eb543e912f99f32f34fa23b64c6daaa0"
+  },
+  {
+   "path": "web/tiles/t07_03_b2.glb",
+   "bytes": 2826264,
+   "sha256": "f87ea938f7a6457a72a7fc116722f00ea793d3fffdab24047ff6354f70aff1a7"
+  },
+  {
+   "path": "web/tiles/t07_03_base.glb",
+   "bytes": 349128,
+   "sha256": "b1d1590254033b4fcd919d3cf79a7a72a7dfab2e4cbc81aa753b5edfc80fc66c"
+  },
+  {
+   "path": "web/tiles/t07_04_b1.glb",
+   "bytes": 876544,
+   "sha256": "db532a23a4d797b8ef2e458fda6b7a8b91764014dbc29c0912bcbab77a572786"
+  },
+  {
+   "path": "web/tiles/t07_04_b2.glb",
+   "bytes": 3282500,
+   "sha256": "ccd82ee02c85f6b5af9e0cb16721debdb78e0d937f14b13a52ecee9c752b559f"
+  },
+  {
+   "path": "web/tiles/t07_04_base.glb",
+   "bytes": 502184,
+   "sha256": "ce198450e61b302e014506eb742785908c1b76058cf3c25db4ced094f677f66b"
+  },
+  {
+   "path": "web/tiles/t07_05_b1.glb",
+   "bytes": 1498144,
+   "sha256": "bff2ee74b69b776f400cabb3b42cfd3dec903afb58784888dde6b43e4bb25c7b"
+  },
+  {
+   "path": "web/tiles/t07_05_b2.glb",
+   "bytes": 5170452,
+   "sha256": "a4c4ad7bfb720839396a00eb926e65134325b1f07477c24e6293321db56951dc"
+  },
+  {
+   "path": "web/tiles/t07_05_base.glb",
+   "bytes": 387472,
+   "sha256": "b35b0c5c74e33484acce83aed509aa943df2799a39cc5b4171806c5cc8105252"
+  },
+  {
+   "path": "web/tiles/t07_06_b1.glb",
+   "bytes": 481560,
+   "sha256": "fa79a027064723568c0e12ed46233cabb87737d5aa1db9dda8e5e2c4c78a0c31"
+  },
+  {
+   "path": "web/tiles/t07_06_b2.glb",
+   "bytes": 2750264,
+   "sha256": "8839a630f63c7e775c06f9ce7b796b1686a73735e004091c08abc01ffddbf391"
+  },
+  {
+   "path": "web/tiles/t07_06_base.glb",
+   "bytes": 476168,
+   "sha256": "4d2d0352700336657d75930d57739a6975c1f0bf7a3f2c117245933183e529fb"
+  },
+  {
+   "path": "web/tiles/t07_07_b1.glb",
+   "bytes": 567648,
+   "sha256": "b2f14dbe365f2eea5dc8b5fba42df56d924388a9efc77ca26fdfe85ed7194493"
+  },
+  {
+   "path": "web/tiles/t07_07_b2.glb",
+   "bytes": 6021632,
+   "sha256": "eb4663474eaaf97f5aad6ee0a43238b50713ec61117b9da507bdc9db16c3ec28"
+  },
+  {
+   "path": "web/tiles/t07_07_base.glb",
+   "bytes": 435100,
+   "sha256": "e8791bc803b463f55090c62522f7dcb1e37ebf00b21c583e1b9ae640e36fa5ac"
+  },
+  {
+   "path": "web/tiles/t07_08_b1.glb",
+   "bytes": 638592,
+   "sha256": "5f8263d9c93e03e25e34e495ec865ba63a6c630ed7111ae9072082a6da1fd331"
+  },
+  {
+   "path": "web/tiles/t07_08_b2.glb",
+   "bytes": 5625252,
+   "sha256": "e56a19ebe563b56f4631e63250705c692debb13ad577f3ef2591afec35e6aac9"
+  },
+  {
+   "path": "web/tiles/t07_08_base.glb",
+   "bytes": 676960,
+   "sha256": "f5bf62666a3f17ab306068e656b68ffc11166008665eaa8501d51ed5bce0b93f"
+  },
+  {
+   "path": "web/tiles/t07_09_b1.glb",
+   "bytes": 942180,
+   "sha256": "fc8e9fa6725524fcebdc45fdf21fdd838a52ceb16bac8a7b671aebea78798d3b"
+  },
+  {
+   "path": "web/tiles/t07_09_b2.glb",
+   "bytes": 4223692,
+   "sha256": "ed1c45359d9a651b1ce5893ebc53bd8d174f4c7870c18bb146ea4483372422ea"
+  },
+  {
+   "path": "web/tiles/t07_09_base.glb",
+   "bytes": 435644,
+   "sha256": "60c47a6d9e1dc97bbaedda8b0913d763cf70fd69d4dadc19ecd03cd6d07bbf8a"
+  },
+  {
+   "path": "web/tiles/t07_10_b1.glb",
+   "bytes": 916936,
+   "sha256": "b1904f704adc070811f541b42312731ac9ff864d76d09c7dae7e1c2e23c8b6cd"
+  },
+  {
+   "path": "web/tiles/t07_10_b2.glb",
+   "bytes": 3853816,
+   "sha256": "e420fa5674ee39bcf9479a5385040a0f4892ff3e8dbfa95c0f4fea88df71524f"
+  },
+  {
+   "path": "web/tiles/t07_10_base.glb",
+   "bytes": 326800,
+   "sha256": "c698cfe08679bd2552a2bf09ef3dfc74652df5ab624d37f952d39dc27b6f3dbe"
+  },
+  {
+   "path": "web/tiles/t07_11_b1.glb",
+   "bytes": 873612,
+   "sha256": "be41bbfe5158f1ecee84e73c21f15ddda1a121470355f9e4ff9994ca6430bef2"
+  },
+  {
+   "path": "web/tiles/t07_11_b2.glb",
+   "bytes": 3666332,
+   "sha256": "45ed864b17c36f36e8ef6947737b2a6d7de518f7275f521353a45207cce9d74e"
+  },
+  {
+   "path": "web/tiles/t07_11_base.glb",
+   "bytes": 383000,
+   "sha256": "6683c447d94500b87e2f3593035a140cf8f5b3571b2e072aa9d901dd686f8b14"
+  },
+  {
+   "path": "web/tiles/t07_12_b1.glb",
+   "bytes": 731292,
+   "sha256": "9cf3623e519178f4e71b5a69dcde8f7e531d0dab8459cabcfbc5f1e2e5963b27"
+  },
+  {
+   "path": "web/tiles/t07_12_b2.glb",
+   "bytes": 2519808,
+   "sha256": "ea81bedfe348d55afbfc7959434ab21640b269cb642c0bcf4a6b9d0aa68b4d25"
+  },
+  {
+   "path": "web/tiles/t07_12_base.glb",
+   "bytes": 350476,
+   "sha256": "f0788f0d95673d914ab30df446d39319bde6cccdb82d0cded81c248b6d6f4021"
+  },
+  {
+   "path": "web/tiles/t07_13_b1.glb",
+   "bytes": 1102624,
+   "sha256": "851568eeec0953594cab8e9250b73bdea30d940200dd55672556d7be95047f1f"
+  },
+  {
+   "path": "web/tiles/t07_13_b2.glb",
+   "bytes": 2978884,
+   "sha256": "aeedf02696c48bee5c610f871116401bb71371bb4ae399e68a8fbfddbc909698"
+  },
+  {
+   "path": "web/tiles/t07_13_base.glb",
+   "bytes": 319208,
+   "sha256": "dfdcc7a5ff42038f093472506129f56a9f8031c4d3c4d41941f09e95c3d0f35a"
+  },
+  {
+   "path": "web/tiles/t07_14_b1.glb",
+   "bytes": 721840,
+   "sha256": "92aba9c0fbe3806e541ade7e1221f8e2197c82bb5d0743836a227aa08d3ce51b"
+  },
+  {
+   "path": "web/tiles/t07_14_b2.glb",
+   "bytes": 1742784,
+   "sha256": "a3e8e7934654697600929f5bdd12385bcc97b68cb0973a3ae7ce1953d5512e0b"
+  },
+  {
+   "path": "web/tiles/t07_14_base.glb",
+   "bytes": 341628,
+   "sha256": "83acc95dad438341876b02ab8364942307b1a98feec8923a524384be9b9586e5"
+  },
+  {
+   "path": "web/tiles/t07_15_b1.glb",
+   "bytes": 960124,
+   "sha256": "cd8877ed48ef0f32821e9b44e614768bc603792a04ad14e1eb540f957522b23e"
+  },
+  {
+   "path": "web/tiles/t07_15_b2.glb",
+   "bytes": 2074664,
+   "sha256": "37c9da8ad9a6d8edd1606c588968ac081548bc720d88ffcf576878d07c99315a"
+  },
+  {
+   "path": "web/tiles/t07_15_base.glb",
+   "bytes": 259192,
+   "sha256": "23a38b3ed993fe22773aaf7b7dc6abc9ba66a1de281eff699cf8015cbc1b397e"
+  },
+  {
+   "path": "web/tiles/t08_00_b1.glb",
+   "bytes": 1093932,
+   "sha256": "d4063b05cc0d41d8cc2c6713374c04660a6b8fb056d5f53ecedc3340b9f3979d"
+  },
+  {
+   "path": "web/tiles/t08_00_b2.glb",
+   "bytes": 1950924,
+   "sha256": "b2ed2d8e8bfd2db4463bee1dbda27b2e9aca7f70ca3e87c6b6e95273e7e153af"
+  },
+  {
+   "path": "web/tiles/t08_00_base.glb",
+   "bytes": 489100,
+   "sha256": "5325fce4cf4631e6047ffdada1c0ff75d7e630416b0a270fca482728c85a58ec"
+  },
+  {
+   "path": "web/tiles/t08_01_b1.glb",
+   "bytes": 1310792,
+   "sha256": "85e98fd829ec14f5c4ef94dabe27008bef6ba680182584d572525de4cd04a1d3"
+  },
+  {
+   "path": "web/tiles/t08_01_b2.glb",
+   "bytes": 2259504,
+   "sha256": "66223d06c3eaf27d9fd15897fc009b89b9f8a75d8fe70290dfae1a4e503cbe26"
+  },
+  {
+   "path": "web/tiles/t08_01_base.glb",
+   "bytes": 243324,
+   "sha256": "2c693052184c6e780c4002571804993f20e419ef10bba710ec2ed483d6dedd1b"
+  },
+  {
+   "path": "web/tiles/t08_02_b1.glb",
+   "bytes": 975312,
+   "sha256": "7c7d100581d62774a62876b426f2d658f443f1d5fcdacfb68f6cc7acd2c309c9"
+  },
+  {
+   "path": "web/tiles/t08_02_b2.glb",
+   "bytes": 1667504,
+   "sha256": "16993b84a677a81e845f0d203a1049715bb6c78134346237f1a7774fe8fe5719"
+  },
+  {
+   "path": "web/tiles/t08_02_base.glb",
+   "bytes": 630748,
+   "sha256": "6be246c9a17c0b9e88be16f49ec1580be472270b1453fd637380a56a9d780fde"
+  },
+  {
+   "path": "web/tiles/t08_03_b1.glb",
+   "bytes": 1001468,
+   "sha256": "0e5175d4e96f1b12f13458b930a1c541770fac99c4ab638b7b993f976fe66daa"
+  },
+  {
+   "path": "web/tiles/t08_03_b2.glb",
+   "bytes": 2111000,
+   "sha256": "5fe82165e14f92530727ba217d6cb0965227d845517c22efcc4d1fab8008e7bc"
+  },
+  {
+   "path": "web/tiles/t08_03_base.glb",
+   "bytes": 418060,
+   "sha256": "a3fca29c0b76550ff448222e4ab3eb3b2c4a5cc690b022766aa061a6008b52dd"
+  },
+  {
+   "path": "web/tiles/t08_04_b1.glb",
+   "bytes": 1730260,
+   "sha256": "080ce64dc7057ca236fe7779fa56e7e7fb67a57028810ef5112da20894ba0caf"
+  },
+  {
+   "path": "web/tiles/t08_04_b2.glb",
+   "bytes": 4977576,
+   "sha256": "f204b16e75ff5e2a18ea75116deb605e49eaf6dc0effb4b258ff4c8779aa5208"
+  },
+  {
+   "path": "web/tiles/t08_04_base.glb",
+   "bytes": 420088,
+   "sha256": "3b3ae4a5c285d4017d00824993e1e64ccba7d7094eeb8d886b6536446eaff6c4"
+  },
+  {
+   "path": "web/tiles/t08_05_b1.glb",
+   "bytes": 484524,
+   "sha256": "1dd108e2f55e4016ef29bebf62da5c2f1f05c924cf97950c80d72ce57ee7b20f"
+  },
+  {
+   "path": "web/tiles/t08_05_b2.glb",
+   "bytes": 2835816,
+   "sha256": "3562a1e0494658fd20be440e9e07aa10e4a83904640d092399364b8e06b8772a"
+  },
+  {
+   "path": "web/tiles/t08_05_base.glb",
+   "bytes": 501916,
+   "sha256": "2cc5ff9a53070df257168a3d146cbb009bbbffaa543c1c1f708b87219ab0136e"
+  },
+  {
+   "path": "web/tiles/t08_06_b1.glb",
+   "bytes": 397700,
+   "sha256": "5585e659286c572b2e0a840632316554e51316f7457fe55ddec3e326fcfae98c"
+  },
+  {
+   "path": "web/tiles/t08_06_b2.glb",
+   "bytes": 2261104,
+   "sha256": "5eaf2ab94d28661bdd5d63a8c3fe15cbc41223d1074f7a6fb15617e4d1393c61"
+  },
+  {
+   "path": "web/tiles/t08_06_base.glb",
+   "bytes": 683856,
+   "sha256": "c06257e3f7184f8021ae815763e82bfeabf743c8cb3bdd2cd14f97f86c436dbc"
+  },
+  {
+   "path": "web/tiles/t08_07_b1.glb",
+   "bytes": 553528,
+   "sha256": "34d132ce8384e6a1083ea42c6bfb06d3868324f3bf2c7bb636d8c85f5080aebb"
+  },
+  {
+   "path": "web/tiles/t08_07_b2.glb",
+   "bytes": 7830588,
+   "sha256": "6dd61215d2e218589c1f4c8e5b4304fbb7cb647b797389e3867aab213f401ef9"
+  },
+  {
+   "path": "web/tiles/t08_07_base.glb",
+   "bytes": 424556,
+   "sha256": "fa94271f82b600376c88f2951e832b41043a53e45e4a9acb6b110851467fcc50"
+  },
+  {
+   "path": "web/tiles/t08_08_b1.glb",
+   "bytes": 691660,
+   "sha256": "5cb3a07ce85829929ccac9ea5b30205c4f3ff793ec7c69ad7e43782f265da0e6"
+  },
+  {
+   "path": "web/tiles/t08_08_b2.glb",
+   "bytes": 9179596,
+   "sha256": "e98cc0d4a95ec98a2b2ee083f232b4c095b76977dc0b6782c10b495f093a1b4c"
+  },
+  {
+   "path": "web/tiles/t08_08_base.glb",
+   "bytes": 408440,
+   "sha256": "448bdd4366407ef01d7417039e5f034f6b8a32184581aaa5b288f80638ac0d01"
+  },
+  {
+   "path": "web/tiles/t08_09_b1.glb",
+   "bytes": 625612,
+   "sha256": "18f35a170073252e043633b888692110f75f194b2bfaa86636c6de35ab51dea7"
+  },
+  {
+   "path": "web/tiles/t08_09_b2.glb",
+   "bytes": 5620012,
+   "sha256": "feb1d802ace441668671672b0f53dc1cff40c0c8b6d9085295c70f068646ca5e"
+  },
+  {
+   "path": "web/tiles/t08_09_base.glb",
+   "bytes": 399216,
+   "sha256": "c348a939ae9d48553afad41b1d454b8cad819c2aad88f2125d2f65bab753c4b2"
+  },
+  {
+   "path": "web/tiles/t08_10_b1.glb",
+   "bytes": 1190404,
+   "sha256": "f4d7b35c420663a7aec3a944b5cbff3f5364cf361a4ef83ca97ab14a0b27ac00"
+  },
+  {
+   "path": "web/tiles/t08_10_b2.glb",
+   "bytes": 4574464,
+   "sha256": "2fdb7b7b169632ad82b924cab7c8db378e78856828ba6d90e3da0ba82c7ed55b"
+  },
+  {
+   "path": "web/tiles/t08_10_base.glb",
+   "bytes": 357424,
+   "sha256": "b3a602dd723492f161f98b0c88a6498baf662eb66cc9409d5b470c4241aba50e"
+  },
+  {
+   "path": "web/tiles/t08_11_b1.glb",
+   "bytes": 1092580,
+   "sha256": "a4ad6a8e728dac0e7c30ff7c3263b43fd69664eb0d65e9ad3f42d8079441bdea"
+  },
+  {
+   "path": "web/tiles/t08_11_b2.glb",
+   "bytes": 4286504,
+   "sha256": "52f0831f2dc80ca6702b83a8b068d66b3454035614ce1ab646d0591e55fc04fc"
+  },
+  {
+   "path": "web/tiles/t08_11_base.glb",
+   "bytes": 352656,
+   "sha256": "072b932e606d8e78fd03f3c740965667248fcdfd44404899e8ef632f0ef798bd"
+  },
+  {
+   "path": "web/tiles/t08_12_b1.glb",
+   "bytes": 1409736,
+   "sha256": "88e627387f361454251725306a14dd3dd273eeee0a8c09d686fa3ce51a8d6d89"
+  },
+  {
+   "path": "web/tiles/t08_12_b2.glb",
+   "bytes": 5129392,
+   "sha256": "c2fadaaf77e308f2012153a736cb66153101d50de2da3a29194c268228e67913"
+  },
+  {
+   "path": "web/tiles/t08_12_base.glb",
+   "bytes": 270976,
+   "sha256": "1f81b985c70774f791d4fac96c8977dd745b126191da25fe4cc17364e94caec3"
+  },
+  {
+   "path": "web/tiles/t08_13_b1.glb",
+   "bytes": 1467244,
+   "sha256": "1fcd0fe0e07f2de4d4c45e9651954ff5d04002a1b1b6aa9508ab4f8c5d562199"
+  },
+  {
+   "path": "web/tiles/t08_13_b2.glb",
+   "bytes": 4791064,
+   "sha256": "16ae820aa8fdc1d6fdb929ce656ac5b554888750170455670a31b8e48beee8a6"
+  },
+  {
+   "path": "web/tiles/t08_13_base.glb",
+   "bytes": 259620,
+   "sha256": "cb42e016cf91b626fb4274514ba197216bec92800b30aee345d605583f80c331"
+  },
+  {
+   "path": "web/tiles/t08_14_b1.glb",
+   "bytes": 1004480,
+   "sha256": "5c1352b58801e8423c8d8fa7ac9811e044fdca4a04f1c648b7c05f953b382e66"
+  },
+  {
+   "path": "web/tiles/t08_14_b2.glb",
+   "bytes": 2563620,
+   "sha256": "b7552dd75b9d0e4cd5a2f678d891026dc462901004326d1aa4ec07a8e5a22b77"
+  },
+  {
+   "path": "web/tiles/t08_14_base.glb",
+   "bytes": 440780,
+   "sha256": "ae3622a7351b72778ed10a81debbbb679c5ad3f23001a1795c99b32e8d55fc84"
+  },
+  {
+   "path": "web/tiles/t08_15_b1.glb",
+   "bytes": 655200,
+   "sha256": "86f4e10bd3744a3c92f27ab88a01ebfbb7fb72cfc6aa363b05ef7b0826d48203"
+  },
+  {
+   "path": "web/tiles/t08_15_b2.glb",
+   "bytes": 1556824,
+   "sha256": "115c97dbf5c075d55548fe49f5ad75a80fe402f58557931da0be4ec94fc9d4bd"
+  },
+  {
+   "path": "web/tiles/t08_15_base.glb",
+   "bytes": 426256,
+   "sha256": "844ec47d3718372ad6ed93ceb9cffbe8fc396075c425351276d094882a60459f"
+  },
+  {
+   "path": "web/tiles/t09_00_b1.glb",
+   "bytes": 160040,
+   "sha256": "2e5565a3e0ff72d71b85e27ff8420734ff748792fd61673fd92b1caaa7fa4cc4"
+  },
+  {
+   "path": "web/tiles/t09_00_b2.glb",
+   "bytes": 942440,
+   "sha256": "76f4d8596781a62690f5eb17cc9dcdcf0eb4cb5ef799b60d487b37d112b26137"
+  },
+  {
+   "path": "web/tiles/t09_00_base.glb",
+   "bytes": 551600,
+   "sha256": "2608833a6c98df704ae7b0b3397cd3dff7961a5dfd1010bb00446b31fa83d77f"
+  },
+  {
+   "path": "web/tiles/t09_01_b1.glb",
+   "bytes": 1259568,
+   "sha256": "4879b1d5cac87bbc5f30c4affc4125cb54b735c94dbf5728331a0e01430d23d3"
+  },
+  {
+   "path": "web/tiles/t09_01_b2.glb",
+   "bytes": 2306432,
+   "sha256": "8eb1a56f4b05ecef43a7a9641d6141e7494220d5972b863ac3c65bc74b6c27bb"
+  },
+  {
+   "path": "web/tiles/t09_01_base.glb",
+   "bytes": 262280,
+   "sha256": "b832a3cf7604ff94aff0b5f1eebeda63099b72b57875b76ae6fa1b4be7c83c90"
+  },
+  {
+   "path": "web/tiles/t09_02_b1.glb",
+   "bytes": 1012200,
+   "sha256": "00148fee1d69f3aeb8c02d4795d863b7b3de1d1b6f8e4c0aa190a2b5bcbac87c"
+  },
+  {
+   "path": "web/tiles/t09_02_b2.glb",
+   "bytes": 1805860,
+   "sha256": "52a6cf8cb1d36798781c5f70f2db150b75f8babdd5ba285b6e6c41991403b955"
+  },
+  {
+   "path": "web/tiles/t09_02_base.glb",
+   "bytes": 557452,
+   "sha256": "db92c574cc09788ba1e9ff1098b7b62f8faeac6eb4264f343b52673d699d7351"
+  },
+  {
+   "path": "web/tiles/t09_03_b1.glb",
+   "bytes": 814884,
+   "sha256": "e229d9fbef3ffd3e7564c018b9a07c3a9d38e34c34806b5c1c6a869db5090e98"
+  },
+  {
+   "path": "web/tiles/t09_03_b2.glb",
+   "bytes": 1670460,
+   "sha256": "67e22b095e0e74d7fa6384edc18c4244b1b4bc747d4ae5ea83c4390e8efcd24d"
+  },
+  {
+   "path": "web/tiles/t09_03_base.glb",
+   "bytes": 678896,
+   "sha256": "2db973e81c5d98077c76af84b98143540289304dd851324bc05d90593659683c"
+  },
+  {
+   "path": "web/tiles/t09_04_b1.glb",
+   "bytes": 1252308,
+   "sha256": "4f7929b330a0f7e4dc5e8102a52f94882bbe5f0a08e9c5fdfb387960c93d478d"
+  },
+  {
+   "path": "web/tiles/t09_04_b2.glb",
+   "bytes": 3703604,
+   "sha256": "c4059469725530de4c0d4616d0ffd571985e886fc9cea85f81d21c1137dd8670"
+  },
+  {
+   "path": "web/tiles/t09_04_base.glb",
+   "bytes": 462700,
+   "sha256": "733d746d316f32e99f09bfa46557e58ad2b4d98e57d3ad64487cc66d07794f0f"
+  },
+  {
+   "path": "web/tiles/t09_05_b1.glb",
+   "bytes": 303040,
+   "sha256": "556ac50e20f33eb57bb5ea2a3029af98e638d85046eb32424f40b19dfb6f2b05"
+  },
+  {
+   "path": "web/tiles/t09_05_b2.glb",
+   "bytes": 1167244,
+   "sha256": "5ad256b5f7ca4c1881f8c1c1f5ba8a91ba5a528cadea35c67b9f6aad3f0e68d3"
+  },
+  {
+   "path": "web/tiles/t09_05_base.glb",
+   "bytes": 676288,
+   "sha256": "9fa123676d3d0a21a4421ed54e7cf980c75e056bb321d4d6f3cecc41a0876166"
+  },
+  {
+   "path": "web/tiles/t09_06_b1.glb",
+   "bytes": 245232,
+   "sha256": "328c0b62a537eae171f5539196c262f598d464eef4efd1497e255c3e51a6031b"
+  },
+  {
+   "path": "web/tiles/t09_06_b2.glb",
+   "bytes": 2356220,
+   "sha256": "5e1648c96870d4b68d18f8ccd85c3831e3363a529f22faf449cae755ff1341ce"
+  },
+  {
+   "path": "web/tiles/t09_06_base.glb",
+   "bytes": 646348,
+   "sha256": "199e050e3c0329db8ac629812bf25beeabeba8299c2cb0afd32e3ff4a73647cc"
+  },
+  {
+   "path": "web/tiles/t09_07_b1.glb",
+   "bytes": 218176,
+   "sha256": "78908fb72a01b6aa16a00fea7de0f7944de0415326da2d7e93f686bc7800e695"
+  },
+  {
+   "path": "web/tiles/t09_07_b2.glb",
+   "bytes": 5378788,
+   "sha256": "848110f4fc4a74fa02e2bd090f1ccb6428c7a557347a366ed410fb1cd2d1f1a4"
+  },
+  {
+   "path": "web/tiles/t09_07_base.glb",
+   "bytes": 493872,
+   "sha256": "a493f99195d77cdab1bf86acc7a8e46eb739ac5034d83a7f4b826f57b2c551ca"
+  },
+  {
+   "path": "web/tiles/t09_08_b1.glb",
+   "bytes": 315172,
+   "sha256": "2e94b04008cad19a4dda0b37391fffa4da6e1f94343c27f65d4558774a5d1ee9"
+  },
+  {
+   "path": "web/tiles/t09_08_b2.glb",
+   "bytes": 5075448,
+   "sha256": "b18bc3da92d5b7005a2480d317f30aab929f2cdcc46bbf97fa19c67bb78a57e8"
+  },
+  {
+   "path": "web/tiles/t09_08_base.glb",
+   "bytes": 598444,
+   "sha256": "ef51bdfcb53d537306452e2a9582270cb1ac6f86ccf9159342c4cc4897f2cf25"
+  },
+  {
+   "path": "web/tiles/t09_09_b1.glb",
+   "bytes": 649396,
+   "sha256": "5b7c1f9d90560c61f347e1443503b60c2670dc6ef240e58b27714e8fab28203f"
+  },
+  {
+   "path": "web/tiles/t09_09_b2.glb",
+   "bytes": 5060064,
+   "sha256": "136c4bed74e7885c84867501add572bd67ae859b3803f9c80d255c03764c60c3"
+  },
+  {
+   "path": "web/tiles/t09_09_base.glb",
+   "bytes": 477104,
+   "sha256": "d1d7c11d09c36fef400dd927351d68b41785ade260291876e751320cf97203a5"
+  },
+  {
+   "path": "web/tiles/t09_10_b1.glb",
+   "bytes": 1715464,
+   "sha256": "d027ae3b79ee7325310d936953f1b5f5949d78d45b9e5ad4b72bcbb6433926ce"
+  },
+  {
+   "path": "web/tiles/t09_10_b2.glb",
+   "bytes": 5998212,
+   "sha256": "45b726f27b7371ca961a6de9807998bdf48dd25fd06e04cd661f8a568e75a1c4"
+  },
+  {
+   "path": "web/tiles/t09_10_base.glb",
+   "bytes": 343044,
+   "sha256": "25c5382c1062b638e18def023eed7dea42534453c46871c7b701ee5f9e24f150"
+  },
+  {
+   "path": "web/tiles/t09_11_b1.glb",
+   "bytes": 1277572,
+   "sha256": "d5ed7d71183bc4d06bf9175572f70cff6dce224458b7baf764fa44cf9a77bd5c"
+  },
+  {
+   "path": "web/tiles/t09_11_b2.glb",
+   "bytes": 4878564,
+   "sha256": "c1e887690c04e4d68258ac4d8633a68d494da961ba40272d078c586ec2d6a8ae"
+  },
+  {
+   "path": "web/tiles/t09_11_base.glb",
+   "bytes": 290968,
+   "sha256": "23d7b36d65cfb231239826b37891c4c3def5c4b509ea754ce039e4966000f481"
+  },
+  {
+   "path": "web/tiles/t09_12_b1.glb",
+   "bytes": 1112396,
+   "sha256": "52eb8aaeaa8a5cf140a68822b71e013f25e1b6b3acebdd1d200d4d55a08b5e21"
+  },
+  {
+   "path": "web/tiles/t09_12_b2.glb",
+   "bytes": 4277428,
+   "sha256": "08f170ca4053d2dc51199d2412d0640346b354d58b19038d66cf65a48e946a4d"
+  },
+  {
+   "path": "web/tiles/t09_12_base.glb",
+   "bytes": 411896,
+   "sha256": "8c7798fadd244b8b8bea1fe1387d793071c5c8ed69fd64f5e6b57da97c7dce7e"
+  },
+  {
+   "path": "web/tiles/t09_13_b1.glb",
+   "bytes": 1309376,
+   "sha256": "71e39a27dd4d45b5ef8e9b50de848ec7a9d92478da2fe76aae25e2a714d174b7"
+  },
+  {
+   "path": "web/tiles/t09_13_b2.glb",
+   "bytes": 5317928,
+   "sha256": "b86399e980057fa170f7bb6fa06491c021354ddffa1a1e0a8661e9c45e279ec3"
+  },
+  {
+   "path": "web/tiles/t09_13_base.glb",
+   "bytes": 247596,
+   "sha256": "878ebfeebd2c17fd284f3c7104f47dff22000ab322ad080d88a87f9f5709b331"
+  },
+  {
+   "path": "web/tiles/t09_14_b1.glb",
+   "bytes": 1807840,
+   "sha256": "63c658fbc361a39a2de85336095a4dd125eeeac39577891817c78948c370ae3a"
+  },
+  {
+   "path": "web/tiles/t09_14_b2.glb",
+   "bytes": 5799508,
+   "sha256": "939274269f7de0117214d82ef7258f9b01375fb206aa684ba2cc22d7e203546c"
+  },
+  {
+   "path": "web/tiles/t09_14_base.glb",
+   "bytes": 250416,
+   "sha256": "c7fa0c908aec241e4ec7ae5d088535ff65f443d7cb06e9563ee925c7e12bbe44"
+  },
+  {
+   "path": "web/tiles/t09_15_b1.glb",
+   "bytes": 1211020,
+   "sha256": "3d595b061ec241c7e766f79c5e9416703ee7b81af2368badfbec7d50346dcd2a"
+  },
+  {
+   "path": "web/tiles/t09_15_b2.glb",
+   "bytes": 3798348,
+   "sha256": "32406beb6b2b0a381a7858ec103a47e436688e9ed101c8f24ac31eaca649a6a7"
+  },
+  {
+   "path": "web/tiles/t09_15_base.glb",
+   "bytes": 329552,
+   "sha256": "5dd9ca34e3da42923f4ccb59afeb21362dcd7f6d9b718553889a6717b66386b3"
+  },
+  {
+   "path": "web/tiles/t10_00_b1.glb",
+   "bytes": 1062508,
+   "sha256": "0676d7ee1ae053bdd5e73f7408910c1f452967b507bafd4c3b8022e59d118914"
+  },
+  {
+   "path": "web/tiles/t10_00_b2.glb",
+   "bytes": 1867448,
+   "sha256": "1f597ccaddd42fcbb9c3864a1422d8aa1ae89abf306f4966731de8ba2e739308"
+  },
+  {
+   "path": "web/tiles/t10_00_base.glb",
+   "bytes": 671696,
+   "sha256": "8367e7456e30bf87c7e32630148b7013b20021a6a03594496446e0657329f47c"
+  },
+  {
+   "path": "web/tiles/t10_01_b1.glb",
+   "bytes": 1312392,
+   "sha256": "68c6230b9b45c5a7769c9972202b65903f0c8049a90ba940471a995066109ecb"
+  },
+  {
+   "path": "web/tiles/t10_01_b2.glb",
+   "bytes": 2326736,
+   "sha256": "b10d8d20d8db1d9e32d68f98140d39eae42fe8bee678153ac38503b9c6c52d96"
+  },
+  {
+   "path": "web/tiles/t10_01_base.glb",
+   "bytes": 288132,
+   "sha256": "0ae86dc1e5965e75b5ab94b2d0861cd074f1e39621678baddd84a5cac297a4ff"
+  },
+  {
+   "path": "web/tiles/t10_02_b1.glb",
+   "bytes": 1010568,
+   "sha256": "61cf89f8fa4208c81d5d2932d0a5afb41c46d974e1e97427b68ac4efe9dddd9a"
+  },
+  {
+   "path": "web/tiles/t10_02_b2.glb",
+   "bytes": 1827904,
+   "sha256": "a55c70eff42be33fe0fba2db5c126d03cbda7638224ddb0108f35d892febdea8"
+  },
+  {
+   "path": "web/tiles/t10_02_base.glb",
+   "bytes": 311700,
+   "sha256": "0e5942d7a7aafcf8a3e61bbe251b7fa7b8ac2de6be7bdf3fd447ff129baa8009"
+  },
+  {
+   "path": "web/tiles/t10_03_b1.glb",
+   "bytes": 932304,
+   "sha256": "e40478db7d98a6ae3d1aaf20448e4e8066e69754d037f80970cf66a22c99f416"
+  },
+  {
+   "path": "web/tiles/t10_03_b2.glb",
+   "bytes": 2060208,
+   "sha256": "9be74afc04664b9a251e45cb0e35ef941c5edd9171acbae7fcc577b96461ab67"
+  },
+  {
+   "path": "web/tiles/t10_03_base.glb",
+   "bytes": 432544,
+   "sha256": "10437d97954ef11f3d706464554723b89c4e2973d3c7f141322ef5128ce0d8d8"
+  },
+  {
+   "path": "web/tiles/t10_04_b1.glb",
+   "bytes": 1454692,
+   "sha256": "16ecc612c36408cdcf3e344443c0ea00a47060c188f65c9a1ad5790c4d55dfa8"
+  },
+  {
+   "path": "web/tiles/t10_04_b2.glb",
+   "bytes": 3274880,
+   "sha256": "6e044a18e076b76b00c2ca2d1c859367eba65f1ad33ac2a7845522e39bf7378a"
+  },
+  {
+   "path": "web/tiles/t10_04_base.glb",
+   "bytes": 472188,
+   "sha256": "7b6b67aedead1695753f44047d34c9a4bc6524d3149bc594e30fa1613e9d91d7"
+  },
+  {
+   "path": "web/tiles/t10_05_b1.glb",
+   "bytes": 1583280,
+   "sha256": "c0a2e0c37eed3669cc083c43b029b2c8a8918c97b7447d0e097e740a3ec9a53a"
+  },
+  {
+   "path": "web/tiles/t10_05_b2.glb",
+   "bytes": 3767012,
+   "sha256": "411f7db557a83652ff8492d6aedd7177b0d2f44f7e69ed03760d50f28d206f65"
+  },
+  {
+   "path": "web/tiles/t10_05_base.glb",
+   "bytes": 680980,
+   "sha256": "e343d6219c604ef1b781c2490bc12f684154172b65ba409d16babde33669dc89"
+  },
+  {
+   "path": "web/tiles/t10_06_b1.glb",
+   "bytes": 78412,
+   "sha256": "173e3f99d06e7d31cedee491305a40e9276067f0f98f5f98f0fc7611ba07bfad"
+  },
+  {
+   "path": "web/tiles/t10_06_b2.glb",
+   "bytes": 1074920,
+   "sha256": "74402437c7c62cc1ee53125d7670e59a41fe85a3b4f26cc2806c1de6a0f4034d"
+  },
+  {
+   "path": "web/tiles/t10_06_base.glb",
+   "bytes": 543832,
+   "sha256": "c859852163186289ba74564e749b4d5ce39aef87aad3ac4c0fc97e32bf722512"
+  },
+  {
+   "path": "web/tiles/t10_07_b1.glb",
+   "bytes": 281924,
+   "sha256": "03cd5f173ade00eb27d2efef7d476ceadf1f087283dbe50772daa4e38a373709"
+  },
+  {
+   "path": "web/tiles/t10_07_b2.glb",
+   "bytes": 3248644,
+   "sha256": "49a540cf2b2c65b9f8edd243644d78ed0d510953dff7020a7d8fd576d23e47c6"
+  },
+  {
+   "path": "web/tiles/t10_07_base.glb",
+   "bytes": 455756,
+   "sha256": "936014afe248e9326471b6a72a4f5554857684123accdcaa401524bb2e1fbc8d"
+  },
+  {
+   "path": "web/tiles/t10_08_b1.glb",
+   "bytes": 507952,
+   "sha256": "08cba952e4996bc18f244e4af6aa622810bd4514ea0a8ad68b1ff3fdbfee7229"
+  },
+  {
+   "path": "web/tiles/t10_08_b2.glb",
+   "bytes": 3504360,
+   "sha256": "be85d1a5c3cf577fc8d2d0cc50cff4e11242c063f86100f834587f1b42b43422"
+  },
+  {
+   "path": "web/tiles/t10_08_base.glb",
+   "bytes": 448580,
+   "sha256": "963c12f5384bfeb32ebf3418c3268d42202aa315944a905bd8a4e5edd2bf3393"
+  },
+  {
+   "path": "web/tiles/t10_09_b1.glb",
+   "bytes": 492804,
+   "sha256": "dd14957cf320da06a211aae558696d9f5a7b9a712e23477cc8d56ed5335c4108"
+  },
+  {
+   "path": "web/tiles/t10_09_b2.glb",
+   "bytes": 2417440,
+   "sha256": "22c132cae159d71c0339ed8208df35d69253372151bbf0bc644d107c459daa24"
+  },
+  {
+   "path": "web/tiles/t10_09_base.glb",
+   "bytes": 534876,
+   "sha256": "43b5d3038e23ad14baee40dbc9833c5c370ef722d0006ed8175bf885b4cc7fa4"
+  },
+  {
+   "path": "web/tiles/t10_10_b1.glb",
+   "bytes": 1248220,
+   "sha256": "79da93fd10a19f0255f9b1d8070bbefab8f4a71269b1752db2e3b3c250be931e"
+  },
+  {
+   "path": "web/tiles/t10_10_b2.glb",
+   "bytes": 3663844,
+   "sha256": "8a6fdb655640ed3cdf32d17de4ff8d4651c594ea9c83de92f7444b756b2d02b2"
+  },
+  {
+   "path": "web/tiles/t10_10_base.glb",
+   "bytes": 621596,
+   "sha256": "1c344e9462ee45821a92450918016487e3cd33c0e74d97d35123363e4b6585c6"
+  },
+  {
+   "path": "web/tiles/t10_11_b1.glb",
+   "bytes": 1348724,
+   "sha256": "c861237fbb42d50a436d74a975b0583b91df984cb54d9ac239849bc029875f5c"
+  },
+  {
+   "path": "web/tiles/t10_11_b2.glb",
+   "bytes": 4321336,
+   "sha256": "dfe5521b57b47d1c5bce936559fdb549240cb1fccec8804546628d8792c2cb65"
+  },
+  {
+   "path": "web/tiles/t10_11_base.glb",
+   "bytes": 412208,
+   "sha256": "78d6714bdf4570f3062dfb15647b19864dc1ca38b71965b26d8860d0905ddced"
+  },
+  {
+   "path": "web/tiles/t10_12_b1.glb",
+   "bytes": 669428,
+   "sha256": "7a21abec6224ff0038cd49234c7b6d089003132483fb633c50210b14a23857a8"
+  },
+  {
+   "path": "web/tiles/t10_12_b2.glb",
+   "bytes": 1771596,
+   "sha256": "64a950e3057ca89ed9904f16d45fe3ef4866b6474efd9d1dd7cf80920a5d40e5"
+  },
+  {
+   "path": "web/tiles/t10_12_base.glb",
+   "bytes": 648812,
+   "sha256": "a4aeaf62a57d499978e0f5233ca93db5474d10e107655e9d2164cff9cc47ae03"
+  },
+  {
+   "path": "web/tiles/t10_13_b1.glb",
+   "bytes": 743892,
+   "sha256": "ca44a09cd32c5aedbb3635d92876fb4e5f34c31468ddcb518fab8b06b617afe9"
+  },
+  {
+   "path": "web/tiles/t10_13_b2.glb",
+   "bytes": 3396772,
+   "sha256": "0292a9e58f42b3d42fc2569074f0845939b9a3d4b18d95a378ae8b05cc6f000a"
+  },
+  {
+   "path": "web/tiles/t10_13_base.glb",
+   "bytes": 508984,
+   "sha256": "0bbb7eaaf3940f4c0b0ff9ccade979fcf0b90f81498568395508fcce55a9cafd"
+  },
+  {
+   "path": "web/tiles/t10_14_b1.glb",
+   "bytes": 1108800,
+   "sha256": "3d5ace0ffca6097111cb2b9041fcb9913186988ea9df47a4d40ea1179a299063"
+  },
+  {
+   "path": "web/tiles/t10_14_b2.glb",
+   "bytes": 2815232,
+   "sha256": "6b466a22d16c5ce22d07cdc305f1c5b82bbf57397c22a2bc7c0737724aa77d23"
+  },
+  {
+   "path": "web/tiles/t10_14_base.glb",
+   "bytes": 378800,
+   "sha256": "90043184b5c22928f9c05888b08fcac3250528c3ef8b2cd1a7ca074fbc8d5492"
+  },
+  {
+   "path": "web/tiles/t10_15_b1.glb",
+   "bytes": 936024,
+   "sha256": "153d0b0fdbfcc3eb4fb6bf52bb9807d4644e03c3f940b197dc57d564b54fb548"
+  },
+  {
+   "path": "web/tiles/t10_15_b2.glb",
+   "bytes": 1990768,
+   "sha256": "2866b6d3bc8429d3beacaf3ac9ab38195eaf4c3ed70e4f8884388c9b5779caea"
+  },
+  {
+   "path": "web/tiles/t10_15_base.glb",
+   "bytes": 452044,
+   "sha256": "3cbfc98a5ab560afbebfe6a504b58395c2bbb70e3ee0a44fb656e29d364b459e"
+  },
+  {
+   "path": "web/tiles/t11_00_b1.glb",
+   "bytes": 951184,
+   "sha256": "f53f5fb13e60b13a45c30ff050e07aa367059a3577026b2d826d7adb2011c61f"
+  },
+  {
+   "path": "web/tiles/t11_00_b2.glb",
+   "bytes": 2046404,
+   "sha256": "61e380de4ee09e3ae96e2a227ecf0b6c513cdc9bbb6d6b9d57561531f24ad0bb"
+  },
+  {
+   "path": "web/tiles/t11_00_base.glb",
+   "bytes": 347284,
+   "sha256": "4a75bd1147d79c2e69693dc90136c956938c58fb4d9348d5af75c3c390e1b550"
+  },
+  {
+   "path": "web/tiles/t11_01_b1.glb",
+   "bytes": 1008128,
+   "sha256": "27be707ea86a9d3e8fff982310db0351f724aa67f13afdf61e7a162c443c1245"
+  },
+  {
+   "path": "web/tiles/t11_01_b2.glb",
+   "bytes": 2207864,
+   "sha256": "d09e531f58eccff6c56a85b06292e485286c3552ef9b67388f9a5d9923595c9a"
+  },
+  {
+   "path": "web/tiles/t11_01_base.glb",
+   "bytes": 444996,
+   "sha256": "3f6a98ea7ae732108181a2f963717cda2be6ca7214c2b96174c43927d1c5ec79"
+  },
+  {
+   "path": "web/tiles/t11_02_b1.glb",
+   "bytes": 1019552,
+   "sha256": "a0912e6994adeca33eb4e6b48ee1f94a46565ab99287c9b4cdecd498472ac85a"
+  },
+  {
+   "path": "web/tiles/t11_02_b2.glb",
+   "bytes": 1938704,
+   "sha256": "b3f08f52f63793bde2d39afb1ab01ea0168a01eccc7e733833f92fb85e294d75"
+  },
+  {
+   "path": "web/tiles/t11_02_base.glb",
+   "bytes": 291812,
+   "sha256": "57548de505338e3ae26575c2f85d388d3a0ea72ed8460664ecb02c3cadd4b462"
+  },
+  {
+   "path": "web/tiles/t11_03_b1.glb",
+   "bytes": 886012,
+   "sha256": "d2788740501944e801d5f98c20cad4f3b5c6e6951f59a32f5b1cdb51ddcbfa83"
+  },
+  {
+   "path": "web/tiles/t11_03_b2.glb",
+   "bytes": 2106780,
+   "sha256": "dd41babededc658758e21b2c639b6c6764cf28985aff36f679def2cb5037a9d2"
+  },
+  {
+   "path": "web/tiles/t11_03_base.glb",
+   "bytes": 565724,
+   "sha256": "d81376e5209a7fca9a5830e99c642fece464b436b79a4488eeaba2e5cc9bab4d"
+  },
+  {
+   "path": "web/tiles/t11_04_b1.glb",
+   "bytes": 1449848,
+   "sha256": "8ca05b44610e72287cef46249732e0596a814759efda2cfab772f405f33022ac"
+  },
+  {
+   "path": "web/tiles/t11_04_b2.glb",
+   "bytes": 4542280,
+   "sha256": "5bf075a50a19e72c74f2cb54d52c8789f9e76da9af52dc71fd3abc2be9199db7"
+  },
+  {
+   "path": "web/tiles/t11_04_base.glb",
+   "bytes": 420216,
+   "sha256": "6dd61c22afb1f2b6bf9a5cff68bf8e828e5d0e29efac6bc3f7c59022846ff45a"
+  },
+  {
+   "path": "web/tiles/t11_05_b1.glb",
+   "bytes": 846376,
+   "sha256": "acfec7f1ca668ecec5ef3c04ac1fcabd0eb6dd13fd24c76b58f4cc07c7092790"
+  },
+  {
+   "path": "web/tiles/t11_05_b2.glb",
+   "bytes": 2793880,
+   "sha256": "e2dcfb596c764c93398734f2a6d7ec47560d44f65e97a571cb5516932b82cc63"
+  },
+  {
+   "path": "web/tiles/t11_05_base.glb",
+   "bytes": 524616,
+   "sha256": "104d1e046562b809fee6ffb983da34aaa63d311dfea57e2413c5d5de50bd05fc"
+  },
+  {
+   "path": "web/tiles/t11_06_b1.glb",
+   "bytes": 143780,
+   "sha256": "a65522787ee041401f1aa56df66900b107ba3813fe235214dea3e3c78c028dc5"
+  },
+  {
+   "path": "web/tiles/t11_06_b2.glb",
+   "bytes": 1186584,
+   "sha256": "f2481b620da061c2f94afd0875ce7d5ee500ee091c37922e8ea4ff02bfd2b89a"
+  },
+  {
+   "path": "web/tiles/t11_06_base.glb",
+   "bytes": 290368,
+   "sha256": "32f7653a7178d8dda5e72f34efdb9d24e62ade96368de46885c5e96d0468202e"
+  },
+  {
+   "path": "web/tiles/t11_07_b1.glb",
+   "bytes": 185172,
+   "sha256": "121f96c78c2de3600661257292d6c2b23de4dfafaa31492be2ebcd9dbde5b6f1"
+  },
+  {
+   "path": "web/tiles/t11_07_b2.glb",
+   "bytes": 893304,
+   "sha256": "747e8ccc65c8585936d5d40e96bcb06d6b87ac83723ca4d289a10eb601ccca7c"
+  },
+  {
+   "path": "web/tiles/t11_07_base.glb",
+   "bytes": 465076,
+   "sha256": "ab1aca72f3b4cbb3eb1d841b01cda40bdf7502bd4e84afaf28e2e15e53b26788"
+  },
+  {
+   "path": "web/tiles/t11_08_b1.glb",
+   "bytes": 372576,
+   "sha256": "77a3d71f13e4cdfc8200dc104cc71c1045d1d0af95d915c123efeb991f9b8ae7"
+  },
+  {
+   "path": "web/tiles/t11_08_b2.glb",
+   "bytes": 1934980,
+   "sha256": "b5d4acf2e518943bc3612af3ca5f8cf0c15e8cdd00331a25d599caceb22f4ffd"
+  },
+  {
+   "path": "web/tiles/t11_08_base.glb",
+   "bytes": 510396,
+   "sha256": "f43d1ad809ef045c591ca81849ddcbd43da1202290ffd08a4e305300883fc259"
+  },
+  {
+   "path": "web/tiles/t11_09_b1.glb",
+   "bytes": 886720,
+   "sha256": "2d74300e31d505caa28c5847593809c93df3c3ef85dd2fcb998976a03d6a7de7"
+  },
+  {
+   "path": "web/tiles/t11_09_b2.glb",
+   "bytes": 3303828,
+   "sha256": "579cee28983dd399edd039c76dd603ca2fd7331587a23b603346da15e360c54c"
+  },
+  {
+   "path": "web/tiles/t11_09_base.glb",
+   "bytes": 598812,
+   "sha256": "0d1eba7493efb554f30ae073400080b5fdf2d0d3a86012968818820d6f4685cf"
+  },
+  {
+   "path": "web/tiles/t11_10_b1.glb",
+   "bytes": 1021540,
+   "sha256": "1a603e32506c094fd196b19103c10d6ae3d4f8114b56b07b0a90e535aef6a04c"
+  },
+  {
+   "path": "web/tiles/t11_10_b2.glb",
+   "bytes": 3555004,
+   "sha256": "bea0580a694c69d6c70cbeaa0923b221cf6217408e6bf15788018a87dbd7da6a"
+  },
+  {
+   "path": "web/tiles/t11_10_base.glb",
+   "bytes": 643580,
+   "sha256": "dbfd9b35bf0ac7dbe8903592a438481a10bb81266e508ef28089cedf39b005d9"
+  },
+  {
+   "path": "web/tiles/t11_11_b1.glb",
+   "bytes": 1097708,
+   "sha256": "3d50d2636fbb6fbe509ac624735e5198c921f0db0a79b46ef4e4669f97fee3f1"
+  },
+  {
+   "path": "web/tiles/t11_11_b2.glb",
+   "bytes": 3356632,
+   "sha256": "d02b8996a19fcae8ee5a6d424b6f34bb8c54085ff68a545b119417c1b14ad9a2"
+  },
+  {
+   "path": "web/tiles/t11_11_base.glb",
+   "bytes": 405808,
+   "sha256": "1b61dd97571f5c8d9b7eed27abdc3f77257da2d0868722a12b2a27cd168a55d0"
+  },
+  {
+   "path": "web/tiles/t11_12_b1.glb",
+   "bytes": 878740,
+   "sha256": "2ab74dda42a951d1b97990f2807c14dc3e2a0faeb6cb97efe4cdf4d90891c1c1"
+  },
+  {
+   "path": "web/tiles/t11_12_b2.glb",
+   "bytes": 1814324,
+   "sha256": "46274570652b84b56a487949d9c56709e82659e8a2c77c68a6f64a152d38960c"
+  },
+  {
+   "path": "web/tiles/t11_12_base.glb",
+   "bytes": 622736,
+   "sha256": "46eab040f66641b8005fa8b2410a028d9bfadfbeea3abf2ac0e714160164d76f"
+  },
+  {
+   "path": "web/tiles/t11_13_b1.glb",
+   "bytes": 504580,
+   "sha256": "37e8bad84ceb94ea76442d0dc9a104f93e9495b1607fa61fb2121a34b2eec47d"
+  },
+  {
+   "path": "web/tiles/t11_13_b2.glb",
+   "bytes": 1104772,
+   "sha256": "856da9fc7369e1917df232af79a071a0ef493d838f8a8efdd0ac5ff0251141d3"
+  },
+  {
+   "path": "web/tiles/t11_13_base.glb",
+   "bytes": 747340,
+   "sha256": "db29ca2b9694e812b36588efb8230f043b568ce26edabfff44d9c9f370649333"
+  },
+  {
+   "path": "web/tiles/t11_14_b1.glb",
+   "bytes": 540104,
+   "sha256": "e47e9194dd7f1afd439a150277f64cbc8eebff2f68706d7c7f01b564e03dbfd7"
+  },
+  {
+   "path": "web/tiles/t11_14_b2.glb",
+   "bytes": 1132400,
+   "sha256": "9151817032890699faaf1f10d3ae6bc958d63f611a620c7be30c35db71aea154"
+  },
+  {
+   "path": "web/tiles/t11_14_base.glb",
+   "bytes": 562160,
+   "sha256": "a16f88849a5159614c4125abf436d595b9f8d361e66c4901a16c21f31a3ba990"
+  },
+  {
+   "path": "web/tiles/t11_15_b1.glb",
+   "bytes": 786036,
+   "sha256": "e86eaea64725e2e5e4b90361a836fd23711d921f3d39dc4dc44594b542cfc4e9"
+  },
+  {
+   "path": "web/tiles/t11_15_b2.glb",
+   "bytes": 1367868,
+   "sha256": "d8b2421028dcb2c210b87a1812545b54529c5be0c4a03aed12c54017a4710023"
+  },
+  {
+   "path": "web/tiles/t11_15_base.glb",
+   "bytes": 345356,
+   "sha256": "ee50b07b606eb317db5cbde5df2327b4b2470cf76dd7ec794f493c1fb01f9ff4"
+  },
+  {
+   "path": "web/tiles/t12_00_b1.glb",
+   "bytes": 356060,
+   "sha256": "a388a802765bc018d0e4b174f7b5874c44c429076808a28ce83cd59912d9a1f4"
+  },
+  {
+   "path": "web/tiles/t12_00_b2.glb",
+   "bytes": 867004,
+   "sha256": "0d2ca4a1ff0a99b27cecb40dc1e9e665093925badf4bc94324ee00a5ad08b457"
+  },
+  {
+   "path": "web/tiles/t12_00_base.glb",
+   "bytes": 315860,
+   "sha256": "e81488aeeff36d8097405f0aa066cc9aa8386714297731c9b562da95d45ca1de"
+  },
+  {
+   "path": "web/tiles/t12_01_b1.glb",
+   "bytes": 1220728,
+   "sha256": "13708c014efcad6bd7da292365337384ee4f31b530997b1ed7694185032cfefb"
+  },
+  {
+   "path": "web/tiles/t12_01_b2.glb",
+   "bytes": 2594052,
+   "sha256": "c3c8967807a776c2a44c659eaf36d0868e2aee922a32cc806cfcf53bfd9f842b"
+  },
+  {
+   "path": "web/tiles/t12_01_base.glb",
+   "bytes": 334760,
+   "sha256": "30e2ce6faca06fe824e4f19347e29577d97efefa73ea99cb68a52473a2ae9279"
+  },
+  {
+   "path": "web/tiles/t12_02_b1.glb",
+   "bytes": 847648,
+   "sha256": "6a892bb1fce8ddaa4210b901f1b771ce90bfe9cc59c531787846eedd411aa0f4"
+  },
+  {
+   "path": "web/tiles/t12_02_b2.glb",
+   "bytes": 1782332,
+   "sha256": "126cfe9b338d85b39624faf68b02092336016d7f3dd60be28e9c28a56e61f0f1"
+  },
+  {
+   "path": "web/tiles/t12_02_base.glb",
+   "bytes": 429972,
+   "sha256": "6a005d2995984b607a0a2369ee937968d3ba5ca3b55458a9239a43366c6c1a12"
+  },
+  {
+   "path": "web/tiles/t12_03_b1.glb",
+   "bytes": 1052012,
+   "sha256": "1fe86cfcb2aab3bdeac3ce1cdadaaeec7e5b8aa8a3a29fdd4e28040263c68f22"
+  },
+  {
+   "path": "web/tiles/t12_03_b2.glb",
+   "bytes": 3380772,
+   "sha256": "d54605bfa9ac9c0dd111fcc5f8881801648ef3d4c657e736d82c90cbd5418dfc"
+  },
+  {
+   "path": "web/tiles/t12_03_base.glb",
+   "bytes": 360480,
+   "sha256": "1f9c2f2d73b8270193a49a28b336a75953898a452c53abd13983742a0ee1bad7"
+  },
+  {
+   "path": "web/tiles/t12_04_b1.glb",
+   "bytes": 911636,
+   "sha256": "6ed9aef5f5f6b4143fb0aaf738d07c3b41356349894d1403a03eb9009c2e860f"
+  },
+  {
+   "path": "web/tiles/t12_04_b2.glb",
+   "bytes": 2856640,
+   "sha256": "c1ab28118752addb27558aeb4d809620e6025cf49ecbd017e47a3dbd87cd87a6"
+  },
+  {
+   "path": "web/tiles/t12_04_base.glb",
+   "bytes": 636176,
+   "sha256": "8e8b5386a6c0e5e2f51f5a9475e875555a261937f6a8c1c721033091848a499c"
+  },
+  {
+   "path": "web/tiles/t12_05_b1.glb",
+   "bytes": 443716,
+   "sha256": "109af0b5dd2090d3a6902b189427907e6976e0fc80dfa9d669f8c69ee1e87429"
+  },
+  {
+   "path": "web/tiles/t12_05_b2.glb",
+   "bytes": 2092772,
+   "sha256": "ee0e988cf9462a8cfae8347ad72f70277b9d20f8f5d3d28469218e48338628a3"
+  },
+  {
+   "path": "web/tiles/t12_05_base.glb",
+   "bytes": 617848,
+   "sha256": "3b399302407527c03fbdff62e5b50cd78fabd843066980a7ceafc59d64b39e3d"
+  },
+  {
+   "path": "web/tiles/t12_06_b1.glb",
+   "bytes": 99252,
+   "sha256": "cb7d9685f8031d5b79fbf6579ee66a1333901f597f8c6fbaa02d73f5648cf4c3"
+  },
+  {
+   "path": "web/tiles/t12_06_b2.glb",
+   "bytes": 761108,
+   "sha256": "d929e52ad516b24c18a7ad3b99cbce9e5e5481fe5d857c17af93ac2ce762c95f"
+  },
+  {
+   "path": "web/tiles/t12_06_base.glb",
+   "bytes": 523028,
+   "sha256": "2a711e65fef986833d9362982acc46d0701ff7aa790b980e24b855c0489d6cca"
+  },
+  {
+   "path": "web/tiles/t12_07_b1.glb",
+   "bytes": 485316,
+   "sha256": "f5c531a146045e1e817fda491af6c01011ee41b3568bd6b7988369150c8acbc3"
+  },
+  {
+   "path": "web/tiles/t12_07_b2.glb",
+   "bytes": 1820052,
+   "sha256": "c2ffe1eabce4f4b0d2bc5fa68c8e5c37ba931a2622f0c612660694678950302a"
+  },
+  {
+   "path": "web/tiles/t12_07_base.glb",
+   "bytes": 548076,
+   "sha256": "a9313288ab8c26ad5d49deab64ed0da181dceb72f9a8a36bf306ba16f387586a"
+  },
+  {
+   "path": "web/tiles/t12_08_b1.glb",
+   "bytes": 710452,
+   "sha256": "1e62c67c98c40cf3fccc07d4c828a2768fc53bf46876e4a3b94a49b9265e0193"
+  },
+  {
+   "path": "web/tiles/t12_08_b2.glb",
+   "bytes": 2756948,
+   "sha256": "efc6327e89ca90ea8bce2cb14c2038541cbb26fab955291ab9ce336584ddba18"
+  },
+  {
+   "path": "web/tiles/t12_08_base.glb",
+   "bytes": 589404,
+   "sha256": "b79b92a4804e5e89dce6c35f777f401e122474252fe11fc24011def4df56d9ff"
+  },
+  {
+   "path": "web/tiles/t12_09_b1.glb",
+   "bytes": 583592,
+   "sha256": "2c7dbd9cbf5b6e40435fe1b6ca28304aad2501539891dc3174b7ccf2caa90604"
+  },
+  {
+   "path": "web/tiles/t12_09_b2.glb",
+   "bytes": 2382204,
+   "sha256": "eb8c8e9e5d043d5280ceaf2e85997a286c1aba7575548f9a927623673f714c1c"
+  },
+  {
+   "path": "web/tiles/t12_09_base.glb",
+   "bytes": 433188,
+   "sha256": "ef8ddaf5055b0817162b496f05fae1286a17aa2f00715ed9dd7c1d422a0bfeda"
+  },
+  {
+   "path": "web/tiles/t12_10_b1.glb",
+   "bytes": 2072560,
+   "sha256": "bdab3854a189103e79e79c8e84157db3319501087c8026f9c55ca1cb55236eb2"
+  },
+  {
+   "path": "web/tiles/t12_10_b2.glb",
+   "bytes": 6314272,
+   "sha256": "70637f8f5d25cfbbaaeed43eeffe283c8ac27333a0f92babc6911948c1397de6"
+  },
+  {
+   "path": "web/tiles/t12_10_base.glb",
+   "bytes": 369780,
+   "sha256": "8ba6adc6a27ad9e22989e28ea884f7ca9a33204b10e4fc59cf5fcc2629a76c9f"
+  },
+  {
+   "path": "web/tiles/t12_11_b1.glb",
+   "bytes": 1124972,
+   "sha256": "d4d4ac65a13d53c1e9446b2f0b83c0ebe06e40954679c051356091d111c8b192"
+  },
+  {
+   "path": "web/tiles/t12_11_b2.glb",
+   "bytes": 3859408,
+   "sha256": "f0d30633817fe0771b02e58e684cd61ea68f082f54cdadde438edbad1e06b5f4"
+  },
+  {
+   "path": "web/tiles/t12_11_base.glb",
+   "bytes": 374248,
+   "sha256": "ecf6c2062f7ec6170668335737eb533323bbe5de9b446bfac1fc66449948259f"
+  },
+  {
+   "path": "web/tiles/t12_12_b1.glb",
+   "bytes": 547868,
+   "sha256": "ee15c579a18fd7139604cd13b2a69cacc3c7aba45d3a926457bc6c802b3510de"
+  },
+  {
+   "path": "web/tiles/t12_12_b2.glb",
+   "bytes": 1945240,
+   "sha256": "a2a175878735375eac9adc50dac8ff96aa8b0b441195ccf9ef96bfb808b8d308"
+  },
+  {
+   "path": "web/tiles/t12_12_base.glb",
+   "bytes": 498488,
+   "sha256": "951f98ccf2e67b4716973d6c5ce3893d7dd51385627e75732a66306c3d9de7fc"
+  },
+  {
+   "path": "web/tiles/t12_13_b1.glb",
+   "bytes": 515136,
+   "sha256": "1bd0cf8f1178a83ec310bad176cd8e746a4117522697b7af9693f57e4921823e"
+  },
+  {
+   "path": "web/tiles/t12_13_b2.glb",
+   "bytes": 1402128,
+   "sha256": "0a93ad1d94af01cd849b2d3c283d3c3cf554b9e446dee9d8884b88900c3b5757"
+  },
+  {
+   "path": "web/tiles/t12_13_base.glb",
+   "bytes": 626700,
+   "sha256": "ed8fbb8ff13a02adccd2f51f656297adb3ba8d7246bb4d1cc744f82c1a0b2e20"
+  },
+  {
+   "path": "web/tiles/t12_14_b1.glb",
+   "bytes": 190132,
+   "sha256": "0a2c197d35bb7ed69e8c1b2af9e1210628463512445af0045df683ce937664a1"
+  },
+  {
+   "path": "web/tiles/t12_14_b2.glb",
+   "bytes": 336444,
+   "sha256": "6733c7489a41d8ca9b12abc76a59de454c22a502da9c5537077f65a821249878"
+  },
+  {
+   "path": "web/tiles/t12_14_base.glb",
+   "bytes": 831168,
+   "sha256": "ce40d820e8007871a5af15299f09a311bba6542d1a4c70c15517dbb74d2c1daa"
+  },
+  {
+   "path": "web/tiles/t12_15_b1.glb",
+   "bytes": 656712,
+   "sha256": "b3d9240dbe02e94c16f957a599ae55f4fd3bc01cdc68e066a10a7fe323f52072"
+  },
+  {
+   "path": "web/tiles/t12_15_b2.glb",
+   "bytes": 1308464,
+   "sha256": "70f85d7e3f02836959b65df02080e12ce20986cf633c9219902f16b01e351d12"
+  },
+  {
+   "path": "web/tiles/t12_15_base.glb",
+   "bytes": 503232,
+   "sha256": "95a6c8c434e297b7e8735d563f4061b27b2019b1d4a33b90d73948a7848405c5"
+  },
+  {
+   "path": "web/tiles/t13_00_b1.glb",
+   "bytes": 764076,
+   "sha256": "9dbe7790ce629bd9fd74a5de73e295e2b99a1d2e15d552900b2952066cad7ad8"
+  },
+  {
+   "path": "web/tiles/t13_00_b2.glb",
+   "bytes": 1619908,
+   "sha256": "ad47a26c8041928540047c4665d35dd75318607f2d5d160d3d2f0d7243d6951d"
+  },
+  {
+   "path": "web/tiles/t13_00_base.glb",
+   "bytes": 440508,
+   "sha256": "230462ae474d0ad0ebb995abb2dbf01ad53a1db16d566543a47b25023c5f9cba"
+  },
+  {
+   "path": "web/tiles/t13_01_b1.glb",
+   "bytes": 587636,
+   "sha256": "d0096c2c417fdaae8efd992857f016663f27021d23c25db859275838601d8ef3"
+  },
+  {
+   "path": "web/tiles/t13_01_b2.glb",
+   "bytes": 1310128,
+   "sha256": "b624033051603400b8b640cee742c6e9cb7837d0a0a6b761e57bd7acedb4b64e"
+  },
+  {
+   "path": "web/tiles/t13_01_base.glb",
+   "bytes": 408936,
+   "sha256": "c87b31feb8ddf4ac0faa1aac60b19899c5f5d750857b0c0eb81883cd08684956"
+  },
+  {
+   "path": "web/tiles/t13_02_b1.glb",
+   "bytes": 343912,
+   "sha256": "201356844a4c7e055c8708becafe771407255bfbc2c32f345183486c31603dd7"
+  },
+  {
+   "path": "web/tiles/t13_02_b2.glb",
+   "bytes": 1041804,
+   "sha256": "36eccd2849938203477fe4d1ff66fc98da83eaf994f62de82148fba19478ae3b"
+  },
+  {
+   "path": "web/tiles/t13_02_base.glb",
+   "bytes": 749520,
+   "sha256": "1b20225fd68eebaf3b4fac2898335894ab0adb01252541bcb7f9e353df731b87"
+  },
+  {
+   "path": "web/tiles/t13_03_b1.glb",
+   "bytes": 864924,
+   "sha256": "03382291f511a8a8e5ba03742499783f372697d6143bd6ad29a8885079c113b1"
+  },
+  {
+   "path": "web/tiles/t13_03_b2.glb",
+   "bytes": 1738792,
+   "sha256": "bd7327cd6131d314c8369973f0e7a789e1735a4da8bcab2c40a79e76f04c2889"
+  },
+  {
+   "path": "web/tiles/t13_03_base.glb",
+   "bytes": 499352,
+   "sha256": "985915ccd9448d26da30b5883db2d1caf4a045e776c19f14ac263e6351249863"
+  },
+  {
+   "path": "web/tiles/t13_04_b1.glb",
+   "bytes": 1173084,
+   "sha256": "78d7d5ef0e9a65f78ed068a3b772e02f233adf499aae8cf98a760fed157fbcba"
+  },
+  {
+   "path": "web/tiles/t13_04_b2.glb",
+   "bytes": 3441436,
+   "sha256": "c08d3e85e909d4edb7defa5ea6ec5313051aef8067c4f27e9a75742c07f07037"
+  },
+  {
+   "path": "web/tiles/t13_04_base.glb",
+   "bytes": 368004,
+   "sha256": "002c50960d2810b3f876e04142e35347d338179e28c259cb2d5251632f5c04d8"
+  },
+  {
+   "path": "web/tiles/t13_05_b1.glb",
+   "bytes": 1098712,
+   "sha256": "60c328afb0179ff568114c15ec4a764e2c9098bff84aa419587a5a6b3cf4696e"
+  },
+  {
+   "path": "web/tiles/t13_05_b2.glb",
+   "bytes": 3234504,
+   "sha256": "f5cde742132311172782e7ef623e73642fe3215de71115a982d25970a0d8bf1a"
+  },
+  {
+   "path": "web/tiles/t13_05_base.glb",
+   "bytes": 421740,
+   "sha256": "5d895f0b0a828e0823479115600e075e95f446fd5c7a16619bbd1777ea629362"
+  },
+  {
+   "path": "web/tiles/t13_06_b1.glb",
+   "bytes": 201240,
+   "sha256": "f156dd06b112f927e97daa2f6635360e28d5ab59e8edaa5ab5bd35dcd5bd5909"
+  },
+  {
+   "path": "web/tiles/t13_06_b2.glb",
+   "bytes": 1125948,
+   "sha256": "95f706b3c128234255d09f5ea54a58003029a879a93b322641b2a438c581fece"
+  },
+  {
+   "path": "web/tiles/t13_06_base.glb",
+   "bytes": 421336,
+   "sha256": "a3b589d2d784f00f6d6c6ac5653f181969772ccda90dccd1aea4d95a143159ed"
+  },
+  {
+   "path": "web/tiles/t13_07_b1.glb",
+   "bytes": 191400,
+   "sha256": "619a341436e206bcc2c2db8c9466406c1c5b3b477eac847e736ddd73a32f484c"
+  },
+  {
+   "path": "web/tiles/t13_07_b2.glb",
+   "bytes": 1223972,
+   "sha256": "e966939177eab958a958050b7c55da95373a60c698bc24293e2bd1a87ccf0d10"
+  },
+  {
+   "path": "web/tiles/t13_07_base.glb",
+   "bytes": 591252,
+   "sha256": "1244f47e55c264c2cd31b35497a5eaabb2120faa4ce550e20c25d6425a5501f6"
+  },
+  {
+   "path": "web/tiles/t13_08_b1.glb",
+   "bytes": 1638412,
+   "sha256": "74454bb357952d263d7f8523df427ef15c8e16dee890ea674210aa0c0b07e0a6"
+  },
+  {
+   "path": "web/tiles/t13_08_b2.glb",
+   "bytes": 4635392,
+   "sha256": "3f46d8304134e59ab78662228bf5ac89b6b176d1a63a74bca1ed110bb1898906"
+  },
+  {
+   "path": "web/tiles/t13_08_base.glb",
+   "bytes": 428648,
+   "sha256": "0bfbf54a94a1c1c7484646a96091358f138791f8b95846f070923f4771e02207"
+  },
+  {
+   "path": "web/tiles/t13_09_b1.glb",
+   "bytes": 1876916,
+   "sha256": "6545d4d7a76d81f992b94701f04db569ac5d724067f20aa23d194b25be9a2c6d"
+  },
+  {
+   "path": "web/tiles/t13_09_b2.glb",
+   "bytes": 5844384,
+   "sha256": "adb2e1785208750e8e0e2797bc62e5cbcfb80fb1ce8ea62d6812dae90a57374a"
+  },
+  {
+   "path": "web/tiles/t13_09_base.glb",
+   "bytes": 305576,
+   "sha256": "b3197a4d14e3e5c3776007302b9ec58813d2c5c1e1cc69dd375a7611fdeae3af"
+  },
+  {
+   "path": "web/tiles/t13_10_b1.glb",
+   "bytes": 1854192,
+   "sha256": "7f38b88785e9523da2ddb95f901eb63bf6c177b7cb8d06201e730329629edaae"
+  },
+  {
+   "path": "web/tiles/t13_10_b2.glb",
+   "bytes": 5084204,
+   "sha256": "59f09580d467d8eb389a62c4f83bde579904dfb764d98c88ca86f7ace95fa565"
+  },
+  {
+   "path": "web/tiles/t13_10_base.glb",
+   "bytes": 347280,
+   "sha256": "890b38fa97dc20be2c923d9d7dee51e1cdcc56108e748e2d6b9b494d58a4b2b0"
+  },
+  {
+   "path": "web/tiles/t13_11_b1.glb",
+   "bytes": 1078196,
+   "sha256": "f03b9f5d93049f67dae6c2965ced18f3b7a82632d29b34bf6ea9fee66a993e7a"
+  },
+  {
+   "path": "web/tiles/t13_11_b2.glb",
+   "bytes": 3088040,
+   "sha256": "8c573bb65a5d49ecc3606eb46b52e697f6a360701a30bc447d3f4b08c27690e5"
+  },
+  {
+   "path": "web/tiles/t13_11_base.glb",
+   "bytes": 534952,
+   "sha256": "6e3dd04fc05bec351d86844c6e25019d990c415e13a8bcfc17543ff820b27418"
+  },
+  {
+   "path": "web/tiles/t13_12_b1.glb",
+   "bytes": 807460,
+   "sha256": "b457221a7956287cc8bed1a59118088e739b394bb08f1764347566a5eec2b9be"
+  },
+  {
+   "path": "web/tiles/t13_12_b2.glb",
+   "bytes": 2359436,
+   "sha256": "276f81db4e5935e794d47d2b302140a009e7a302866d1c9c4c1306bd39c0f3ed"
+  },
+  {
+   "path": "web/tiles/t13_12_base.glb",
+   "bytes": 506916,
+   "sha256": "c94ec0aa331fa48206a39d683ee553aba46e3024ea4b9b1825b683a0a83d8a61"
+  },
+  {
+   "path": "web/tiles/t13_13_b1.glb",
+   "bytes": 410840,
+   "sha256": "2aee2b1d173125c9b42c1603efe4eacd5c5cc8106094fcfe4ad8d5009f758f67"
+  },
+  {
+   "path": "web/tiles/t13_13_b2.glb",
+   "bytes": 909816,
+   "sha256": "0de5cf540c72f5acc64bff4f0cc1f0140b896b76ae74f7061cb0c5f95374ea9c"
+  },
+  {
+   "path": "web/tiles/t13_13_base.glb",
+   "bytes": 634848,
+   "sha256": "02991279cfa55cf3d9a5b875dcf2c822f733f1d9a87af537c7df564c03653215"
+  },
+  {
+   "path": "web/tiles/t13_14_b1.glb",
+   "bytes": 483624,
+   "sha256": "75b1b8cc3075b4553f69b7de201cfb3ea0ce0d8f7906b78d854a4aba588bbd27"
+  },
+  {
+   "path": "web/tiles/t13_14_b2.glb",
+   "bytes": 1151940,
+   "sha256": "e2baf77a08554876616f0a4ae4120c2f53797d6b7a34a23db97e136781004cc6"
+  },
+  {
+   "path": "web/tiles/t13_14_base.glb",
+   "bytes": 588132,
+   "sha256": "26c0c734d67f451c80c7d688bd60fa0ecd5a05b9ad401a0c57320a6d8e10b07c"
+  },
+  {
+   "path": "web/tiles/t13_15_b1.glb",
+   "bytes": 30536,
+   "sha256": "1ed0b9a7565109da704af2346dfaefa51da2da4e400f1da95678371a78c36b90"
+  },
+  {
+   "path": "web/tiles/t13_15_b2.glb",
+   "bytes": 74276,
+   "sha256": "18c9199e3148a19233dec25c128fce713281c114c5cd78a1b2ecb77aba2dff4b"
+  },
+  {
+   "path": "web/tiles/t13_15_base.glb",
+   "bytes": 901768,
+   "sha256": "85f919f83452be09087f58ec9ea578f8d3f19febcc20d644c11bffff6114cd20"
+  },
+  {
+   "path": "web/tiles/t14_00_b1.glb",
+   "bytes": 456596,
+   "sha256": "be901e245f682862e5520b474effa679b7b9b3bca5d4a32fb9bc8d78118b6326"
+  },
+  {
+   "path": "web/tiles/t14_00_b2.glb",
+   "bytes": 759472,
+   "sha256": "895bf8f8ed861915f9ae4e50ca89113b62b7dbdb5fc3c9131f45efd5748bf440"
+  },
+  {
+   "path": "web/tiles/t14_00_base.glb",
+   "bytes": 862024,
+   "sha256": "e6d186300c43c25c34588ff48e1ee08d4446a50991a41a441f8893f94447cc35"
+  },
+  {
+   "path": "web/tiles/t14_01_b1.glb",
+   "bytes": 142764,
+   "sha256": "69d71b3ab66292b5a002fcbf823aa616bd4bd108e57f6663197cfd0b9060ec2b"
+  },
+  {
+   "path": "web/tiles/t14_01_b2.glb",
+   "bytes": 328036,
+   "sha256": "7f0a18216794402c19819b81cb8e19af84695952de64355650edfc4e3c2499e9"
+  },
+  {
+   "path": "web/tiles/t14_01_base.glb",
+   "bytes": 676396,
+   "sha256": "3440fa044e44829015b46949305de7fe731f9570eebde4495e168c04c4821885"
+  },
+  {
+   "path": "web/tiles/t14_02_b1.glb",
+   "bytes": 728344,
+   "sha256": "3e4353ab8659c897d44ac67fcc2d346eb2d0889e77d21e9f2e5c215d58fdb314"
+  },
+  {
+   "path": "web/tiles/t14_02_b2.glb",
+   "bytes": 1852168,
+   "sha256": "0ba9248637690bffe258ac0b3bbce4184db53bb8eae017139684ecb121854f6b"
+  },
+  {
+   "path": "web/tiles/t14_02_base.glb",
+   "bytes": 361592,
+   "sha256": "e8fa474440fba6863543a2fb4d146ce7ecd928aa38def7ad693b0b14e66c8b15"
+  },
+  {
+   "path": "web/tiles/t14_03_b1.glb",
+   "bytes": 1110172,
+   "sha256": "dc154c6b7e9ccfbbe9d41a9b3d5b0d152c084cd3b2ab57876d7294de0e27f465"
+  },
+  {
+   "path": "web/tiles/t14_03_b2.glb",
+   "bytes": 2852240,
+   "sha256": "dc3c53ed6578d291639d0ced2cd916d48603d08a73478881cc41686e907bddcc"
+  },
+  {
+   "path": "web/tiles/t14_03_base.glb",
+   "bytes": 307684,
+   "sha256": "240220b6c07fd9e3f637a246b4387b892e35f9a9490bd7d18353917b197c4053"
+  },
+  {
+   "path": "web/tiles/t14_04_b1.glb",
+   "bytes": 1705760,
+   "sha256": "c14254291ef19f8e644b7fe361dc051061118b4182046c0812bc0f1cb3e24494"
+  },
+  {
+   "path": "web/tiles/t14_04_b2.glb",
+   "bytes": 4126624,
+   "sha256": "ee2a7593673ea872a7fef2c60e6b119459098c0aad9b6982472450feef992a56"
+  },
+  {
+   "path": "web/tiles/t14_04_base.glb",
+   "bytes": 302384,
+   "sha256": "be22e666eeb0de9403944165ec7d45d7ae5e6914658706e0c78c1b32a2696aa3"
+  },
+  {
+   "path": "web/tiles/t14_05_b1.glb",
+   "bytes": 1228260,
+   "sha256": "47dfb8d453d860edae34630796a44bedd526082a5cd58a2db526629fccd7f0c3"
+  },
+  {
+   "path": "web/tiles/t14_05_b2.glb",
+   "bytes": 2940880,
+   "sha256": "bf69c5060638fffada96a489aa9dc7e5488412da933475a3546593011f687126"
+  },
+  {
+   "path": "web/tiles/t14_05_base.glb",
+   "bytes": 544872,
+   "sha256": "148694363f39aaedab8135f40e6849703db787ce9dc32193cbd51404442a63b2"
+  },
+  {
+   "path": "web/tiles/t14_06_b1.glb",
+   "bytes": 1005240,
+   "sha256": "5f6aba4f80dfe5df1cdbcbc7fac785dcfa606da9bf6d5f5042ad336ba47aa5c9"
+  },
+  {
+   "path": "web/tiles/t14_06_b2.glb",
+   "bytes": 2416204,
+   "sha256": "56537a155c8f1e4a5bc0cbb973ea70497802f0fa88c0da9b9cbdac1ec59bb94f"
+  },
+  {
+   "path": "web/tiles/t14_06_base.glb",
+   "bytes": 396100,
+   "sha256": "15e4a12ea236e1f3899dd0b09bd11375da7a4d0ca17ffaf5e4df093825a7e0bc"
+  },
+  {
+   "path": "web/tiles/t14_07_b1.glb",
+   "bytes": 597600,
+   "sha256": "053eeea4935cc90fae4a13ca29425cc770e5442c271b4afa4f1afc753c43333d"
+  },
+  {
+   "path": "web/tiles/t14_07_b2.glb",
+   "bytes": 2117296,
+   "sha256": "9d7dbdb3d48ad6ed3182a7301d9b5e12017caf8598db466e05e27e379c26c2d4"
+  },
+  {
+   "path": "web/tiles/t14_07_base.glb",
+   "bytes": 435644,
+   "sha256": "63da70f9bfad015e7be4c67349a8e921a49ea6a10eacf1dddf0c2e3665550e25"
+  },
+  {
+   "path": "web/tiles/t14_08_b1.glb",
+   "bytes": 550176,
+   "sha256": "f7cc33fa87853abc83f84ef693bf09f633e1efc4713475963cd11d5d275e36d9"
+  },
+  {
+   "path": "web/tiles/t14_08_b2.glb",
+   "bytes": 1903652,
+   "sha256": "d21168c2e889f6e2810a73645e0ac863338efecab8a2f92d4b0d189124a86931"
+  },
+  {
+   "path": "web/tiles/t14_08_base.glb",
+   "bytes": 605132,
+   "sha256": "11df3d33e9a64b419f83a88b3763acf73c41a3567e52d11234d13d2e370e3818"
+  },
+  {
+   "path": "web/tiles/t14_09_b1.glb",
+   "bytes": 1023760,
+   "sha256": "6b02f965d35adf2122e4f767232c986b87b4972706b9bd94c1976a0a4908e6d5"
+  },
+  {
+   "path": "web/tiles/t14_09_b2.glb",
+   "bytes": 3259980,
+   "sha256": "a755fdb8393569a1733898d972f9af3355b4f018b9fd41c9cae635f9c37f12e6"
+  },
+  {
+   "path": "web/tiles/t14_09_base.glb",
+   "bytes": 538992,
+   "sha256": "c4485f138764ede006a288f68ed22af143abfa3554ab3043adf5c71f9d220056"
+  },
+  {
+   "path": "web/tiles/t14_10_b1.glb",
+   "bytes": 1038720,
+   "sha256": "4b31f09d2a4fcdd9e0f7db7ed8def52f7a68b612e6e3ce5097eec496dd435aff"
+  },
+  {
+   "path": "web/tiles/t14_10_b2.glb",
+   "bytes": 2713860,
+   "sha256": "73f609e5d2607b75a83f4dea5509e9d43c056f8a79df2ae212f858fd001f269e"
+  },
+  {
+   "path": "web/tiles/t14_10_base.glb",
+   "bytes": 389816,
+   "sha256": "ead63ec0db1dc81151035517f53d66cfca51c08c38194661bfaf73f8d8294f2a"
+  },
+  {
+   "path": "web/tiles/t14_11_b1.glb",
+   "bytes": 518060,
+   "sha256": "1bce28d6ab2417f574badc13d149daff06129777e443980d55ee646245c2253c"
+  },
+  {
+   "path": "web/tiles/t14_11_b2.glb",
+   "bytes": 1147320,
+   "sha256": "60057adfec1b45c1ab2b392238b7b5847dd92ace4e5234419ddeb91a42621748"
+  },
+  {
+   "path": "web/tiles/t14_11_base.glb",
+   "bytes": 763344,
+   "sha256": "0c0d6e59f9610599f37da231497bc5c771673b073a6298749d55989005848b0b"
+  },
+  {
+   "path": "web/tiles/t14_12_b1.glb",
+   "bytes": 863884,
+   "sha256": "b3627798f7ea2765a603b363ec2ad270e5530e385641f104fda47e5a5b428c3a"
+  },
+  {
+   "path": "web/tiles/t14_12_b2.glb",
+   "bytes": 2252972,
+   "sha256": "a08758d3c46b66dc09fb8db5eefcdd9e4c19e0f45c66c39c5f54eaefcc0e2866"
+  },
+  {
+   "path": "web/tiles/t14_12_base.glb",
+   "bytes": 587912,
+   "sha256": "e5c5c7d63c90a9eea372c77f247096a0dcf2aeb0c532808ba9b54989d7663401"
+  },
+  {
+   "path": "web/tiles/t14_13_b1.glb",
+   "bytes": 273208,
+   "sha256": "e5ee2c8e5398153f94022ef7a1a6dc58b5d2d5ee6f1988e1d882c7ef313a752c"
+  },
+  {
+   "path": "web/tiles/t14_13_b2.glb",
+   "bytes": 503956,
+   "sha256": "91c4cb67f009137f112ac310c6e07510c02fa746d618c32fbe4294ffccfb5507"
+  },
+  {
+   "path": "web/tiles/t14_13_base.glb",
+   "bytes": 1102204,
+   "sha256": "c3b3aa15ed919868e15b73ab860003779cbab8350b49014f8678263fcf5699c0"
+  },
+  {
+   "path": "web/tiles/t14_14_b1.glb",
+   "bytes": 413504,
+   "sha256": "ac70d661013cdcb9c04d561ded8bd96fe532118d8b1b587da39e483852c26330"
+  },
+  {
+   "path": "web/tiles/t14_14_b2.glb",
+   "bytes": 945560,
+   "sha256": "f0c491ccc572fa63866b3efe59bd81706f297f22b9d039841381d6afde5ce80e"
+  },
+  {
+   "path": "web/tiles/t14_14_base.glb",
+   "bytes": 835044,
+   "sha256": "626546791ad27eb90c5301dc11fb9578cee4fa10b33c7646ad9b3ac874ad00cd"
+  },
+  {
+   "path": "web/tiles/t14_15_b1.glb",
+   "bytes": 619196,
+   "sha256": "9aa94ddcded01137f91830e29c2eaf7149a4d4e7985b89707807ae5f557deb09"
+  },
+  {
+   "path": "web/tiles/t14_15_b2.glb",
+   "bytes": 1314016,
+   "sha256": "08a745a0b67733a8c0cb087d2d4517aa91a132b1aa52867dc27272b8687a29d4"
+  },
+  {
+   "path": "web/tiles/t14_15_base.glb",
+   "bytes": 724916,
+   "sha256": "f92a290337619d101a7341fb0e10a579f419c0ec491a20ccbc811cf3efe49d75"
+  },
+  {
+   "path": "web/tiles/t15_00_b1.glb",
+   "bytes": 282572,
+   "sha256": "1aaecf39cf6c93911af0c8d6aa0fc7906f141ded463635f0be4f86f099bc74e8"
+  },
+  {
+   "path": "web/tiles/t15_00_b2.glb",
+   "bytes": 548456,
+   "sha256": "8d64d7e59f3e75fffa8027892ce7610df08ac9d3d8697866677fe26e774a43bb"
+  },
+  {
+   "path": "web/tiles/t15_00_base.glb",
+   "bytes": 1071724,
+   "sha256": "7113909d89700aa535da60ab9ae25af02243b31a00f3d8ad680cf958107bfb54"
+  },
+  {
+   "path": "web/tiles/t15_01_b1.glb",
+   "bytes": 194436,
+   "sha256": "089d3b8a8ab0a48432324cdd87e6d1853f0d3bd60b691f309f7efe90028728b9"
+  },
+  {
+   "path": "web/tiles/t15_01_b2.glb",
+   "bytes": 353708,
+   "sha256": "90697f53a8918f8e63a8a5de01be594fc04abc8587034f46760248443fa0b7d4"
+  },
+  {
+   "path": "web/tiles/t15_01_base.glb",
+   "bytes": 503544,
+   "sha256": "4d11be987dc685e9434dae0b2bf49110066a1a3252f2830348e506f4bc7f851a"
+  },
+  {
+   "path": "web/tiles/t15_02_b1.glb",
+   "bytes": 313388,
+   "sha256": "ab1ece3c6ddc6a8617aa4b7afc1a75f156aed0bdd4f89007e044bb54e739c3e9"
+  },
+  {
+   "path": "web/tiles/t15_02_b2.glb",
+   "bytes": 1270872,
+   "sha256": "7c79766f14b8698da20f0ec122178e00eeb5d49a1d2300d6db38b357e13b2df4"
+  },
+  {
+   "path": "web/tiles/t15_02_base.glb",
+   "bytes": 263908,
+   "sha256": "9f7d4e2e6bb45f1f14682d1146b6c6ac0735f556b5e469d6079d760d18a116dd"
+  },
+  {
+   "path": "web/tiles/t15_03_b1.glb",
+   "bytes": 408708,
+   "sha256": "2292b97e2137ffde4b5d16552403f198e49b81314ac985822905c05efc6e113f"
+  },
+  {
+   "path": "web/tiles/t15_03_b2.glb",
+   "bytes": 1349488,
+   "sha256": "314e91ff1d12e0b961be579532030c6445aa68e41cfd5754c19823a5d0c65510"
+  },
+  {
+   "path": "web/tiles/t15_03_base.glb",
+   "bytes": 547016,
+   "sha256": "2340203f3b1784b8a56667eccd5b6dbbff73b5e2f9467f5b5300cd515bc44f9a"
+  },
+  {
+   "path": "web/tiles/t15_04_b1.glb",
+   "bytes": 688272,
+   "sha256": "813a0f8035dca0aa296e16295eeb43052400a6cf85bd74cff72d010e55bddb6f"
+  },
+  {
+   "path": "web/tiles/t15_04_b2.glb",
+   "bytes": 1286068,
+   "sha256": "ded950ee6ee43400cc18c0143ca360789862f26c9eb35815b5cadc219ce6b36e"
+  },
+  {
+   "path": "web/tiles/t15_04_base.glb",
+   "bytes": 611916,
+   "sha256": "0fbcf3359206632237d2fc1e97a4a750ceeb1c7aeec86c1c262b7110ec9839b5"
+  },
+  {
+   "path": "web/tiles/t15_05_b1.glb",
+   "bytes": 909192,
+   "sha256": "45a1a8eae7eb8da627247ae1309cc0408c88cb88f9d6acc09e3be876d6391d76"
+  },
+  {
+   "path": "web/tiles/t15_05_b2.glb",
+   "bytes": 1580892,
+   "sha256": "cd497300b6b376e9c21d0c0ac4f4741c49a384e6096d1d6d279359b53c6a2068"
+  },
+  {
+   "path": "web/tiles/t15_05_base.glb",
+   "bytes": 670092,
+   "sha256": "ef41228c12fb3015aa37e35a4d16265e785e5193843935da1da9c032ec95d3b9"
+  },
+  {
+   "path": "web/tiles/t15_06_b1.glb",
+   "bytes": 472024,
+   "sha256": "991da0990c57c4f03e5a4d7d9c13cb7fc0e74f66c719cc9f3be48aa238a5940c"
+  },
+  {
+   "path": "web/tiles/t15_06_b2.glb",
+   "bytes": 972180,
+   "sha256": "de10c6042c434bbee96726cfb8f6a4884dc9c1c7382945cf7f8cb7c812e0acfb"
+  },
+  {
+   "path": "web/tiles/t15_06_base.glb",
+   "bytes": 895620,
+   "sha256": "5d99d8fc688955617fa746d6c59ff9dc09885831d29eb43eb3d079fb160afb6f"
+  },
+  {
+   "path": "web/tiles/t15_07_b1.glb",
+   "bytes": 1095308,
+   "sha256": "04f5766396c581a0a952ed1bcefccb504367da591aac0d477a3cbf76e75dfd39"
+  },
+  {
+   "path": "web/tiles/t15_07_b2.glb",
+   "bytes": 2118252,
+   "sha256": "5871524e6f6f1473335275e6eed3782d9cebc706fe8a8134afda5fb0654620d9"
+  },
+  {
+   "path": "web/tiles/t15_07_base.glb",
+   "bytes": 632288,
+   "sha256": "6825216222bfb28c56a848a449bf0e34b7a824c96f92a118442e5fe67605b888"
+  },
+  {
+   "path": "web/tiles/t15_08_b1.glb",
+   "bytes": 572808,
+   "sha256": "1ada7c0c0d4100b095e31e9fe4961ca9afc2828880b23b7b3e71fdedf3ccf9cf"
+  },
+  {
+   "path": "web/tiles/t15_08_b2.glb",
+   "bytes": 1568060,
+   "sha256": "09302dd771b7abee6dadbbc2ec1b3d9841fcfbc0f8f22565b60d15993eec3cad"
+  },
+  {
+   "path": "web/tiles/t15_08_base.glb",
+   "bytes": 696248,
+   "sha256": "f637f399ae72e325ba887c05ea33e839c4e5e2e73b79583bc8d3eaa015f8bdfe"
+  },
+  {
+   "path": "web/tiles/t15_09_b1.glb",
+   "bytes": 1160920,
+   "sha256": "f993680e78747c0116fa69ef4d0172650676c6b69c6e9f0766e9d6899ca81959"
+  },
+  {
+   "path": "web/tiles/t15_09_b2.glb",
+   "bytes": 3604240,
+   "sha256": "fb42dbb5b20b88c36530257152e5471195f9c323947deab578aab4d5b04adae6"
+  },
+  {
+   "path": "web/tiles/t15_09_base.glb",
+   "bytes": 440972,
+   "sha256": "8b2c03b6719563019a5fb393b005284040f34b2e9e802ff18372697c7a06317e"
+  },
+  {
+   "path": "web/tiles/t15_10_b1.glb",
+   "bytes": 1272116,
+   "sha256": "96cc7376e2c787b8c2602c8331ac6aa45ed3f98963118ff95fb55f1962c0f9f6"
+  },
+  {
+   "path": "web/tiles/t15_10_b2.glb",
+   "bytes": 3094072,
+   "sha256": "db3e3e4d8211efa4e957f086167df0f9e6396c410404f4315a8115d9146911da"
+  },
+  {
+   "path": "web/tiles/t15_10_base.glb",
+   "bytes": 339512,
+   "sha256": "1f8d1d9da67cc133887f68c7c99d936339d27d11a34048ff0ba606c2a35df9b2"
+  },
+  {
+   "path": "web/tiles/t15_11_b1.glb",
+   "bytes": 598024,
+   "sha256": "7153aa29acad98629abf4656f4da4f41a95a72f5262dd435c74b1663d33dd5f2"
+  },
+  {
+   "path": "web/tiles/t15_11_b2.glb",
+   "bytes": 1734932,
+   "sha256": "e34190a4b50ea15510da6f6967d993f33d48e0ea18ca9ec450ef23582890caae"
+  },
+  {
+   "path": "web/tiles/t15_11_base.glb",
+   "bytes": 367744,
+   "sha256": "8854a98b9ae654ac57e427df5ed839e3cf61842ced8022091a57b75924d57994"
+  },
+  {
+   "path": "web/tiles/t15_12_b1.glb",
+   "bytes": 885340,
+   "sha256": "ce0544e946f19a2f123aa21b622ee8273662078d5ee7f9fb5db6404e29a265bf"
+  },
+  {
+   "path": "web/tiles/t15_12_b2.glb",
+   "bytes": 2565716,
+   "sha256": "c0bae07d805256af28115969f8cd9f0c6a3c2190335af916b1994d31fabc677c"
+  },
+  {
+   "path": "web/tiles/t15_12_base.glb",
+   "bytes": 547996,
+   "sha256": "9d3b22592c061f1cf36e455713afdb17e41c007bdb20ae6391742800c7a906bf"
+  },
+  {
+   "path": "web/tiles/t15_13_b1.glb",
+   "bytes": 779608,
+   "sha256": "ef1c961983910641857812842e5a8175bbc57c6c1e584ef7dbd03e91efd6dce7"
+  },
+  {
+   "path": "web/tiles/t15_13_b2.glb",
+   "bytes": 2107408,
+   "sha256": "509623aa3a4556f8807978792dd8322210a1dc0833aca2e737364efbd4d72658"
+  },
+  {
+   "path": "web/tiles/t15_13_base.glb",
+   "bytes": 574320,
+   "sha256": "8572b9828c68c7e486e102c1d25469150bd9b8b9b07449974beadb8092854e40"
+  },
+  {
+   "path": "web/tiles/t15_14_b1.glb",
+   "bytes": 411512,
+   "sha256": "874640e419bb3a5f7d2e0fdb36743a8b9ef74e44fe56fcd1688c3bffc5f654f1"
+  },
+  {
+   "path": "web/tiles/t15_14_b2.glb",
+   "bytes": 1778648,
+   "sha256": "90d58937724e78f99b4b5dd9e3c6ad67e852939185aeb80af1f47c5cf320ec9a"
+  },
+  {
+   "path": "web/tiles/t15_14_base.glb",
+   "bytes": 453092,
+   "sha256": "65913ecc169d175fbbf67cd2b02b8bd7a3e94792828d835f8a1d68053e198438"
+  },
+  {
+   "path": "web/tiles/t15_15_b1.glb",
+   "bytes": 501180,
+   "sha256": "d3710c5e0960f8dfc970aa0804bce5269bf9bf6521d362e68ccc5534f2ae2b17"
+  },
+  {
+   "path": "web/tiles/t15_15_b2.glb",
+   "bytes": 1142388,
+   "sha256": "bee46d78e1217586dd19afcb7941b3cd088600cc2af8736cf752f423b7428d5f"
+  },
+  {
+   "path": "web/tiles/t15_15_base.glb",
+   "bytes": 781560,
+   "sha256": "df736d90a3e18fa8668a67f0c1585ca828da40391ec904abad1286743c8b432a"
+  }
+ ]
+}

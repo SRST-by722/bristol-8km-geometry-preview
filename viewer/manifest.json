@@ -1,0 +1,5122 @@
+{
+ "title": "Bristol 8 km",
+ "subtitle": "8 km × 8 km · centred on The Centre · EPSG:32630 grid",
+ "stats": [
+  [
+   "Buildings modelled",
+   "107,312"
+  ],
+  [
+   "Windows / doors (near detail)",
+   "1,822,025 / 77,342"
+  ],
+  [
+   "Mapped green areas / hedges",
+   "3,160 / 359"
+  ],
+  [
+   "Mapped tree points (council asset records + OSM)",
+   "33,869"
+  ]
+ ],
+ "note": "Footprints, roads, water and green areas are mapped data. Heights come from tags, LiDAR or defaults (see each building). Roof forms, facades, colours, crowns in woodland and water display levels are inferred or illustrative.",
+ "attribution": "Map data © OpenStreetMap contributors (ODbL) · Terrain © Environment Agency copyright and/or database right 2022 (OGL v3) · Trees: Bristol City Council, OGL v3 · Drag to pan, right-drag to rotate, scroll to zoom, double-click a feature for details",
+ "overview": "../web/overview_b0.glb",
+ "tiles": [
+  {
+   "id": "t00_00",
+   "bbox": [
+    -4000.0,
+    -4000.0,
+    -3500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_00_base.glb",
+    "b1": "../web/tiles/t00_00_b1.glb",
+    "b2": "../web/tiles/t00_00_b2.glb"
+   },
+   "bytes": {
+    "base": 4534156,
+    "b1": 4556,
+    "b2": 18060
+   }
+  },
+  {
+   "id": "t00_01",
+   "bbox": [
+    -4000.0,
+    -3500.0,
+    -3500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_01_base.glb",
+    "b1": "../web/tiles/t00_01_b1.glb",
+    "b2": "../web/tiles/t00_01_b2.glb"
+   },
+   "bytes": {
+    "base": 4309792,
+    "b1": 68968,
+    "b2": 487088
+   }
+  },
+  {
+   "id": "t00_02",
+   "bbox": [
+    -4000.0,
+    -3000.0,
+    -3500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_02_base.glb",
+    "b1": "../web/tiles/t00_02_b1.glb",
+    "b2": "../web/tiles/t00_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2931060,
+    "b1": 750188,
+    "b2": 3375832
+   }
+  },
+  {
+   "id": "t00_03",
+   "bbox": [
+    -4000.0,
+    -2500.0,
+    -3500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_03_base.glb",
+    "b1": "../web/tiles/t00_03_b1.glb",
+    "b2": "../web/tiles/t00_03_b2.glb"
+   },
+   "bytes": {
+    "base": 1569660,
+    "b1": 917032,
+    "b2": 5495452
+   }
+  },
+  {
+   "id": "t00_04",
+   "bbox": [
+    -4000.0,
+    -2000.0,
+    -3500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_04_base.glb",
+    "b1": "../web/tiles/t00_04_b1.glb",
+    "b2": "../web/tiles/t00_04_b2.glb"
+   },
+   "bytes": {
+    "base": 5877948,
+    "b1": 7408,
+    "b2": 42876
+   }
+  },
+  {
+   "id": "t00_05",
+   "bbox": [
+    -4000.0,
+    -1500.0,
+    -3500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_05_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 7879508,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t00_06",
+   "bbox": [
+    -4000.0,
+    -1000.0,
+    -3500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_06_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 6565136,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t00_07",
+   "bbox": [
+    -4000.0,
+    -500.0,
+    -3500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_07_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 6447832,
+    "b1": 956,
+    "b2": 956
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t00_08",
+   "bbox": [
+    -4000.0,
+    0.0,
+    -3500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_08_base.glb",
+    "b1": "../web/tiles/t00_08_b1.glb",
+    "b2": "../web/tiles/t00_08_b2.glb"
+   },
+   "bytes": {
+    "base": 4060980,
+    "b1": 73308,
+    "b2": 750364
+   }
+  },
+  {
+   "id": "t00_09",
+   "bbox": [
+    -4000.0,
+    500.0,
+    -3500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_09_base.glb",
+    "b1": "../web/tiles/t00_09_b1.glb",
+    "b2": "../web/tiles/t00_09_b2.glb"
+   },
+   "bytes": {
+    "base": 3461484,
+    "b1": 13752,
+    "b2": 348668
+   }
+  },
+  {
+   "id": "t00_10",
+   "bbox": [
+    -4000.0,
+    1000.0,
+    -3500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_10_base.glb",
+    "b1": "../web/tiles/t00_10_b1.glb",
+    "b2": "../web/tiles/t00_10_b2.glb"
+   },
+   "bytes": {
+    "base": 5614248,
+    "b1": 114808,
+    "b2": 796036
+   }
+  },
+  {
+   "id": "t00_11",
+   "bbox": [
+    -4000.0,
+    1500.0,
+    -3500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_11_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 10824952,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t00_12",
+   "bbox": [
+    -4000.0,
+    2000.0,
+    -3500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_12_base.glb",
+    "b1": "../web/tiles/t00_12_b1.glb",
+    "b2": "../web/tiles/t00_12_b2.glb"
+   },
+   "bytes": {
+    "base": 5683892,
+    "b1": 4388,
+    "b2": 20356
+   }
+  },
+  {
+   "id": "t00_13",
+   "bbox": [
+    -4000.0,
+    2500.0,
+    -3500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_13_base.glb",
+    "b1": "../web/tiles/t00_13_b1.glb",
+    "b2": "../web/tiles/t00_13_b2.glb"
+   },
+   "bytes": {
+    "base": 3744720,
+    "b1": 266844,
+    "b2": 1031488
+   }
+  },
+  {
+   "id": "t00_14",
+   "bbox": [
+    -4000.0,
+    3000.0,
+    -3500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_14_base.glb",
+    "b1": "../web/tiles/t00_14_b1.glb",
+    "b2": "../web/tiles/t00_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2418192,
+    "b1": 729924,
+    "b2": 3613124
+   }
+  },
+  {
+   "id": "t00_15",
+   "bbox": [
+    -4000.0,
+    3500.0,
+    -3500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t00_15_base.glb",
+    "b1": "../web/tiles/t00_15_b1.glb",
+    "b2": "../web/tiles/t00_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2801636,
+    "b1": 1405928,
+    "b2": 5405448
+   }
+  },
+  {
+   "id": "t01_00",
+   "bbox": [
+    -3500.0,
+    -4000.0,
+    -3000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_00_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 4079648,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t01_01",
+   "bbox": [
+    -3500.0,
+    -3500.0,
+    -3000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_01_base.glb",
+    "b1": "../web/tiles/t01_01_b1.glb",
+    "b2": "../web/tiles/t01_01_b2.glb"
+   },
+   "bytes": {
+    "base": 4757648,
+    "b1": 6536,
+    "b2": 18508
+   }
+  },
+  {
+   "id": "t01_02",
+   "bbox": [
+    -3500.0,
+    -3000.0,
+    -3000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_02_base.glb",
+    "b1": "../web/tiles/t01_02_b1.glb",
+    "b2": "../web/tiles/t01_02_b2.glb"
+   },
+   "bytes": {
+    "base": 3271796,
+    "b1": 16532,
+    "b2": 112740
+   }
+  },
+  {
+   "id": "t01_03",
+   "bbox": [
+    -3500.0,
+    -2500.0,
+    -3000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_03_base.glb",
+    "b1": "../web/tiles/t01_03_b1.glb",
+    "b2": "../web/tiles/t01_03_b2.glb"
+   },
+   "bytes": {
+    "base": 3278784,
+    "b1": 405792,
+    "b2": 2328096
+   }
+  },
+  {
+   "id": "t01_04",
+   "bbox": [
+    -3500.0,
+    -2000.0,
+    -3000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_04_base.glb",
+    "b1": "../web/tiles/t01_04_b1.glb",
+    "b2": "../web/tiles/t01_04_b2.glb"
+   },
+   "bytes": {
+    "base": 4244388,
+    "b1": 123712,
+    "b2": 782964
+   }
+  },
+  {
+   "id": "t01_05",
+   "bbox": [
+    -3500.0,
+    -1500.0,
+    -3000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_05_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 5836928,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t01_06",
+   "bbox": [
+    -3500.0,
+    -1000.0,
+    -3000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_06_base.glb",
+    "b1": "../web/tiles/t01_06_b1.glb",
+    "b2": "../web/tiles/t01_06_b2.glb"
+   },
+   "bytes": {
+    "base": 6353196,
+    "b1": 14992,
+    "b2": 56184
+   }
+  },
+  {
+   "id": "t01_07",
+   "bbox": [
+    -3500.0,
+    -500.0,
+    -3000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_07_base.glb",
+    "b1": "../web/tiles/t01_07_b1.glb",
+    "b2": "../web/tiles/t01_07_b2.glb"
+   },
+   "bytes": {
+    "base": 6755040,
+    "b1": 47868,
+    "b2": 414364
+   }
+  },
+  {
+   "id": "t01_08",
+   "bbox": [
+    -3500.0,
+    0.0,
+    -3000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_08_base.glb",
+    "b1": "../web/tiles/t01_08_b1.glb",
+    "b2": "../web/tiles/t01_08_b2.glb"
+   },
+   "bytes": {
+    "base": 6305112,
+    "b1": 55972,
+    "b2": 465636
+   }
+  },
+  {
+   "id": "t01_09",
+   "bbox": [
+    -3500.0,
+    500.0,
+    -3000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_09_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 9886716,
+    "b1": 956,
+    "b2": 956
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t01_10",
+   "bbox": [
+    -3500.0,
+    1000.0,
+    -3000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_10_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 11298848,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t01_11",
+   "bbox": [
+    -3500.0,
+    1500.0,
+    -3000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_11_base.glb",
+    "b1": "../web/tiles/t01_11_b1.glb",
+    "b2": "../web/tiles/t01_11_b2.glb"
+   },
+   "bytes": {
+    "base": 7175396,
+    "b1": 7384,
+    "b2": 22840
+   }
+  },
+  {
+   "id": "t01_12",
+   "bbox": [
+    -3500.0,
+    2000.0,
+    -3000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_12_base.glb",
+    "b1": "../web/tiles/t01_12_b1.glb",
+    "b2": "../web/tiles/t01_12_b2.glb"
+   },
+   "bytes": {
+    "base": 4333576,
+    "b1": 291308,
+    "b2": 2597380
+   }
+  },
+  {
+   "id": "t01_13",
+   "bbox": [
+    -3500.0,
+    2500.0,
+    -3000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_13_base.glb",
+    "b1": "../web/tiles/t01_13_b1.glb",
+    "b2": "../web/tiles/t01_13_b2.glb"
+   },
+   "bytes": {
+    "base": 2238080,
+    "b1": 1190376,
+    "b2": 6812440
+   }
+  },
+  {
+   "id": "t01_14",
+   "bbox": [
+    -3500.0,
+    3000.0,
+    -3000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_14_base.glb",
+    "b1": "../web/tiles/t01_14_b1.glb",
+    "b2": "../web/tiles/t01_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2587724,
+    "b1": 1302820,
+    "b2": 6230528
+   }
+  },
+  {
+   "id": "t01_15",
+   "bbox": [
+    -3500.0,
+    3500.0,
+    -3000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t01_15_base.glb",
+    "b1": "../web/tiles/t01_15_b1.glb",
+    "b2": "../web/tiles/t01_15_b2.glb"
+   },
+   "bytes": {
+    "base": 3424468,
+    "b1": 1582768,
+    "b2": 7008624
+   }
+  },
+  {
+   "id": "t02_00",
+   "bbox": [
+    -3000.0,
+    -4000.0,
+    -2500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_00_base.glb",
+    "b1": "../web/tiles/t02_00_b1.glb",
+    "b2": "../web/tiles/t02_00_b2.glb"
+   },
+   "bytes": {
+    "base": 4794356,
+    "b1": 26404,
+    "b2": 118020
+   }
+  },
+  {
+   "id": "t02_01",
+   "bbox": [
+    -3000.0,
+    -3500.0,
+    -2500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_01_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 4783076,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t02_02",
+   "bbox": [
+    -3000.0,
+    -3000.0,
+    -2500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_02_base.glb",
+    "b1": "../web/tiles/t02_02_b1.glb",
+    "b2": "../web/tiles/t02_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2795216,
+    "b1": 4468,
+    "b2": 157956
+   }
+  },
+  {
+   "id": "t02_03",
+   "bbox": [
+    -3000.0,
+    -2500.0,
+    -2500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_03_base.glb",
+    "b1": "../web/tiles/t02_03_b1.glb",
+    "b2": "../web/tiles/t02_03_b2.glb"
+   },
+   "bytes": {
+    "base": 4214316,
+    "b1": 4512,
+    "b2": 27284
+   }
+  },
+  {
+   "id": "t02_04",
+   "bbox": [
+    -3000.0,
+    -2000.0,
+    -2500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_04_base.glb",
+    "b1": "../web/tiles/t02_04_b1.glb",
+    "b2": "../web/tiles/t02_04_b2.glb"
+   },
+   "bytes": {
+    "base": 4580328,
+    "b1": 4304,
+    "b2": 48268
+   }
+  },
+  {
+   "id": "t02_05",
+   "bbox": [
+    -3000.0,
+    -1500.0,
+    -2500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_05_base.glb",
+    "b1": "../web/tiles/t02_05_b1.glb",
+    "b2": "../web/tiles/t02_05_b2.glb"
+   },
+   "bytes": {
+    "base": 5052244,
+    "b1": 37832,
+    "b2": 710144
+   }
+  },
+  {
+   "id": "t02_06",
+   "bbox": [
+    -3000.0,
+    -1000.0,
+    -2500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_06_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 5637540,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t02_07",
+   "bbox": [
+    -3000.0,
+    -500.0,
+    -2500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_07_base.glb",
+    "b1": "../web/tiles/t02_07_b1.glb",
+    "b2": "../web/tiles/t02_07_b2.glb"
+   },
+   "bytes": {
+    "base": 3576868,
+    "b1": 274096,
+    "b2": 3116040
+   }
+  },
+  {
+   "id": "t02_08",
+   "bbox": [
+    -3000.0,
+    0.0,
+    -2500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_08_base.glb",
+    "b1": "../web/tiles/t02_08_b1.glb",
+    "b2": "../web/tiles/t02_08_b2.glb"
+   },
+   "bytes": {
+    "base": 9837664,
+    "b1": 63852,
+    "b2": 1192080
+   }
+  },
+  {
+   "id": "t02_09",
+   "bbox": [
+    -3000.0,
+    500.0,
+    -2500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_09_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 11458108,
+    "b1": 956,
+    "b2": 956
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t02_10",
+   "bbox": [
+    -3000.0,
+    1000.0,
+    -2500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_10_base.glb",
+    "b1": null,
+    "b2": null
+   },
+   "bytes": {
+    "base": 10519944,
+    "b1": 960,
+    "b2": 960
+   },
+   "empty_layers": [
+    "b1",
+    "b2"
+   ]
+  },
+  {
+   "id": "t02_11",
+   "bbox": [
+    -3000.0,
+    1500.0,
+    -2500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_11_base.glb",
+    "b1": "../web/tiles/t02_11_b1.glb",
+    "b2": "../web/tiles/t02_11_b2.glb"
+   },
+   "bytes": {
+    "base": 3983404,
+    "b1": 257924,
+    "b2": 2281444
+   }
+  },
+  {
+   "id": "t02_12",
+   "bbox": [
+    -3000.0,
+    2000.0,
+    -2500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_12_base.glb",
+    "b1": "../web/tiles/t02_12_b1.glb",
+    "b2": "../web/tiles/t02_12_b2.glb"
+   },
+   "bytes": {
+    "base": 1519984,
+    "b1": 740336,
+    "b2": 6897544
+   }
+  },
+  {
+   "id": "t02_13",
+   "bbox": [
+    -3000.0,
+    2500.0,
+    -2500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_13_base.glb",
+    "b1": "../web/tiles/t02_13_b1.glb",
+    "b2": "../web/tiles/t02_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1349884,
+    "b1": 1081632,
+    "b2": 6780836
+   }
+  },
+  {
+   "id": "t02_14",
+   "bbox": [
+    -3000.0,
+    3000.0,
+    -2500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_14_base.glb",
+    "b1": "../web/tiles/t02_14_b1.glb",
+    "b2": "../web/tiles/t02_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2188748,
+    "b1": 916292,
+    "b2": 6416368
+   }
+  },
+  {
+   "id": "t02_15",
+   "bbox": [
+    -3000.0,
+    3500.0,
+    -2500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t02_15_base.glb",
+    "b1": "../web/tiles/t02_15_b1.glb",
+    "b2": "../web/tiles/t02_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2257676,
+    "b1": 1111340,
+    "b2": 6167692
+   }
+  },
+  {
+   "id": "t03_00",
+   "bbox": [
+    -2500.0,
+    -4000.0,
+    -2000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_00_base.glb",
+    "b1": "../web/tiles/t03_00_b1.glb",
+    "b2": "../web/tiles/t03_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2909592,
+    "b1": 1227924,
+    "b2": 5458320
+   }
+  },
+  {
+   "id": "t03_01",
+   "bbox": [
+    -2500.0,
+    -3500.0,
+    -2000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_01_base.glb",
+    "b1": "../web/tiles/t03_01_b1.glb",
+    "b2": "../web/tiles/t03_01_b2.glb"
+   },
+   "bytes": {
+    "base": 4059772,
+    "b1": 25228,
+    "b2": 989828
+   }
+  },
+  {
+   "id": "t03_02",
+   "bbox": [
+    -2500.0,
+    -3000.0,
+    -2000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_02_base.glb",
+    "b1": "../web/tiles/t03_02_b1.glb",
+    "b2": "../web/tiles/t03_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2515508,
+    "b1": 754384,
+    "b2": 5546188
+   }
+  },
+  {
+   "id": "t03_03",
+   "bbox": [
+    -2500.0,
+    -2500.0,
+    -2000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_03_base.glb",
+    "b1": "../web/tiles/t03_03_b1.glb",
+    "b2": "../web/tiles/t03_03_b2.glb"
+   },
+   "bytes": {
+    "base": 3062704,
+    "b1": 784616,
+    "b2": 3161784
+   }
+  },
+  {
+   "id": "t03_04",
+   "bbox": [
+    -2500.0,
+    -2000.0,
+    -2000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_04_base.glb",
+    "b1": "../web/tiles/t03_04_b1.glb",
+    "b2": "../web/tiles/t03_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2931036,
+    "b1": 98932,
+    "b2": 2792780
+   }
+  },
+  {
+   "id": "t03_05",
+   "bbox": [
+    -2500.0,
+    -1500.0,
+    -2000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_05_base.glb",
+    "b1": "../web/tiles/t03_05_b1.glb",
+    "b2": "../web/tiles/t03_05_b2.glb"
+   },
+   "bytes": {
+    "base": 3647752,
+    "b1": 509512,
+    "b2": 4286592
+   }
+  },
+  {
+   "id": "t03_06",
+   "bbox": [
+    -2500.0,
+    -1000.0,
+    -2000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_06_base.glb",
+    "b1": "../web/tiles/t03_06_b1.glb",
+    "b2": "../web/tiles/t03_06_b2.glb"
+   },
+   "bytes": {
+    "base": 5290708,
+    "b1": 9788,
+    "b2": 93792
+   }
+  },
+  {
+   "id": "t03_07",
+   "bbox": [
+    -2500.0,
+    -500.0,
+    -2000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_07_base.glb",
+    "b1": "../web/tiles/t03_07_b1.glb",
+    "b2": "../web/tiles/t03_07_b2.glb"
+   },
+   "bytes": {
+    "base": 4337824,
+    "b1": 262528,
+    "b2": 2547480
+   }
+  },
+  {
+   "id": "t03_08",
+   "bbox": [
+    -2500.0,
+    0.0,
+    -2000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_08_base.glb",
+    "b1": "../web/tiles/t03_08_b1.glb",
+    "b2": "../web/tiles/t03_08_b2.glb"
+   },
+   "bytes": {
+    "base": 6049600,
+    "b1": 54664,
+    "b2": 707440
+   }
+  },
+  {
+   "id": "t03_09",
+   "bbox": [
+    -2500.0,
+    500.0,
+    -2000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_09_base.glb",
+    "b1": "../web/tiles/t03_09_b1.glb",
+    "b2": "../web/tiles/t03_09_b2.glb"
+   },
+   "bytes": {
+    "base": 6520584,
+    "b1": 21928,
+    "b2": 810192
+   }
+  },
+  {
+   "id": "t03_10",
+   "bbox": [
+    -2500.0,
+    1000.0,
+    -2000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_10_base.glb",
+    "b1": "../web/tiles/t03_10_b1.glb",
+    "b2": "../web/tiles/t03_10_b2.glb"
+   },
+   "bytes": {
+    "base": 5392408,
+    "b1": 4288,
+    "b2": 12124
+   }
+  },
+  {
+   "id": "t03_11",
+   "bbox": [
+    -2500.0,
+    1500.0,
+    -2000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_11_base.glb",
+    "b1": "../web/tiles/t03_11_b1.glb",
+    "b2": "../web/tiles/t03_11_b2.glb"
+   },
+   "bytes": {
+    "base": 6023644,
+    "b1": 40216,
+    "b2": 420092
+   }
+  },
+  {
+   "id": "t03_12",
+   "bbox": [
+    -2500.0,
+    2000.0,
+    -2000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_12_base.glb",
+    "b1": "../web/tiles/t03_12_b1.glb",
+    "b2": "../web/tiles/t03_12_b2.glb"
+   },
+   "bytes": {
+    "base": 1533068,
+    "b1": 1047448,
+    "b2": 10382468
+   }
+  },
+  {
+   "id": "t03_13",
+   "bbox": [
+    -2500.0,
+    2500.0,
+    -2000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_13_base.glb",
+    "b1": "../web/tiles/t03_13_b1.glb",
+    "b2": "../web/tiles/t03_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1451004,
+    "b1": 888984,
+    "b2": 7391436
+   }
+  },
+  {
+   "id": "t03_14",
+   "bbox": [
+    -2500.0,
+    3000.0,
+    -2000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_14_base.glb",
+    "b1": "../web/tiles/t03_14_b1.glb",
+    "b2": "../web/tiles/t03_14_b2.glb"
+   },
+   "bytes": {
+    "base": 1543576,
+    "b1": 1947788,
+    "b2": 9279280
+   }
+  },
+  {
+   "id": "t03_15",
+   "bbox": [
+    -2500.0,
+    3500.0,
+    -2000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t03_15_base.glb",
+    "b1": "../web/tiles/t03_15_b1.glb",
+    "b2": "../web/tiles/t03_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2060700,
+    "b1": 1667484,
+    "b2": 7875880
+   }
+  },
+  {
+   "id": "t04_00",
+   "bbox": [
+    -2000.0,
+    -4000.0,
+    -1500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_00_base.glb",
+    "b1": "../web/tiles/t04_00_b1.glb",
+    "b2": "../web/tiles/t04_00_b2.glb"
+   },
+   "bytes": {
+    "base": 1957788,
+    "b1": 1863120,
+    "b2": 7527540
+   }
+  },
+  {
+   "id": "t04_01",
+   "bbox": [
+    -2000.0,
+    -3500.0,
+    -1500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_01_base.glb",
+    "b1": "../web/tiles/t04_01_b1.glb",
+    "b2": "../web/tiles/t04_01_b2.glb"
+   },
+   "bytes": {
+    "base": 3572368,
+    "b1": 607148,
+    "b2": 2740000
+   }
+  },
+  {
+   "id": "t04_02",
+   "bbox": [
+    -2000.0,
+    -3000.0,
+    -1500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_02_base.glb",
+    "b1": "../web/tiles/t04_02_b1.glb",
+    "b2": "../web/tiles/t04_02_b2.glb"
+   },
+   "bytes": {
+    "base": 3258900,
+    "b1": 927428,
+    "b2": 5516196
+   }
+  },
+  {
+   "id": "t04_03",
+   "bbox": [
+    -2000.0,
+    -2500.0,
+    -1500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_03_base.glb",
+    "b1": "../web/tiles/t04_03_b1.glb",
+    "b2": "../web/tiles/t04_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2205352,
+    "b1": 1465684,
+    "b2": 6886396
+   }
+  },
+  {
+   "id": "t04_04",
+   "bbox": [
+    -2000.0,
+    -2000.0,
+    -1500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_04_base.glb",
+    "b1": "../web/tiles/t04_04_b1.glb",
+    "b2": "../web/tiles/t04_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2633736,
+    "b1": 330712,
+    "b2": 7968772
+   }
+  },
+  {
+   "id": "t04_05",
+   "bbox": [
+    -2000.0,
+    -1500.0,
+    -1500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_05_base.glb",
+    "b1": "../web/tiles/t04_05_b1.glb",
+    "b2": "../web/tiles/t04_05_b2.glb"
+   },
+   "bytes": {
+    "base": 4010700,
+    "b1": 441732,
+    "b2": 4710140
+   }
+  },
+  {
+   "id": "t04_06",
+   "bbox": [
+    -2000.0,
+    -1000.0,
+    -1500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_06_base.glb",
+    "b1": "../web/tiles/t04_06_b1.glb",
+    "b2": "../web/tiles/t04_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3723440,
+    "b1": 327668,
+    "b2": 4058164
+   }
+  },
+  {
+   "id": "t04_07",
+   "bbox": [
+    -2000.0,
+    -500.0,
+    -1500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_07_base.glb",
+    "b1": "../web/tiles/t04_07_b1.glb",
+    "b2": "../web/tiles/t04_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2051200,
+    "b1": 1466624,
+    "b2": 22745512
+   }
+  },
+  {
+   "id": "t04_08",
+   "bbox": [
+    -2000.0,
+    0.0,
+    -1500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_08_base.glb",
+    "b1": "../web/tiles/t04_08_b1.glb",
+    "b2": "../web/tiles/t04_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2923132,
+    "b1": 1471260,
+    "b2": 22360624
+   }
+  },
+  {
+   "id": "t04_09",
+   "bbox": [
+    -2000.0,
+    500.0,
+    -1500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_09_base.glb",
+    "b1": "../web/tiles/t04_09_b1.glb",
+    "b2": "../web/tiles/t04_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2115748,
+    "b1": 838136,
+    "b2": 12644532
+   }
+  },
+  {
+   "id": "t04_10",
+   "bbox": [
+    -2000.0,
+    1000.0,
+    -1500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_10_base.glb",
+    "b1": "../web/tiles/t04_10_b1.glb",
+    "b2": "../web/tiles/t04_10_b2.glb"
+   },
+   "bytes": {
+    "base": 3552616,
+    "b1": 287108,
+    "b2": 3748080
+   }
+  },
+  {
+   "id": "t04_11",
+   "bbox": [
+    -2000.0,
+    1500.0,
+    -1500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_11_base.glb",
+    "b1": "../web/tiles/t04_11_b1.glb",
+    "b2": "../web/tiles/t04_11_b2.glb"
+   },
+   "bytes": {
+    "base": 4860152,
+    "b1": 144792,
+    "b2": 1611004
+   }
+  },
+  {
+   "id": "t04_12",
+   "bbox": [
+    -2000.0,
+    2000.0,
+    -1500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_12_base.glb",
+    "b1": "../web/tiles/t04_12_b1.glb",
+    "b2": "../web/tiles/t04_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3755588,
+    "b1": 96876,
+    "b2": 759236
+   }
+  },
+  {
+   "id": "t04_13",
+   "bbox": [
+    -2000.0,
+    2500.0,
+    -1500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_13_base.glb",
+    "b1": "../web/tiles/t04_13_b1.glb",
+    "b2": "../web/tiles/t04_13_b2.glb"
+   },
+   "bytes": {
+    "base": 2524288,
+    "b1": 325588,
+    "b2": 4614196
+   }
+  },
+  {
+   "id": "t04_14",
+   "bbox": [
+    -2000.0,
+    3000.0,
+    -1500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_14_base.glb",
+    "b1": "../web/tiles/t04_14_b1.glb",
+    "b2": "../web/tiles/t04_14_b2.glb"
+   },
+   "bytes": {
+    "base": 1318108,
+    "b1": 928888,
+    "b2": 6904340
+   }
+  },
+  {
+   "id": "t04_15",
+   "bbox": [
+    -2000.0,
+    3500.0,
+    -1500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t04_15_base.glb",
+    "b1": "../web/tiles/t04_15_b1.glb",
+    "b2": "../web/tiles/t04_15_b2.glb"
+   },
+   "bytes": {
+    "base": 1412980,
+    "b1": 2178524,
+    "b2": 9946404
+   }
+  },
+  {
+   "id": "t05_00",
+   "bbox": [
+    -1500.0,
+    -4000.0,
+    -1000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_00_base.glb",
+    "b1": "../web/tiles/t05_00_b1.glb",
+    "b2": "../web/tiles/t05_00_b2.glb"
+   },
+   "bytes": {
+    "base": 3719560,
+    "b1": 1845012,
+    "b2": 7323832
+   }
+  },
+  {
+   "id": "t05_01",
+   "bbox": [
+    -1500.0,
+    -3500.0,
+    -1000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_01_base.glb",
+    "b1": "../web/tiles/t05_01_b1.glb",
+    "b2": "../web/tiles/t05_01_b2.glb"
+   },
+   "bytes": {
+    "base": 2052512,
+    "b1": 2154420,
+    "b2": 8823832
+   }
+  },
+  {
+   "id": "t05_02",
+   "bbox": [
+    -1500.0,
+    -3000.0,
+    -1000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_02_base.glb",
+    "b1": "../web/tiles/t05_02_b1.glb",
+    "b2": "../web/tiles/t05_02_b2.glb"
+   },
+   "bytes": {
+    "base": 3972596,
+    "b1": 805200,
+    "b2": 3409704
+   }
+  },
+  {
+   "id": "t05_03",
+   "bbox": [
+    -1500.0,
+    -2500.0,
+    -1000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_03_base.glb",
+    "b1": "../web/tiles/t05_03_b1.glb",
+    "b2": "../web/tiles/t05_03_b2.glb"
+   },
+   "bytes": {
+    "base": 1854308,
+    "b1": 860424,
+    "b2": 7607900
+   }
+  },
+  {
+   "id": "t05_04",
+   "bbox": [
+    -1500.0,
+    -2000.0,
+    -1000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_04_base.glb",
+    "b1": "../web/tiles/t05_04_b1.glb",
+    "b2": "../web/tiles/t05_04_b2.glb"
+   },
+   "bytes": {
+    "base": 1836524,
+    "b1": 2808224,
+    "b2": 16597280
+   }
+  },
+  {
+   "id": "t05_05",
+   "bbox": [
+    -1500.0,
+    -1500.0,
+    -1000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_05_base.glb",
+    "b1": "../web/tiles/t05_05_b1.glb",
+    "b2": "../web/tiles/t05_05_b2.glb"
+   },
+   "bytes": {
+    "base": 2545908,
+    "b1": 2505676,
+    "b2": 21694844
+   }
+  },
+  {
+   "id": "t05_06",
+   "bbox": [
+    -1500.0,
+    -1000.0,
+    -1000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_06_base.glb",
+    "b1": "../web/tiles/t05_06_b1.glb",
+    "b2": "../web/tiles/t05_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3119872,
+    "b1": 1047600,
+    "b2": 9604960
+   }
+  },
+  {
+   "id": "t05_07",
+   "bbox": [
+    -1500.0,
+    -500.0,
+    -1000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_07_base.glb",
+    "b1": "../web/tiles/t05_07_b1.glb",
+    "b2": "../web/tiles/t05_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2501328,
+    "b1": 1500028,
+    "b2": 17007580
+   }
+  },
+  {
+   "id": "t05_08",
+   "bbox": [
+    -1500.0,
+    0.0,
+    -1000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_08_base.glb",
+    "b1": "../web/tiles/t05_08_b1.glb",
+    "b2": "../web/tiles/t05_08_b2.glb"
+   },
+   "bytes": {
+    "base": 1990464,
+    "b1": 1457824,
+    "b2": 25379344
+   }
+  },
+  {
+   "id": "t05_09",
+   "bbox": [
+    -1500.0,
+    500.0,
+    -1000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_09_base.glb",
+    "b1": "../web/tiles/t05_09_b1.glb",
+    "b2": "../web/tiles/t05_09_b2.glb"
+   },
+   "bytes": {
+    "base": 1687448,
+    "b1": 1446228,
+    "b2": 17841124
+   }
+  },
+  {
+   "id": "t05_10",
+   "bbox": [
+    -1500.0,
+    1000.0,
+    -1000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_10_base.glb",
+    "b1": "../web/tiles/t05_10_b1.glb",
+    "b2": "../web/tiles/t05_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1483536,
+    "b1": 1708572,
+    "b2": 17978440
+   }
+  },
+  {
+   "id": "t05_11",
+   "bbox": [
+    -1500.0,
+    1500.0,
+    -1000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_11_base.glb",
+    "b1": "../web/tiles/t05_11_b1.glb",
+    "b2": "../web/tiles/t05_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2352912,
+    "b1": 1977100,
+    "b2": 17283280
+   }
+  },
+  {
+   "id": "t05_12",
+   "bbox": [
+    -1500.0,
+    2000.0,
+    -1000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_12_base.glb",
+    "b1": "../web/tiles/t05_12_b1.glb",
+    "b2": "../web/tiles/t05_12_b2.glb"
+   },
+   "bytes": {
+    "base": 2891832,
+    "b1": 835140,
+    "b2": 9218712
+   }
+  },
+  {
+   "id": "t05_13",
+   "bbox": [
+    -1500.0,
+    2500.0,
+    -1000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_13_base.glb",
+    "b1": "../web/tiles/t05_13_b1.glb",
+    "b2": "../web/tiles/t05_13_b2.glb"
+   },
+   "bytes": {
+    "base": 2825416,
+    "b1": 1497800,
+    "b2": 12351132
+   }
+  },
+  {
+   "id": "t05_14",
+   "bbox": [
+    -1500.0,
+    3000.0,
+    -1000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_14_base.glb",
+    "b1": "../web/tiles/t05_14_b1.glb",
+    "b2": "../web/tiles/t05_14_b2.glb"
+   },
+   "bytes": {
+    "base": 1828080,
+    "b1": 1611364,
+    "b2": 16074596
+   }
+  },
+  {
+   "id": "t05_15",
+   "bbox": [
+    -1500.0,
+    3500.0,
+    -1000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t05_15_base.glb",
+    "b1": "../web/tiles/t05_15_b1.glb",
+    "b2": "../web/tiles/t05_15_b2.glb"
+   },
+   "bytes": {
+    "base": 1571044,
+    "b1": 1064840,
+    "b2": 9131960
+   }
+  },
+  {
+   "id": "t06_00",
+   "bbox": [
+    -1000.0,
+    -4000.0,
+    -500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_00_base.glb",
+    "b1": "../web/tiles/t06_00_b1.glb",
+    "b2": "../web/tiles/t06_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2225816,
+    "b1": 2430464,
+    "b2": 9358236
+   }
+  },
+  {
+   "id": "t06_01",
+   "bbox": [
+    -1000.0,
+    -3500.0,
+    -500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_01_base.glb",
+    "b1": "../web/tiles/t06_01_b1.glb",
+    "b2": "../web/tiles/t06_01_b2.glb"
+   },
+   "bytes": {
+    "base": 5107872,
+    "b1": 960184,
+    "b2": 3747060
+   }
+  },
+  {
+   "id": "t06_02",
+   "bbox": [
+    -1000.0,
+    -3000.0,
+    -500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_02_base.glb",
+    "b1": "../web/tiles/t06_02_b1.glb",
+    "b2": "../web/tiles/t06_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2733796,
+    "b1": 1785520,
+    "b2": 7068996
+   }
+  },
+  {
+   "id": "t06_03",
+   "bbox": [
+    -1000.0,
+    -2500.0,
+    -500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_03_base.glb",
+    "b1": "../web/tiles/t06_03_b1.glb",
+    "b2": "../web/tiles/t06_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2104036,
+    "b1": 2411704,
+    "b2": 15341312
+   }
+  },
+  {
+   "id": "t06_04",
+   "bbox": [
+    -1000.0,
+    -2000.0,
+    -500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_04_base.glb",
+    "b1": "../web/tiles/t06_04_b1.glb",
+    "b2": "../web/tiles/t06_04_b2.glb"
+   },
+   "bytes": {
+    "base": 1932800,
+    "b1": 3840916,
+    "b2": 30092224
+   }
+  },
+  {
+   "id": "t06_05",
+   "bbox": [
+    -1000.0,
+    -1500.0,
+    -500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_05_base.glb",
+    "b1": "../web/tiles/t06_05_b1.glb",
+    "b2": "../web/tiles/t06_05_b2.glb"
+   },
+   "bytes": {
+    "base": 1580568,
+    "b1": 3773364,
+    "b2": 31354008
+   }
+  },
+  {
+   "id": "t06_06",
+   "bbox": [
+    -1000.0,
+    -1000.0,
+    -500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_06_base.glb",
+    "b1": "../web/tiles/t06_06_b1.glb",
+    "b2": "../web/tiles/t06_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3125372,
+    "b1": 1102496,
+    "b2": 12461432
+   }
+  },
+  {
+   "id": "t06_07",
+   "bbox": [
+    -1000.0,
+    -500.0,
+    -500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_07_base.glb",
+    "b1": "../web/tiles/t06_07_b1.glb",
+    "b2": "../web/tiles/t06_07_b2.glb"
+   },
+   "bytes": {
+    "base": 3379752,
+    "b1": 1129612,
+    "b2": 14799812
+   }
+  },
+  {
+   "id": "t06_08",
+   "bbox": [
+    -1000.0,
+    0.0,
+    -500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_08_base.glb",
+    "b1": "../web/tiles/t06_08_b1.glb",
+    "b2": "../web/tiles/t06_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2704328,
+    "b1": 1562616,
+    "b2": 27964804
+   }
+  },
+  {
+   "id": "t06_09",
+   "bbox": [
+    -1000.0,
+    500.0,
+    -500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_09_base.glb",
+    "b1": "../web/tiles/t06_09_b1.glb",
+    "b2": "../web/tiles/t06_09_b2.glb"
+   },
+   "bytes": {
+    "base": 1732528,
+    "b1": 1389396,
+    "b2": 19782540
+   }
+  },
+  {
+   "id": "t06_10",
+   "bbox": [
+    -1000.0,
+    1000.0,
+    -500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_10_base.glb",
+    "b1": "../web/tiles/t06_10_b1.glb",
+    "b2": "../web/tiles/t06_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1740112,
+    "b1": 2463448,
+    "b2": 23630728
+   }
+  },
+  {
+   "id": "t06_11",
+   "bbox": [
+    -1000.0,
+    1500.0,
+    -500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_11_base.glb",
+    "b1": "../web/tiles/t06_11_b1.glb",
+    "b2": "../web/tiles/t06_11_b2.glb"
+   },
+   "bytes": {
+    "base": 1643092,
+    "b1": 2334112,
+    "b2": 19373720
+   }
+  },
+  {
+   "id": "t06_12",
+   "bbox": [
+    -1000.0,
+    2000.0,
+    -500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_12_base.glb",
+    "b1": "../web/tiles/t06_12_b1.glb",
+    "b2": "../web/tiles/t06_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3487420,
+    "b1": 1681636,
+    "b2": 12590236
+   }
+  },
+  {
+   "id": "t06_13",
+   "bbox": [
+    -1000.0,
+    2500.0,
+    -500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_13_base.glb",
+    "b1": "../web/tiles/t06_13_b1.glb",
+    "b2": "../web/tiles/t06_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1674804,
+    "b1": 3238672,
+    "b2": 22810692
+   }
+  },
+  {
+   "id": "t06_14",
+   "bbox": [
+    -1000.0,
+    3000.0,
+    -500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_14_base.glb",
+    "b1": "../web/tiles/t06_14_b1.glb",
+    "b2": "../web/tiles/t06_14_b2.glb"
+   },
+   "bytes": {
+    "base": 1512784,
+    "b1": 2311988,
+    "b2": 12446216
+   }
+  },
+  {
+   "id": "t06_15",
+   "bbox": [
+    -1000.0,
+    3500.0,
+    -500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t06_15_base.glb",
+    "b1": "../web/tiles/t06_15_b1.glb",
+    "b2": "../web/tiles/t06_15_b2.glb"
+   },
+   "bytes": {
+    "base": 1405320,
+    "b1": 2168180,
+    "b2": 11094432
+   }
+  },
+  {
+   "id": "t07_00",
+   "bbox": [
+    -500.0,
+    -4000.0,
+    0.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_00_base.glb",
+    "b1": "../web/tiles/t07_00_b1.glb",
+    "b2": "../web/tiles/t07_00_b2.glb"
+   },
+   "bytes": {
+    "base": 3490460,
+    "b1": 506984,
+    "b2": 2260180
+   }
+  },
+  {
+   "id": "t07_01",
+   "bbox": [
+    -500.0,
+    -3500.0,
+    0.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_01_base.glb",
+    "b1": "../web/tiles/t07_01_b1.glb",
+    "b2": "../web/tiles/t07_01_b2.glb"
+   },
+   "bytes": {
+    "base": 2929568,
+    "b1": 1117072,
+    "b2": 4171988
+   }
+  },
+  {
+   "id": "t07_02",
+   "bbox": [
+    -500.0,
+    -3000.0,
+    0.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_02_base.glb",
+    "b1": "../web/tiles/t07_02_b1.glb",
+    "b2": "../web/tiles/t07_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2871120,
+    "b1": 1076032,
+    "b2": 5591688
+   }
+  },
+  {
+   "id": "t07_03",
+   "bbox": [
+    -500.0,
+    -2500.0,
+    0.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_03_base.glb",
+    "b1": "../web/tiles/t07_03_b1.glb",
+    "b2": "../web/tiles/t07_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2106340,
+    "b1": 2266172,
+    "b2": 12030072
+   }
+  },
+  {
+   "id": "t07_04",
+   "bbox": [
+    -500.0,
+    -2000.0,
+    0.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_04_base.glb",
+    "b1": "../web/tiles/t07_04_b1.glb",
+    "b2": "../web/tiles/t07_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2638876,
+    "b1": 1590312,
+    "b2": 14920148
+   }
+  },
+  {
+   "id": "t07_05",
+   "bbox": [
+    -500.0,
+    -1500.0,
+    0.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_05_base.glb",
+    "b1": "../web/tiles/t07_05_b1.glb",
+    "b2": "../web/tiles/t07_05_b2.glb"
+   },
+   "bytes": {
+    "base": 2253900,
+    "b1": 2793508,
+    "b2": 23357276
+   }
+  },
+  {
+   "id": "t07_06",
+   "bbox": [
+    -500.0,
+    -1000.0,
+    0.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_06_base.glb",
+    "b1": "../web/tiles/t07_06_b1.glb",
+    "b2": "../web/tiles/t07_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3116924,
+    "b1": 957124,
+    "b2": 13253620
+   }
+  },
+  {
+   "id": "t07_07",
+   "bbox": [
+    -500.0,
+    -500.0,
+    0.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_07_base.glb",
+    "b1": "../web/tiles/t07_07_b1.glb",
+    "b2": "../web/tiles/t07_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2570340,
+    "b1": 1043960,
+    "b2": 29945376
+   }
+  },
+  {
+   "id": "t07_08",
+   "bbox": [
+    -500.0,
+    0.0,
+    0.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_08_base.glb",
+    "b1": "../web/tiles/t07_08_b1.glb",
+    "b2": "../web/tiles/t07_08_b2.glb"
+   },
+   "bytes": {
+    "base": 3438148,
+    "b1": 1228580,
+    "b2": 27497688
+   }
+  },
+  {
+   "id": "t07_09",
+   "bbox": [
+    -500.0,
+    500.0,
+    0.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_09_base.glb",
+    "b1": "../web/tiles/t07_09_b1.glb",
+    "b2": "../web/tiles/t07_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2328620,
+    "b1": 1800400,
+    "b2": 19712716
+   }
+  },
+  {
+   "id": "t07_10",
+   "bbox": [
+    -500.0,
+    1000.0,
+    0.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_10_base.glb",
+    "b1": "../web/tiles/t07_10_b1.glb",
+    "b2": "../web/tiles/t07_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1848412,
+    "b1": 2036968,
+    "b2": 18040196
+   }
+  },
+  {
+   "id": "t07_11",
+   "bbox": [
+    -500.0,
+    1500.0,
+    0.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_11_base.glb",
+    "b1": "../web/tiles/t07_11_b1.glb",
+    "b2": "../web/tiles/t07_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2041536,
+    "b1": 1892768,
+    "b2": 17143300
+   }
+  },
+  {
+   "id": "t07_12",
+   "bbox": [
+    -500.0,
+    2000.0,
+    0.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_12_base.glb",
+    "b1": "../web/tiles/t07_12_b1.glb",
+    "b2": "../web/tiles/t07_12_b2.glb"
+   },
+   "bytes": {
+    "base": 2028440,
+    "b1": 1626608,
+    "b2": 11536704
+   }
+  },
+  {
+   "id": "t07_13",
+   "bbox": [
+    -500.0,
+    2500.0,
+    0.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_13_base.glb",
+    "b1": "../web/tiles/t07_13_b1.glb",
+    "b2": "../web/tiles/t07_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1862292,
+    "b1": 2344988,
+    "b2": 13333980
+   }
+  },
+  {
+   "id": "t07_14",
+   "bbox": [
+    -500.0,
+    3000.0,
+    0.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_14_base.glb",
+    "b1": "../web/tiles/t07_14_b1.glb",
+    "b2": "../web/tiles/t07_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2247248,
+    "b1": 1485860,
+    "b2": 7490204
+   }
+  },
+  {
+   "id": "t07_15",
+   "bbox": [
+    -500.0,
+    3500.0,
+    0.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t07_15_base.glb",
+    "b1": "../web/tiles/t07_15_b1.glb",
+    "b2": "../web/tiles/t07_15_b2.glb"
+   },
+   "bytes": {
+    "base": 1717188,
+    "b1": 1981584,
+    "b2": 8847136
+   }
+  },
+  {
+   "id": "t08_00",
+   "bbox": [
+    0.0,
+    -4000.0,
+    500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_00_base.glb",
+    "b1": "../web/tiles/t08_00_b1.glb",
+    "b2": "../web/tiles/t08_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2832596,
+    "b1": 2062300,
+    "b2": 8086312
+   }
+  },
+  {
+   "id": "t08_01",
+   "bbox": [
+    0.0,
+    -3500.0,
+    500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_01_base.glb",
+    "b1": "../web/tiles/t08_01_b1.glb",
+    "b2": "../web/tiles/t08_01_b2.glb"
+   },
+   "bytes": {
+    "base": 1418724,
+    "b1": 2416020,
+    "b2": 9002616
+   }
+  },
+  {
+   "id": "t08_02",
+   "bbox": [
+    0.0,
+    -3000.0,
+    500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_02_base.glb",
+    "b1": "../web/tiles/t08_02_b1.glb",
+    "b2": "../web/tiles/t08_02_b2.glb"
+   },
+   "bytes": {
+    "base": 3641780,
+    "b1": 1823868,
+    "b2": 6643108
+   }
+  },
+  {
+   "id": "t08_03",
+   "bbox": [
+    0.0,
+    -2500.0,
+    500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_03_base.glb",
+    "b1": "../web/tiles/t08_03_b1.glb",
+    "b2": "../web/tiles/t08_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2553264,
+    "b1": 1923024,
+    "b2": 8935076
+   }
+  },
+  {
+   "id": "t08_04",
+   "bbox": [
+    0.0,
+    -2000.0,
+    500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_04_base.glb",
+    "b1": "../web/tiles/t08_04_b1.glb",
+    "b2": "../web/tiles/t08_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2312588,
+    "b1": 3131232,
+    "b2": 21983024
+   }
+  },
+  {
+   "id": "t08_05",
+   "bbox": [
+    0.0,
+    -1500.0,
+    500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_05_base.glb",
+    "b1": "../web/tiles/t08_05_b1.glb",
+    "b2": "../web/tiles/t08_05_b2.glb"
+   },
+   "bytes": {
+    "base": 2956524,
+    "b1": 888760,
+    "b2": 13514824
+   }
+  },
+  {
+   "id": "t08_06",
+   "bbox": [
+    0.0,
+    -1000.0,
+    500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_06_base.glb",
+    "b1": "../web/tiles/t08_06_b1.glb",
+    "b2": "../web/tiles/t08_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3892092,
+    "b1": 757560,
+    "b2": 11007108
+   }
+  },
+  {
+   "id": "t08_07",
+   "bbox": [
+    0.0,
+    -500.0,
+    500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_07_base.glb",
+    "b1": "../web/tiles/t08_07_b1.glb",
+    "b2": "../web/tiles/t08_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2687356,
+    "b1": 972412,
+    "b2": 39308580
+   }
+  },
+  {
+   "id": "t08_08",
+   "bbox": [
+    0.0,
+    0.0,
+    500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_08_base.glb",
+    "b1": "../web/tiles/t08_08_b1.glb",
+    "b2": "../web/tiles/t08_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2471172,
+    "b1": 1204324,
+    "b2": 45311132
+   }
+  },
+  {
+   "id": "t08_09",
+   "bbox": [
+    0.0,
+    500.0,
+    500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_09_base.glb",
+    "b1": "../web/tiles/t08_09_b1.glb",
+    "b2": "../web/tiles/t08_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2209952,
+    "b1": 1212480,
+    "b2": 27878028
+   }
+  },
+  {
+   "id": "t08_10",
+   "bbox": [
+    0.0,
+    1000.0,
+    500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_10_base.glb",
+    "b1": "../web/tiles/t08_10_b1.glb",
+    "b2": "../web/tiles/t08_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1853156,
+    "b1": 2416844,
+    "b2": 21040504
+   }
+  },
+  {
+   "id": "t08_11",
+   "bbox": [
+    0.0,
+    1500.0,
+    500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_11_base.glb",
+    "b1": "../web/tiles/t08_11_b1.glb",
+    "b2": "../web/tiles/t08_11_b2.glb"
+   },
+   "bytes": {
+    "base": 1895260,
+    "b1": 2301348,
+    "b2": 19799752
+   }
+  },
+  {
+   "id": "t08_12",
+   "bbox": [
+    0.0,
+    2000.0,
+    500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_12_base.glb",
+    "b1": "../web/tiles/t08_12_b1.glb",
+    "b2": "../web/tiles/t08_12_b2.glb"
+   },
+   "bytes": {
+    "base": 1517516,
+    "b1": 2891300,
+    "b2": 24168556
+   }
+  },
+  {
+   "id": "t08_13",
+   "bbox": [
+    0.0,
+    2500.0,
+    500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_13_base.glb",
+    "b1": "../web/tiles/t08_13_b1.glb",
+    "b2": "../web/tiles/t08_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1495248,
+    "b1": 2953220,
+    "b2": 21827568
+   }
+  },
+  {
+   "id": "t08_14",
+   "bbox": [
+    0.0,
+    3000.0,
+    500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_14_base.glb",
+    "b1": "../web/tiles/t08_14_b1.glb",
+    "b2": "../web/tiles/t08_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2759452,
+    "b1": 2056744,
+    "b2": 11191496
+   }
+  },
+  {
+   "id": "t08_15",
+   "bbox": [
+    0.0,
+    3500.0,
+    500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t08_15_base.glb",
+    "b1": "../web/tiles/t08_15_b1.glb",
+    "b2": "../web/tiles/t08_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2870756,
+    "b1": 1387184,
+    "b2": 6771656
+   }
+  },
+  {
+   "id": "t09_00",
+   "bbox": [
+    500.0,
+    -4000.0,
+    1000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_00_base.glb",
+    "b1": "../web/tiles/t09_00_b1.glb",
+    "b2": "../web/tiles/t09_00_b2.glb"
+   },
+   "bytes": {
+    "base": 3591524,
+    "b1": 273596,
+    "b2": 4462252
+   }
+  },
+  {
+   "id": "t09_01",
+   "bbox": [
+    500.0,
+    -3500.0,
+    1000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_01_base.glb",
+    "b1": "../web/tiles/t09_01_b1.glb",
+    "b2": "../web/tiles/t09_01_b2.glb"
+   },
+   "bytes": {
+    "base": 1589588,
+    "b1": 2416040,
+    "b2": 9410956
+   }
+  },
+  {
+   "id": "t09_02",
+   "bbox": [
+    500.0,
+    -3000.0,
+    1000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_02_base.glb",
+    "b1": "../web/tiles/t09_02_b1.glb",
+    "b2": "../web/tiles/t09_02_b2.glb"
+   },
+   "bytes": {
+    "base": 3017292,
+    "b1": 1909224,
+    "b2": 7304116
+   }
+  },
+  {
+   "id": "t09_03",
+   "bbox": [
+    500.0,
+    -2500.0,
+    1000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_03_base.glb",
+    "b1": "../web/tiles/t09_03_b1.glb",
+    "b2": "../web/tiles/t09_03_b2.glb"
+   },
+   "bytes": {
+    "base": 3594500,
+    "b1": 1605004,
+    "b2": 7002136
+   }
+  },
+  {
+   "id": "t09_04",
+   "bbox": [
+    500.0,
+    -2000.0,
+    1000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_04_base.glb",
+    "b1": "../web/tiles/t09_04_b1.glb",
+    "b2": "../web/tiles/t09_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2821304,
+    "b1": 2318448,
+    "b2": 16295432
+   }
+  },
+  {
+   "id": "t09_05",
+   "bbox": [
+    500.0,
+    -1500.0,
+    1000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_05_base.glb",
+    "b1": "../web/tiles/t09_05_b1.glb",
+    "b2": "../web/tiles/t09_05_b2.glb"
+   },
+   "bytes": {
+    "base": 4056740,
+    "b1": 532980,
+    "b2": 5328316
+   }
+  },
+  {
+   "id": "t09_06",
+   "bbox": [
+    500.0,
+    -1000.0,
+    1000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_06_base.glb",
+    "b1": "../web/tiles/t09_06_b1.glb",
+    "b2": "../web/tiles/t09_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3608660,
+    "b1": 700884,
+    "b2": 11836888
+   }
+  },
+  {
+   "id": "t09_07",
+   "bbox": [
+    500.0,
+    -500.0,
+    1000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_07_base.glb",
+    "b1": "../web/tiles/t09_07_b1.glb",
+    "b2": "../web/tiles/t09_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2909736,
+    "b1": 392716,
+    "b2": 27162584
+   }
+  },
+  {
+   "id": "t09_08",
+   "bbox": [
+    500.0,
+    0.0,
+    1000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_08_base.glb",
+    "b1": "../web/tiles/t09_08_b1.glb",
+    "b2": "../web/tiles/t09_08_b2.glb"
+   },
+   "bytes": {
+    "base": 3463476,
+    "b1": 601664,
+    "b2": 25365896
+   }
+  },
+  {
+   "id": "t09_09",
+   "bbox": [
+    500.0,
+    500.0,
+    1000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_09_base.glb",
+    "b1": "../web/tiles/t09_09_b1.glb",
+    "b2": "../web/tiles/t09_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2725992,
+    "b1": 1165096,
+    "b2": 24465708
+   }
+  },
+  {
+   "id": "t09_10",
+   "bbox": [
+    500.0,
+    1000.0,
+    1000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_10_base.glb",
+    "b1": "../web/tiles/t09_10_b1.glb",
+    "b2": "../web/tiles/t09_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1864724,
+    "b1": 3217624,
+    "b2": 27181600
+   }
+  },
+  {
+   "id": "t09_11",
+   "bbox": [
+    500.0,
+    1500.0,
+    1000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_11_base.glb",
+    "b1": "../web/tiles/t09_11_b1.glb",
+    "b2": "../web/tiles/t09_11_b2.glb"
+   },
+   "bytes": {
+    "base": 1631960,
+    "b1": 2584768,
+    "b2": 22417944
+   }
+  },
+  {
+   "id": "t09_12",
+   "bbox": [
+    500.0,
+    2000.0,
+    1000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_12_base.glb",
+    "b1": "../web/tiles/t09_12_b1.glb",
+    "b2": "../web/tiles/t09_12_b2.glb"
+   },
+   "bytes": {
+    "base": 2372228,
+    "b1": 2240084,
+    "b2": 19734232
+   }
+  },
+  {
+   "id": "t09_13",
+   "bbox": [
+    500.0,
+    2500.0,
+    1000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_13_base.glb",
+    "b1": "../web/tiles/t09_13_b1.glb",
+    "b2": "../web/tiles/t09_13_b2.glb"
+   },
+   "bytes": {
+    "base": 1603384,
+    "b1": 2680900,
+    "b2": 24680932
+   }
+  },
+  {
+   "id": "t09_14",
+   "bbox": [
+    500.0,
+    3000.0,
+    1000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_14_base.glb",
+    "b1": "../web/tiles/t09_14_b1.glb",
+    "b2": "../web/tiles/t09_14_b2.glb"
+   },
+   "bytes": {
+    "base": 1476636,
+    "b1": 3510584,
+    "b2": 25939044
+   }
+  },
+  {
+   "id": "t09_15",
+   "bbox": [
+    500.0,
+    3500.0,
+    1000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t09_15_base.glb",
+    "b1": "../web/tiles/t09_15_b1.glb",
+    "b2": "../web/tiles/t09_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2025668,
+    "b1": 2469216,
+    "b2": 17174088
+   }
+  },
+  {
+   "id": "t10_00",
+   "bbox": [
+    1000.0,
+    -4000.0,
+    1500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_00_base.glb",
+    "b1": "../web/tiles/t10_00_b1.glb",
+    "b2": "../web/tiles/t10_00_b2.glb"
+   },
+   "bytes": {
+    "base": 3731520,
+    "b1": 1936068,
+    "b2": 7476084
+   }
+  },
+  {
+   "id": "t10_01",
+   "bbox": [
+    1000.0,
+    -3500.0,
+    1500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_01_base.glb",
+    "b1": "../web/tiles/t10_01_b1.glb",
+    "b2": "../web/tiles/t10_01_b2.glb"
+   },
+   "bytes": {
+    "base": 1646516,
+    "b1": 2498872,
+    "b2": 9450836
+   }
+  },
+  {
+   "id": "t10_02",
+   "bbox": [
+    1000.0,
+    -3000.0,
+    1500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_02_base.glb",
+    "b1": "../web/tiles/t10_02_b1.glb",
+    "b2": "../web/tiles/t10_02_b2.glb"
+   },
+   "bytes": {
+    "base": 1882592,
+    "b1": 1967620,
+    "b2": 7452976
+   }
+  },
+  {
+   "id": "t10_03",
+   "bbox": [
+    1000.0,
+    -2500.0,
+    1500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_03_base.glb",
+    "b1": "../web/tiles/t10_03_b1.glb",
+    "b2": "../web/tiles/t10_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2442492,
+    "b1": 1798864,
+    "b2": 8710084
+   }
+  },
+  {
+   "id": "t10_04",
+   "bbox": [
+    1000.0,
+    -2000.0,
+    1500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_04_base.glb",
+    "b1": "../web/tiles/t10_04_b1.glb",
+    "b2": "../web/tiles/t10_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2585968,
+    "b1": 2683676,
+    "b2": 13844284
+   }
+  },
+  {
+   "id": "t10_05",
+   "bbox": [
+    1000.0,
+    -1500.0,
+    1500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_05_base.glb",
+    "b1": "../web/tiles/t10_05_b1.glb",
+    "b2": "../web/tiles/t10_05_b2.glb"
+   },
+   "bytes": {
+    "base": 3708836,
+    "b1": 3065496,
+    "b2": 16201804
+   }
+  },
+  {
+   "id": "t10_06",
+   "bbox": [
+    1000.0,
+    -1000.0,
+    1500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_06_base.glb",
+    "b1": "../web/tiles/t10_06_b1.glb",
+    "b2": "../web/tiles/t10_06_b2.glb"
+   },
+   "bytes": {
+    "base": 2877596,
+    "b1": 142296,
+    "b2": 5406400
+   }
+  },
+  {
+   "id": "t10_07",
+   "bbox": [
+    1000.0,
+    -500.0,
+    1500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_07_base.glb",
+    "b1": "../web/tiles/t10_07_b1.glb",
+    "b2": "../web/tiles/t10_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2465012,
+    "b1": 544260,
+    "b2": 16154212
+   }
+  },
+  {
+   "id": "t10_08",
+   "bbox": [
+    1000.0,
+    0.0,
+    1500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_08_base.glb",
+    "b1": "../web/tiles/t10_08_b1.glb",
+    "b2": "../web/tiles/t10_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2548156,
+    "b1": 966152,
+    "b2": 16816168
+   }
+  },
+  {
+   "id": "t10_09",
+   "bbox": [
+    1000.0,
+    500.0,
+    1500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_09_base.glb",
+    "b1": "../web/tiles/t10_09_b1.glb",
+    "b2": "../web/tiles/t10_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2947028,
+    "b1": 896796,
+    "b2": 11389360
+   }
+  },
+  {
+   "id": "t10_10",
+   "bbox": [
+    1000.0,
+    1000.0,
+    1500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_10_base.glb",
+    "b1": "../web/tiles/t10_10_b1.glb",
+    "b2": "../web/tiles/t10_10_b2.glb"
+   },
+   "bytes": {
+    "base": 3342196,
+    "b1": 2331908,
+    "b2": 16217712
+   }
+  },
+  {
+   "id": "t10_11",
+   "bbox": [
+    1000.0,
+    1500.0,
+    1500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_11_base.glb",
+    "b1": "../web/tiles/t10_11_b1.glb",
+    "b2": "../web/tiles/t10_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2289940,
+    "b1": 2546752,
+    "b2": 19457632
+   }
+  },
+  {
+   "id": "t10_12",
+   "bbox": [
+    1000.0,
+    2000.0,
+    1500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_12_base.glb",
+    "b1": "../web/tiles/t10_12_b1.glb",
+    "b2": "../web/tiles/t10_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3656916,
+    "b1": 1253464,
+    "b2": 7734180
+   }
+  },
+  {
+   "id": "t10_13",
+   "bbox": [
+    1000.0,
+    2500.0,
+    1500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_13_base.glb",
+    "b1": "../web/tiles/t10_13_b1.glb",
+    "b2": "../web/tiles/t10_13_b2.glb"
+   },
+   "bytes": {
+    "base": 2638456,
+    "b1": 1397404,
+    "b2": 15795576
+   }
+  },
+  {
+   "id": "t10_14",
+   "bbox": [
+    1000.0,
+    3000.0,
+    1500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_14_base.glb",
+    "b1": "../web/tiles/t10_14_b1.glb",
+    "b2": "../web/tiles/t10_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2066132,
+    "b1": 2069228,
+    "b2": 12213504
+   }
+  },
+  {
+   "id": "t10_15",
+   "bbox": [
+    1000.0,
+    3500.0,
+    1500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t10_15_base.glb",
+    "b1": "../web/tiles/t10_15_b1.glb",
+    "b2": "../web/tiles/t10_15_b2.glb"
+   },
+   "bytes": {
+    "base": 3182512,
+    "b1": 1793144,
+    "b2": 8363068
+   }
+  },
+  {
+   "id": "t11_00",
+   "bbox": [
+    1500.0,
+    -4000.0,
+    2000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_00_base.glb",
+    "b1": "../web/tiles/t11_00_b1.glb",
+    "b2": "../web/tiles/t11_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2119920,
+    "b1": 1782100,
+    "b2": 8608064
+   }
+  },
+  {
+   "id": "t11_01",
+   "bbox": [
+    1500.0,
+    -3500.0,
+    2000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_01_base.glb",
+    "b1": "../web/tiles/t11_01_b1.glb",
+    "b2": "../web/tiles/t11_01_b2.glb"
+   },
+   "bytes": {
+    "base": 2453428,
+    "b1": 1869608,
+    "b2": 9286448
+   }
+  },
+  {
+   "id": "t11_02",
+   "bbox": [
+    1500.0,
+    -3000.0,
+    2000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_02_base.glb",
+    "b1": "../web/tiles/t11_02_b1.glb",
+    "b2": "../web/tiles/t11_02_b2.glb"
+   },
+   "bytes": {
+    "base": 1715676,
+    "b1": 1996972,
+    "b2": 8003476
+   }
+  },
+  {
+   "id": "t11_03",
+   "bbox": [
+    1500.0,
+    -2500.0,
+    2000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_03_base.glb",
+    "b1": "../web/tiles/t11_03_b1.glb",
+    "b2": "../web/tiles/t11_03_b2.glb"
+   },
+   "bytes": {
+    "base": 3309244,
+    "b1": 1695588,
+    "b2": 9094728
+   }
+  },
+  {
+   "id": "t11_04",
+   "bbox": [
+    1500.0,
+    -2000.0,
+    2000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_04_base.glb",
+    "b1": "../web/tiles/t11_04_b1.glb",
+    "b2": "../web/tiles/t11_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2504516,
+    "b1": 2936236,
+    "b2": 20486192
+   }
+  },
+  {
+   "id": "t11_05",
+   "bbox": [
+    1500.0,
+    -1500.0,
+    2000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_05_base.glb",
+    "b1": "../web/tiles/t11_05_b1.glb",
+    "b2": "../web/tiles/t11_05_b2.glb"
+   },
+   "bytes": {
+    "base": 3008320,
+    "b1": 1517240,
+    "b2": 12689940
+   }
+  },
+  {
+   "id": "t11_06",
+   "bbox": [
+    1500.0,
+    -1000.0,
+    2000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_06_base.glb",
+    "b1": "../web/tiles/t11_06_b1.glb",
+    "b2": "../web/tiles/t11_06_b2.glb"
+   },
+   "bytes": {
+    "base": 1862980,
+    "b1": 241068,
+    "b2": 5859280
+   }
+  },
+  {
+   "id": "t11_07",
+   "bbox": [
+    1500.0,
+    -500.0,
+    2000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_07_base.glb",
+    "b1": "../web/tiles/t11_07_b1.glb",
+    "b2": "../web/tiles/t11_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2683668,
+    "b1": 317904,
+    "b2": 4171148
+   }
+  },
+  {
+   "id": "t11_08",
+   "bbox": [
+    1500.0,
+    0.0,
+    2000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_08_base.glb",
+    "b1": "../web/tiles/t11_08_b1.glb",
+    "b2": "../web/tiles/t11_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2945956,
+    "b1": 641736,
+    "b2": 9338252
+   }
+  },
+  {
+   "id": "t11_09",
+   "bbox": [
+    1500.0,
+    500.0,
+    2000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_09_base.glb",
+    "b1": "../web/tiles/t11_09_b1.glb",
+    "b2": "../web/tiles/t11_09_b2.glb"
+   },
+   "bytes": {
+    "base": 3307640,
+    "b1": 1494332,
+    "b2": 15452548
+   }
+  },
+  {
+   "id": "t11_10",
+   "bbox": [
+    1500.0,
+    1000.0,
+    2000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_10_base.glb",
+    "b1": "../web/tiles/t11_10_b1.glb",
+    "b2": "../web/tiles/t11_10_b2.glb"
+   },
+   "bytes": {
+    "base": 3472668,
+    "b1": 1979060,
+    "b2": 16353076
+   }
+  },
+  {
+   "id": "t11_11",
+   "bbox": [
+    1500.0,
+    1500.0,
+    2000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_11_base.glb",
+    "b1": "../web/tiles/t11_11_b1.glb",
+    "b2": "../web/tiles/t11_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2404040,
+    "b1": 1931524,
+    "b2": 14766784
+   }
+  },
+  {
+   "id": "t11_12",
+   "bbox": [
+    1500.0,
+    2000.0,
+    2000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_12_base.glb",
+    "b1": "../web/tiles/t11_12_b1.glb",
+    "b2": "../web/tiles/t11_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3369952,
+    "b1": 1695284,
+    "b2": 7672928
+   }
+  },
+  {
+   "id": "t11_13",
+   "bbox": [
+    1500.0,
+    2500.0,
+    2000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_13_base.glb",
+    "b1": "../web/tiles/t11_13_b1.glb",
+    "b2": "../web/tiles/t11_13_b2.glb"
+   },
+   "bytes": {
+    "base": 4503240,
+    "b1": 978008,
+    "b2": 4723696
+   }
+  },
+  {
+   "id": "t11_14",
+   "bbox": [
+    1500.0,
+    3000.0,
+    2000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_14_base.glb",
+    "b1": "../web/tiles/t11_14_b1.glb",
+    "b2": "../web/tiles/t11_14_b2.glb"
+   },
+   "bytes": {
+    "base": 3123448,
+    "b1": 1036268,
+    "b2": 4723544
+   }
+  },
+  {
+   "id": "t11_15",
+   "bbox": [
+    1500.0,
+    3500.0,
+    2000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t11_15_base.glb",
+    "b1": "../web/tiles/t11_15_b1.glb",
+    "b2": "../web/tiles/t11_15_b2.glb"
+   },
+   "bytes": {
+    "base": 1889104,
+    "b1": 1482328,
+    "b2": 5479232
+   }
+  },
+  {
+   "id": "t12_00",
+   "bbox": [
+    2000.0,
+    -4000.0,
+    2500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_00_base.glb",
+    "b1": "../web/tiles/t12_00_b1.glb",
+    "b2": "../web/tiles/t12_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2198068,
+    "b1": 713676,
+    "b2": 3783168
+   }
+  },
+  {
+   "id": "t12_01",
+   "bbox": [
+    2000.0,
+    -3500.0,
+    2500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_01_base.glb",
+    "b1": "../web/tiles/t12_01_b1.glb",
+    "b2": "../web/tiles/t12_01_b2.glb"
+   },
+   "bytes": {
+    "base": 1920248,
+    "b1": 2330524,
+    "b2": 10912572
+   }
+  },
+  {
+   "id": "t12_02",
+   "bbox": [
+    2000.0,
+    -3000.0,
+    2500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_02_base.glb",
+    "b1": "../web/tiles/t12_02_b1.glb",
+    "b2": "../web/tiles/t12_02_b2.glb"
+   },
+   "bytes": {
+    "base": 2321764,
+    "b1": 1681756,
+    "b2": 7528536
+   }
+  },
+  {
+   "id": "t12_03",
+   "bbox": [
+    2000.0,
+    -2500.0,
+    2500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_03_base.glb",
+    "b1": "../web/tiles/t12_03_b1.glb",
+    "b2": "../web/tiles/t12_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2166112,
+    "b1": 2047668,
+    "b2": 15233768
+   }
+  },
+  {
+   "id": "t12_04",
+   "bbox": [
+    2000.0,
+    -2000.0,
+    2500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_04_base.glb",
+    "b1": "../web/tiles/t12_04_b1.glb",
+    "b2": "../web/tiles/t12_04_b2.glb"
+   },
+   "bytes": {
+    "base": 3461832,
+    "b1": 1871548,
+    "b2": 12905420
+   }
+  },
+  {
+   "id": "t12_05",
+   "bbox": [
+    2000.0,
+    -1500.0,
+    2500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_05_base.glb",
+    "b1": "../web/tiles/t12_05_b1.glb",
+    "b2": "../web/tiles/t12_05_b2.glb"
+   },
+   "bytes": {
+    "base": 3443516,
+    "b1": 818712,
+    "b2": 9848196
+   }
+  },
+  {
+   "id": "t12_06",
+   "bbox": [
+    2000.0,
+    -1000.0,
+    2500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_06_base.glb",
+    "b1": "../web/tiles/t12_06_b1.glb",
+    "b2": "../web/tiles/t12_06_b2.glb"
+   },
+   "bytes": {
+    "base": 3240204,
+    "b1": 172260,
+    "b2": 3711168
+   }
+  },
+  {
+   "id": "t12_07",
+   "bbox": [
+    2000.0,
+    -500.0,
+    2500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_07_base.glb",
+    "b1": "../web/tiles/t12_07_b1.glb",
+    "b2": "../web/tiles/t12_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2884296,
+    "b1": 879204,
+    "b2": 8321836
+   }
+  },
+  {
+   "id": "t12_08",
+   "bbox": [
+    2000.0,
+    0.0,
+    2500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_08_base.glb",
+    "b1": "../web/tiles/t12_08_b1.glb",
+    "b2": "../web/tiles/t12_08_b2.glb"
+   },
+   "bytes": {
+    "base": 3248032,
+    "b1": 1322600,
+    "b2": 12755656
+   }
+  },
+  {
+   "id": "t12_09",
+   "bbox": [
+    2000.0,
+    500.0,
+    2500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_09_base.glb",
+    "b1": "../web/tiles/t12_09_b1.glb",
+    "b2": "../web/tiles/t12_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2466252,
+    "b1": 1063428,
+    "b2": 11068424
+   }
+  },
+  {
+   "id": "t12_10",
+   "bbox": [
+    2000.0,
+    1000.0,
+    2500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_10_base.glb",
+    "b1": "../web/tiles/t12_10_b1.glb",
+    "b2": "../web/tiles/t12_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1967928,
+    "b1": 3631712,
+    "b2": 27839540
+   }
+  },
+  {
+   "id": "t12_11",
+   "bbox": [
+    2000.0,
+    1500.0,
+    2500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_11_base.glb",
+    "b1": "../web/tiles/t12_11_b1.glb",
+    "b2": "../web/tiles/t12_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2042180,
+    "b1": 2072748,
+    "b2": 17513704
+   }
+  },
+  {
+   "id": "t12_12",
+   "bbox": [
+    2000.0,
+    2000.0,
+    2500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_12_base.glb",
+    "b1": "../web/tiles/t12_12_b1.glb",
+    "b2": "../web/tiles/t12_12_b2.glb"
+   },
+   "bytes": {
+    "base": 2831152,
+    "b1": 1110888,
+    "b2": 8924120
+   }
+  },
+  {
+   "id": "t12_13",
+   "bbox": [
+    2000.0,
+    2500.0,
+    2500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_13_base.glb",
+    "b1": "../web/tiles/t12_13_b1.glb",
+    "b2": "../web/tiles/t12_13_b2.glb"
+   },
+   "bytes": {
+    "base": 3602912,
+    "b1": 1037904,
+    "b2": 6196788
+   }
+  },
+  {
+   "id": "t12_14",
+   "bbox": [
+    2000.0,
+    3000.0,
+    2500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_14_base.glb",
+    "b1": "../web/tiles/t12_14_b1.glb",
+    "b2": "../web/tiles/t12_14_b2.glb"
+   },
+   "bytes": {
+    "base": 5100176,
+    "b1": 350680,
+    "b2": 1338772
+   }
+  },
+  {
+   "id": "t12_15",
+   "bbox": [
+    2000.0,
+    3500.0,
+    2500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t12_15_base.glb",
+    "b1": "../web/tiles/t12_15_b1.glb",
+    "b2": "../web/tiles/t12_15_b2.glb"
+   },
+   "bytes": {
+    "base": 2803404,
+    "b1": 1221664,
+    "b2": 5378004
+   }
+  },
+  {
+   "id": "t13_00",
+   "bbox": [
+    2500.0,
+    -4000.0,
+    3000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_00_base.glb",
+    "b1": "../web/tiles/t13_00_b1.glb",
+    "b2": "../web/tiles/t13_00_b2.glb"
+   },
+   "bytes": {
+    "base": 2421588,
+    "b1": 1472832,
+    "b2": 6880820
+   }
+  },
+  {
+   "id": "t13_01",
+   "bbox": [
+    2500.0,
+    -3500.0,
+    3000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_01_base.glb",
+    "b1": "../web/tiles/t13_01_b1.glb",
+    "b2": "../web/tiles/t13_01_b2.glb"
+   },
+   "bytes": {
+    "base": 2945192,
+    "b1": 1189216,
+    "b2": 5611600
+   }
+  },
+  {
+   "id": "t13_02",
+   "bbox": [
+    2500.0,
+    -3000.0,
+    3000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_02_base.glb",
+    "b1": "../web/tiles/t13_02_b1.glb",
+    "b2": "../web/tiles/t13_02_b2.glb"
+   },
+   "bytes": {
+    "base": 4499756,
+    "b1": 686448,
+    "b2": 4686016
+   }
+  },
+  {
+   "id": "t13_03",
+   "bbox": [
+    2500.0,
+    -2500.0,
+    3000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_03_base.glb",
+    "b1": "../web/tiles/t13_03_b1.glb",
+    "b2": "../web/tiles/t13_03_b2.glb"
+   },
+   "bytes": {
+    "base": 2794160,
+    "b1": 1657352,
+    "b2": 7360284
+   }
+  },
+  {
+   "id": "t13_04",
+   "bbox": [
+    2500.0,
+    -2000.0,
+    3000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_04_base.glb",
+    "b1": "../web/tiles/t13_04_b1.glb",
+    "b2": "../web/tiles/t13_04_b2.glb"
+   },
+   "bytes": {
+    "base": 2055224,
+    "b1": 2253292,
+    "b2": 15246796
+   }
+  },
+  {
+   "id": "t13_05",
+   "bbox": [
+    2500.0,
+    -1500.0,
+    3000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_05_base.glb",
+    "b1": "../web/tiles/t13_05_b1.glb",
+    "b2": "../web/tiles/t13_05_b2.glb"
+   },
+   "bytes": {
+    "base": 2490856,
+    "b1": 2130704,
+    "b2": 14377952
+   }
+  },
+  {
+   "id": "t13_06",
+   "bbox": [
+    2500.0,
+    -1000.0,
+    3000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_06_base.glb",
+    "b1": "../web/tiles/t13_06_b1.glb",
+    "b2": "../web/tiles/t13_06_b2.glb"
+   },
+   "bytes": {
+    "base": 2456784,
+    "b1": 357656,
+    "b2": 5325292
+   }
+  },
+  {
+   "id": "t13_07",
+   "bbox": [
+    2500.0,
+    -500.0,
+    3000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_07_base.glb",
+    "b1": "../web/tiles/t13_07_b1.glb",
+    "b2": "../web/tiles/t13_07_b2.glb"
+   },
+   "bytes": {
+    "base": 3832392,
+    "b1": 357664,
+    "b2": 5896840
+   }
+  },
+  {
+   "id": "t13_08",
+   "bbox": [
+    2500.0,
+    0.0,
+    3000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_08_base.glb",
+    "b1": "../web/tiles/t13_08_b1.glb",
+    "b2": "../web/tiles/t13_08_b2.glb"
+   },
+   "bytes": {
+    "base": 2749816,
+    "b1": 3110012,
+    "b2": 20481992
+   }
+  },
+  {
+   "id": "t13_09",
+   "bbox": [
+    2500.0,
+    500.0,
+    3000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_09_base.glb",
+    "b1": "../web/tiles/t13_09_b1.glb",
+    "b2": "../web/tiles/t13_09_b2.glb"
+   },
+   "bytes": {
+    "base": 1807196,
+    "b1": 3324092,
+    "b2": 26025668
+   }
+  },
+  {
+   "id": "t13_10",
+   "bbox": [
+    2500.0,
+    1000.0,
+    3000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_10_base.glb",
+    "b1": "../web/tiles/t13_10_b1.glb",
+    "b2": "../web/tiles/t13_10_b2.glb"
+   },
+   "bytes": {
+    "base": 1965208,
+    "b1": 3398808,
+    "b2": 22445636
+   }
+  },
+  {
+   "id": "t13_11",
+   "bbox": [
+    2500.0,
+    1500.0,
+    3000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_11_base.glb",
+    "b1": "../web/tiles/t13_11_b1.glb",
+    "b2": "../web/tiles/t13_11_b2.glb"
+   },
+   "bytes": {
+    "base": 3092084,
+    "b1": 2078948,
+    "b2": 13695468
+   }
+  },
+  {
+   "id": "t13_12",
+   "bbox": [
+    2500.0,
+    2000.0,
+    3000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_12_base.glb",
+    "b1": "../web/tiles/t13_12_b1.glb",
+    "b2": "../web/tiles/t13_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3171236,
+    "b1": 1484208,
+    "b2": 10373776
+   }
+  },
+  {
+   "id": "t13_13",
+   "bbox": [
+    2500.0,
+    2500.0,
+    3000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_13_base.glb",
+    "b1": "../web/tiles/t13_13_b1.glb",
+    "b2": "../web/tiles/t13_13_b2.glb"
+   },
+   "bytes": {
+    "base": 3616852,
+    "b1": 800716,
+    "b2": 3873948
+   }
+  },
+  {
+   "id": "t13_14",
+   "bbox": [
+    2500.0,
+    3000.0,
+    3000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_14_base.glb",
+    "b1": "../web/tiles/t13_14_b1.glb",
+    "b2": "../web/tiles/t13_14_b2.glb"
+   },
+   "bytes": {
+    "base": 3171688,
+    "b1": 974124,
+    "b2": 4977076
+   }
+  },
+  {
+   "id": "t13_15",
+   "bbox": [
+    2500.0,
+    3500.0,
+    3000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t13_15_base.glb",
+    "b1": "../web/tiles/t13_15_b1.glb",
+    "b2": "../web/tiles/t13_15_b2.glb"
+   },
+   "bytes": {
+    "base": 5471404,
+    "b1": 50304,
+    "b2": 311396
+   }
+  },
+  {
+   "id": "t14_00",
+   "bbox": [
+    3000.0,
+    -4000.0,
+    3500.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_00_base.glb",
+    "b1": "../web/tiles/t14_00_b1.glb",
+    "b2": "../web/tiles/t14_00_b2.glb"
+   },
+   "bytes": {
+    "base": 4890920,
+    "b1": 876756,
+    "b2": 3118408
+   }
+  },
+  {
+   "id": "t14_01",
+   "bbox": [
+    3000.0,
+    -3500.0,
+    3500.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_01_base.glb",
+    "b1": "../web/tiles/t14_01_b1.glb",
+    "b2": "../web/tiles/t14_01_b2.glb"
+   },
+   "bytes": {
+    "base": 4145984,
+    "b1": 299024,
+    "b2": 1413728
+   }
+  },
+  {
+   "id": "t14_02",
+   "bbox": [
+    3000.0,
+    -3000.0,
+    3500.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_02_base.glb",
+    "b1": "../web/tiles/t14_02_b1.glb",
+    "b2": "../web/tiles/t14_02_b2.glb"
+   },
+   "bytes": {
+    "base": 1959284,
+    "b1": 1621872,
+    "b2": 8179868
+   }
+  },
+  {
+   "id": "t14_03",
+   "bbox": [
+    3000.0,
+    -2500.0,
+    3500.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_03_base.glb",
+    "b1": "../web/tiles/t14_03_b1.glb",
+    "b2": "../web/tiles/t14_03_b2.glb"
+   },
+   "bytes": {
+    "base": 1785072,
+    "b1": 2277684,
+    "b2": 12629152
+   }
+  },
+  {
+   "id": "t14_04",
+   "bbox": [
+    3000.0,
+    -2000.0,
+    3500.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_04_base.glb",
+    "b1": "../web/tiles/t14_04_b1.glb",
+    "b2": "../web/tiles/t14_04_b2.glb"
+   },
+   "bytes": {
+    "base": 1690796,
+    "b1": 3351016,
+    "b2": 18172588
+   }
+  },
+  {
+   "id": "t14_05",
+   "bbox": [
+    3000.0,
+    -1500.0,
+    3500.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_05_base.glb",
+    "b1": "../web/tiles/t14_05_b1.glb",
+    "b2": "../web/tiles/t14_05_b2.glb"
+   },
+   "bytes": {
+    "base": 2894236,
+    "b1": 2491680,
+    "b2": 12774608
+   }
+  },
+  {
+   "id": "t14_06",
+   "bbox": [
+    3000.0,
+    -1000.0,
+    3500.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_06_base.glb",
+    "b1": "../web/tiles/t14_06_b1.glb",
+    "b2": "../web/tiles/t14_06_b2.glb"
+   },
+   "bytes": {
+    "base": 2353512,
+    "b1": 1970488,
+    "b2": 10424780
+   }
+  },
+  {
+   "id": "t14_07",
+   "bbox": [
+    3000.0,
+    -500.0,
+    3500.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_07_base.glb",
+    "b1": "../web/tiles/t14_07_b1.glb",
+    "b2": "../web/tiles/t14_07_b2.glb"
+   },
+   "bytes": {
+    "base": 2575452,
+    "b1": 1119352,
+    "b2": 9646004
+   }
+  },
+  {
+   "id": "t14_08",
+   "bbox": [
+    3000.0,
+    0.0,
+    3500.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_08_base.glb",
+    "b1": "../web/tiles/t14_08_b1.glb",
+    "b2": "../web/tiles/t14_08_b2.glb"
+   },
+   "bytes": {
+    "base": 3377968,
+    "b1": 983388,
+    "b2": 8654816
+   }
+  },
+  {
+   "id": "t14_09",
+   "bbox": [
+    3000.0,
+    500.0,
+    3500.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_09_base.glb",
+    "b1": "../web/tiles/t14_09_b1.glb",
+    "b2": "../web/tiles/t14_09_b2.glb"
+   },
+   "bytes": {
+    "base": 3276016,
+    "b1": 1850256,
+    "b2": 14583060
+   }
+  },
+  {
+   "id": "t14_10",
+   "bbox": [
+    3000.0,
+    1000.0,
+    3500.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_10_base.glb",
+    "b1": "../web/tiles/t14_10_b1.glb",
+    "b2": "../web/tiles/t14_10_b2.glb"
+   },
+   "bytes": {
+    "base": 2790064,
+    "b1": 2009132,
+    "b2": 11964416
+   }
+  },
+  {
+   "id": "t14_11",
+   "bbox": [
+    3000.0,
+    1500.0,
+    3500.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_11_base.glb",
+    "b1": "../web/tiles/t14_11_b1.glb",
+    "b2": "../web/tiles/t14_11_b2.glb"
+   },
+   "bytes": {
+    "base": 4346240,
+    "b1": 997028,
+    "b2": 4943860
+   }
+  },
+  {
+   "id": "t14_12",
+   "bbox": [
+    3000.0,
+    2000.0,
+    3500.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_12_base.glb",
+    "b1": "../web/tiles/t14_12_b1.glb",
+    "b2": "../web/tiles/t14_12_b2.glb"
+   },
+   "bytes": {
+    "base": 3558372,
+    "b1": 1696400,
+    "b2": 9887804
+   }
+  },
+  {
+   "id": "t14_13",
+   "bbox": [
+    3000.0,
+    2500.0,
+    3500.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_13_base.glb",
+    "b1": "../web/tiles/t14_13_b1.glb",
+    "b2": "../web/tiles/t14_13_b2.glb"
+   },
+   "bytes": {
+    "base": 6296728,
+    "b1": 537360,
+    "b2": 2100008
+   }
+  },
+  {
+   "id": "t14_14",
+   "bbox": [
+    3000.0,
+    3000.0,
+    3500.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_14_base.glb",
+    "b1": "../web/tiles/t14_14_b1.glb",
+    "b2": "../web/tiles/t14_14_b2.glb"
+   },
+   "bytes": {
+    "base": 4424972,
+    "b1": 829096,
+    "b2": 4085876
+   }
+  },
+  {
+   "id": "t14_15",
+   "bbox": [
+    3000.0,
+    3500.0,
+    3500.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t14_15_base.glb",
+    "b1": "../web/tiles/t14_15_b1.glb",
+    "b2": "../web/tiles/t14_15_b2.glb"
+   },
+   "bytes": {
+    "base": 3975348,
+    "b1": 1168824,
+    "b2": 5521788
+   }
+  },
+  {
+   "id": "t15_00",
+   "bbox": [
+    3500.0,
+    -4000.0,
+    4000.0,
+    -3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_00_base.glb",
+    "b1": "../web/tiles/t15_00_b1.glb",
+    "b2": "../web/tiles/t15_00_b2.glb"
+   },
+   "bytes": {
+    "base": 6649180,
+    "b1": 598252,
+    "b2": 2263468
+   }
+  },
+  {
+   "id": "t15_01",
+   "bbox": [
+    3500.0,
+    -3500.0,
+    4000.0,
+    -3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_01_base.glb",
+    "b1": "../web/tiles/t15_01_b1.glb",
+    "b2": "../web/tiles/t15_01_b2.glb"
+   },
+   "bytes": {
+    "base": 3142460,
+    "b1": 393664,
+    "b2": 1412628
+   }
+  },
+  {
+   "id": "t15_02",
+   "bbox": [
+    3500.0,
+    -3000.0,
+    4000.0,
+    -2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_02_base.glb",
+    "b1": "../web/tiles/t15_02_b1.glb",
+    "b2": "../web/tiles/t15_02_b2.glb"
+   },
+   "bytes": {
+    "base": 1580524,
+    "b1": 623576,
+    "b2": 5878116
+   }
+  },
+  {
+   "id": "t15_03",
+   "bbox": [
+    3500.0,
+    -2500.0,
+    4000.0,
+    -2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_03_base.glb",
+    "b1": "../web/tiles/t15_03_b1.glb",
+    "b2": "../web/tiles/t15_03_b2.glb"
+   },
+   "bytes": {
+    "base": 3303432,
+    "b1": 787992,
+    "b2": 6124096
+   }
+  },
+  {
+   "id": "t15_04",
+   "bbox": [
+    3500.0,
+    -2000.0,
+    4000.0,
+    -1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_04_base.glb",
+    "b1": "../web/tiles/t15_04_b1.glb",
+    "b2": "../web/tiles/t15_04_b2.glb"
+   },
+   "bytes": {
+    "base": 3299524,
+    "b1": 1336336,
+    "b2": 5273608
+   }
+  },
+  {
+   "id": "t15_05",
+   "bbox": [
+    3500.0,
+    -1500.0,
+    4000.0,
+    -1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_05_base.glb",
+    "b1": "../web/tiles/t15_05_b1.glb",
+    "b2": "../web/tiles/t15_05_b2.glb"
+   },
+   "bytes": {
+    "base": 3641572,
+    "b1": 1682564,
+    "b2": 6327720
+   }
+  },
+  {
+   "id": "t15_06",
+   "bbox": [
+    3500.0,
+    -1000.0,
+    4000.0,
+    -500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_06_base.glb",
+    "b1": "../web/tiles/t15_06_b1.glb",
+    "b2": "../web/tiles/t15_06_b2.glb"
+   },
+   "bytes": {
+    "base": 4588344,
+    "b1": 917976,
+    "b2": 4086824
+   }
+  },
+  {
+   "id": "t15_07",
+   "bbox": [
+    3500.0,
+    -500.0,
+    4000.0,
+    0.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_07_base.glb",
+    "b1": "../web/tiles/t15_07_b1.glb",
+    "b2": "../web/tiles/t15_07_b2.glb"
+   },
+   "bytes": {
+    "base": 3294068,
+    "b1": 2038500,
+    "b2": 8753200
+   }
+  },
+  {
+   "id": "t15_08",
+   "bbox": [
+    3500.0,
+    0.0,
+    4000.0,
+    500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_08_base.glb",
+    "b1": "../web/tiles/t15_08_b1.glb",
+    "b2": "../web/tiles/t15_08_b2.glb"
+   },
+   "bytes": {
+    "base": 3941008,
+    "b1": 1024660,
+    "b2": 6836908
+   }
+  },
+  {
+   "id": "t15_09",
+   "bbox": [
+    3500.0,
+    500.0,
+    4000.0,
+    1000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_09_base.glb",
+    "b1": "../web/tiles/t15_09_b1.glb",
+    "b2": "../web/tiles/t15_09_b2.glb"
+   },
+   "bytes": {
+    "base": 2605084,
+    "b1": 2182272,
+    "b2": 16256968
+   }
+  },
+  {
+   "id": "t15_10",
+   "bbox": [
+    3500.0,
+    1000.0,
+    4000.0,
+    1500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_10_base.glb",
+    "b1": "../web/tiles/t15_10_b1.glb",
+    "b2": "../web/tiles/t15_10_b2.glb"
+   },
+   "bytes": {
+    "base": 2046040,
+    "b1": 2357984,
+    "b2": 13297444
+   }
+  },
+  {
+   "id": "t15_11",
+   "bbox": [
+    3500.0,
+    1500.0,
+    4000.0,
+    2000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_11_base.glb",
+    "b1": "../web/tiles/t15_11_b1.glb",
+    "b2": "../web/tiles/t15_11_b2.glb"
+   },
+   "bytes": {
+    "base": 2064168,
+    "b1": 1082064,
+    "b2": 7739900
+   }
+  },
+  {
+   "id": "t15_12",
+   "bbox": [
+    3500.0,
+    2000.0,
+    4000.0,
+    2500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_12_base.glb",
+    "b1": "../web/tiles/t15_12_b1.glb",
+    "b2": "../web/tiles/t15_12_b2.glb"
+   },
+   "bytes": {
+    "base": 2919220,
+    "b1": 1756484,
+    "b2": 11400608
+   }
+  },
+  {
+   "id": "t15_13",
+   "bbox": [
+    3500.0,
+    2500.0,
+    4000.0,
+    3000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_13_base.glb",
+    "b1": "../web/tiles/t15_13_b1.glb",
+    "b2": "../web/tiles/t15_13_b2.glb"
+   },
+   "bytes": {
+    "base": 3184648,
+    "b1": 1558548,
+    "b2": 9288464
+   }
+  },
+  {
+   "id": "t15_14",
+   "bbox": [
+    3500.0,
+    3000.0,
+    4000.0,
+    3500.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_14_base.glb",
+    "b1": "../web/tiles/t15_14_b1.glb",
+    "b2": "../web/tiles/t15_14_b2.glb"
+   },
+   "bytes": {
+    "base": 2619928,
+    "b1": 802720,
+    "b2": 8338792
+   }
+  },
+  {
+   "id": "t15_15",
+   "bbox": [
+    3500.0,
+    3500.0,
+    4000.0,
+    4000.0
+   ],
+   "files": {
+    "base": "../web/tiles/t15_15_base.glb",
+    "b1": "../web/tiles/t15_15_b1.glb",
+    "b2": "../web/tiles/t15_15_b2.glb"
+   },
+   "bytes": {
+    "base": 4227140,
+    "b1": 995292,
+    "b2": 4898068
+   }
+  }
+ ],
+ "landmarks": [
+  {
+   "name": "Clifton Suspension Bridge",
+   "osm_name": "Clifton Suspension Bridge",
+   "id": "way/3578235",
+   "tier": "priority",
+   "x": -2127.2,
+   "y": 96.5,
+   "z": -2.2092512249946488
+  },
+  {
+   "name": "Cabot Tower",
+   "osm_name": "Cabot Tower",
+   "id": "way/22751075",
+   "tier": "priority",
+   "x": -668.3,
+   "y": -0.4,
+   "z": 78.97453422546387
+  },
+  {
+   "name": "Bristol Cathedral",
+   "osm_name": "Bristol Cathedral",
+   "id": "way/48937931",
+   "tier": "priority",
+   "x": -239.7,
+   "y": -258.8,
+   "z": 17.10802654266357
+  },
+  {
+   "name": "St Mary Redcliffe",
+   "osm_name": "St Mary Redcliffe",
+   "id": "way/15718953",
+   "tier": "priority",
+   "x": 530.5,
+   "y": -628.8,
+   "z": 14.260894584655794
+  },
+  {
+   "name": "Wills Memorial Building",
+   "osm_name": "Wills Memorial Building",
+   "id": "way/175488942",
+   "tier": "priority",
+   "x": -513.2,
+   "y": 259.3,
+   "z": 45.53690067291259
+  },
+  {
+   "name": "SS Great Britain",
+   "osm_name": "SS Great Britain",
+   "id": "way/48859354",
+   "tier": "secondary",
+   "x": -770.3,
+   "y": -544.8,
+   "z": 7.7450819826126125
+  },
+  {
+   "name": "Clifton Cathedral",
+   "osm_name": "Clifton Cathedral",
+   "id": "way/4315318",
+   "tier": "secondary",
+   "x": -1335.1,
+   "y": 625.9,
+   "z": 68.21312120437622
+  },
+  {
+   "name": "Bristol City Hall",
+   "osm_name": "Bristol City Hall",
+   "id": "way/4309554",
+   "tier": "secondary",
+   "x": -337.0,
+   "y": -164.3,
+   "z": 15.237753868103026
+  },
+  {
+   "name": "M Shed",
+   "osm_name": "M Shed",
+   "id": "way/397358060",
+   "tier": "secondary",
+   "x": -75.8,
+   "y": -710.3,
+   "z": 8.859365787506105
+  },
+  {
+   "name": "Bristol Museum & Art Gallery",
+   "osm_name": "Bristol City Museum & Art Gallery",
+   "id": "way/36990873",
+   "tier": "secondary",
+   "x": -546.1,
+   "y": 274.4,
+   "z": 48.91585700988765
+  },
+  {
+   "name": "Pero's Bridge",
+   "osm_name": "Pero's Bridge",
+   "id": "way/661123754",
+   "tier": "secondary",
+   "x": -50.5,
+   "y": -431.7,
+   "z": 6.0746811270713845
+  },
+  {
+   "name": "Lord Mayor's Chapel",
+   "osm_name": "Lord Mayor's Chapel",
+   "id": "way/94482854",
+   "tier": "secondary",
+   "x": -204.6,
+   "y": -116.2,
+   "z": 17.78145515441893
+  },
+  {
+   "name": "Bristol Old Vic",
+   "osm_name": "Bristol Old Vic",
+   "id": "way/123964058",
+   "tier": "secondary",
+   "x": 207.6,
+   "y": -186.7,
+   "z": 7.629195857048051
+  },
+  {
+   "name": "John Wesley's New Room",
+   "osm_name": "John Wesley's Chapel",
+   "id": "way/124100389",
+   "tier": "secondary",
+   "x": 485.4,
+   "y": 444.5,
+   "z": 9.222655296325682
+  },
+  {
+   "name": "St Nicholas Church",
+   "osm_name": "St Nicholas",
+   "id": "way/108398564",
+   "tier": "secondary",
+   "x": 341.3,
+   "y": -4.2,
+   "z": 12.010665965080277
+  },
+  {
+   "name": "Corn Exchange",
+   "osm_name": "Corn Exchange",
+   "id": "way/376275103",
+   "tier": "secondary",
+   "x": 257.7,
+   "y": 46.2,
+   "z": 16.879299812316894
+  },
+  {
+   "name": "Arnolfini",
+   "osm_name": "Arnolfini",
+   "id": "way/123982876",
+   "tier": "secondary",
+   "x": -3.1,
+   "y": -520.7,
+   "z": 8.495402922630308
+  },
+  {
+   "name": "Christ Church Clifton",
+   "osm_name": "Christ Church Clifton",
+   "id": "way/79848361",
+   "tier": "secondary",
+   "x": -1585.2,
+   "y": 397.3,
+   "z": 80.21184204101561
+  },
+  {
+   "name": "The Red Lodge Museum",
+   "osm_name": "The Red Lodge Museum",
+   "id": "way/97653396",
+   "tier": "secondary",
+   "x": -165.0,
+   "y": 159.4,
+   "z": 34.80920257568353
+  },
+  {
+   "name": "Bristol Beacon",
+   "osm_name": "Bristol Beacon",
+   "id": "way/94826517",
+   "tier": "secondary",
+   "x": -74.7,
+   "y": 78.3,
+   "z": 18.034270896911607
+  }
+ ],
+ "generated": "2026-11-10T11:35:38+00:00"
+}
