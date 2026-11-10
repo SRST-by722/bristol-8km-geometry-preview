@@ -1,10 +1,12 @@
-// Bristol 8 km viewer. Local frame: x = grid east, y = up, z = -grid north (glTF Y-up). Tiles stream by distance.
+// Bristol 8 km viewer - web preview build. Local frame: x = grid east, y = up, z = -grid north (glTF Y-up).
+// Loading: terrain overview first, then whole-area building blocks in parts; near detail streams by distance from the view target
+// through one priority queue (bounded concurrency, retries, stale requests cancelled). Progress shown is real bytes from the manifest.
 import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
+window.__viewerStarted = true;
 const LAYERS = [
   ['terrain', 'Terrain', '#d4d2c0'], ['buildings', 'Buildings', '#b9a690'], ['facade', 'Facade detail (near)', '#2f3b47'],
   ['roads', 'Roads', '#666'], ['rail', 'Railways', '#7a6b60'], ['bridges', 'Bridges', '#8d8a85'],
@@ -13,144 +15,230 @@ const LAYERS = [
   ['trees_rows', 'Tree rows (illustrative spacing)', '#4c7a3d'], ['canopy_illustrative', 'Illustrative woodland crowns', '#385e33']];
 const GROUP_TO_LAYER = { terrain: 'terrain', buildings_b0: 'buildings', buildings_b1: 'buildings', buildings_b2: 'buildings', roads: 'roads', rail: 'rail',
   bridges: 'bridges', water: 'water', waterways: 'waterways', veg_areas: 'veg_areas', hedges: 'hedges', trees_mapped: 'trees_mapped', trees_rows: 'trees_rows', canopy_illustrative: 'canopy_illustrative' };
-const R_BASE = 1400, R_B2 = 420;
-const state = { layers: Object.fromEntries(LAYERS.map(l => [l[0], true])), tiles: {}, manifest: null, pick: [], info: {} };
-const DIAG = new URLSearchParams(location.search).has('diag');
+const R_BASE = 1400, R_B2 = 420;          // same detail radii as the first published version
+const CONC = 4, RETRIES = 2;              // parallel downloads; automatic retries per file before it is reported as failed
+const QS = new URLSearchParams(location.search);
+const DIAG = QS.has('diag');
+const state = { layers: Object.fromEntries(LAYERS.map(l => [l[0], true])), tiles: {}, manifest: null, pick: [], ov: {}, feat: {}, jobs: new Map(), log: [],
+  net: { requests: 0, bytes: 0, retries: 0, failed: 0, cancelled: 0 } };
+const $ = id => document.getElementById(id);
+const mb = v => (v / 1e6).toFixed(v < 1e7 ? 1 : 0);
 
-const canvas = document.getElementById('c');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+// ---- start-up panel (in the page before this module loads) and activity bar
+const boot = { el: $('boot'), msg: $('boot-msg'), bar: $('boot-bar'), fill: $('boot-fill'), sub: $('boot-sub'), retry: $('boot-retry') };
+function bootSet(msg, frac, sub) { boot.msg.textContent = msg; boot.sub.textContent = sub || '';
+  if (frac === null || frac === undefined) boot.bar.classList.add('ind'); else { boot.bar.classList.remove('ind'); boot.fill.style.width = (Math.max(0, Math.min(1, frac)) * 100).toFixed(1) + '%'; } }
+function bootFail(msg, onRetry) { boot.el.hidden = false; boot.el.classList.add('err'); boot.bar.hidden = true; boot.msg.textContent = msg; boot.sub.textContent = 'Check the connection, then retry.';
+  boot.retry.hidden = false; boot.retry.onclick = () => { boot.el.classList.remove('err'); boot.bar.hidden = false; boot.retry.hidden = true; onRetry(); }; }
+
+let renderer;
+const canvas = $('c');
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true }); }
+catch (e) { bootFail('This browser could not start WebGL, which the 3D view needs.', () => location.reload()); throw e; }
+// Pixel ratio: ?pr=1.5 fixes it; otherwise start at min(device, 2) and step down only if the measured frame rate stays low while nothing is loading.
+let PR = QS.has('pr') ? Math.max(0.5, Math.min(3, Number(QS.get('pr')) || 1)) : Math.min(devicePixelRatio || 1, 2);
+renderer.setPixelRatio(PR); renderer.setSize(innerWidth, innerHeight);
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#e9eeeb'); scene.fog = new THREE.Fog('#e9eeeb', 6000, 14000);
 const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 30000);
 scene.add(new THREE.HemisphereLight('#ffffff', '#8c9486', 1.25)); const sun = new THREE.DirectionalLight('#fff4e6', 1.4); sun.position.set(-3000, 5000, 2500); scene.add(sun);
 const controls = new MapControls(camera, canvas); controls.maxPolarAngle = Math.PI * 0.47; controls.minDistance = 20; controls.maxDistance = 16000; controls.enableDamping = true;
 const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
-const mat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
+// Terrain keeps its stored normals. Everything else has no stored normals in the preview files and is shaded flat from the triangle itself.
+const matSmooth = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
+const matFlat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide, flatShading: true });
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
 
 function shown(o) { for (let p = o; p; p = p.parent) { if (!p.visible) return false; } return true; }
-function originOf(gltf) { const j = gltf.parser.json; let o = (j.scenes || [])[0]?.extras?.origin_local_zup_m;   // empty glTF files are valid: no nodes
+function originOf(gltf) { const j = gltf.parser.json; let o = (j.scenes || [])[0]?.extras?.origin_local_zup_m;
   if (!o) for (const n of (j.nodes || [])) if (n.extras?.origin_local_zup_m) { o = n.extras.origin_local_zup_m; break; }
   o = o || [0, 0, 0]; return new THREE.Vector3(o[0], o[2], -o[1]); }
-// Web tiles are meshopt-compressed with quantized (int) attributes; convert to Float32 before baking node transforms.
-function toFloat(ge) { for (const k of Object.keys(ge.attributes)) { const a = ge.attributes[k]; if (a.array instanceof Float32Array && !a.normalized) continue;
-  const n = a.count, s = a.itemSize, d = new Float32Array(n * s);
-  for (let i = 0; i < n; i++) { d[i * s] = a.getX(i); if (s > 1) d[i * s + 1] = a.getY(i); if (s > 2) d[i * s + 2] = a.getZ(i); if (s > 3) d[i * s + 3] = a.getW(i); }
-  ge.setAttribute(k, new THREE.BufferAttribute(d, s)); } return ge; }
-function featureOf(o) { for (let p = o; p; p = p.parent) if (p.userData && p.userData.id) return [p.userData.id, p.userData];
-  for (let p = o; p; p = p.parent) if (p.name && !/^mesh_\d+$/.test(p.name) && !p.userData?.group) return [p.name, p.userData]; return [o.name, o.userData]; }
+function namedParent(o) { for (let p = o; p; p = p.parent) if (p.name && !/^mesh_\d+$/.test(p.name)) return p.name; return o.name; }
 
-// Merge each group's meshes into one draw call; keep a face->feature lookup for picking.
-function mergeScene(gltf, kind) {
-  const root = new THREE.Group(); root.position.copy(originOf(gltf)); root.userData.kind = kind;
-  gltf.scene.updateMatrixWorld(true);
-  if (kind === 'b0') {  // overview: keep one mesh per tile so detail tiles can hide their overview stand-ins
-    state.ov = {};
-    for (const g of gltf.scene.children) g.traverse(o => { if (!o.isMesh) return; const m = new THREE.Mesh(toFloat(o.geometry.clone()), mat);
-      m.applyMatrix4(o.matrixWorld); m.name = featureOf(o)[0]; m.userData.layer = GROUP_TO_LAYER[g.name] || g.name; m.userData.ranges = [[0, 1e12, m.name, { level: 'B0 overview', tile: m.name.slice(0, 6) }]];
-      root.add(m); state.pick.push(m); state.ov[m.name] = m; });
-    return root;
-  }
-  for (const g of gltf.scene.children) {
-    const geoms = [], ranges = []; let tri = 0;
-    g.traverse(o => { if (!o.isMesh) return; const ge = toFloat(o.geometry.clone()); ge.applyMatrix4(o.matrixWorld);
-      for (const k of Object.keys(ge.attributes)) if (!['position', 'normal', 'color'].includes(k)) ge.deleteAttribute(k);
-      if (!ge.attributes.color) { const c = new Float32Array(ge.attributes.position.count * 4).fill(0.7); ge.setAttribute('color', new THREE.BufferAttribute(c, 4)); }
-      if (ge.attributes.color.itemSize === 3) { const s = ge.attributes.color.array, d = new Float32Array(s.length / 3 * 4); for (let i = 0, j = 0; i < s.length; i += 3, j += 4) { d[j] = s[i]; d[j + 1] = s[i + 1]; d[j + 2] = s[i + 2]; d[j + 3] = 1; } ge.setAttribute('color', new THREE.BufferAttribute(d, 4)); }
-      const n = ge.index ? ge.index.count / 3 : ge.attributes.position.count / 3; const [fid, fex] = featureOf(o); ranges.push([tri, tri + n, fid, fex]); if (fex && fex.height_m !== undefined) state.info[fid] = fex; tri += n; geoms.push(ge); });
-    if (!geoms.length) continue;
-    const merged = mergeGeometries(geoms, false); const m = new THREE.Mesh(merged, mat); m.name = g.name; m.userData.ranges = ranges;
-    m.userData.layer = (kind === 'b2' && g.name === 'buildings_b2') ? 'facade' : (GROUP_TO_LAYER[g.name] || g.name);
-    root.add(m); state.pick.push(m);
-  }
+// Meshes are used as decoded (quantised integer positions + the node's scale/offset matrix): no per-vertex conversion on the main thread.
+function buildScene(gltf, kind, tileId) {
+  const root = new THREE.Group(); root.position.copy(originOf(gltf)); root.userData.kind = kind; gltf.scene.updateMatrixWorld(true);
+  for (const g of gltf.scene.children) g.traverse(o => { if (!o.isMesh) return;
+    const m = new THREE.Mesh(o.geometry, o.geometry.attributes.normal ? matSmooth : matFlat); m.matrixAutoUpdate = false; m.matrix.copy(o.matrixWorld);
+    if (kind === 'ov') { m.name = namedParent(o); m.userData = { layer: GROUP_TO_LAYER[g.name] || g.name, ov: true, tile: m.name.slice(0, 6) }; state.ov[m.name] = m; }
+    else { m.name = g.name; m.userData = { layer: (kind === 'b2' && g.name === 'buildings_b2') ? 'facade' : (GROUP_TO_LAYER[g.name] || g.name), tile: tileId, file: kind, group: g.name }; }
+    root.add(m); state.pick.push(m); });
   return root;
 }
 function applyLayers() {
-  for (const m of state.pick) { const L = m.userData.layer; m.visible = !m.userData.hiddenByTile && (L === 'facade' ? (state.layers.facade && state.layers.buildings) : !!state.layers[L]); }
-  for (const t of Object.values(state.tiles)) { if (t.b1) t.b1.visible = !(t.b2 && state.layers.facade); }
+  for (const [id, s] of Object.entries(state.tiles)) {   // overview stand-ins give way to the detail that replaces them
+    const a = state.ov[id + '_terrain_b0'], b = state.ov[id + '_buildings_b0']; if (a) a.userData.hidden = !!s.base; if (b) b.userData.hidden = !!(s.b1 || s.b2);
+    if (s.b1) s.b1.visible = !(s.b2 && state.layers.facade); }
+  for (const m of state.pick) { const L = m.userData.layer; m.visible = !m.userData.hidden && (L === 'facade' ? (state.layers.facade && state.layers.buildings) : !!state.layers[L]); }
 }
-async function load(url, kind) { const g = await loader.loadAsync(url); return mergeScene(g, kind); }
-function dispose(root) { if (!root) return; scene.remove(root); root.traverse(o => { if (o.isMesh) { o.geometry.dispose(); state.pick = state.pick.filter(p => p !== o); } }); }
+function dispose(root) { if (!root) return; scene.remove(root); const gone = new Set(); root.traverse(o => { if (o.isMesh) { o.geometry.dispose(); gone.add(o); } }); state.pick = state.pick.filter(p => !gone.has(p)); }
 
+// ---- download queue
+async function download(job) {
+  const r = await fetch(job.url, { signal: job.ctrl.signal }); if (!r.ok) throw new Error('HTTP ' + r.status);
+  if (!r.body || !r.body.getReader) { const b = await r.arrayBuffer(); job.got = b.byteLength; return b; }
+  const rd = r.body.getReader(), chunks = []; let n = 0;
+  for (;;) { const { done, value } = await rd.read(); if (done) break; chunks.push(value); n += value.length; job.got = n; }
+  const out = new Uint8Array(n); let o = 0; for (const c of chunks) { out.set(c, o); o += c.length; } return out.buffer;
+}
+function addJob(key, url, bytes, kind, tile, prio, onDone) {
+  const job = { key, url, bytes: bytes || 0, kind, tile, prio, onDone, state: 'queued', got: 0, tries: 0, ctrl: null, wait: 0 }; state.jobs.set(key, job); return job;
+}
+function cancel(job) { if (job.ctrl) job.ctrl.abort(); job.state = 'cancelled'; state.jobs.delete(job.key); state.net.cancelled++; }
+async function run(job) {
+  job.state = 'loading'; job.ctrl = new AbortController(); job.got = 0; const t0 = performance.now(); state.net.requests++;
+  try {
+    const buf = await download(job); const t1 = performance.now(); state.net.bytes += buf.byteLength;
+    if (job.state === 'cancelled') return; job.state = 'decoding';
+    const gltf = await loader.parseAsync(buf, ''); if (job.state === 'cancelled') return;
+    const root = buildScene(gltf, job.kind === 'ov' ? 'ov' : job.kind, job.tile); const t2 = performance.now();
+    job.state = 'done'; job.got = job.bytes || buf.byteLength; if (job.key !== 'ov:terrain') { batch.bytes += job.bytes; batch.files++; } state.log.push({ key: job.key, bytes: buf.byteLength, download_ms: Math.round(t1 - t0), decode_ms: Math.round(t2 - t1), at_ms: Math.round(t2 - __diag.t0), tries: job.tries + 1 });
+    job.onDone(root);
+  } catch (e) {
+    if (job.state === 'cancelled' || (e && e.name === 'AbortError')) return;
+    job.tries++;
+    if (job.tries <= RETRIES) { state.net.retries++; job.state = 'queued'; job.wait = performance.now() + 700 * job.tries; }
+    else { job.state = 'failed'; job.error = String(e && e.message || e); state.net.failed++; diagError('file_load', e, { file: job.url, tile: job.tile, attempts: job.tries }); console.error('file failed', job.url, e); }
+  } finally { pump(); showActivity(); }
+}
+function pump() {
+  let running = 0; for (const j of state.jobs.values()) if (j.state === 'loading' || j.state === 'decoding') running++;
+  const now = performance.now(), q = [...state.jobs.values()].filter(j => j.state === 'queued' && j.wait <= now).sort((a, b) => a.prio - b.prio);
+  while (running < CONC && q.length) { run(q.shift()); running++; }
+}
+function retryFailed() { for (const j of state.jobs.values()) if (j.state === 'failed') { j.state = 'queued'; j.tries = 0; j.wait = 0; } pump(); showActivity(); }
+
+// ---- what the current view needs
+function plan() {
+  const mf = state.manifest; if (!mf) return; const t = controls.target, camH = camera.position.y - t.y;
+  for (const ti of mf.tiles) {
+    const cx = (ti.bbox[0] + ti.bbox[2]) / 2, cz = -(ti.bbox[1] + ti.bbox[3]) / 2, d = Math.hypot(cx - t.x, cz - t.z), s = state.tiles[ti.id] ||= {};
+    const want = { base: d < R_BASE && camH < 3500, b1: d < R_BASE && camH < 3500, b2: d < R_B2 && camH < 900 };
+    const keep = { base: d < R_BASE * 1.15 && camH < 3850, b1: d < R_BASE * 1.15 && camH < 3850, b2: d < R_B2 * 1.25 && camH < 1000 };   // a little slack so tiles do not flicker at the edge
+    for (const L of ['base', 'b1', 'b2']) {
+      const key = ti.id + ':' + L, job = state.jobs.get(key), url = ti.files[L]; if (!url) continue;
+      // nearest tile first; its facade detail comes before the outer ring of mid-distance tiles
+      const prio = d + (L === 'b1' ? 1 : L === 'b2' ? 250 : 0);
+      if (want[L]) { if (!s[L] && !job) addJob(key, url, ti.bytes?.[L], L, ti.id, prio, root => { s[L] = root; scene.add(root); state.jobs.delete(key); applyLayers(); mark(ti.id + '_' + L + '_ready_ms'); }); else if (job) job.prio = prio; }
+      else {
+        if (job && job.state !== 'done' && !keep[L]) cancel(job);            // the view moved on: drop requests nobody is waiting for
+        if (s[L] && !keep[L]) { dispose(s[L]); s[L] = null; applyLayers(); }
+      }
+    }
+  }
+  pump(); showActivity();
+  const n = Object.values(state.tiles); $('status').textContent = `Loaded tiles: ${n.filter(x => x.base).length} near, ${n.filter(x => x.b2).length} with facade detail · draw calls ${renderer.info.render.calls}`;
+}
+const batch = { bytes: 0, files: 0, active: false }; let hideTimer = 0;
+function pending() { const j = [...state.jobs.values()]; return { live: j.filter(x => x.state === 'queued' || x.state === 'loading' || x.state === 'decoding'), failed: j.filter(x => x.state === 'failed') }; }
+// Activity bar: bytes are real (finished files + bytes received so far, against the manifest sizes of everything this view still needs).
+// The total changes when the view moves, because the list of needed files changes.
+function showActivity() {
+  const el = $('act'); if (!state.terrainReady) return; const p = pending(), live = p.live;
+  if (!live.length && !p.failed.length) {
+    if (batch.active) { batch.active = false; $('act-text').textContent = `Ready: everything for this view is loaded (${batch.files} files, ${mb(batch.bytes)} MB)`; $('act-fill').style.width = '100%'; $('act-retry').hidden = true; el.classList.remove('err');
+      clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (!batch.active) { el.hidden = true; batch.bytes = 0; batch.files = 0; } }, 2500); }
+    return;
+  }
+  batch.active = true; clearTimeout(hideTimer); el.hidden = false;
+  const ov = live.filter(j => j.kind === 'ov').length, det = live.length - ov, dec = live.filter(j => j.state === 'decoding').length, dl = live.filter(j => j.state === 'loading').length;
+  const left = live.reduce((n, j) => n + j.bytes, 0), got = live.reduce((n, j) => n + Math.min(j.got, j.bytes || j.got), 0), total = batch.bytes + left;
+  const parts = []; if (det) parts.push(`detail near the view: ${det} file${det > 1 ? 's' : ''} left`); if (ov) parts.push(`whole-area building blocks: ${ov} part${ov > 1 ? 's' : ''} left`);
+  let txt = live.length ? `Loading ${parts.join(' · ')} · ${mb(batch.bytes + got)} of ${mb(total)} MB` + (dl ? ` · downloading ${dl}` : '') + (dec ? ` · decoding ${dec}` : '') : '';
+  if (p.failed.length) txt += (txt ? ' · ' : '') + `${p.failed.length} file${p.failed.length > 1 ? 's' : ''} did not load after ${RETRIES + 1} attempts`;
+  $('act-text').textContent = txt; $('act-fill').style.width = (total ? Math.min(1, (batch.bytes + got) / total) * 100 : 0).toFixed(1) + '%';
+  $('act-retry').hidden = !p.failed.length; el.classList.toggle('err', !!p.failed.length && !live.length);
+}
+
+// ---- feature records (separate .features.json per tile file; fetched only when a feature is picked)
+function features(tileId, file) { const k = tileId + ':' + file; if (state.feat[k]) return state.feat[k];
+  const ti = state.manifest.tiles.find(t => t.id === tileId), url = ti?.features?.[file]; if (!url) return Promise.resolve(null);
+  return state.feat[k] = fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).catch(e => { delete state.feat[k]; throw e; }); }
+function infoBox(title, layer, rows, noteText) { const box = $('info');
+  box.innerHTML = `<b></b><div class="note"></div><table></table>`; box.querySelector('b').textContent = title; box.querySelector('.note').textContent = layer + (noteText ? ' · ' + noteText : '');
+  const tb = box.querySelector('table'); for (const [k, v] of rows) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = typeof v === 'object' ? JSON.stringify(v) : v; }
+  box.style.display = 'block'; }
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let pickSeq = 0;
+canvas.addEventListener('dblclick', async e => {
+  mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(state.pick.filter(shown), false)[0]; const seq = ++pickSeq;
+  if (!hit) { $('info').style.display = 'none'; return; }
+  const u = hit.object.userData;
+  if (u.ov) { infoBox(hit.object.name, u.layer, [['level', 'B0 overview'], ['tile', u.tile]], 'zoom in for the detailed model and its record'); return; }
+  const uv = hit.object.geometry.attributes.uv, fid = uv ? Math.round(uv.getX(hit.face.a)) : 0;
+  infoBox(u.group + ' #' + fid, u.layer, [['tile', u.tile]], 'loading record…');
+  try {
+    const fs = await features(u.tile, u.file); if (seq !== pickSeq) return; const f = fs?.[u.group]?.[fid]; if (!f) { infoBox(u.group + ' #' + fid, u.layer, [['tile', u.tile]], 'no record found'); return; }
+    let ex = Object.assign({}, f[1]); const id = ex.id || f[0];
+    if (u.file === 'b2') { const b1 = await features(u.tile, 'b1').catch(() => null); if (seq !== pickSeq) return; const rec = b1?.buildings_b1?.find(x => (x[1].id || x[0]) === id); if (rec) ex = Object.assign({}, rec[1], ex); }
+    infoBox(id, u.layer, Object.entries(ex).filter(([k, v]) => v !== null && v !== undefined));
+  } catch (err) { if (seq === pickSeq) infoBox(u.group + ' #' + fid, u.layer, [['tile', u.tile]], 'the record file did not load (' + err.message + '); double-click again to retry'); }
+});
+
+// ---- start
+function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
-  const mf = state.manifest = await (await fetch('manifest.json')).json();
-  document.getElementById('sub').textContent = mf.subtitle;
-  document.getElementById('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
-  document.getElementById('note').textContent = mf.note;
-  document.getElementById('foot').innerHTML = mf.attribution;
-  document.getElementById('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
+  bootSet('Reading the list of model files…', null);
+  const r = await fetch('manifest.json?v=perf001-20261110'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
+  $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
+  $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
   document.querySelectorAll('#layers input').forEach(i => i.onchange = () => { state.layers[i.dataset.k] = i.checked; applyLayers(); });
   const views = { 'Overview': [0, 5200, 6800, 0, 0, 0], 'Top view': [0, 11000, 1, 0, 0, 0], 'City centre': [-150, 650, 900, 0, 0, 0] };
-  document.getElementById('views').innerHTML = Object.keys(views).map(k => `<button data-v="${k}">${k}</button>`).join('');
+  $('views').innerHTML = Object.keys(views).map(k => `<button data-v="${k}">${k}</button>`).join('');
   document.querySelectorAll('#views button').forEach(b => b.onclick = () => fly(...views[b.dataset.v]));
-  document.getElementById('landmarks').innerHTML = (mf.landmarks || []).map((l, i) => `<button data-i="${i}"${l.tier === 'priority' ? ' class="pri"' : ''}>${l.name}</button>`).join('') || '<span class="note">None listed</span>';
-  document.querySelectorAll('#landmarks button').forEach(b => b.onclick = () => { const l = mf.landmarks[+b.dataset.i]; const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); document.getElementById('info').style.display = 'none'; });
-  state.overview = await load(mf.overview, 'b0'); scene.add(state.overview); applyLayers(); mark('overview_ready_ms');
-  fly(...views['Overview']); tick(); setInterval(stream, 600);
-  // Optional inspection views (inspect_views.json next to this file; absent in normal copies): fixed cameras for reproducible checks.
-  try { const r = await fetch('./inspect_views.json'); if (r.ok) { const iv = await r.json(); const host = document.getElementById('landmarks');
+  $('landmarks').innerHTML = (mf.landmarks || []).map((l, i) => `<button data-i="${i}"${l.tier === 'priority' ? ' class="pri"' : ''}>${l.name}</button>`).join('') || '<span class="note">None listed</span>';
+  document.querySelectorAll('#landmarks button').forEach(b => b.onclick = () => { const l = mf.landmarks[+b.dataset.i]; const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); $('info').style.display = 'none'; });
+  $('act-retry').onclick = retryFailed;
+  camera.position.set(...views['Overview'].slice(0, 3)); controls.target.set(0, 0, 0); controls.update(); if (!state.ticking) { state.ticking = true; tick(); }
+  // 1. terrain overview: the first picture
+  const ov = mf.overview, tj = addJob('ov:terrain', ov.terrain.file, ov.terrain.bytes, 'ov', null, -1e9, root => { scene.add(root); state.jobs.delete('ov:terrain'); state.terrainReady = true; applyLayers(); mark('terrain_ready_ms'); boot.el.hidden = true; startBuildings(); });
+  const watchTerrain = () => { const w = setInterval(() => {
+    if (tj.state === 'queued') bootSet('Downloading the terrain overview', 0, tj.tries ? `retrying, attempt ${tj.tries + 1} of ${RETRIES + 1}` : `0 of ${mb(tj.bytes)} MB`);
+    else if (tj.state === 'loading') bootSet('Downloading the terrain overview', tj.bytes ? tj.got / tj.bytes : null, `${mb(tj.got)} of ${mb(tj.bytes)} MB` + (tj.tries ? ` · attempt ${tj.tries + 1} of ${RETRIES + 1}` : ''));
+    else if (tj.state === 'decoding') bootSet('Preparing the terrain…', 1, `${mb(tj.bytes)} MB downloaded`);
+    else if (tj.state === 'failed') { clearInterval(w); bootFail(`The terrain overview did not load after ${RETRIES + 1} attempts (${tj.error}).`, () => { tj.state = 'queued'; tj.tries = 0; tj.wait = 0; bootSet('Downloading the terrain overview', 0); watchTerrain(); pump(); }); }
+    else clearInterval(w);
+  }, 120); };
+  watchTerrain();
+  pump();
+  // 2. whole-area building blocks, nearest part to the view first; near detail (lower priority numbers) always goes ahead of them
+  function startBuildings() { let left = ov.buildings.length;
+    for (const p of ov.buildings) { const key = 'ov:' + p.file; addJob(key, p.file, p.bytes, 'ov', null, 1e5 + Math.hypot(p.centre[0] - controls.target.x, -p.centre[1] - controls.target.z), root => { scene.add(root); state.jobs.delete(key); applyLayers(); if (--left === 0) mark('overview_ready_ms'); }); }
+    plan(); }
+  if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
+  // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
+  try { const ri = await fetch('./inspect_views.json'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
-      box.querySelectorAll('button').forEach(bn => bn.onclick = () => { const v = iv.views[+bn.dataset.i]; fly(...v.cam); const ib = document.getElementById('info');
-        ib.innerHTML = `<b>${v.label}</b><div class="note">inspection view ${+bn.dataset.i + 1}</div><table>` + Object.entries(v).filter(([k, x]) => k !== 'label' && x !== null && x !== undefined).map(([k, x]) => `<tr><td>${k}</td><td>${typeof x === 'object' ? JSON.stringify(x) : x}</td></tr>`).join('') + '</table>'; ib.style.display = 'block'; }); } } catch (e) { /* no inspection file */ }
-  const cp = new URLSearchParams(location.search).get('cam'); if (cp) { const c = cp.split(',').map(Number); if (c.length === 6 && c.every(Number.isFinite)) fly(...c); }
-  window.uwmViewer = { fly, state, camera, controls, renderer };  // hook for automated screenshots / checks
+      box.querySelectorAll('button').forEach(bn => bn.onclick = () => { const v = iv.views[+bn.dataset.i]; fly(...v.cam);
+        infoBox(v.label, 'inspection view ' + (+bn.dataset.i + 1), Object.entries(v).filter(([k, x]) => k !== 'label' && x !== null && x !== undefined)); }); } } catch (e) { /* no inspection file */ }
+  const cp = QS.get('cam'); if (cp) { const c = cp.split(',').map(Number); if (c.length === 6 && c.every(Number.isFinite)) fly(...c); }
 }
-function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); }
-let busy = false;
-async function stream() {
-  if (busy) return; busy = true;
-  try {
-    const t = controls.target, camH = camera.position.y - t.y, mf = state.manifest; let loading = 0;
-    const want = mf.tiles.map(ti => { const cx = (ti.bbox[0] + ti.bbox[2]) / 2, cz = -(ti.bbox[1] + ti.bbox[3]) / 2; const d = Math.hypot(cx - t.x, cz - t.z);
-      return { ti, d, lvl: d < R_B2 && camH < 900 ? 2 : (d < R_BASE && camH < 3500 ? 1 : 0) }; }).sort((a, b) => a.d - b.d);
-    for (const { ti, lvl } of want) {
-      const s = state.tiles[ti.id] ||= {};
-      if ((s.failed || 0) >= 2) continue;   // recorded twice in diagnostics; not retried
-      try {
-        if (lvl >= 1 && !s.base && loading < 2) { loading++; s.cur = ti.files.base; s.base = await load(ti.files.base, 'base'); scene.add(s.base);
-          if (ti.files.b1) { s.cur = ti.files.b1; s.b1 = await load(ti.files.b1, 'b1'); scene.add(s.b1); }   // null = tile has no buildings
-          applyLayers(); mark(ti.id + '_base_b1_ready_ms'); }
-        if (lvl === 2 && !s.b2 && s.base && ti.files.b2 && loading < 3) { loading++; s.cur = ti.files.b2; s.b2 = await load(ti.files.b2, 'b2'); scene.add(s.b2); applyLayers(); mark(ti.id + '_b2_ready_ms'); }
-      } catch (e) {
-        s.failed = (s.failed || 0) + 1; diagError('tile_load', e, { tile: ti.id, file: s.cur, attempt: s.failed }); console.error('tile load failed', ti.id, s.cur, e);
-      }
-      if (lvl < 2 && s.b2) { dispose(s.b2); s.b2 = null; applyLayers(); }
-      if (lvl < 1 && s.base) { dispose(s.base); dispose(s.b1); s.base = s.b1 = null; }
-      for (const k of ['_terrain_b0', '_buildings_b0']) { const m = state.ov?.[ti.id + k]; if (m) m.userData.hiddenByTile = !!s.base; }
-    }
-    applyLayers();
-    const n = Object.values(state.tiles); document.getElementById('status').textContent =
-      `Loaded tiles: ${n.filter(x => x.base).length} near, ${n.filter(x => x.b2).length} with facade detail · draw calls ${renderer.info.render.calls}`;
-  } catch (e) { diagError('stream', e, {}); console.error(e); } finally { busy = false; }
-}
-// picking
-const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
-canvas.addEventListener('dblclick', e => {
-  mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
-  const hit = ray.intersectObjects(state.pick.filter(shown), false)[0]; const box = document.getElementById('info');
-  if (!hit) { box.style.display = 'none'; return; }
-  const r = hit.object.userData.ranges.find(r => hit.faceIndex >= r[0] && hit.faceIndex < r[1]);
-  const ex = r ? Object.assign({}, state.info[r[2]] || {}, r[3]) : {};
-  const rows = Object.entries(ex).filter(([k, v]) => v !== null && v !== undefined && k !== 'name').map(([k, v]) => `<tr><td>${k}</td><td>${typeof v === 'object' ? JSON.stringify(v) : v}</td></tr>`).join('');
-  box.innerHTML = `<b>${r ? r[2] : hit.object.name}</b><div class="note">${hit.object.userData.layer}</div><table>${rows}</table>`; box.style.display = 'block';
-});
-let frames = 0, fpsT = performance.now(), fps = 0;
+let frames = 0, fpsT = performance.now(), fps = 0, lowFps = 0, first = true;
 function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, camera); frames++;
-  const now = performance.now(); if (now - fpsT >= 1000) { fps = frames * 1000 / (now - fpsT); frames = 0; fpsT = now; if (DIAG) showDiag(); } }
-// ---- read-only diagnostics (?diag=1): FPS, ready times, captured page errors. Not the full browser console.
+  if (first) { first = false; mark('first_frame_ms'); }
+  const now = performance.now(); if (now - fpsT >= 1000) { fps = frames * 1000 / (now - fpsT); frames = 0; fpsT = now;
+    if (!QS.has('pr') && state.terrainReady && !pending().live.length && document.visibilityState === 'visible') { lowFps = fps < 24 ? lowFps + 1 : 0;
+      if (lowFps >= 4 && PR > 1) { PR = Math.max(1, PR - 0.5); renderer.setPixelRatio(PR); lowFps = 0; __diag.marks['pixel_ratio_lowered_to_' + PR + '_ms'] = Math.round(now - __diag.t0); } }
+    if (DIAG) showDiag(); } }
+// ---- read-only diagnostics (?diag=1): frame rate, ready times, network counts, captured page errors. Not the full browser console.
 function mark(k) { if (window.__diag && !(k in __diag.marks)) __diag.marks[k] = Math.round(performance.now() - __diag.t0); }
-function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el = document.getElementById('diag'); if (!el) return; el.style.display = 'block';
-  const i = renderer.info.render;
+function stats() { const p = pending(); return { net: state.net, pending: p.live.length, failed: p.failed.length, files: state.log.slice(), marks: __diag.marks, errors: __diag.errors.length, pixel_ratio: PR, fps: +fps.toFixed(1) }; }
+function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el = $('diag'); if (!el) return; el.style.display = 'block';
+  const i = renderer.info.render, n = state.net, dl = state.log.reduce((s, x) => s + x.download_ms, 0), dc = state.log.reduce((s, x) => s + x.decode_ms, 0);
   el.textContent = `Diagnostics (read-only; page errors captured since load - not the full browser console)\n` +
-    `FPS ${fps.toFixed(1)} · draw calls ${i.calls} · triangles ${(i.triangles / 1e6).toFixed(2)} M · pixel ratio ${renderer.getPixelRatio()}\n` +
+    `FPS ${fps.toFixed(1)} · draw calls ${i.calls} · triangles ${(i.triangles / 1e6).toFixed(2)} M · pixel ratio ${PR}\n` +
+    `Network: ${n.requests} requests · ${mb(n.bytes)} MB · retries ${n.retries} · failed ${n.failed} · cancelled ${n.cancelled}\n` +
+    `Summed per-file times: download ${(dl / 1000).toFixed(1)} s · decode ${(dc / 1000).toFixed(1)} s (downloads overlap, so this is not wall-clock time)\n` +
     `Camera [eye x, up, z, target x, up, z]: ${[camera.position.x, camera.position.y, camera.position.z, controls.target.x, controls.target.y, controls.target.z].map(v => v.toFixed(1)).join(', ')}\n` +
-    `Ready times since page start (ms):\n` + Object.entries(d.marks).map(([k, v]) => `  ${k}: ${v}`).join('\n') +
+    `Ready times since page start (ms):\n` + Object.entries(d.marks).slice(0, 40).map(([k, v]) => `  ${k}: ${v}`).join('\n') +
     `\nErrors captured: ${d.errors.length}\n` + d.errors.slice(-20).map(e => `  [${e.t_ms} ms] ${e.type}${e.tile ? ' tile ' + e.tile : ''}${e.file ? ' file ' + e.file : ''}: ${e.msg} ${e.src || ''}${e.stack ? '\n    ' + e.stack.split('\n').join('\n    ') : ''}`).join('\n');
-  if (!document.getElementById('diagdl')) { const b = document.createElement('button'); b.id = 'diagdl'; b.textContent = 'Download diagnostics (JSON)';
-    b.onclick = () => { const blob = new Blob([JSON.stringify({ captured: window.__diag, fps, renderer: renderer.info.render, ua: navigator.userAgent, url: location.href, note: 'page-captured errors only; not the full browser console' }, null, 1)], { type: 'application/json' });
+  if (!$('diagdl')) { const b = document.createElement('button'); b.id = 'diagdl'; b.textContent = 'Download diagnostics (JSON)';
+    b.onclick = () => { const blob = new Blob([JSON.stringify({ captured: window.__diag, stats: stats(), renderer: renderer.info.render, ua: navigator.userAgent, url: location.href, note: 'page-captured errors only; not the full browser console' }, null, 1)], { type: 'application/json' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'uwm_viewer_diagnostics.json'; a.click(); };
     el.parentNode.insertBefore(b, el.nextSibling); } }
 function diagError(type, e, ctx) { if (window.__diag) __diag.errors.push(Object.assign({ t_ms: Math.round(performance.now()), type, msg: String(e && e.message || e), stack: String(e && e.stack || '') }, ctx)); }
-init().catch(e => { document.getElementById('status').textContent = 'Error: ' + e.message; console.error(e); });
+window.uwmViewer = { fly, state, camera, controls, renderer, stats, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
+const start = () => init().catch(e => { console.error(e); diagError('init', e, {}); bootFail('The viewer could not start (' + e.message + ').', start); });
+start();
