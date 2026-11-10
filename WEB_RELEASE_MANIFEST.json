@@ -1,5 +1,5 @@
 {
-  "release": "perf001-20261110",
+  "release": "panels001-20261110",
   "created_at_utc": "2026-11-10T13:41:50.182585+00:00",
   "source_candidate": "CO performance candidate 001",
   "source_files": {
@@ -12120,12 +12120,12 @@
       "sha256": "7091707307bc0a6e92716293b6ff971eb8e12564dc293c957aeb2b094f3775f1"
     },
     "viewer/index.html": {
-      "bytes": 7146,
-      "sha256": "4d6ceaf06b7e83a1364c833ea68e3503f18faf93949d954f6ca2f95486c686c9"
+      "bytes": 10685,
+      "sha256": "11938839d9b263a91aac16d6617e2f14655e06248078556d708cd3809e39b708"
     },
     "viewer/viewer.js": {
-      "bytes": 25202,
-      "sha256": "d9342a34e4181a734688fbbd768d0e2a618679fcf15750115bc1ce2351490d8b"
+      "bytes": 28173,
+      "sha256": "d654cd69d893c0ed4d10727ed5d11412700d4fcd8b5abfc943c6cc2d912d9688"
     },
     "viewer/manifest.json": {
       "bytes": 128537,
@@ -12194,6 +12194,17 @@
     "SOURCE_FREEZE_full_B8.json": {
       "bytes": 123318,
       "sha256": "83ec3cd0e062fd2bcbb413008c40c0b895f2926626056e97a1b44eb632bbfd4b"
+    }
+  },
+  "updated_at_utc": "2026-11-10T14:06:27.553658+00:00",
+  "panel_patch_source": {
+    "index.html": {
+      "sha256": "54a609535b00c35b268e367bf3d26570c71e25d4af3e5b5ce8073a1f2763844a",
+      "bytes": 10664
+    },
+    "viewer.js": {
+      "sha256": "b329c9b5d71d9dc99b265213e54b16cae4a1d403346cad3f65691145909bfbcf",
+      "bytes": 28154
     }
   }
 }

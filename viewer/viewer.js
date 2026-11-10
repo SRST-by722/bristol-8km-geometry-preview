@@ -24,6 +24,35 @@ const state = { layers: Object.fromEntries(LAYERS.map(l => [l[0], true])), tiles
 const $ = id => document.getElementById(id);
 const mb = v => (v / 1e6).toFixed(v < 1e7 ? 1 : 0);
 
+// ---- panel controls. Each card (layers/landmarks, feature record, loading activity, diagnostics) can be minimised to a small chip
+// in the dock at the top left, and "Hide panels" puts all of them away at once. Only the user's clicks change these flags:
+// picking a feature, jumping to a landmark or a progress update never reopens a card the user has put away.
+const ui = { hideAll: QS.get('panels') === 'hidden', min: { panel: false, info: false, act: false, diag: false }, saved: null,
+  infoOpen: false, infoTitle: '', act: { on: false, text: '', short: '', frac: 0, err: false, retry: false } };
+function renderUI() {
+  const h = ui.hideAll, m = ui.min, a = ui.act;
+  $('panel').hidden = h || m.panel; $('chip-panel').hidden = h || !m.panel;
+  $('info').hidden = !ui.infoOpen || h || m.info; $('chip-info').hidden = !ui.infoOpen || !(h || m.info); $('chip-info-text').textContent = 'Record: ' + ui.infoTitle;
+  $('act').hidden = !a.on || h || m.act; $('chip-act').hidden = !a.on || !(h || m.act);
+  $('act-text').textContent = a.text; $('act-fill').style.width = $('chip-act-fill').style.width = (a.frac * 100).toFixed(1) + '%'; $('chip-act-text').textContent = a.short;
+  $('act-retry').hidden = !a.retry; $('act').classList.toggle('err', a.err); $('chip-act').classList.toggle('err', a.err || a.retry);
+  $('chip-act').title = a.retry ? 'Some files did not load. Show the loading panel to retry' : 'Show the loading panel'; $('chip-act').setAttribute('aria-label', $('chip-act').title + ': ' + a.short);
+  $('diag').hidden = !DIAG || h || m.diag; $('chip-diag').hidden = !DIAG || h || !m.diag; const dl = $('diagdl'); if (dl) dl.hidden = $('diag').hidden;
+  $('foot').hidden = h;
+  const tg = $('ui-toggle'); tg.textContent = h ? 'Show panels' : 'Hide panels'; tg.setAttribute('aria-pressed', String(h));
+  tg.title = h ? 'Show the panels again (H)' : 'Hide all panels to see the model (H)'; tg.setAttribute('aria-label', h ? 'Show the panels again' : 'Hide all panels');
+}
+function setMin(k, v) { ui.min[k] = v; renderUI(); }
+function toggleAll() { ui.hideAll = !ui.hideAll; renderUI(); }
+// A chip opens its own card. While everything is hidden, that shows this one card and leaves the others minimised.
+function openCard(k) { if (ui.hideAll) { ui.hideAll = false; for (const x of Object.keys(ui.min)) ui.min[x] = true; } ui.min[k] = false; renderUI(); }
+function closeInfo() { ui.infoOpen = false; renderUI(); }
+$('ui-toggle').onclick = toggleAll;
+for (const k of ['panel', 'info', 'act', 'diag']) { $('min-' + k).onclick = () => setMin(k, true); $('chip-' + k).onclick = () => openCard(k); }
+$('close-info').onclick = closeInfo;
+addEventListener('keydown', e => { if ((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) toggleAll(); });
+renderUI();   // apply ?panels=hidden before anything loads; the start-up panel is not part of these controls
+
 // ---- start-up panel (in the page before this module loads) and activity bar
 const boot = { el: $('boot'), msg: $('boot-msg'), bar: $('boot-bar'), fill: $('boot-fill'), sub: $('boot-sub'), retry: $('boot-retry') };
 function bootSet(msg, frac, sub) { boot.msg.textContent = msg; boot.sub.textContent = sub || '';
@@ -133,35 +162,36 @@ function pending() { const j = [...state.jobs.values()]; return { live: j.filter
 // Activity bar: bytes are real (finished files + bytes received so far, against the manifest sizes of everything this view still needs).
 // The total changes when the view moves, because the list of needed files changes.
 function showActivity() {
-  const el = $('act'); if (!state.terrainReady) return; const p = pending(), live = p.live;
+  if (!state.terrainReady) return; const p = pending(), live = p.live, A = ui.act;
   if (!live.length && !p.failed.length) {
-    if (batch.active) { batch.active = false; $('act-text').textContent = `Ready: everything for this view is loaded (${batch.files} files, ${mb(batch.bytes)} MB)`; $('act-fill').style.width = '100%'; $('act-retry').hidden = true; el.classList.remove('err');
-      clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (!batch.active) { el.hidden = true; batch.bytes = 0; batch.files = 0; } }, 2500); }
+    if (batch.active) { batch.active = false; Object.assign(A, { on: true, text: `Ready: everything for this view is loaded (${batch.files} files, ${mb(batch.bytes)} MB)`, short: 'Ready', frac: 1, err: false, retry: false }); renderUI();
+      clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (!batch.active) { A.on = false; batch.bytes = 0; batch.files = 0; renderUI(); } }, 2500); }
     return;
   }
-  batch.active = true; clearTimeout(hideTimer); el.hidden = false;
+  batch.active = true; clearTimeout(hideTimer);
   const ov = live.filter(j => j.kind === 'ov').length, det = live.length - ov, dec = live.filter(j => j.state === 'decoding').length, dl = live.filter(j => j.state === 'loading').length;
   const left = live.reduce((n, j) => n + j.bytes, 0), got = live.reduce((n, j) => n + Math.min(j.got, j.bytes || j.got), 0), total = batch.bytes + left;
   const parts = []; if (det) parts.push(`detail near the view: ${det} file${det > 1 ? 's' : ''} left`); if (ov) parts.push(`whole-area building blocks: ${ov} part${ov > 1 ? 's' : ''} left`);
   let txt = live.length ? `Loading ${parts.join(' · ')} · ${mb(batch.bytes + got)} of ${mb(total)} MB` + (dl ? ` · downloading ${dl}` : '') + (dec ? ` · decoding ${dec}` : '') : '';
-  if (p.failed.length) txt += (txt ? ' · ' : '') + `${p.failed.length} file${p.failed.length > 1 ? 's' : ''} did not load after ${RETRIES + 1} attempts`;
-  $('act-text').textContent = txt; $('act-fill').style.width = (total ? Math.min(1, (batch.bytes + got) / total) * 100 : 0).toFixed(1) + '%';
-  $('act-retry').hidden = !p.failed.length; el.classList.toggle('err', !!p.failed.length && !live.length);
+  const nf = p.failed.length, ftxt = nf ? `${nf} file${nf > 1 ? 's' : ''} did not load` : '';
+  if (nf) txt += (txt ? ' · ' : '') + ftxt + ` after ${RETRIES + 1} attempts`;
+  Object.assign(A, { on: true, text: txt, short: (live.length ? `Loading ${mb(batch.bytes + got)} of ${mb(total)} MB` : '') + (nf ? (live.length ? ' · ' : '') + ftxt : ''), frac: total ? Math.min(1, (batch.bytes + got) / total) : 0, err: !!nf && !live.length, retry: !!nf });
+  renderUI();
 }
 
 // ---- feature records (separate .features.json per tile file; fetched only when a feature is picked)
 function features(tileId, file) { const k = tileId + ':' + file; if (state.feat[k]) return state.feat[k];
   const ti = state.manifest.tiles.find(t => t.id === tileId), url = ti?.features?.[file]; if (!url) return Promise.resolve(null);
   return state.feat[k] = fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).catch(e => { delete state.feat[k]; throw e; }); }
-function infoBox(title, layer, rows, noteText) { const box = $('info');
-  box.innerHTML = `<b></b><div class="note"></div><table></table>`; box.querySelector('b').textContent = title; box.querySelector('.note').textContent = layer + (noteText ? ' · ' + noteText : '');
-  const tb = box.querySelector('table'); for (const [k, v] of rows) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = typeof v === 'object' ? JSON.stringify(v) : v; }
-  box.style.display = 'block'; }
+function infoBox(title, layer, rows, noteText) {   // fills the record card; whether the card or its chip is shown is the user's choice (renderUI)
+  $('info-title').textContent = title; $('info-note').textContent = layer + (noteText ? ' · ' + noteText : '');
+  const tb = $('info-table'); tb.textContent = ''; for (const [k, v] of rows) { const tr = tb.insertRow(); tr.insertCell().textContent = k; tr.insertCell().textContent = typeof v === 'object' ? JSON.stringify(v) : v; }
+  ui.infoOpen = true; ui.infoTitle = title; renderUI(); }
 const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let pickSeq = 0;
 canvas.addEventListener('dblclick', async e => {
   mouse.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
   const hit = ray.intersectObjects(state.pick.filter(shown), false)[0]; const seq = ++pickSeq;
-  if (!hit) { $('info').style.display = 'none'; return; }
+  if (!hit) { closeInfo(); return; }
   const u = hit.object.userData;
   if (u.ov) { infoBox(hit.object.name, u.layer, [['level', 'B0 overview'], ['tile', u.tile]], 'zoom in for the detailed model and its record'); return; }
   const uv = hit.object.geometry.attributes.uv, fid = uv ? Math.round(uv.getX(hit.face.a)) : 0;
@@ -187,11 +217,11 @@ async function init() {
   $('views').innerHTML = Object.keys(views).map(k => `<button data-v="${k}">${k}</button>`).join('');
   document.querySelectorAll('#views button').forEach(b => b.onclick = () => fly(...views[b.dataset.v]));
   $('landmarks').innerHTML = (mf.landmarks || []).map((l, i) => `<button data-i="${i}"${l.tier === 'priority' ? ' class="pri"' : ''}>${l.name}</button>`).join('') || '<span class="note">None listed</span>';
-  document.querySelectorAll('#landmarks button').forEach(b => b.onclick = () => { const l = mf.landmarks[+b.dataset.i]; const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); $('info').style.display = 'none'; });
-  $('act-retry').onclick = retryFailed;
+  document.querySelectorAll('#landmarks button').forEach(b => b.onclick = () => { const l = mf.landmarks[+b.dataset.i]; const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); closeInfo(); });
+  $('act-retry').onclick = retryFailed; renderUI();
   camera.position.set(...views['Overview'].slice(0, 3)); controls.target.set(0, 0, 0); controls.update(); if (!state.ticking) { state.ticking = true; tick(); }
   // 1. terrain overview: the first picture
-  const ov = mf.overview, tj = addJob('ov:terrain', ov.terrain.file, ov.terrain.bytes, 'ov', null, -1e9, root => { scene.add(root); state.jobs.delete('ov:terrain'); state.terrainReady = true; applyLayers(); mark('terrain_ready_ms'); boot.el.hidden = true; startBuildings(); });
+  const ov = mf.overview, tj = addJob('ov:terrain', ov.terrain.file, ov.terrain.bytes, 'ov', null, -1e9, root => { scene.add(root); state.jobs.delete('ov:terrain'); state.terrainReady = true; applyLayers(); mark('terrain_ready_ms'); boot.el.hidden = true; renderUI(); startBuildings(); });
   const watchTerrain = () => { const w = setInterval(() => {
     if (tj.state === 'queued') bootSet('Downloading the terrain overview', 0, tj.tries ? `retrying, attempt ${tj.tries + 1} of ${RETRIES + 1}` : `0 of ${mb(tj.bytes)} MB`);
     else if (tj.state === 'loading') bootSet('Downloading the terrain overview', tj.bytes ? tj.got / tj.bytes : null, `${mb(tj.got)} of ${mb(tj.bytes)} MB` + (tj.tries ? ` · attempt ${tj.tries + 1} of ${RETRIES + 1}` : ''));
@@ -225,7 +255,7 @@ function tick() { requestAnimationFrame(tick); controls.update(); renderer.rende
 // ---- read-only diagnostics (?diag=1): frame rate, ready times, network counts, captured page errors. Not the full browser console.
 function mark(k) { if (window.__diag && !(k in __diag.marks)) __diag.marks[k] = Math.round(performance.now() - __diag.t0); }
 function stats() { const p = pending(); return { net: state.net, pending: p.live.length, failed: p.failed.length, files: state.log.slice(), marks: __diag.marks, errors: __diag.errors.length, pixel_ratio: PR, fps: +fps.toFixed(1) }; }
-function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el = $('diag'); if (!el) return; el.style.display = 'block';
+function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el = $('diag-text'); if (!el) return;
   const i = renderer.info.render, n = state.net, dl = state.log.reduce((s, x) => s + x.download_ms, 0), dc = state.log.reduce((s, x) => s + x.decode_ms, 0);
   el.textContent = `Diagnostics (read-only; page errors captured since load - not the full browser console)\n` +
     `FPS ${fps.toFixed(1)} · draw calls ${i.calls} · triangles ${(i.triangles / 1e6).toFixed(2)} M · pixel ratio ${PR}\n` +
@@ -237,7 +267,7 @@ function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el =
   if (!$('diagdl')) { const b = document.createElement('button'); b.id = 'diagdl'; b.textContent = 'Download diagnostics (JSON)';
     b.onclick = () => { const blob = new Blob([JSON.stringify({ captured: window.__diag, stats: stats(), renderer: renderer.info.render, ua: navigator.userAgent, url: location.href, note: 'page-captured errors only; not the full browser console' }, null, 1)], { type: 'application/json' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'uwm_viewer_diagnostics.json'; a.click(); };
-    el.parentNode.insertBefore(b, el.nextSibling); } }
+    $('diag').parentNode.insertBefore(b, $('diag').nextSibling); renderUI(); } }
 function diagError(type, e, ctx) { if (window.__diag) __diag.errors.push(Object.assign({ t_ms: Math.round(performance.now()), type, msg: String(e && e.message || e), stack: String(e && e.stack || '') }, ctx)); }
 window.uwmViewer = { fly, state, camera, controls, renderer, stats, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
 const start = () => init().catch(e => { console.error(e); diagError('init', e, {}); bootFail('The viewer could not start (' + e.message + ').', start); });
