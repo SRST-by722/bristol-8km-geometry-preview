@@ -6095,7 +6095,8 @@
   "cd_packaging_changes": [
     "Version queries on module, manifest, GLBs and metadata to avoid mixing browser caches",
     "README bounding-box wording and measured native test coverage",
-    "Source freeze manifest explicitly historical"
+    "Source freeze manifest explicitly historical",
+    "CO final handoff clarified report precision wording after native tests; viewer and HTML hashes unchanged."
   ],
   "files": {
     "web/tiles/t08_05_b2.glb": {
