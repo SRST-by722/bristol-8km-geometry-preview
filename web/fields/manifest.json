@@ -623,5 +623,1256 @@
   ],
   "deviation_from_reference": "latent U-Net tiles of 128 cells instead of 256 (halo unchanged at 4); decoded tiles of 128 cells instead of 256 (latent halo unchanged at 4); more tile seams, same weights and operators",
   "note": "SCALED neural surrogate of Yueyan Li's framework applied to the Bristol buildings with flattened terrain. Wind direction and speed are those the model produces, not a Bristol wind record. Not validated against CFD or measurements."
+ },
+ "shade": {
+  "label": "Shade (sun and shadow through one day)",
+  "grid": {
+   "x0": -3999.0,
+   "y0": -3999.0,
+   "cell": 4,
+   "nx": 1999,
+   "ny": 1999
+  },
+  "encoding": "shadow mask, 8 bit: 255 = in shadow of buildings or terrain, 0 = sunlit",
+  "frames": [
+   {
+    "file": "shade_000.png",
+    "bytes": 120447,
+    "sha256": "683b48b61d44c3d969953150b90cd1e8da4c47dfa7577bf107d72e93d3b4cc78",
+    "local_time": "05:00",
+    "local_h": 5.0,
+    "altitude_deg": 0.45,
+    "azimuth_deg": 50.28,
+    "ground_shaded_fraction": 0.9247
+   },
+   {
+    "file": "shade_001.png",
+    "bytes": 329364,
+    "sha256": "cc7b79fe124d91a6f9e07e65a39b47ab0332d2cba5a4ad20440f588b1374c925",
+    "local_time": "05:30",
+    "local_h": 5.5,
+    "altitude_deg": 3.9,
+    "azimuth_deg": 56.06,
+    "ground_shaded_fraction": 0.6591
+   },
+   {
+    "file": "shade_002.png",
+    "bytes": 386656,
+    "sha256": "83a81b66132148d526f80ab535f15b6e50315a77d1bcee151290c1703b71fb7e",
+    "local_time": "06:00",
+    "local_h": 6.0,
+    "altitude_deg": 7.82,
+    "azimuth_deg": 61.68,
+    "ground_shaded_fraction": 0.503
+   },
+   {
+    "file": "shade_003.png",
+    "bytes": 371080,
+    "sha256": "49d75b1b9e019c859c66b186e5518b6d89f709c00e87a578a67925cada67c811",
+    "local_time": "06:30",
+    "local_h": 6.5,
+    "altitude_deg": 11.99,
+    "azimuth_deg": 67.2,
+    "ground_shaded_fraction": 0.396
+   },
+   {
+    "file": "shade_004.png",
+    "bytes": 348429,
+    "sha256": "c9e1a508655f3174a161060871fdfc8fe76c18d86fbca45385910adf4338a379",
+    "local_time": "07:00",
+    "local_h": 7.0,
+    "altitude_deg": 16.36,
+    "azimuth_deg": 72.67,
+    "ground_shaded_fraction": 0.3113
+   },
+   {
+    "file": "shade_005.png",
+    "bytes": 325966,
+    "sha256": "0c699a5c0b913917fbdf5fbcc1fd1875917ce24ff487fa58e2602981a978012f",
+    "local_time": "07:30",
+    "local_h": 7.5,
+    "altitude_deg": 20.87,
+    "azimuth_deg": 78.14,
+    "ground_shaded_fraction": 0.2514
+   },
+   {
+    "file": "shade_006.png",
+    "bytes": 290902,
+    "sha256": "19faf0b1880e205938c1a23ba3cbed4f8570e3f7638b05de286cf78d510435d2",
+    "local_time": "08:00",
+    "local_h": 8.0,
+    "altitude_deg": 25.47,
+    "azimuth_deg": 83.69,
+    "ground_shaded_fraction": 0.2027
+   },
+   {
+    "file": "shade_007.png",
+    "bytes": 284027,
+    "sha256": "84d0c55d3f209638e1bf3033fba59645901fdb0e3aee536db78869084ceedf06",
+    "local_time": "08:30",
+    "local_h": 8.5,
+    "altitude_deg": 30.13,
+    "azimuth_deg": 89.41,
+    "ground_shaded_fraction": 0.1648
+   },
+   {
+    "file": "shade_008.png",
+    "bytes": 280701,
+    "sha256": "d8526901b604e215d9c79cddc9585453ccb93df33b0e37d1f972c3a89bf1cb54",
+    "local_time": "09:00",
+    "local_h": 9.0,
+    "altitude_deg": 34.79,
+    "azimuth_deg": 95.41,
+    "ground_shaded_fraction": 0.1373
+   },
+   {
+    "file": "shade_009.png",
+    "bytes": 265254,
+    "sha256": "2c56a5148042c6d2f022cf36d8aada28a84c2d0db921cc7258d8946ac4f21cd1",
+    "local_time": "09:30",
+    "local_h": 9.5,
+    "altitude_deg": 39.41,
+    "azimuth_deg": 101.8,
+    "ground_shaded_fraction": 0.1148
+   },
+   {
+    "file": "shade_010.png",
+    "bytes": 238202,
+    "sha256": "a79f1cd2b3e1d2765dcf01586dc9677c3579da5a279e4dfd6a12a7cfd8abb003",
+    "local_time": "10:00",
+    "local_h": 10.0,
+    "altitude_deg": 43.91,
+    "azimuth_deg": 108.77,
+    "ground_shaded_fraction": 0.0891
+   },
+   {
+    "file": "shade_011.png",
+    "bytes": 208670,
+    "sha256": "3482c9f54071ebb4eead792c5480487397ae3b22c0ca4f806ddd9f55ecc024d1",
+    "local_time": "10:30",
+    "local_h": 10.5,
+    "altitude_deg": 48.22,
+    "azimuth_deg": 116.5,
+    "ground_shaded_fraction": 0.0724
+   },
+   {
+    "file": "shade_012.png",
+    "bytes": 174626,
+    "sha256": "7f53175b4aff4a2540820d96a69d9eee22ffc70b10f1ccb9559391184e2dee14",
+    "local_time": "11:00",
+    "local_h": 11.0,
+    "altitude_deg": 52.23,
+    "azimuth_deg": 125.25,
+    "ground_shaded_fraction": 0.0613
+   },
+   {
+    "file": "shade_013.png",
+    "bytes": 116872,
+    "sha256": "2db461ade5db5523bbfc1d573f9139b11279ba3c1886ac38a2f60913a81c4a84",
+    "local_time": "11:30",
+    "local_h": 11.5,
+    "altitude_deg": 55.79,
+    "azimuth_deg": 135.28,
+    "ground_shaded_fraction": 0.0363
+   },
+   {
+    "file": "shade_014.png",
+    "bytes": 90725,
+    "sha256": "64beecb006096d8e0f4a783551e55d8124bb643a16072926ed9821f7403b8160",
+    "local_time": "12:00",
+    "local_h": 12.0,
+    "altitude_deg": 58.73,
+    "azimuth_deg": 146.8,
+    "ground_shaded_fraction": 0.0271
+   },
+   {
+    "file": "shade_015.png",
+    "bytes": 143748,
+    "sha256": "35a1a77b5607139a7ba2e0f9d3496bd7835d806ec0d474ced5bdfaab4a42d535",
+    "local_time": "12:30",
+    "local_h": 12.5,
+    "altitude_deg": 60.84,
+    "azimuth_deg": 159.84,
+    "ground_shaded_fraction": 0.0474
+   },
+   {
+    "file": "shade_016.png",
+    "bytes": 121169,
+    "sha256": "566d6ee8d986fc596bb2ba68211cc2bfc6851e32904d8d0c6dc61288f8c139ee",
+    "local_time": "13:00",
+    "local_h": 13.0,
+    "altitude_deg": 61.89,
+    "azimuth_deg": 174.05,
+    "ground_shaded_fraction": 0.0386
+   },
+   {
+    "file": "shade_017.png",
+    "bytes": 123796,
+    "sha256": "8e34975d3258fcd0ebe1184ba3597e5b41da3cb23373c3f3e1181049f68ba4cb",
+    "local_time": "13:30",
+    "local_h": 13.5,
+    "altitude_deg": 61.78,
+    "azimuth_deg": 188.65,
+    "ground_shaded_fraction": 0.0396
+   },
+   {
+    "file": "shade_018.png",
+    "bytes": 148308,
+    "sha256": "884c70a8e33ce873b1e474976d5957eecc852e9ca8a4702d585001802db2c497",
+    "local_time": "14:00",
+    "local_h": 14.0,
+    "altitude_deg": 60.52,
+    "azimuth_deg": 202.69,
+    "ground_shaded_fraction": 0.0495
+   },
+   {
+    "file": "shade_019.png",
+    "bytes": 90991,
+    "sha256": "2f78bfab0ba707aba1afbbd13dcbad3b5c6c9ddb07be300b160050af0da8b39d",
+    "local_time": "14:30",
+    "local_h": 14.5,
+    "altitude_deg": 58.24,
+    "azimuth_deg": 215.46,
+    "ground_shaded_fraction": 0.0275
+   },
+   {
+    "file": "shade_020.png",
+    "bytes": 117085,
+    "sha256": "0a7f6a993140e8e154af59c8b42d0c788f14811a117869eb457ff57f8507bbdc",
+    "local_time": "15:00",
+    "local_h": 15.0,
+    "altitude_deg": 55.17,
+    "azimuth_deg": 226.69,
+    "ground_shaded_fraction": 0.037
+   },
+   {
+    "file": "shade_021.png",
+    "bytes": 172406,
+    "sha256": "8018b62e6e884e89e41a6d22cf184f78c292215b21e73f08acba6eef9358c549",
+    "local_time": "15:30",
+    "local_h": 15.5,
+    "altitude_deg": 51.51,
+    "azimuth_deg": 236.46,
+    "ground_shaded_fraction": 0.062
+   },
+   {
+    "file": "shade_022.png",
+    "bytes": 209465,
+    "sha256": "c3f915c93fd0b6107895aad28294bdf49a2fba9ccc883dfb9a5fd026209867a6",
+    "local_time": "16:00",
+    "local_h": 16.0,
+    "altitude_deg": 47.44,
+    "azimuth_deg": 245.0,
+    "ground_shaded_fraction": 0.0724
+   },
+   {
+    "file": "shade_023.png",
+    "bytes": 239615,
+    "sha256": "5c028272a71eb0d1099faccd5f0ba3cb25c5f0d6189b9538c9f58fcfc3bb5ecd",
+    "local_time": "16:30",
+    "local_h": 16.5,
+    "altitude_deg": 43.08,
+    "azimuth_deg": 252.58,
+    "ground_shaded_fraction": 0.0893
+   },
+   {
+    "file": "shade_024.png",
+    "bytes": 266516,
+    "sha256": "e8e1e9977abc5bd84cade05ac9923f58454532aa74237efe921b4e6b39fe52f6",
+    "local_time": "17:00",
+    "local_h": 17.0,
+    "altitude_deg": 38.56,
+    "azimuth_deg": 259.42,
+    "ground_shaded_fraction": 0.116
+   },
+   {
+    "file": "shade_025.png",
+    "bytes": 280712,
+    "sha256": "07cb5bb71ea860fe36ccc4defc4210edf83569a9686925a6075149e37f26e5dd",
+    "local_time": "17:30",
+    "local_h": 17.5,
+    "altitude_deg": 33.93,
+    "azimuth_deg": 265.73,
+    "ground_shaded_fraction": 0.1401
+   },
+   {
+    "file": "shade_026.png",
+    "bytes": 283581,
+    "sha256": "0bb41666bd779b19d8d01fdda70fa24b2ba47f9575be2b220099d64d0a70518f",
+    "local_time": "18:00",
+    "local_h": 18.0,
+    "altitude_deg": 29.26,
+    "azimuth_deg": 271.66,
+    "ground_shaded_fraction": 0.1704
+   },
+   {
+    "file": "shade_027.png",
+    "bytes": 305375,
+    "sha256": "826b2b2ed15079811195eda2628c9df205c9285f94de9e858cd2c3e3d7c6d9bb",
+    "local_time": "18:30",
+    "local_h": 18.5,
+    "altitude_deg": 24.61,
+    "azimuth_deg": 277.35,
+    "ground_shaded_fraction": 0.214
+   },
+   {
+    "file": "shade_028.png",
+    "bytes": 324184,
+    "sha256": "a8bddc1495e1cb50d96c40a62590a7f25132a543f02dca1b0b1a51d31e1c7450",
+    "local_time": "19:00",
+    "local_h": 19.0,
+    "altitude_deg": 20.02,
+    "azimuth_deg": 282.88,
+    "ground_shaded_fraction": 0.2699
+   },
+   {
+    "file": "shade_029.png",
+    "bytes": 351937,
+    "sha256": "3dd6a68fb093b8d1e35afceff897726e5a9dc30590acdcaeafc12e6eed6ecdaa",
+    "local_time": "19:30",
+    "local_h": 19.5,
+    "altitude_deg": 15.54,
+    "azimuth_deg": 288.34,
+    "ground_shaded_fraction": 0.3417
+   },
+   {
+    "file": "shade_030.png",
+    "bytes": 366887,
+    "sha256": "4d0ea4a90f7d858488971d175af0d482484ea812457d7b031e0edff982bded25",
+    "local_time": "20:00",
+    "local_h": 20.0,
+    "altitude_deg": 11.2,
+    "azimuth_deg": 293.81,
+    "ground_shaded_fraction": 0.4375
+   },
+   {
+    "file": "shade_031.png",
+    "bytes": 364231,
+    "sha256": "0a74b2f123f8aaf5af387def105c55e7fbb60bf2ed6a176f4ad7e119778d7799",
+    "local_time": "20:30",
+    "local_h": 20.5,
+    "altitude_deg": 7.07,
+    "azimuth_deg": 299.35,
+    "ground_shaded_fraction": 0.5762
+   },
+   {
+    "file": "shade_032.png",
+    "bytes": 274282,
+    "sha256": "cb9a978c0f5a96f7b30d30b6b21c45dd0a2dd486183d4f21dee799e0f8c00b0e",
+    "local_time": "21:00",
+    "local_h": 21.0,
+    "altitude_deg": 3.22,
+    "azimuth_deg": 305.0,
+    "ground_shaded_fraction": 0.7665
+   }
+  ],
+  "scenario": {
+   "date": "2026-06-21",
+   "sky": "clear (no clouds)",
+   "minutes_per_frame": 30.0,
+   "local_time": "Europe/London, UTC+1 (BST)",
+   "sun_at": [
+    51.454,
+    -2.5972
+   ],
+   "chosen_by": "project default (summer solstice, as the framework South Kensington run); not an observed day"
+  },
+  "model": "framework @587f3d9 src/urban_flow/physics/solar/model.py (vendored unchanged): ShadowNet, HorizonNet (16 azimuths x 18 altitudes), NOAA sun position, ASHRAE clear sky",
+  "summary": {
+   "sunrise_local": "05:00",
+   "sunset_local": "21:00",
+   "max_altitude_deg": 61.893833311472996,
+   "ground_sunlit_hours_mean": 12.77642822265625,
+   "ground_daily_kwh_m2_mean": 7.610072612762451,
+   "ground_svf_mean": 0.8585678339004517
+  },
+  "limits": [
+   "clear sky only",
+   "trees do not cast shadows or attenuate light (not in the height field)",
+   "2.5-D building columns at 4 m: overhangs filled, narrow streets blurred",
+   "no facade irradiance",
+   "single ground-reflected bounce (albedo x open-sky GHI x (1 - SVF))",
+   "sun position for one point (AOI centre)"
+  ]
+ },
+ "pollution": {
+  "label": "Traffic NOx tracer (illustrative)",
+  "grid": {
+   "x0": -4096.0,
+   "y0": -4096.0,
+   "cell": 8.0,
+   "nx": 1024,
+   "ny": 1024
+  },
+  "encoding": "log10(c / 1.0 ug/m3) / log10(1000.0/1.0), 8 bit; c = NOx in a 10.0 m mixed layer under the stated assumptions",
+  "frames": [
+   {
+    "file": "nox_000.png",
+    "bytes": 11183,
+    "sha256": "5eb5e491d61378fa941a552f254e97afc53696bedb1e163b0e3367cda8b36135",
+    "t_s": 5.0
+   },
+   {
+    "file": "nox_001.png",
+    "bytes": 70422,
+    "sha256": "9b94c75152252e11741511367c4caa420e0d9e34617a4d8df87085434b16d921",
+    "t_s": 60.0
+   },
+   {
+    "file": "nox_002.png",
+    "bytes": 104893,
+    "sha256": "297f478b1bccc66651d33217deb4c98ed0deaa1baa14778baf0ef194c282ead4",
+    "t_s": 120.0
+   },
+   {
+    "file": "nox_003.png",
+    "bytes": 128498,
+    "sha256": "5acd784b4c8d758ed5fb7da2cc7b32a3374b05d980364939dac17e0b773cd33d",
+    "t_s": 180.0
+   },
+   {
+    "file": "nox_004.png",
+    "bytes": 141836,
+    "sha256": "67cc5e67f92d7438f8cb0e68ab33f75c19b646f473fe073d754d22d17e8ffe83",
+    "t_s": 240.0
+   },
+   {
+    "file": "nox_005.png",
+    "bytes": 153024,
+    "sha256": "2b7d79dfe57067da0d49278b9f9d3c7591efe3afeeaf2bee74b0506929133631",
+    "t_s": 300.0
+   },
+   {
+    "file": "nox_006.png",
+    "bytes": 158017,
+    "sha256": "8339a7479ba105ada1fbee4d06e870685368fc8b9088867f524282b39950ec04",
+    "t_s": 360.0
+   },
+   {
+    "file": "nox_007.png",
+    "bytes": 162728,
+    "sha256": "2a816f8fc931767c238d919c9c964181ee2971642d2c1f3f685a6a68482d0ba8",
+    "t_s": 420.0
+   },
+   {
+    "file": "nox_008.png",
+    "bytes": 168987,
+    "sha256": "5abcb5d201e244f45acbdba897b77111eb3cd5531e3d29974ad5e54affc30e2f",
+    "t_s": 480.0
+   },
+   {
+    "file": "nox_009.png",
+    "bytes": 172283,
+    "sha256": "cf0d13c13971bc0261b63371233d4d060c746fa9de2b438c14dda4f24a690020",
+    "t_s": 540.0
+   },
+   {
+    "file": "nox_010.png",
+    "bytes": 175208,
+    "sha256": "3c25203c4aa10d449e28d54f09f0fedb34fb34ee7ebeecedefd8e8ceae9c5d67",
+    "t_s": 600.0
+   },
+   {
+    "file": "nox_011.png",
+    "bytes": 175688,
+    "sha256": "475a58bf93cad5e56aa8905fcec7006de91a0b8bf9001f8d60764105c9ee1f3d",
+    "t_s": 660.0
+   },
+   {
+    "file": "nox_012.png",
+    "bytes": 177634,
+    "sha256": "da76978cfb998bbcfbda70daefe9eb0ea38c0210c6d9ae399d541e0716d9577c",
+    "t_s": 720.0
+   },
+   {
+    "file": "nox_013.png",
+    "bytes": 179521,
+    "sha256": "b708830fe209f4be40311b59524d6aaf917799ba724125ca71eab73bafd34bce",
+    "t_s": 780.0
+   },
+   {
+    "file": "nox_014.png",
+    "bytes": 181079,
+    "sha256": "1b1ac747bbaceded7955ede148b0ffd7510379d93bdf94865fda51da058e5f8d",
+    "t_s": 840.0
+   },
+   {
+    "file": "nox_015.png",
+    "bytes": 182263,
+    "sha256": "cff3954fdab55fccb7e6e065ecfcf2a06f2fc859ba6ac672010af12993ef9fad",
+    "t_s": 900.0
+   },
+   {
+    "file": "nox_016.png",
+    "bytes": 181530,
+    "sha256": "2ce2dd1317dedef079e6a6f17346bdebd7aeee8d1902035c69df0ee2f6b607a2",
+    "t_s": 960.0
+   },
+   {
+    "file": "nox_017.png",
+    "bytes": 182919,
+    "sha256": "6113db092066e15371e4f305debf5d9adf305de8cb714dd4a7752b0509701c72",
+    "t_s": 1020.0
+   },
+   {
+    "file": "nox_018.png",
+    "bytes": 183819,
+    "sha256": "e9963fc8520b559e72dd4d1ef257df6757a06c0c14c721c0c2b80bd199018eb5",
+    "t_s": 1080.0
+   },
+   {
+    "file": "nox_019.png",
+    "bytes": 184415,
+    "sha256": "14ac0384b8e8fa54c8f0c116037b27dd8cc4f5d9c2768c11c305fa8406b80586",
+    "t_s": 1140.0
+   },
+   {
+    "file": "nox_020.png",
+    "bytes": 185816,
+    "sha256": "8f9a9065bbedddd3896695530ac2e46ce497ca0d6152581e3bc18eb0b81eed7f",
+    "t_s": 1200.0
+   },
+   {
+    "file": "nox_021.png",
+    "bytes": 184908,
+    "sha256": "fcdd9ce9737afdf8234acd5458be4431bd8a47266a37827ecbeaa9b56dc96581",
+    "t_s": 1260.0
+   },
+   {
+    "file": "nox_022.png",
+    "bytes": 185478,
+    "sha256": "3680a21202a7a683e81b073ea04acf6cd848880b72d3d4b3f278bd2742fecb3f",
+    "t_s": 1320.0
+   },
+   {
+    "file": "nox_023.png",
+    "bytes": 186076,
+    "sha256": "a5f4b46c9c7f6382d1f5bfc6bf2139cc49af016a02ff39bd9a66c0bbef9ebc6e",
+    "t_s": 1380.0
+   },
+   {
+    "file": "nox_024.png",
+    "bytes": 186381,
+    "sha256": "7efee1df40c18a06777c45c9a5df114c1b915495371545f91bfa6f53c0a9b2cb",
+    "t_s": 1440.0
+   },
+   {
+    "file": "nox_025.png",
+    "bytes": 187580,
+    "sha256": "08bb5607180fa610502f654337b8dabbe07b29d4e09d471513fd200de2dcae0a",
+    "t_s": 1500.0
+   },
+   {
+    "file": "nox_026.png",
+    "bytes": 186803,
+    "sha256": "f790f9e4e1fcb0faad89cb6464554aca9eb3d8c538e54d10f93d71a917ae00f5",
+    "t_s": 1560.0
+   },
+   {
+    "file": "nox_027.png",
+    "bytes": 187183,
+    "sha256": "abb363448356a5e0c06cd0609ff7cfe23f436f8130177a21e3c30695bc7e0959",
+    "t_s": 1620.0
+   },
+   {
+    "file": "nox_028.png",
+    "bytes": 187609,
+    "sha256": "bf443010c8a3e6e33b46b10fc379b49198019c4c0b116c4125303b0aa487fbdb",
+    "t_s": 1680.0
+   },
+   {
+    "file": "nox_029.png",
+    "bytes": 187679,
+    "sha256": "88f8c10a0adafeb0f4ca29f8a66a4fc0c631aa9928f1838c23bf11af2e69adfb",
+    "t_s": 1740.0
+   },
+   {
+    "file": "nox_030.png",
+    "bytes": 188500,
+    "sha256": "3bd7c74982928cbaf7cf2e835d40b5723e0374af43f743bfff3021f61f6bc1e5",
+    "t_s": 1800.0
+   }
+  ],
+  "display": {
+   "stops": [
+    "#fff3b0",
+    "#f6c453",
+    "#e8833a",
+    "#c8432b",
+    "#7a1530"
+   ],
+   "floor": 0.12,
+   "alpha": 0.85,
+   "legend": [
+    "low",
+    "high (relative, log scale)"
+   ]
+  },
+  "model": {
+   "transport": "framework @587f3d9 wind_pollution_code/.../physical_transport.py upwind_step (vendored unchanged)",
+   "follows": "framework run_core008_pollution_scaled_latent.py (sub-stepping, cells-per-second velocities)",
+   "emissions": "SUMO 1.28 built-in emission model, HBEFA4/PC_petrol_Euro-4 (default passenger type), NOx mg/s per car per second; task-17 replay, 300 s looped; 693 invalid SUMO values set to 0",
+   "wind": {
+    "source": "task 15 run_4m frames/slices_060 (final saved step), slice index 1 (12 m layer), 8 m cells",
+    "rescaled_mean_open_m_s": 2.0,
+    "scale_factor": 5.107911421790775,
+    "note": "surrogate output units are not a calibrated wind speed; the mean speed is a project default"
+   },
+   "mixing_height_m": 10.0,
+   "dt_s": 5.0,
+   "minutes": 30.0,
+   "boundaries": {
+    "ub_cells_s": 0.24243837594985962,
+    "vb_cells_s": 0.012948389165103436,
+    "type": "open, uniform edge velocity (solver convention)"
+   },
+   "units": "mg/m3 NOx under the stated assumptions; shown as a relative tracer"
+  },
+  "limits": [
+   "2-D single layer; no vertical mixing profile",
+   "no chemistry, deposition or background",
+   "one steady wind field from a surrogate model",
+   "emission model default petrol Euro-4 for every car; diesel / petrol split and particle attribution not yet done",
+   "not validated against measurements"
+  ],
+  "mass_check": {
+   "t_s": 1800.0,
+   "iters": 17,
+   "residual": 9.195545658258197e-07,
+   "mass_in_domain_mg": 3409120.9375,
+   "emitted_mg": 3452809.86328125,
+   "max_mg_m3": 36.81721496582031,
+   "p99_open_mg_m3": 0.060889072716236115,
+   "wall_s": 385.7636091709137
+  }
+ },
+ "temperature": {
+  "label": "Air temperature (2-D model)",
+  "grid": {
+   "x0": -4096.0,
+   "y0": -4096.0,
+   "cell": 8.0,
+   "nx": 1024,
+   "ny": 1024
+  },
+  "encoding": "1 + 254 x (T - 31.0) / (32.4 - 31.0) degC, 8 bit; 0 = not computed (buildings, outside the study area)",
+  "range_c": [
+   31.0,
+   32.4
+  ],
+  "frames": [
+   {
+    "file": "temp_000.png",
+    "bytes": 158405,
+    "sha256": "51c2b384cc3a034a413b6848ba64bbc8a8c3240e90c6fd61afceda730c788c09",
+    "t_s": 0.0
+   },
+   {
+    "file": "temp_001.png",
+    "bytes": 302357,
+    "sha256": "4586653731fbf83462caae077668610b2c3673d56bb305d73ece4381271ffc18",
+    "t_s": 400.0
+   },
+   {
+    "file": "temp_002.png",
+    "bytes": 286286,
+    "sha256": "251fd4781d332a25e0f35aa2241af8229436155f401c3567fc2662d98f80b88e",
+    "t_s": 800.0
+   },
+   {
+    "file": "temp_003.png",
+    "bytes": 282773,
+    "sha256": "f7b90a68e3ddbcf389d7436cb06e9d7b409aa869e528f40093229a5163983375",
+    "t_s": 1200.0
+   },
+   {
+    "file": "temp_004.png",
+    "bytes": 279678,
+    "sha256": "7d4d79caf88a862741110810d337934450eb114690a4a5e60bb3f38c8ee0cef6",
+    "t_s": 1600.0
+   },
+   {
+    "file": "temp_005.png",
+    "bytes": 278779,
+    "sha256": "dc9991391e9c5a8169211c06e882e7cd49bab9ce67702e88d172bd01b58bce8f",
+    "t_s": 2000.0
+   },
+   {
+    "file": "temp_006.png",
+    "bytes": 278411,
+    "sha256": "80b886c676e67d9c0dd2ca3241c9fba82c19b3b75b8cedf0ac1342b6e9040a71",
+    "t_s": 2400.0
+   },
+   {
+    "file": "temp_007.png",
+    "bytes": 279053,
+    "sha256": "6baa4544e6f74614289acbb5f620cc17a6edf27f57bca218873bfa1cd7a06f1c",
+    "t_s": 2800.0
+   },
+   {
+    "file": "temp_008.png",
+    "bytes": 271240,
+    "sha256": "0784c6b65be0d4dfc1b39e5a3c5e85d35730ec6a71f97194f5a6f5525307426c",
+    "t_s": 3200.0
+   },
+   {
+    "file": "temp_009.png",
+    "bytes": 271965,
+    "sha256": "7c2aebfd33daa2438a53f6a9a09a05728d2b2131d9ed065d3ddceb42552c9eb6",
+    "t_s": 3600.0
+   },
+   {
+    "file": "temp_010.png",
+    "bytes": 272458,
+    "sha256": "ed5c62edf2501ab5792c33a2b2bc4b56a67fce50607b849069deb2c54b08d4c3",
+    "t_s": 4000.0
+   }
+  ],
+  "display": {
+   "stops": [
+    "#2c7bb6",
+    "#abd9e9",
+    "#ffffbf",
+    "#fdae61",
+    "#d7191c"
+   ],
+   "floor": 0.002,
+   "alpha": 0.75,
+   "legend": [
+    "31.0 °C",
+    "32.4 °C"
+   ]
+  },
+  "model": {
+   "wind": "task 15 run_4m slices steps 20..56 every 4, coarse layer 1 (12 m), 400 s per saved frame",
+   "cache_stats": {
+    "frames": 10,
+    "grid": [
+     1024,
+     1024
+    ],
+    "building_cells": 270596,
+    "vegetation_cells": 326270,
+    "urban_cells": 403134,
+    "mean_speed_model_units": 0.37196967005729675
+   },
+   "site": [
+    51.454,
+    -2.5972
+   ],
+   "analysis_time_utc": "2026-06-21T13:00:00+00:00",
+   "model": "Yi Qi 2-D temperature label solver, unchanged; scenario values are its defaults except site and time",
+   "orientation": "saved arrays: row 0 = north (image); flip rows for the local frame",
+   "seconds": 85.26944231987,
+   "limits": [
+    "parameterised heat sources and cooling rates of the model, not an energy balance with Bristol weather",
+    "wind from a surrogate model in model units",
+    "2-D single layer",
+    "not validated against measurements"
+   ]
+  },
+  "scenario_defaults": {
+   "ambient_temp_c": 31.5,
+   "inflow_temp_c": 31.8,
+   "analysis_time_utc": "2026-06-21T13:00:00+00:00",
+   "site_latitude_deg": 51.454,
+   "site_longitude_deg": -2.5972,
+   "urban_source_c_per_hour": 0.3,
+   "vegetation_cooling_c_per_hour": 0.28,
+   "shade_cooling_c_per_hour": 0.18,
+   "velocity_scale": 0.65
+  },
+  "summary": {
+   "temperature_min_c": 30.88836669921875,
+   "temperature_max_c": 32.3053092956543,
+   "dt_seconds": 3.8461538461538463,
+   "substeps_per_frame": 104
+  }
+ },
+ "flood_river": {
+  "label": "Flooding (river inflow scenario)",
+  "grid": {
+   "x0": -3999.0,
+   "y0": -3999.0,
+   "cell": 8,
+   "nx": 999,
+   "ny": 999
+  },
+  "encoding": "water depth in cm, 8 bit, clipped at 255 cm",
+  "frames": [
+   {
+    "file": "river_000.png",
+    "bytes": 1048,
+    "sha256": "06b43ca5d9dbab98a926fb509ae0f056acfef27630af21ee7d705e4156cf0465",
+    "t_s": 0.8,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_001.png",
+    "bytes": 1254,
+    "sha256": "505c550fde69878f11542ea5b5bcf0bcbe4ea631c22697959fe64ffadacae031",
+    "t_s": 300.0,
+    "q_m3_s": 66.5
+   },
+   {
+    "file": "river_002.png",
+    "bytes": 1583,
+    "sha256": "4a63f61c4d6f5be58e46ef34c018e0d8e1eb3f62d9b481a4817328a270e4b0f7",
+    "t_s": 600.0,
+    "q_m3_s": 133.2
+   },
+   {
+    "file": "river_003.png",
+    "bytes": 1912,
+    "sha256": "3a4fc6c4009bc0d96cbd621c4fc374a92cfa5212c16a81780efbbe7189296668",
+    "t_s": 900.0,
+    "q_m3_s": 199.8
+   },
+   {
+    "file": "river_004.png",
+    "bytes": 2378,
+    "sha256": "c945834c19254e78f5a82a74c1313167dd012a0f977cb1c62ddc7985bf55888b",
+    "t_s": 1200.0,
+    "q_m3_s": 266.5
+   },
+   {
+    "file": "river_005.png",
+    "bytes": 3418,
+    "sha256": "a50339fe3801670c55025bd7c008d8ab5d84f647283f7228bfb3d57e495befd2",
+    "t_s": 1500.0,
+    "q_m3_s": 333.2
+   },
+   {
+    "file": "river_006.png",
+    "bytes": 4276,
+    "sha256": "a3fd2d211b029e0c2b469431a3aa257758a3b87f95d7d8279852743adfebf84d",
+    "t_s": 1800.0,
+    "q_m3_s": 399.8
+   },
+   {
+    "file": "river_007.png",
+    "bytes": 5027,
+    "sha256": "96f152473c05004d6c9beb603c42f6f76c1c255933305d0ef0b3543ae92aea03",
+    "t_s": 2100.0,
+    "q_m3_s": 466.5
+   },
+   {
+    "file": "river_008.png",
+    "bytes": 5664,
+    "sha256": "72abcade69ac976168b0d9761da3ba08ba1a52a2f5e62ffd8edd861b225943df",
+    "t_s": 2400.0,
+    "q_m3_s": 533.2
+   },
+   {
+    "file": "river_009.png",
+    "bytes": 6785,
+    "sha256": "3e38a17fc5a89d976876e5e9c4d5764514fcc6bee084f4b2f28fb56a54c508ff",
+    "t_s": 2700.0,
+    "q_m3_s": 599.8
+   },
+   {
+    "file": "river_010.png",
+    "bytes": 8035,
+    "sha256": "5d19434f03910a165ce4ef234bd0699980b5b205ed65aba1dbef4c79ee034627",
+    "t_s": 3000.0,
+    "q_m3_s": 666.5
+   },
+   {
+    "file": "river_011.png",
+    "bytes": 8419,
+    "sha256": "cee7b5e8b1408f73c23d560ef8f73229127a3e35775dabdb5d6d085c6d6fc0f7",
+    "t_s": 3300.0,
+    "q_m3_s": 733.2
+   },
+   {
+    "file": "river_012.png",
+    "bytes": 9032,
+    "sha256": "8f8568feff181234d9857e4092d93637687323cd47f99b1eb03204008cd77e47",
+    "t_s": 3600.0,
+    "q_m3_s": 799.8
+   },
+   {
+    "file": "river_013.png",
+    "bytes": 10805,
+    "sha256": "2f9fea5185d7554f57727dbb14a9b8385adcac743c05b9863ac6d955b4a68077",
+    "t_s": 3900.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_014.png",
+    "bytes": 12896,
+    "sha256": "edfb471bd05b4c50e780b84b0292ddfd54cd41899dfdace7193ae7cf961b8e9d",
+    "t_s": 4200.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_015.png",
+    "bytes": 14740,
+    "sha256": "52d1a43f6d89a1f499e33017890336fd4fcd9b5d02bb4429cc7bd0deb2406d7a",
+    "t_s": 4500.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_016.png",
+    "bytes": 15664,
+    "sha256": "4d2287d3dccd4d8fdfbf870438ad126586bc7be1ca235bc81fb2960951436158",
+    "t_s": 4800.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_017.png",
+    "bytes": 16111,
+    "sha256": "2a4073a1adc1cae60b48326bd1194fc607593dfa0a828fd0ba054006a9f91eda",
+    "t_s": 5100.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_018.png",
+    "bytes": 16702,
+    "sha256": "5907d08d4d4ef0efc1e3ec4d38d37a9a9e2c7b18865682ed907ffb326a0220be",
+    "t_s": 5400.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_019.png",
+    "bytes": 16876,
+    "sha256": "30dc7224119be44558ebc10f9beceb74cb8ad5a811d711faa01a2348b776ee1b",
+    "t_s": 5700.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_020.png",
+    "bytes": 16963,
+    "sha256": "1ad445a8ca0d27879c1cf84ecc1b2e6a8e674fca1763558273929b80e58da64f",
+    "t_s": 6000.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_021.png",
+    "bytes": 17119,
+    "sha256": "b86f884b3e830253d596408efe73caf20922ee49a8ba54e6c0d155e647bfa446",
+    "t_s": 6300.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_022.png",
+    "bytes": 17161,
+    "sha256": "d3028359332fe66a86382b9c97e63e1bd4ec2ea5e5858e6393a7449f030d651e",
+    "t_s": 6600.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_023.png",
+    "bytes": 16872,
+    "sha256": "4f14c0c2df4463c9d8662d7ffeed499431c679ef4d1c75566975f76795546b69",
+    "t_s": 6900.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_024.png",
+    "bytes": 16967,
+    "sha256": "6ce773ac56a17bc5d2430dc499d0a4346c3f94f527a2451ff5e16406f3fd2593",
+    "t_s": 7200.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_025.png",
+    "bytes": 17385,
+    "sha256": "bf18357e1fcc4b32592404a116474db33ad413030c3a88ee0c4509547e0fcdad",
+    "t_s": 7500.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_026.png",
+    "bytes": 18162,
+    "sha256": "62a97268ccd9e97a18cb714b076202f62a46bf205ceea47a0264ce321189bdbc",
+    "t_s": 7800.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_027.png",
+    "bytes": 18820,
+    "sha256": "04057cb50efaefb7f5e2a086f383d01640946379d876d62ae1413b67755d71a1",
+    "t_s": 8100.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_028.png",
+    "bytes": 19969,
+    "sha256": "c689515c775569f5d68f3cd02a41afc6d3493eced29d07e5a6f7108b981df66f",
+    "t_s": 8400.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_029.png",
+    "bytes": 20702,
+    "sha256": "beaadf7f65f6d27c488c553e03f0ae077de6f5d6a750dd9a58481d266361486a",
+    "t_s": 8700.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_030.png",
+    "bytes": 21502,
+    "sha256": "9361c583d0c515f75add4c9bd3f4224109de057722765eb69fa97f8a6fd8395c",
+    "t_s": 9000.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_031.png",
+    "bytes": 22262,
+    "sha256": "46eb76ab0da0e265d23af1cf9392c3461e32d3a862ed186bd6e994f7a70ee420",
+    "t_s": 9300.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_032.png",
+    "bytes": 23044,
+    "sha256": "8e3c80fcd58ed4d4bc51df480fb80460c9946a9051f90c6f389176afa8210cc6",
+    "t_s": 9600.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_033.png",
+    "bytes": 23814,
+    "sha256": "c130d16dbeb53e53f13ec5146a50788d8990c35286fd24049afada2c9e92ff09",
+    "t_s": 9900.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_034.png",
+    "bytes": 24718,
+    "sha256": "29c710107ed20076137a1c146aafcde4633683c971e1e199c1bc47373adc7f4e",
+    "t_s": 10200.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_035.png",
+    "bytes": 25627,
+    "sha256": "029de4ceca505672c8439a1a46fa97b2c1e50e1b590e423c14dc9cf4f5c5c067",
+    "t_s": 10500.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_036.png",
+    "bytes": 26883,
+    "sha256": "8fd02b02f616aa0c4d2f0d2b8de689d5c9c5846e362418b57793a0b0e38eca38",
+    "t_s": 10800.0,
+    "q_m3_s": 800.0
+   },
+   {
+    "file": "river_037.png",
+    "bytes": 27979,
+    "sha256": "303af974f0e4c28cc7754c38dfcdde363734dcacccd4eb2ebb54b2cfdc272dfd",
+    "t_s": 11100.0,
+    "q_m3_s": 733.5
+   },
+   {
+    "file": "river_038.png",
+    "bytes": 28972,
+    "sha256": "b985bcdd3202a1a94cb3cab7030d883439161ac92de430e18f08f24a2e16ff2d",
+    "t_s": 11400.0,
+    "q_m3_s": 666.8
+   },
+   {
+    "file": "river_039.png",
+    "bytes": 29824,
+    "sha256": "e6c3abe3ad8514f7b21c43d922b6bc3493c5a4f28500cb3c8cb3fd4075b4a6d4",
+    "t_s": 11700.0,
+    "q_m3_s": 600.2
+   },
+   {
+    "file": "river_040.png",
+    "bytes": 30677,
+    "sha256": "c79ba64cba7b428fc386bd5a7641ace2bd7cbc78fc7477d2c166d9f3831f4b4d",
+    "t_s": 12000.0,
+    "q_m3_s": 533.5
+   },
+   {
+    "file": "river_041.png",
+    "bytes": 31376,
+    "sha256": "8e00a5ab0a9b9b9f0ab8d358d4cad0f975d75d995cccad025244397c50a4a7de",
+    "t_s": 12300.0,
+    "q_m3_s": 466.8
+   },
+   {
+    "file": "river_042.png",
+    "bytes": 31943,
+    "sha256": "82ee79e8c2ef41bfe0cd2533be14cf950ee17266fe934b059eced079077980cd",
+    "t_s": 12600.0,
+    "q_m3_s": 400.2
+   },
+   {
+    "file": "river_043.png",
+    "bytes": 32468,
+    "sha256": "a036079f8fbd9065dd7be989930864a10f87106dc7fafd94f61a2cb9f64202b6",
+    "t_s": 12900.0,
+    "q_m3_s": 333.5
+   },
+   {
+    "file": "river_044.png",
+    "bytes": 33074,
+    "sha256": "c9e53b648c035fdca6f0f8ba328df02b73f5bb1fcbbf736f3fa624c3cac630be",
+    "t_s": 13200.0,
+    "q_m3_s": 266.8
+   },
+   {
+    "file": "river_045.png",
+    "bytes": 33650,
+    "sha256": "217f27373bfd6ddd15e6f3d69dfa90c496667661a7752f4e092564e85c30a865",
+    "t_s": 13500.0,
+    "q_m3_s": 200.2
+   },
+   {
+    "file": "river_046.png",
+    "bytes": 34307,
+    "sha256": "23eb6221ca8394db2f1efd5cc9468342c70aecc2911de8c03ed77ba255ddc801",
+    "t_s": 13800.0,
+    "q_m3_s": 133.5
+   },
+   {
+    "file": "river_047.png",
+    "bytes": 34984,
+    "sha256": "650d921074fc0286578784b2acb4e0e547a673346c33bde11b1ae89469c50987",
+    "t_s": 14100.0,
+    "q_m3_s": 66.8
+   },
+   {
+    "file": "river_048.png",
+    "bytes": 35545,
+    "sha256": "1acef0a1fafd071b8391ef45f5fad679df90852462007b104606607c9ffc8215",
+    "t_s": 14400.0,
+    "q_m3_s": 0.2
+   },
+   {
+    "file": "river_049.png",
+    "bytes": 35827,
+    "sha256": "a0c095bd2e3ff8a9858ce8d3f23fbc3c4673d96b0af5fa460e04d32ae7658bbc",
+    "t_s": 14700.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_050.png",
+    "bytes": 35988,
+    "sha256": "cfaca0c950b42b2a54ac80498bb6023039433ed12fc7b26ad94bc1257aa1659e",
+    "t_s": 15000.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_051.png",
+    "bytes": 36144,
+    "sha256": "77e7d35c762c6decc28d932acc38817c4d958f0ee6b93ee6701a863cd7ee4718",
+    "t_s": 15300.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_052.png",
+    "bytes": 36351,
+    "sha256": "bdd265f85f7b5f3338079bce7cbd5ae9f598b2bd8a9f627c72290755efa61c3c",
+    "t_s": 15600.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_053.png",
+    "bytes": 36528,
+    "sha256": "915133a5ff3abbe8d3194662ef0830f7c16e5670e7f72f2cd4bdd8ef73ecdd17",
+    "t_s": 15900.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_054.png",
+    "bytes": 36649,
+    "sha256": "97d832840c548059f1f235891daa86c58b2d6147888fa1613947a7fe80b6d585",
+    "t_s": 16200.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_055.png",
+    "bytes": 36764,
+    "sha256": "f861d9d2d734275c74d31cb1a6270492bdcdf1480927edb5bbdcac24bc0519b7",
+    "t_s": 16500.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_056.png",
+    "bytes": 36837,
+    "sha256": "ea4f33c7943f92b598d98a9d2ae5be58471ecd4699d3931c3c580c9e0d29e2a3",
+    "t_s": 16800.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_057.png",
+    "bytes": 36990,
+    "sha256": "d0fa93a932776bc943a4340ac8b281fb2f6bd21b6e4ecbb068d51f6e6bfa18f7",
+    "t_s": 17100.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_058.png",
+    "bytes": 37123,
+    "sha256": "d2a569eb20278d051099b1b8ec7a9883078dfd8ef37e08ac421c63188c878489",
+    "t_s": 17400.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_059.png",
+    "bytes": 37246,
+    "sha256": "05f5f086df41f28a9d5bbaec8af9ea79ad32d4ea465634bc4071fe5090fee68d",
+    "t_s": 17700.0,
+    "q_m3_s": 0.0
+   },
+   {
+    "file": "river_060.png",
+    "bytes": 37342,
+    "sha256": "d235dac10e14801bc387942859c10e86d1e4d5738cd0b8c2273a4d3f74146131",
+    "t_s": 18000.0,
+    "q_m3_s": 0.0
+   }
+  ],
+  "scenario": {
+   "type": "illustrative river inflow; project default values, not a recorded or design event, no return period",
+   "inflow": {
+    "where": "River Avon at the east edge of the domain (mapped OSM water cells, columns nx-5..nx-3, rows 500-540)",
+    "cells": 15,
+    "cell_centres_y_m": [
+     141.0,
+     3605.0
+    ],
+    "hydrograph": {
+     "q_peak_m3_s": 800.0,
+     "rise_h": 1.0,
+     "hold_h": 2.0,
+     "fall_h": 1.0
+    },
+    "volume_m3": 8640000.0
+   },
+   "rain": "none",
+   "drainage_infiltration": "none",
+   "manning_n": {
+    "paved": 0.02,
+    "green": 0.05,
+    "water": 0.03
+   },
+   "river_bed": "LiDAR DTM over water = water surface at survey time; real channel depth is missing, so overbank flooding is exaggerated",
+   "downstream_boundary": "outer 2 cells absorb outflow (free outflow incl. the Avon at the west edge); tides not modelled; the east edge next to the inflow (rows 480-560) is closed",
+   "initial_state": "dry (no base flow in the river)",
+   "duration_h": 5.0
+  },
+  "summary": {
+   "steps": 22500,
+   "model_seconds": 17999.999999992393,
+   "wall_seconds": 5762.074743747711,
+   "volumes_m3": {
+    "inflow": 8639999.560512446,
+    "drained": 0.0,
+    "outflow": 820474.7219209922,
+    "neg_clamped": 0.05055541461139512,
+    "stored_final": 7819515.0,
+    "balance_error": -9.788036039099097
+   },
+   "max_depth_m": 11.858250617980957,
+   "land_max_depth_gt_10cm_ha": 187.4176,
+   "land_max_depth_gt_50cm_ha": 164.6656,
+   "land_area_ha": 4922.9568
+  }
  }
 }

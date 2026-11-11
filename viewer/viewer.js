@@ -5,8 +5,11 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createFields } from './fields.js?v=intro001-20261111';
-import { createTour } from './tour.js?v=intro001-20261111';
+import { createFields } from './fields.js?v=ext001-20261111';
+import { createTour } from './tour.js?v=ext001-20261111';
+import { createCars } from './cars.js?v=ext001-20261111';
+import { createNorthArrow } from './north.js?v=ext001-20261111';
+import { createLayers } from './layers.js?v=ext001-20261111';
 
 window.__viewerStarted = true;
 const LAYERS = [
@@ -217,7 +220,7 @@ canvas.addEventListener('dblclick', async e => {
 function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
   bootSet('Reading the list of model files…', null);
-  const r = await fetch('manifest.json?v=intro001-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  const r = await fetch('manifest.json?v=ext001-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
   $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
   $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
   $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
@@ -246,7 +249,7 @@ async function init() {
     plan(); }
   if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
   // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
-  try { const ri = await fetch('./inspect_views.json?v=intro001-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
+  try { const ri = await fetch('./inspect_views.json?v=ext001-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
@@ -257,28 +260,72 @@ async function init() {
 // ---- simulations card: flooding (rainfall scenario) and wind (surrogate model)
 const fields = createFields({ scene, camera, controls, materials: [[matSmooth, false], [matFlat, false], [matRaised, true]],
   onStatus: (k, msg, err) => { const e = $(k === 'flood' ? 'fl-status' : 'wd-status'); e.textContent = msg; e.classList.toggle('err', !!err); } });
-const sim = { flPlay: false, wdPlay: false, last: performance.now(), wdAcc: 0 };
+const layers = createLayers({ materials: [[matSmooth, false], [matFlat, false], [matRaised, true]] });   // task 17: shade, NOx tracer, temperature (layers.js)
+const sim = { flPlay: false, wdPlay: false, trPlay: false, last: performance.now(), wdAcc: 0, trLabAcc: 0 };
+const cars = createCars({ scene, camera, controls });   // illustrative traffic (cars.js)
+const northArrow = createNorthArrow({ camera, controls, el: $('north') });   // permanent true-north arrow (north.js)
 const fmtMin = s => `${Math.floor(s / 3600)}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}`;
-function floodLabel() { const f = fields.floodInfo(); $('fl-t').value = f.t; $('fl-lab').textContent = `${fmtMin(f.t)} of ${fmtMin(f.end || 10800)} h · rain ${f.rain} mm/h`; }
+function floodLabel() { const f = fields.floodInfo(); $('fl-t').max = f.end || 10800; $('fl-t').value = f.t;
+  $('fl-lab').textContent = `${fmtMin(f.t)} of ${fmtMin(f.end || 10800)} h · ` + (f.scenario === 'river' ? `river inflow ${Math.round(f.q ?? 0)} m³/s` : `rain ${f.rain} mm/h`); }
+// ---- task 17 layers: shade, NOx tracer, air temperature (layers.js); pollution and temperature share one map slot
+const fmtHM = h => `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.round((h % 1) * 60) % 60).padStart(2, '0')}`;
+function shadeLabel() { const i = layers.shadeInfo(); if (i.h == null) return; $('sh-t').value = i.h; $('sh-lab').textContent = `21 June · ${fmtHM(i.h)} BST · sun ${Math.max(0, i.altitude).toFixed(0)}° high`; }
+function scalarLabel(k) { const i = layers.scalarInfo(k); if (i.end == null) return; const el = $(k === 'pollution' ? 'px-t' : 'tp-t'); el.max = i.end; el.value = layers.S.scalar.t;
+  $(k === 'pollution' ? 'px-lab' : 'tp-lab').textContent = k === 'pollution' ? `${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min of traffic emissions` : `model time ${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min · 14:00 BST scenario`; }
+async function scalarOn(k, on) {   // k = 'pollution' | 'temperature'
+  const other = k === 'pollution' ? 'temperature' : 'pollution', ids = { pollution: ['px-on', 'px-ctl', 'px-play', 'px-status'], temperature: ['tp-on', 'tp-ctl', 'tp-play', 'tp-status'] }[k];
+  $(ids[1]).hidden = !on; sim[k + 'Play'] = on; setPlay($(ids[2]), on);
+  if (!on) { if (layers.S.scalar.key === k) layers.useScalar(null); return; }
+  if ($(other === 'pollution' ? 'px-on' : 'tp-on').checked) { const o = $(other === 'pollution' ? 'px-on' : 'tp-on'); o.checked = false; await o.onchange({ target: o }); }
+  $(ids[3]).textContent = 'Loading…';
+  try { await layers.loadScalar(k, (n, t) => { $(ids[3]).textContent = `Loading frames: ${n} of ${t}`; }); layers.S.scalar.t = 0; layers.useScalar(k); scalarLabel(k); $(ids[3]).textContent = ''; }
+  catch (err) { $(ids[0]).checked = false; $(ids[1]).hidden = true; sim[k + 'Play'] = false; $(ids[3]).textContent = 'This layer did not load: ' + err.message; diagError(k, err, {}); } }
+$('sh-on').onchange = async e => { const on = e.target.checked; $('sh-ctl').hidden = !on; sim.shadePlay = on; setPlay($('sh-play'), on); layers.setShade(on);
+  if (on) { $('sh-status').textContent = 'Loading…'; try { await layers.loadShade((n, t) => { $('sh-status').textContent = `Loading frames: ${n} of ${t}`; }); if (layers.S.shade.t < 5) layers.setShadeTime(5); shadeLabel(); $('sh-status').textContent = ''; }
+    catch (err) { e.target.checked = false; $('sh-ctl').hidden = true; layers.setShade(false); sim.shadePlay = false; $('sh-status').textContent = 'The shade layer did not load: ' + err.message; diagError('shade', err, {}); } } };
+$('sh-t').oninput = e => { layers.setShadeTime(+e.target.value); shadeLabel(); };
+$('sh-play').onclick = () => { sim.shadePlay = !sim.shadePlay; setPlay($('sh-play'), sim.shadePlay); };
+$('px-on').onchange = e => scalarOn('pollution', e.target.checked);
+$('tp-on').onchange = e => scalarOn('temperature', e.target.checked);
+$('px-t').oninput = e => { layers.setScalarTime(+e.target.value); scalarLabel('pollution'); };
+$('tp-t').oninput = e => { layers.setScalarTime(+e.target.value); scalarLabel('temperature'); };
+$('px-play').onclick = () => { sim.pollutionPlay = !sim.pollutionPlay; setPlay($('px-play'), sim.pollutionPlay); };
+$('tp-play').onclick = () => { sim.temperaturePlay = !sim.temperaturePlay; setPlay($('tp-play'), sim.temperaturePlay); };
+$('fl-scn').onchange = async e => { await fields.useFloodScenario(e.target.value); const k = fields.floodScenario(); e.target.value = k;   // a scenario that is not in this build falls back to the one shown
+  fields.setFloodTime(0); floodLabel(); $('fl-about').textContent = k === 'river' ? 'river inflow' : 'rain storm'; };
 function windLabel() { const w = fields.windInfo(); if (!w.n) return; $('wd-k').max = w.n - 1; $('wd-k').value = w.i; $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground`; }
+const fmtMS = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+function trafficLabel() { const c = cars.info(); if (!c.loaded) return; $('tr-t').max = c.seconds - 1; $('tr-t').value = Math.floor(c.t);
+  $('tr-lab').textContent = `replay ${fmtMS(c.t)} of ${fmtMS(c.seconds)} · ${c.count.toLocaleString('en-GB')} cars (${c.moving.toLocaleString('en-GB')} moving)` + (c.mode === 'dots' ? ' · dots: white moving, amber stopped' : ''); }
 function setPlay(btn, on) { btn.textContent = on ? 'Pause' : 'Play'; btn.setAttribute('aria-pressed', String(on)); btn.title = on ? 'Pause' : 'Play'; }
 $('fl-on').onchange = async e => { const on = e.target.checked; $('fl-ctl').hidden = !on; if (!on) { sim.flPlay = false; setPlay($('fl-play'), false); }
   try { await fields.setFlood(on); floodLabel(); } catch (err) { e.target.checked = false; $('fl-ctl').hidden = true; fields.setFlood(false); diagError('fields_flood', err, {}); } };
 $('wd-on').onchange = async e => { const on = e.target.checked; $('wd-ctl').hidden = !on; if (!on) { sim.wdPlay = false; setPlay($('wd-play'), false); }
   try { await fields.setWind(on); windLabel(); } catch (err) { e.target.checked = false; $('wd-ctl').hidden = true; fields.setWind(false); diagError('fields_wind', err, {}); } };
+$('tr-on').onchange = async e => { const on = e.target.checked; $('tr-ctl').hidden = !on; sim.trPlay = on; setPlay($('tr-play'), on);
+  if (on) $('tr-status').textContent = 'Loading the traffic replay (about 10 MB)…';
+  try { await cars.setOn(on); trafficLabel(); $('tr-status').textContent = ''; } catch (err) { e.target.checked = false; $('tr-ctl').hidden = true; sim.trPlay = false; cars.setOn(false);
+    $('tr-status').textContent = 'The traffic replay did not load: ' + err.message; diagError('traffic', err, {}); } };
+$('tr-t').oninput = e => { cars.setTime(+e.target.value); cars.update(); trafficLabel(); };
+$('tr-play').onclick = () => { sim.trPlay = !sim.trPlay; setPlay($('tr-play'), sim.trPlay); };
+$('tr-speed').onchange = e => cars.setSpeed(+e.target.value);
 $('fl-t').oninput = e => { fields.setFloodTime(+e.target.value); floodLabel(); };
 $('fl-play').onclick = () => { sim.flPlay = !sim.flPlay; setPlay($('fl-play'), sim.flPlay); };
 $('wd-k').oninput = e => { fields.setWindFrame(+e.target.value); windLabel(); };
 $('wd-play').onclick = () => { sim.wdPlay = !sim.wdPlay; setPlay($('wd-play'), sim.wdPlay); };
 fields.manifest().then(m => { if (!m.flood) { $('fl-on').disabled = true; $('fl-status').textContent = 'Flood results are not in this build yet.'; }
+  if (!m.flood_river) { const o = $('fl-scn').querySelector('option[value="river"]'); o.disabled = true; o.textContent = 'River inflow (not in this build)'; $('fl-scn').value = 'rain'; const ab = $('about-river'); if (ab) ab.hidden = true; }
   if (!m.wind) { $('wd-on').disabled = true; $('wd-status').textContent = 'Wind results are not in this build yet.'; } })
   .catch(e => { $('fl-on').disabled = $('wd-on').disabled = true; $('fl-status').textContent = 'Simulation results are not available (' + e.message + ').'; });
-// ---- intro tour (tour.js): geometry -> landmarks -> wind -> flooding -> free exploration
+// ---- intro tour (tour.js): geometry -> landmarks -> traffic -> wind -> temperature -> shade -> pollution -> flooding -> free exploration
 const simApi = {
-  set: async (k, on) => { const e = $(k === 'wind' ? 'wd-on' : 'fl-on'); if (e.disabled || e.checked === on) return; e.checked = on; await e.onchange({ target: e }); },
-  play: (k, on) => { if (k === 'wind') { sim.wdPlay = on; setPlay($('wd-play'), on); } else { sim.flPlay = on; setPlay($('fl-play'), on); } },
+  set: async (k, on) => { const e = $({ wind: 'wd-on', flood: 'fl-on', traffic: 'tr-on', shade: 'sh-on', pollution: 'px-on', temperature: 'tp-on' }[k]); if (e.disabled || e.checked === on) return; e.checked = on; await e.onchange({ target: e }); },
+  play: (k, on) => { const B = { shade: 'sh-play', pollution: 'px-play', temperature: 'tp-play' }[k]; if (B) { sim[k + 'Play'] = on; setPlay($(B), on); return; } if (k === 'wind') { sim.wdPlay = on; setPlay($('wd-play'), on); } else if (k === 'traffic') { sim.trPlay = on; setPlay($('tr-play'), on); } else { sim.flPlay = on; setPlay($('fl-play'), on); } },
+  trafficLoaded: () => cars.S.loaded, trafficPreload: () => cars.load(), trafficTime: t => { cars.setTime(t); trafficLabel(); },
   floodTime: t => { fields.setFloodTime(t); floodLabel(); }, windFrame: i => { fields.setWindFrame(i); windLabel(); },
-  label: k => $(k === 'wind' ? 'wd-lab' : 'fl-lab').textContent,
+  label: k => $({ wind: 'wd-lab', flood: 'fl-lab', traffic: 'tr-lab', shade: 'sh-lab', pollution: 'px-lab', temperature: 'tp-lab' }[k]).textContent,
+  shadeTime: h => { layers.setShadeTime(h); shadeLabel(); }, scalarTime: (k, t) => { layers.setScalarTime(t); scalarLabel(k); },
+  floodScenario: async k => { const e = $('fl-scn'); if (e.value !== k) { e.value = k; await e.onchange({ target: e }); } },
   trees: on => { for (const k of ['trees_mapped', 'trees_rows', 'canopy_illustrative', 'hedges']) { const e = $('layer-' + k); if (e && e.checked !== on) { e.checked = on; e.onchange(); } } } };
 const tour = createTour({ camera, controls, state, fields, sim: simApi, loadingText: () => (ui.act.on && batch.active ? ui.act.short : ''),
   overviewReady: () => 'overview_ready_ms' in __diag.marks, setFog: on => { scene.fog.near = on ? 6000 : 1e6; scene.fog.far = on ? 14000 : 2e6; }, onActive: on => { document.body.classList.toggle('touring', on); if (on) closeInfo(); renderUI(); } });
@@ -289,10 +336,14 @@ function simTick() {
   const now = performance.now(), dt = Math.min(0.1, (now - sim.last) / 1000); sim.last = now;
   if (sim.flPlay && fields.S.flood.loaded) { const f = fields.floodInfo(); let t = f.t + dt * 300; if (t > f.end) t = 0; fields.setFloodTime(t); floodLabel(); }   // 5 model minutes per second
   if (sim.wdPlay && fields.S.wind.loaded) { sim.wdAcc += dt; if (sim.wdAcc > 0.7) { sim.wdAcc = 0; const w = fields.windInfo(); fields.setWindFrame((w.i + 1) % w.n); windLabel(); } }
+  if (sim.trPlay && cars.S.loaded) cars.advance(dt);
+  if (sim.shadePlay && layers.S.shade.loaded) { let h = layers.S.shade.t + dt * 0.6; const i = layers.shadeInfo(); if (h > i.last) h = i.first; layers.setShadeTime(h); if ((sim.shAcc = (sim.shAcc || 0) + dt) > 0.25) { sim.shAcc = 0; shadeLabel(); } }   // 0.6 h per second
+  { const k = layers.S.scalar.key; if (k && sim[k + 'Play'] && layers.S.scalar.loaded[k]) { const i = layers.scalarInfo(k); let t = layers.S.scalar.t + dt * (k === 'pollution' ? 150 : 400); if (t > i.end) t = i.start; layers.setScalarTime(t); if ((sim.scAcc = (sim.scAcc || 0) + dt) > 0.25) { sim.scAcc = 0; scalarLabel(k); } } }
+  cars.update(); if (cars.S.on && (sim.trLabAcc += dt) > 0.25) { sim.trLabAcc = 0; trafficLabel(); }
   fields.update();
 }
 let frames = 0, fpsT = performance.now(), fps = 0, lowFps = 0, first = true;
-function tick() { requestAnimationFrame(tick); if (tour.active()) tour.update(); else controls.update(); simTick(); renderer.render(scene, camera); frames++;
+function tick() { requestAnimationFrame(tick); if (tour.active()) tour.update(); else controls.update(); simTick(); renderer.render(scene, camera); northArrow.update(); frames++;
   if (first) { first = false; mark('first_frame_ms'); }
   const now = performance.now(); if (now - fpsT >= 1000) { fps = frames * 1000 / (now - fpsT); frames = 0; fpsT = now;
     if (!QS.has('pr') && state.terrainReady && !pending().live.length && document.visibilityState === 'visible') { lowFps = fps < 24 ? lowFps + 1 : 0;
@@ -315,6 +366,6 @@ function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el =
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'uwm_viewer_diagnostics.json'; a.click(); };
     $('diag').parentNode.insertBefore(b, $('diag').nextSibling); renderUI(); } }
 function diagError(type, e, ctx) { if (window.__diag) __diag.errors.push(Object.assign({ t_ms: Math.round(performance.now()), type, msg: String(e && e.message || e), stack: String(e && e.stack || '') }, ctx)); }
-window.uwmViewer = { fly, state, camera, controls, renderer, stats, fields, tour, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
+window.uwmViewer = { fly, state, camera, controls, renderer, stats, fields, tour, cars, layers, north: northArrow, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
 const start = () => init().catch(e => { console.error(e); diagError('init', e, {}); bootFail('The viewer could not start (' + e.message + ').', start); });
 start();

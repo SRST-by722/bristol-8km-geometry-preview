@@ -1,15 +1,37 @@
 # Data sources, licences and attribution
 
-This site contains derived 3D geometry and derived simulation frames only. No source data files, model weights or solver code are included.
+This site contains derived 3D geometry, derived simulation frames, a derived traffic replay and one vehicle model only. No source data files, model weights or solver code are included.
 
 | Source | Used for | Licence | Attribution |
 | --- | --- | --- | --- |
-| OpenStreetMap (Geofabrik extracts, snapshot 2026-11-08T21:21Z) | Building footprints and parts, roads, rail, bridges, water, green areas, hedges, tree rows, trees, landmark tags | Open Database Licence (ODbL) 1.0 | (c) OpenStreetMap contributors, https://www.openstreetmap.org/copyright |
-| Environment Agency LIDAR Composite DTM 2022, 2 m | Terrain, building base heights | Open Government Licence v3.0 | (c) Environment Agency copyright and/or database right 2022. All rights reserved. |
+| OpenStreetMap (Geofabrik extracts, snapshot 2026-11-08T21:21Z) | Building footprints and parts, roads, rail, bridges, water, green areas, hedges, tree rows, trees, landmark tags; the road network of the traffic run | Open Database Licence (ODbL) 1.0 | (c) OpenStreetMap contributors, https://www.openstreetmap.org/copyright |
+| Environment Agency LIDAR Composite DTM 2022, 2 m | Terrain, building base heights, flood and shade terrain | Open Government Licence v3.0 | (c) Environment Agency copyright and/or database right 2022. All rights reserved. |
 | Environment Agency LIDAR Composite First Return DSM 2022, 2 m | Building and bridge deck heights | Open Government Licence v3.0 | (c) Environment Agency copyright and/or database right 2022. All rights reserved. |
 | Bristol City Council tree asset records | Tree points | Open Government Licence v3.0 | Bristol City Council |
 
-Simulation layers (`web/fields/`): computed with the Physics-Grounded 4D World Model Framework (Yueyan Li, Zhongkai Yuan, Bohan Ye et al., Imperial College London; https://github.com/acse-yl222/physics-grounded-4d-world-model-framework, commit 587f3d9): the shallow-water flood solver and the SCALED wind surrogate with its trained weights, both unchanged. The flood terrain is the Environment Agency DTM above; buildings and water areas are from the OpenStreetMap data above.
+## Simulation layers
+
+All simulation outputs on this site were computed for this preview from the geometry above. They are derived data: the OpenStreetMap and Environment Agency terms above continue to apply to what they are derived from. No further open licence has been declared for the simulation outputs themselves; ask the authors before reusing them elsewhere.
+
+Solver code is from the Physics-Grounded 4D World Model Framework (Yueyan Li, Zhongkai Yuan, Bohan Ye et al., Imperial College London; https://github.com/acse-yl222/physics-grounded-4d-world-model-framework, commit 587f3d9), used unchanged and not included here. The repository carries no licence file at that commit; the code and weights were used within the research group that wrote them.
+
+| Output | Files | Computed with | Inputs |
+| --- | --- | --- | --- |
+| Wind | `web/fields/wind_*.png` | Framework SCALED wind surrogate with its trained weights (used on Bristol with Yueyan Li's agreement) | Building heights of this model |
+| Flooding, rain storm | `web/fields/flood_*.png` | Framework shallow-water flood solver | Environment Agency DTM; OpenStreetMap buildings, water and green areas |
+| Flooding, river inflow | `web/fields/river_*.png` | Framework shallow-water flood solver with an inflow source | As above; inflow values are illustrative project defaults |
+| Shade | `web/fields/shade_*.png` | Framework solar module (sun position, shadow casting) | Environment Agency DTM; building heights of this model |
+| Air temperature | `web/fields/temp_*.png` | Framework 2-D temperature model by Yi Qi | The wind output above; OpenStreetMap buildings and green areas |
+| Traffic | `web/traffic/traffic.bin` | Eclipse SUMO 1.28.0 (netconvert, randomTrips, sumo) | OpenStreetMap road network; heights from this model's road and bridge surfaces |
+| Traffic NOx tracer | `web/fields/nox_*.png` | SUMO's built-in HBEFA 4 emission model; framework upwind transport step (physical_transport) | The traffic run and the wind output above |
+
+Eclipse SUMO (https://eclipse.dev/sumo) is distributed under the Eclipse Public License 2.0; the software is not included here, only results computed with it. Its emission classes are based on the Handbook Emission Factors for Road Transport (HBEFA, INFRAS). The traffic replay is derived from the OpenStreetMap road network and keeps the ODbL terms where they apply.
+
+## Vehicle model
+
+`viewer/assets/sedan_4p5m.glb` (52,236 bytes, SHA-256 b26fa30fb495067b7ceb7cd234e1038b0fc6ffcb372e9702a7825ba934b99f44) is the procedural 4.5 m sedan of the framework repository above (`src/visualization/legacy/agents/demo_rev02/actors/sedan_4p5m.glb`, generated by `build_sedan.mjs` there; described in that folder's README as original procedural geometry with no external textures). It is copied unchanged from commit 587f3d9. The repository carries no licence file at that commit; the model is used here as work of the same research group. Ask the framework authors before reusing it elsewhere. The way cars are drawn (palette, instancing, heading interpolation, overhead dots) follows the framework's South Kensington traffic replay.
+
+## Other
 
 Reference photographs (Wikimedia Commons, CC BY-SA) guided the colour and form of five landmarks. The photographs are not included.
 

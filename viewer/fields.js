@@ -63,7 +63,7 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
 
   const S = { man: null, dtm: null, flood: { tex: [], t: 0, playing: false, loaded: false, loading: false }, wind: { frames: [], k: -1, on: false, loaded: false, loading: false, playing: false, fi: 0, mode: 'streaks', mapOpacity: 1 } };
   let manP = null;
-  const manifest = () => manP ||= fetch(base + 'manifest.json?v=intro001-20261111').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => (S.man = m));
+  const manifest = () => manP ||= fetch(base + 'manifest.json?v=ext001-20261111').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => { m.flood_rain = m.flood; return (S.man = m); });   // task 17: flood_rain / flood_river scenarios share the flood slot
 
   async function loadDtm() {
     if (S.dtm) return S.dtm;
@@ -110,7 +110,9 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
   // Rain rate from the scenario's 15-minute hyetograph (the first saved frame is at the end of the first solver step, not at 0 s).
   function floodInfo() { const fl = S.man?.flood, fr = fl?.frames || [], t = S.flood.t, hy = fl?.scenario?.hyetograph_mm_h_15min_blocks || [];
     const k = Math.floor(t / 900), rain = t < hy.length * 900 ? hy[Math.min(k, hy.length - 1)] : 0;
-    return { t, end: fr.length ? Math.round(fr[fr.length - 1].t_s) : 0, rain }; }
+    const h = fl?.scenario?.inflow?.hydrograph; let q = null;   // river scenario: inflow from its stated hydrograph
+    if (h) { const R = h.rise_h * 3600, H = h.hold_h * 3600, F = h.fall_h * 3600; q = t < R ? h.q_peak_m3_s * t / R : t < R + H ? h.q_peak_m3_s : t < R + H + F ? h.q_peak_m3_s * (1 - (t - R - H) / F) : 0; }
+    return { t, end: fr.length ? Math.round(fr[fr.length - 1].t_s) : 0, rain, q, scenario: S.flood.scenario || 'rain' }; }
 
   // ---- wind
   const N = 12000, LIFE = 5;   // streaks; seconds of screen time before a streak is respawned
@@ -178,6 +180,10 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
 
   return {
     U, S, update, dtmAt, windAt,
+    // task 17: choose the flood scenario ('rain' = task-15 design storm, 'river' = river-inflow scenario); frames reload on demand
+    async useFloodScenario(k) { await manifest(); const key = k === 'river' ? 'flood_river' : 'flood_rain'; if (!S.man[key] || S.man.flood === S.man[key]) return;
+      S.man.flood = S.man[key]; S.flood.tex = []; S.flood.loaded = false; S.flood.scenario = k; if (U.uFloodOn.value > 0.5) await loadFlood(); },
+    floodScenario: () => S.flood.scenario || 'rain',
     async setFlood(on) { U.uFloodOn.value = on ? 1 : 0; if (on) await loadFlood(); },
     setFloodTime, floodInfo,
     async setWind(on) { S.wind.on = on; lines.visible = on && S.wind.mode !== 'map'; U.uWindOn.value = on && S.wind.mode === 'map' ? S.wind.mapOpacity : 0; if (on) await loadWind(); },

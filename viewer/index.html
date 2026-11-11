@@ -56,6 +56,13 @@ body.touring #left,body.touring #info,body.touring #act,body.touring #foot{displ
 #tour-meta{font-size:12px;font-variant-numeric:tabular-nums;margin-top:4px;min-height:17px}#tour .legend{max-width:260px}#tour .bar{height:3px;margin-top:8px}#tour .bar i{transition:none}
 #tour.hint{cursor:pointer}#tour.hint .bar,#tour.hint #tour-meta{display:none}
 @media (max-width:700px){#tour{bottom:12px}#tour-title{font-size:16px}.tour-row{flex-direction:column;gap:6px}}
+/* permanent north arrow (top right; never hidden by Hide panels or the intro tour) */
+.ramp.shade{background:linear-gradient(90deg,#e9e6dc,#7a776f)}.ramp.temp{background:linear-gradient(90deg,#2c7bb6,#abd9e9,#ffffbf,#fdae61,#d7191c)}.ramp.nox{background:linear-gradient(90deg,#fff3b0,#f6c453,#e8833a,#c8432b,#7a1530)}
+#north{position:fixed;right:14px;top:14px;width:56px;height:56px;z-index:30;pointer-events:none;filter:drop-shadow(0 1px 4px rgba(0,0,0,.18))}
+#north svg{display:block}#north .n-bg{fill:rgba(255,255,255,.93);stroke:#c9d1cd;stroke-width:1}#north .n-head{fill:#b3261e}#north .n-tail{fill:#8f9894}
+#north .n-lab{font:700 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;fill:#1f2724}#north.weak{opacity:.45}
+@media (min-width:701px){#info{top:80px;max-height:calc(60% - 66px)}}
+@media (max-width:700px){#left{right:80px}}
 #diagdl{position:fixed;right:12px;bottom:6px;font:11px system-ui;padding:2px 8px}#diag{position:fixed;right:12px;bottom:30px;width:400px;max-width:calc(100% - 24px);max-height:50%;overflow:auto;background:rgba(20,26,24,.88);color:#e8efe9;border-radius:8px;padding:6px 8px 8px 10px}#diag-text{margin:0;font:11px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere}#diag .cardhead{color:#b9c6be;font-size:11px;align-items:center}#diag button.ico{background:transparent;border-color:#5d6864;color:#e8efe9}
 </style>
 <script>/* Read-only diagnostics, captured from page start. Shown only with ?diag=1. Not the full browser console. */
@@ -70,7 +77,7 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
 <div id="left">
   <div id="dock" role="toolbar" aria-label="Panel controls">
     <button id="ui-toggle" type="button" aria-pressed="false" aria-label="Hide all panels" title="Hide all panels to see the model (H)">Hide panels</button>
-    <button id="tour-replay" type="button" aria-label="Play the intro tour" title="Play the intro tour: geometry, landmarks, wind, flooding">Play intro</button>
+    <button id="tour-replay" type="button" aria-label="Play the intro tour" title="Play the intro tour: geometry, landmarks, traffic, wind, temperature, shade, pollution, flooding">Play intro</button>
     <button id="chip-panel" class="chip" type="button" hidden aria-label="Show the layers and landmarks panel" title="Show the layers and landmarks panel">Layers &amp; landmarks</button>
     <button id="chip-info" class="chip" type="button" hidden aria-label="Show the feature record" title="Show the feature record"><span id="chip-info-text">Record</span></button>
     <button id="chip-act" class="chip" type="button" hidden aria-label="Show the loading panel" title="Show the loading panel"><span id="chip-act-text"></span><span class="bar"><i id="chip-act-fill"></i></span></button>
@@ -89,8 +96,36 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
   </div>
   <div id="fields" role="group" aria-label="Simulations">
     <div class="cardhead"><b>Simulations</b><div class="tools"><button id="min-fields" class="ico" type="button" aria-label="Minimise the simulations panel" title="Minimise this panel">&#8211;</button></div></div>
-    <label><input type="checkbox" id="fl-on"> Flooding (rainfall scenario)</label>
+    <label><input type="checkbox" id="tr-on"> Traffic (illustrative SUMO run)</label>
+    <div id="tr-ctl" class="simctl" hidden>
+      <div class="row"><button id="tr-play" type="button" aria-pressed="false" title="Play">Play</button><input id="tr-t" type="range" min="0" max="300" step="1" value="0" aria-label="Traffic replay time"><select id="tr-speed" aria-label="Traffic replay speed"><option value="1">1×</option><option value="2">2×</option><option value="5">5×</option></select></div>
+      <div class="lab" id="tr-lab"></div>
+    </div>
+    <div class="note" id="tr-status"></div>
+    <label><input type="checkbox" id="sh-on"> Shade (21 June, clear sky)</label>
+    <div id="sh-ctl" class="simctl" hidden>
+      <div class="row"><button id="sh-play" type="button" aria-pressed="false" title="Play">Play</button><input id="sh-t" type="range" min="5" max="21" step="0.25" value="5" aria-label="Time of day"></div>
+      <div class="lab" id="sh-lab"></div>
+      <div class="legend"><span>sunlit</span><i class="ramp shade"></i><span>in shadow</span></div>
+    </div>
+    <div class="note" id="sh-status"></div>
+    <label><input type="checkbox" id="tp-on"> Air temperature (2-D model)</label>
+    <div id="tp-ctl" class="simctl" hidden>
+      <div class="row"><button id="tp-play" type="button" aria-pressed="false" title="Play">Play</button><input id="tp-t" type="range" min="0" max="4000" step="50" value="0" aria-label="Temperature model time"></div>
+      <div class="lab" id="tp-lab"></div>
+      <div class="legend"><span>31.0 °C</span><i class="ramp temp"></i><span>32.4 °C</span></div>
+    </div>
+    <div class="note" id="tp-status"></div>
+    <label><input type="checkbox" id="px-on"> Traffic NOx tracer (illustrative)</label>
+    <div id="px-ctl" class="simctl" hidden>
+      <div class="row"><button id="px-play" type="button" aria-pressed="false" title="Play">Play</button><input id="px-t" type="range" min="0" max="1800" step="30" value="0" aria-label="Tracer time"></div>
+      <div class="lab" id="px-lab"></div>
+      <div class="legend"><span>low</span><i class="ramp nox"></i><span>high (log)</span></div>
+    </div>
+    <div class="note" id="px-status"></div>
+    <label><input type="checkbox" id="fl-on"> Flooding (<span id="fl-about">rain storm</span>)</label>
     <div id="fl-ctl" class="simctl" hidden>
+      <div class="row"><select id="fl-scn" aria-label="Flood scenario"><option value="rain">Rain storm</option><option value="river">River inflow</option></select></div>
       <div class="row"><button id="fl-play" type="button" aria-pressed="false" title="Play">Play</button><input id="fl-t" type="range" min="0" max="10800" step="30" value="0" aria-label="Flood scenario time"></div>
       <div class="lab" id="fl-lab"></div>
       <div class="legend"><span>2 cm</span><i class="ramp flood"></i><span>60 cm+</span></div>
@@ -104,6 +139,12 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
     </div>
     <div class="note" id="wd-status"></div>
     <details class="note"><summary>About these simulations</summary>
+      <p><b>Shade.</b> Sun and shadow on 21 June 2026 under a clear sky, every 30 minutes from 05:00 to 21:00 BST (sun position for the area centre). Framework solar model (shadow and sky-view networks, ASHRAE clear-sky irradiance) on a 4 m height field of the terrain and the buildings. Trees do not cast shadows here.</p>
+      <p><b>Air temperature.</b> Yi Qi's 2-D temperature model from the framework, unchanged, driven by the wind layer at 12 m on 8 m cells: its own summer-afternoon scenario (ambient 31.5 °C, heat sources on urban ground, cooling over green areas and in shade), with the sun of 21 June 14:00 BST. A parameterised model scenario, not a Bristol weather record.</p>
+      <p><b>Traffic NOx tracer.</b> Each car of the traffic replay is a source at its position, with SUMO's built-in emission model (petrol Euro 4 car for every vehicle). The tracer is carried by the 12 m wind (speeds rescaled to a 2 m/s mean) with the framework's upwind transport solver, mixed over 10 m, for 30 minutes from clean air. Shown on a relative log scale; not a measured concentration, not PM2.5.</p>
+      <p id="about-river"><b>River inflow flooding.</b> An illustrative scenario: the River Avon entering at the east edge of the area with a flow rising to 800 m³/s in one hour, held for two hours and falling over one hour; no rain; free outflow at the edges; no tides. The terrain data record the water surface, not the river bed, so the channel carries too little water and flooding of the banks is exaggerated. Not a recorded event or a forecast.</p>
+      <p><b>North arrow.</b> The arrow at the top right always points to true north. The model's map grid (EPSG:32630) is turned 0.3° from true north here, too small to see on the arrow.</p>
+      <p><b>Traffic.</b> Illustrative only: a SUMO microsimulation with random passenger-car trips on the OpenStreetMap road network (left-hand traffic, signal timings guessed by the network converter), five minutes replayed in a loop after a ten-minute warm-up. It is not observed traffic, not traffic counts and not the group's traffic surrogate model (TSM). Cars follow the drawn road and bridge-deck surfaces; cars in tunnels and covered roads are not shown. Display after the framework's South Kensington traffic replay: the same 4.5 m sedan model at true size, and in distant views a traffic map of dots (white moving, amber stopped).</p>
       <p><b>Flooding.</b> A rainfall scenario: 50 mm in 90 minutes, then 90 minutes of drainage (the design storm used for the group's South Kensington run, not a Bristol event). Shallow-water solver from the Physics-Grounded 4D World Model Framework, on the Environment Agency 2 m terrain at 8 m resolution with buildings as solid blocks. Sewers take 12 mm/h and green areas infiltrate 20 mm/h; rivers and the harbour take the outflow, but river levels and tides are not modelled. Illustrative only: not a flood forecast and not checked against Environment Agency flood maps.</p>
       <p><b>Wind.</b> The framework's SCALED neural surrogate applied to the Bristol buildings with the terrain flattened. Streaks move with the horizontal wind at the stated height above the ground, speeded up for display. Wind direction and speed are what the model produces, not a Bristol weather record. Not validated against CFD or measurements.</p>
     </details>
@@ -114,6 +155,10 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
   <div class="note" id="info-note"></div><table id="info-table"></table>
 </div>
 <div id="foot"></div>
+<div id="north" role="img" aria-label="North arrow, pointing to true north" title="North arrow: true north (0.3° west of the map grid north)"><svg viewBox="0 0 56 56" width="56" height="56" aria-hidden="true">
+  <circle class="n-bg" cx="28" cy="28" r="26"/>
+  <g class="n-rot"><polygon class="n-head" points="28,14 33.5,29 28,26 22.5,29"/><polygon class="n-tail" points="28,42 33.5,29 28,32 22.5,29"/></g>
+  <text class="n-lab" x="28" y="12.5" text-anchor="middle">N</text></svg></div>
 <div id="tour" hidden role="region" aria-label="Intro tour">
   <div id="tour-steps" aria-hidden="true"></div>
   <div class="tour-row">
@@ -139,6 +184,6 @@ function __viewerCodeFailed() { var b = document.getElementById('boot'); b.class
   document.getElementById('boot-msg').textContent = 'The viewer code did not load.'; document.getElementById('boot-sub').textContent = 'Check the connection, then retry.';
   var r = document.getElementById('boot-retry'); r.hidden = false; r.onclick = function () { location.reload(); }; }
 </script>
-<script type="module" src="./viewer.js?v=intro001-20261111" onerror="__viewerCodeFailed()"></script>
+<script type="module" src="./viewer.js?v=ext001-20261111" onerror="__viewerCodeFailed()"></script>
 </body>
 </html>
