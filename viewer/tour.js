@@ -9,6 +9,9 @@
 //   5. instead of looping back to the start (the reference's auto mode), a flight back to the whole-area view and free
 //      exploration. The tour only moves the camera and switches existing layers; it adds no data.
 // Any drag, scroll or tap on the model hands control to the user at once.
+// Chapter replay (task 17): start({ chapter: g }) plays only the stages of group g (Landmarks ... Flooding) with the same poses,
+// flights, layer animation and captions, flying in from wherever the camera is, then the same flight back to the whole-area
+// view and free exploration. Leaving a chapter with its button or Esc stops where the camera is.
 const D2R = Math.PI / 180;
 const clamp01 = t => (t < 0 ? 0 : t > 1 ? 1 : t);
 const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);   // same easing as the reference flyTo
@@ -33,7 +36,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     pause: $('tour-pause'), skip: $('tour-skip'), legend: $('tour-legend'), ramp: $('tour-ramp'), lo: $('tour-lo'), hi: $('tour-hi') };
   el.steps.innerHTML = GROUPS.map(g => `<span>${g}</span>`).join('');
   const T = { active: false, paused: false, stages: [], i: -1, t: 0, from: null, last: 0, hintTimer: 0, total: 1, done: 0, skipped: [], holdEnd: 0,
-    fade: { wind: { v: 0, to: 0 }, flood: { v: 0, to: 0 } } };
+    fade: { wind: { v: 0, to: 0 }, flood: { v: 0, to: 0 } }, chapter: null };
 
   // ---- camera poses {tx, ty, tz, dist, el (rad), az (rad)} -> position + target
   const pos = p => { const ce = Math.cos(p.el); return [p.tx + p.dist * ce * Math.sin(p.az), p.ty + p.dist * Math.sin(p.el), p.tz + p.dist * ce * Math.cos(p.az)]; };
@@ -102,14 +105,16 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
         tick: u => { sim.floodTime(end * clamp01(u / RIVER_DUR)); return sim.label('flood'); }, exit: () => fadeTo('flood', 0) }); }
     S.push({ group: G_EXPLORE, title: 'Explore freely', sub: 'Drag to move · scroll or pinch to zoom · right-drag or two fingers to turn · double-click a feature for its record.',
       fly: FLY_SHOT, dur: 0, pose: orbit(0, 0, 0, OVERVIEW.dist, OVERVIEW.el, OVERVIEW.az0, 0), last: true });
-    // Files to fetch: what the view on screen needs and, at lower priority, what the next view needs.
-    S.forEach((s, k) => { const nx = S[k + 1]; s.focus = u => [focusOf(s.pose(Math.max(0, u))), ...(nx && !(s.hold && s.hold()) ? [{ ...focusOf(nx.pose(0)), pr: 3000 }] : [])]; });
     return S;
   }
+  // Files to fetch: what the view on screen needs and, at lower priority, what the next view needs.
+  function link(S) { S.forEach((s, k) => { const nx = S[k + 1]; s.focus = u => [focusOf(s.pose(Math.max(0, u))), ...(nx && !(s.hold && s.hold()) ? [{ ...focusOf(nx.pose(0)), pr: 3000 }] : [])]; }); return S; }
+  // The whole film, or one chapter of it: the stages of that group, then the same closing flight to the whole-area view.
+  function stagesFor(mf, fm, chapter) { const S = build(mf, fm); return link(chapter == null ? S : [...S.filter(s => s.group === chapter), S[S.length - 1]]); }
 
   function show() {
     const s = T.stages[T.i]; el.box.hidden = false; el.title.textContent = s.title; el.sub.textContent = s.sub; el.meta.textContent = '';
-    [...el.steps.children].forEach((c, k) => { c.classList.toggle('on', k === s.group); c.classList.toggle('done', k < s.group); });
+    [...el.steps.children].forEach((c, k) => { c.classList.toggle('on', k === s.group); c.classList.toggle('done', T.chapter == null && k < s.group); });
     el.legend.hidden = !s.legend; if (s.legend) { el.ramp.className = 'ramp ' + s.legend[0]; el.lo.textContent = s.legend[1]; el.hi.textContent = s.legend[2]; }
     el.pause.hidden = el.skip.hidden = !!s.last;
   }
@@ -117,7 +122,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     const prev = T.stages[T.i]; if (prev) { T.done += prev.fly + prev.dur; if (prev.exit) prev.exit(); }
     T.i = i; T.t = 0; T.from = now3(); T.holdEnd = 0; const s = T.stages[i]; s.entered = false; show();
     setFog(s.group !== G_WIND && s.group !== G_FLOOD && !s.overhead);   // no distance haze in the overhead field views (camera about 10 km up)
-    Promise.resolve(s.enter ? s.enter() : 0).catch(e => { T.skipped.push(s.title + ': ' + (e && e.message || e)); }).then(() => { s.entered = true; });
+    Promise.resolve(s.enter ? s.enter() : 0).catch(e => { T.skipped.push(s.title + ': ' + (e && e.message || e)); }).then(() => { s.entered = true; if (!T.active) restoreLayers(T.kept); });   // left while this stage was still loading: put the layers back again
     state.planFocus = s.focus(0);
   }
   function restoreLayers(keep) {   // after the tour: tree layers back on; fields off unless the user took over during one
@@ -130,26 +135,30 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
   }
   function finish(how) {   // 'end' = played through; 'skip' = button or Esc; 'take' = the user grabbed the model
     if (!T.active) return; const s = T.stages[T.i]; T.active = false; state.planFocus = null; controls.enabled = true; controls.update(); setFog(true);
-    restoreLayers(how === 'take' && s && !s.last ? ({ [G_WIND]: 'wind', [G_FLOOD]: 'flood', [G_TRAFFIC]: 'traffic', [G_TEMP]: 'temperature', [G_SHADE]: 'shade', [G_POLL]: 'pollution' }[s.group] ?? null) : null);
+    T.kept = how === 'take' && s && !s.last ? ({ [G_WIND]: 'wind', [G_FLOOD]: 'flood', [G_TRAFFIC]: 'traffic', [G_TEMP]: 'temperature', [G_SHADE]: 'shade', [G_POLL]: 'pollution' }[s.group] ?? null) : null; restoreLayers(T.kept);
     onActive(false);
     el.title.textContent = 'Explore freely'; el.sub.textContent = T.stages[T.stages.length - 1].sub; el.meta.textContent = ''; el.legend.hidden = true; el.pause.hidden = el.skip.hidden = true;
-    [...el.steps.children].forEach((c, k) => { c.classList.toggle('on', k === G_EXPLORE); c.classList.toggle('done', k < G_EXPLORE); }); el.fill.style.width = '100%';
+    [...el.steps.children].forEach((c, k) => { c.classList.toggle('on', k === G_EXPLORE); c.classList.toggle('done', T.chapter == null && k < G_EXPLORE); }); el.fill.style.width = '100%';
     const hide = () => { clearTimeout(T.hintTimer); el.box.hidden = true; el.box.classList.remove('hint'); el.box.onclick = null; };
     el.box.classList.add('hint'); el.box.onclick = hide; clearTimeout(T.hintTimer); T.hintTimer = setTimeout(hide, 7000);
     if (window.__diag) window.__diag.marks['tour_' + how + '_ms'] = Math.round(performance.now() - window.__diag.t0);
   }
-  function skip() {   // jump to the whole-area view and hand over
-    if (!T.active) return; const p = T.stages[T.stages.length - 1].pose(0); put(pos(p), [p.tx, p.ty, p.tz]); finish('skip'); }
+  function skip() {   // intro: jump to the whole-area view and hand over; a chapter: stop where the camera is
+    if (!T.active) return; if (T.chapter == null) { const p = T.stages[T.stages.length - 1].pose(0); put(pos(p), [p.tx, p.ty, p.tz]); } finish('skip'); }
 
-  async function start() {
-    if (T.active) return; const mf = state.manifest; if (!mf) return;
+  async function start(opts = {}) {   // opts.chapter = group number: play that chapter only, from the current view
+    if (T.active) return false; const mf = state.manifest; if (!mf) return false;
     let fm = {}; try { fm = await fields.manifest(); } catch (e) { fm = {}; }
+    const chapter = Number.isInteger(opts.chapter) && opts.chapter > 0 && opts.chapter < G_EXPLORE ? opts.chapter : null;
+    const stages = stagesFor(mf, fm, chapter); if (T.active || (chapter != null && stages.length < 2)) return false;   // a chapter whose results are not in this build
+    T.chapter = chapter; el.skip.textContent = chapter == null ? 'Skip intro' : 'End chapter'; el.box.setAttribute('aria-label', chapter == null ? 'Intro tour' : 'Chapter: ' + GROUPS[chapter]);
     clearTimeout(T.hintTimer); el.box.classList.remove('hint'); el.box.onclick = null;
-    T.stages = build(mf, fm); T.total = T.stages.reduce((n, s) => n + s.fly + s.dur, 0); T.done = 0; T.i = -1; T.paused = false; T.skipped = []; T.active = true; T.last = performance.now();
+    T.stages = stages; T.total = T.stages.reduce((n, s) => n + s.fly + s.dur, 0); T.done = 0; T.i = -1; T.paused = false; T.skipped = []; T.active = true; T.last = performance.now();
     el.pause.textContent = 'Pause'; el.pause.setAttribute('aria-pressed', 'false');
     for (const k of ['wind', 'flood']) { T.fade[k].v = T.fade[k].to = 0; fields.setOpacity(k, 0); sim.play(k, false); }
     await sim.set('wind', false); await sim.set('flood', false); await sim.set('traffic', false); for (const k of ['shade', 'pollution', 'temperature']) await sim.set(k, false);
     controls.enabled = false; onActive(true);
+    if (chapter != null) { enter(0); return true; }   // a chapter flies in from the current view (every chapter stage starts with a flight)
     const p0 = T.stages[0].pose(0); put(pos(p0), [p0.tx, p0.ty, p0.tz]); enter(0);
     // Fetch the simulation results while the geometry part plays, wind first.
     sim.trafficPreload().catch(() => {}).then(() => fm.wind ? fields.preload('wind') : 0).catch(() => {}).then(() => fm.flood ? fields.preload('flood') : 0).catch(() => {});
@@ -161,7 +170,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
       if (f.v === 0 && f.to === 0) sim.set(k, false); }
   }
   function update() {
-    if (!T.active) return; const now = performance.now(), dt = Math.min(0.1, (now - T.last) / 1000); T.last = now;
+    if (!T.active || T.i < 0) return; const now = performance.now(), dt = Math.min(0.1, (now - T.last) / 1000); T.last = now;
     const s = T.stages[T.i], nx = T.stages[T.i + 1];
     if (!T.paused && s.entered) { T.t += dt; stepFades(dt); }
     const u = T.t - s.fly, p = s.pose(Math.max(0, u));
@@ -192,9 +201,15 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
   addEventListener('keydown', e => { if (!T.active || e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === 'Escape') skip(); else if (e.key === ' ' && !/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target.tagName)) { e.preventDefault(); togglePause(); } });
 
-  return { start, skip, update, togglePause, active: () => T.active,
-    info: () => ({ active: T.active, paused: T.paused, stage: T.i, of: T.stages.length, title: T.stages[T.i]?.title, t: +T.t.toFixed(2), skipped: T.skipped.slice(),
+  // chapters that can be replayed: [{ group, name, stages, seconds }]; stages = 0 when the results are not in this build
+  async function chapters() { const mf = state.manifest; if (!mf) return []; let fm = {}; try { fm = await fields.manifest(); } catch (e) { fm = {}; }
+    const S = build(mf, fm); return GROUPS.map((name, group) => ({ group, name, list: S.filter(s => s.group === group) })).filter(c => c.group > 0 && c.group < G_EXPLORE)
+      .map(c => ({ group: c.group, name: c.name, stages: c.list.length, seconds: Math.round(c.list.reduce((n, s) => n + s.fly + s.dur, 0)) })); }
+  return { start, skip, update, togglePause, chapters, active: () => T.active,
+    info: () => ({ active: T.active, paused: T.paused, chapter: T.chapter, entered: !!T.stages[T.i]?.entered, stage: T.i, of: T.stages.length, title: T.stages[T.i]?.title, t: +T.t.toFixed(2), skipped: T.skipped.slice(),
       fade: { wind: +T.fade.wind.v.toFixed(2), flood: +T.fade.flood.v.toFixed(2) }, total_s: +T.total.toFixed(1) }),
+    // for automated checks: move the current stage to its last moment (it then ends by itself, as in normal play)
+    toEnd() { const s = T.stages[T.i]; if (T.active && s && s.entered) T.t = Math.max(T.t, s.fly + s.dur - 0.05); },
     // for automated checks: jump to stage k at stage time t (flight included), with the fades of that stage settled
     seek(k, t = 0) { if (!T.active) return; enter(Math.max(0, Math.min(T.stages.length - 1, k))); const s = T.stages[T.i]; T.t = t;
       const p = s.pose(Math.max(0, t - s.fly)); T.from = { pos: pos(p), tgt: [p.tx, p.ty, p.tz] };

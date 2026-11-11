@@ -4,7 +4,7 @@
 // green areas), like the flood layer of fields.js; this module chains its shader code after the one fields.js installs.
 import * as THREE from 'three';
 
-const V = 'ext001-20261111';
+const V = 'ext002-20261111';
 async function decodeGrey(url) {   // first channel of a PNG; first row = north
   const r = await fetch(url); if (!r.ok) throw new Error(url.split('/').pop() + ': HTTP ' + r.status);
   const blob = await r.blob(); let src;

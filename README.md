@@ -1,6 +1,6 @@
 # Bristol 8 km x 8 km - geometry with traffic, wind, temperature, shade, pollution and flooding (web preview)
 
-Release ext001-20261111.
+Release ext002-20261111.
 
 Interactive Three.js preview of a base/analysis-candidate geometry layer for central Bristol (EPSG:32630 local frame, 8 km x 8 km),
 with illustrative simulation layers: traffic, wind, air temperature, shade, a traffic NOx tracer and two flooding scenarios.
@@ -16,6 +16,13 @@ The order and camera transitions follow the South Kensington viewer of the Physi
 Skip intro or Esc leaves it; dragging, scrolling or touching the model hands control to you at once; Space pauses; Play intro replays it.
 `?tour=0` (or a fixed `?cam=`) opens without the tour; the tour also does not start by itself when the system asks for reduced motion.
 In the tour, wind is shown as speed colours on the ground; in the Simulations panel it is shown as moving streaks.
+
+**Chapters.** In free exploration the Chapters button (top left, next to Play intro) lists the seven chapters of the tour: Landmarks, Traffic, Wind,
+Temperature, Shade, Pollution and Flooding. Choosing one plays that chapter again with the same camera moves, layer animation and captions:
+the camera flies in from the current view, the chapter plays (Landmarks: all five; Traffic: close up, then the whole area; Flooding: rain storm,
+then river inflow), and the camera returns to the whole-area view for free exploration. End chapter or Esc stops where the camera is and
+switches the chapter's layer off; dragging, scrolling or touching the model hands control over and keeps that layer on. A chapter can be
+played as often as wanted; a chapter whose results are missing from a build is greyed out.
 
 ## Simulations (illustrative, not validated)
 
@@ -102,5 +109,7 @@ Geometry preview: the CO performance candidate reviewed by CD on Mac mini Safari
 Release intro001-20261111 (wind, rain flood, intro tour): display and interaction checked by CD on Mac mini Safari 27.2 from a local server; about 60 frames per second sampled; captured page errors zero.
 
 Release ext001-20261111 (traffic, north arrow, temperature, shade, NOx tracer, river flood): the review builds were checked by CD on Mac mini Safari from a local server in two rounds: the new tour stages, the layer switches, cars on the Cumberland Basin flyover, traffic speed, pause and seek, shadows at three times of day from one camera, both flood scenarios and the switch between them; about 60 frames per second in most sampled views (35 in one sample just after three layers were switched on) and zero captured page errors there. Not tested on a MacBook Air or over a slow network. These checks cover display only, not the physics; no layer has been compared with measurements.
+
+Release ext002-20261111 (chapter replay): checked by CO before release in headless Chromium with software rendering (not Safari): the Chapters menu; each of the seven chapters started from a different view and played to its end; End chapter, Esc and hand-over by drag; an immediate repeat; chapters after skipping the intro and after its natural end; a 390 px wide window; greyed-out chapters in a build without those results; zero page errors. On Mac mini Safari, CD played the intro and all seven chapters to their natural end from a local server and exercised Skip, Space, Esc, End chapter and hand-over by drag and by wheel (about 60 frames per second at the chapter ends). After that review the layout for short, narrow windows was corrected (the Chapters menu stays above the loading bar and scrolls if needed; the caption box keeps clear of the north arrow and scrolls inside when the window is short) and checked by CO in headless Chromium at seven window sizes from 320 x 480 to 1280 x 800, including 427 x 290. Not tested on a phone, a MacBook Air or a slow network.
 
 `SOURCE_FREEZE_full_B8.json` describes the historical input freeze, not current deployed file hashes. `WEB_RELEASE_MANIFEST.json` (in the repository) lists the deployed release. Analysis masters and frozen outputs were not changed.

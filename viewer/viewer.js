@@ -5,11 +5,11 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createFields } from './fields.js?v=ext001-20261111';
-import { createTour } from './tour.js?v=ext001-20261111';
-import { createCars } from './cars.js?v=ext001-20261111';
-import { createNorthArrow } from './north.js?v=ext001-20261111';
-import { createLayers } from './layers.js?v=ext001-20261111';
+import { createFields } from './fields.js?v=ext002-20261111';
+import { createTour } from './tour.js?v=ext002-20261111';
+import { createCars } from './cars.js?v=ext002-20261111';
+import { createNorthArrow } from './north.js?v=ext002-20261111';
+import { createLayers } from './layers.js?v=ext002-20261111';
 
 window.__viewerStarted = true;
 const LAYERS = [
@@ -220,7 +220,7 @@ canvas.addEventListener('dblclick', async e => {
 function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
   bootSet('Reading the list of model files…', null);
-  const r = await fetch('manifest.json?v=ext001-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  const r = await fetch('manifest.json?v=ext002-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
   $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
   $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
   $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
@@ -249,7 +249,7 @@ async function init() {
     plan(); }
   if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
   // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
-  try { const ri = await fetch('./inspect_views.json?v=ext001-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
+  try { const ri = await fetch('./inspect_views.json?v=ext002-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
@@ -278,7 +278,8 @@ async function scalarOn(k, on) {   // k = 'pollution' | 'temperature'
   if (!on) { if (layers.S.scalar.key === k) layers.useScalar(null); return; }
   if ($(other === 'pollution' ? 'px-on' : 'tp-on').checked) { const o = $(other === 'pollution' ? 'px-on' : 'tp-on'); o.checked = false; await o.onchange({ target: o }); }
   $(ids[3]).textContent = 'Loading…';
-  try { await layers.loadScalar(k, (n, t) => { $(ids[3]).textContent = `Loading frames: ${n} of ${t}`; }); layers.S.scalar.t = 0; layers.useScalar(k); scalarLabel(k); $(ids[3]).textContent = ''; }
+  try { await layers.loadScalar(k, (n, t) => { $(ids[3]).textContent = `Loading frames: ${n} of ${t}`; }); if (!$(ids[0]).checked) { $(ids[3]).textContent = ''; return; }   // switched off while loading
+    layers.S.scalar.t = 0; layers.useScalar(k); scalarLabel(k); $(ids[3]).textContent = ''; }
   catch (err) { $(ids[0]).checked = false; $(ids[1]).hidden = true; sim[k + 'Play'] = false; $(ids[3]).textContent = 'This layer did not load: ' + err.message; diagError(k, err, {}); } }
 $('sh-on').onchange = async e => { const on = e.target.checked; $('sh-ctl').hidden = !on; sim.shadePlay = on; setPlay($('sh-play'), on); layers.setShade(on);
   if (on) { $('sh-status').textContent = 'Loading…'; try { await layers.loadShade((n, t) => { $('sh-status').textContent = `Loading frames: ${n} of ${t}`; }); if (layers.S.shade.t < 5) layers.setShadeTime(5); shadeLabel(); $('sh-status').textContent = ''; }
@@ -332,6 +333,20 @@ const tour = createTour({ camera, controls, state, fields, sim: simApi, loadingT
 // Plays on opening the page unless a fixed camera is asked for (?cam=), the tour is switched off (?tour=0) or the system asks for reduced motion.
 const TOUR_AUTO = QS.get('tour') !== '0' && !QS.has('cam') && (QS.get('tour') === '1' || !matchMedia('(prefers-reduced-motion: reduce)').matches);
 $('tour-replay').onclick = () => tour.start();
+// Chapter replay: a small menu in the dock; each entry plays that chapter of the intro again from the current view (tour.js).
+const chBtn = $('tour-chapters'), chMenu = $('chapter-menu');
+function closeChapters() { if (chMenu.hidden) return; chMenu.hidden = true; chBtn.setAttribute('aria-expanded', 'false'); }
+chBtn.onclick = async () => { if (!chMenu.hidden) { closeChapters(); return; }
+  const list = await tour.chapters(); chMenu.textContent = '';
+  for (const c of list) { const b = document.createElement('button'), n = document.createElement('span'), d = document.createElement('small'); b.type = 'button'; b.setAttribute('role', 'menuitem'); b.disabled = !c.stages;
+    n.textContent = c.name; d.textContent = !c.stages ? 'not in this build' : (c.stages > 1 ? c.stages + ' views · ' : '') + c.seconds + ' s'; b.append(n, d);
+    b.onclick = () => { closeChapters(); tour.start({ chapter: c.group }); }; chMenu.appendChild(b); }
+  chMenu.hidden = false; chBtn.setAttribute('aria-expanded', 'true'); placeChapters(); };
+function placeChapters() { if (chMenu.hidden) return; const r = $('dock').getBoundingClientRect();   // under the dock; never taller than the space below it
+  chMenu.style.left = r.left + 'px'; chMenu.style.top = (r.bottom + 4) + 'px'; chMenu.style.maxHeight = Math.max(72, innerHeight - r.bottom - 12) + 'px'; }
+addEventListener('resize', placeChapters);
+addEventListener('pointerdown', e => { if (!chMenu.hidden && !chMenu.contains(e.target) && e.target !== chBtn) closeChapters(); }, true);
+addEventListener('keydown', e => { if (e.key === 'Escape') closeChapters(); });
 function simTick() {
   const now = performance.now(), dt = Math.min(0.1, (now - sim.last) / 1000); sim.last = now;
   if (sim.flPlay && fields.S.flood.loaded) { const f = fields.floodInfo(); let t = f.t + dt * 300; if (t > f.end) t = 0; fields.setFloodTime(t); floodLabel(); }   // 5 model minutes per second

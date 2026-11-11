@@ -63,7 +63,7 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
 
   const S = { man: null, dtm: null, flood: { tex: [], t: 0, playing: false, loaded: false, loading: false }, wind: { frames: [], k: -1, on: false, loaded: false, loading: false, playing: false, fi: 0, mode: 'streaks', mapOpacity: 1 } };
   let manP = null;
-  const manifest = () => manP ||= fetch(base + 'manifest.json?v=ext001-20261111').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => { m.flood_rain = m.flood; return (S.man = m); });   // task 17: flood_rain / flood_river scenarios share the flood slot
+  const manifest = () => manP ||= fetch(base + 'manifest.json?v=ext002-20261111').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => { m.flood_rain = m.flood; return (S.man = m); });   // task 17: flood_rain / flood_river scenarios share the flood slot
 
   async function loadDtm() {
     if (S.dtm) return S.dtm;
@@ -187,7 +187,7 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
     async setFlood(on) { U.uFloodOn.value = on ? 1 : 0; if (on) await loadFlood(); },
     setFloodTime, floodInfo,
     async setWind(on) { S.wind.on = on; lines.visible = on && S.wind.mode !== 'map'; U.uWindOn.value = on && S.wind.mode === 'map' ? S.wind.mapOpacity : 0; if (on) await loadWind(); },
-    setWindFrame(i) { const W = S.wind; if (!W.frames.length) return; W.fi = Math.max(0, Math.min(W.frames.length - 1, i)); U.uWind.value = W.frames[W.fi].tex; },
+    setWindFrame(i) { const W = S.wind; if (!W.loaded) return; W.fi = Math.max(0, Math.min(W.frames.length - 1, i)); U.uWind.value = W.frames[W.fi].tex; },
     // 'streaks' (default, the Simulations card) or 'map' (speed colours on the ground, used by the intro tour's overhead view)
     setWindMode(mode) { const W = S.wind; W.mode = mode; lines.visible = W.on && mode !== 'map'; U.uWindOn.value = W.on && mode === 'map' ? W.mapOpacity : 0; },
     windInfo() { const W = S.wind, f = W.frames[W.fi]; return { i: W.fi, n: W.frames.length, step: f?.step, total: S.man?.wind?.steps_total, height: S.man?.wind?.height_above_ground_m }; },

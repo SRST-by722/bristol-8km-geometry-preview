@@ -14,7 +14,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const CAR_COLORS = ['#dae0e5', '#33516e', '#878b8c', '#48474a', '#842f2c', '#bcc4cd', '#d2c6a5', '#377175'];   // framework DEFAULT_CAR_COLORS
 const DOTS_FROM = 1600, MODELS_UNTIL = 2600;   // camera distance to the view target (m): dots beyond, models below (both in between)
-const V = 'ext001-20261111';
+const V = 'ext002-20261111';
 
 function dotTexture() {   // as the framework's traffic map dots
   const c = document.createElement('canvas'); c.width = c.height = 32; const g = c.getContext('2d');
@@ -100,7 +100,7 @@ export function createCars({ scene, camera, controls, base = '../web/traffic/' }
 
   return {
     S, load, update,
-    async setOn(on) { S.on = on; if (on) await load(); group.visible = on; if (on) update(); },
+    async setOn(on) { S.on = on; if (on) await load(); group.visible = S.on; if (S.on) update(); },   // S.on, not on: it may have been switched off while loading
     setTime(t) { if (!S.n) return; S.t = ((t % S.n) + S.n) % S.n; },
     setSpeed(v) { S.speed = v; },
     advance(dt) { if (S.n) S.t = (S.t + dt * S.speed) % S.n; },
