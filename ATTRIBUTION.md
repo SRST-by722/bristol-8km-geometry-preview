@@ -1,6 +1,6 @@
 # Data sources, licences and attribution
 
-This site contains derived 3D geometry only. No source data files are included.
+This site contains derived 3D geometry and derived simulation frames only. No source data files, model weights or solver code are included.
 
 | Source | Used for | Licence | Attribution |
 | --- | --- | --- | --- |
@@ -8,6 +8,8 @@ This site contains derived 3D geometry only. No source data files are included.
 | Environment Agency LIDAR Composite DTM 2022, 2 m | Terrain, building base heights | Open Government Licence v3.0 | (c) Environment Agency copyright and/or database right 2022. All rights reserved. |
 | Environment Agency LIDAR Composite First Return DSM 2022, 2 m | Building and bridge deck heights | Open Government Licence v3.0 | (c) Environment Agency copyright and/or database right 2022. All rights reserved. |
 | Bristol City Council tree asset records | Tree points | Open Government Licence v3.0 | Bristol City Council |
+
+Simulation layers (`web/fields/`): computed with the Physics-Grounded 4D World Model Framework (Yueyan Li, Zhongkai Yuan, Bohan Ye et al., Imperial College London; https://github.com/acse-yl222/physics-grounded-4d-world-model-framework, commit 587f3d9): the shallow-water flood solver and the SCALED wind surrogate with its trained weights, both unchanged. The flood terrain is the Environment Agency DTM above; buildings and water areas are from the OpenStreetMap data above.
 
 Reference photographs (Wikimedia Commons, CC BY-SA) guided the colour and form of five landmarks. The photographs are not included.
 

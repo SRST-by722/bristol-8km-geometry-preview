@@ -39,8 +39,23 @@ label{display:flex;gap:7px;align-items:center;margin:3px 0;cursor:pointer}.sw{wi
 #boot.err #boot-msg{color:var(--warn)}#boot-retry{margin-top:8px}
 #act{position:fixed;left:318px;right:348px;top:14px;margin-inline:auto;max-width:520px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px 9px 12px;font-size:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}#act .cardhead{align-items:center}
 #act-text{font-variant-numeric:tabular-nums}#act .bar{margin-top:6px;height:4px}#act.err #act-text{color:var(--warn)}#act-retry{margin-top:6px}
+#fields{flex:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px 10px;box-shadow:0 2px 12px rgba(0,0,0,.08);max-height:45%;overflow:auto}
+#fields label{font-weight:600;margin-top:6px}.simctl{margin:2px 0 4px 22px}.simctl .row{display:flex;gap:8px;align-items:center}.simctl input[type=range]{flex:1;min-width:0;accent-color:var(--accent)}
+.simctl .lab{color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums;margin-top:2px}.legend{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);margin-top:3px}
+.ramp{flex:1;height:7px;border-radius:3px}.ramp.flood{background:linear-gradient(90deg,#9fd8f2,#4fb3e6,#1e88d0,#0d5fb0,#083b85,#041f52)}.ramp.wind{background:linear-gradient(90deg,#1d3a8a,#2f6fc0,#d99a12,#d9531e,#9b111e)}
+#fields .note.err{color:var(--warn)}#fields details p{margin:6px 0}#fields summary{cursor:pointer}
 @media (max-width:980px){#act{left:14px;right:14px;top:auto;bottom:34px;max-width:none}}
 @media (max-width:700px){#left{width:auto;right:14px;bottom:auto;max-height:52%}#info{left:14px;right:14px;width:auto;top:auto;bottom:92px;max-height:34%}#foot{display:none}#act{bottom:14px}}
+/* intro tour: caption bar at the bottom; the panels are put away while it plays */
+body.touring #left,body.touring #info,body.touring #act,body.touring #foot{display:none!important}
+#tour{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);width:min(680px,calc(100% - 28px));background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px 12px;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+#tour-steps{display:flex;gap:14px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9aa5a0;font-weight:600;margin-bottom:6px;flex-wrap:wrap}
+#tour-steps span.on{color:var(--accent)}#tour-steps span.done{color:var(--muted)}
+.tour-row{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}.tour-text{min-width:0}.tour-btns{display:flex;gap:6px;flex:none}
+#tour-title{font-family:Georgia,serif;font-size:19px;font-weight:600;display:block;text-wrap:balance}#tour-sub{color:var(--muted);font-size:12px;margin-top:2px}
+#tour-meta{font-size:12px;font-variant-numeric:tabular-nums;margin-top:4px;min-height:17px}#tour .legend{max-width:260px}#tour .bar{height:3px;margin-top:8px}#tour .bar i{transition:none}
+#tour.hint{cursor:pointer}#tour.hint .bar,#tour.hint #tour-meta{display:none}
+@media (max-width:700px){#tour{bottom:12px}#tour-title{font-size:16px}.tour-row{flex-direction:column;gap:6px}}
 #diagdl{position:fixed;right:12px;bottom:6px;font:11px system-ui;padding:2px 8px}#diag{position:fixed;right:12px;bottom:30px;width:400px;max-width:calc(100% - 24px);max-height:50%;overflow:auto;background:rgba(20,26,24,.88);color:#e8efe9;border-radius:8px;padding:6px 8px 8px 10px}#diag-text{margin:0;font:11px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere}#diag .cardhead{color:#b9c6be;font-size:11px;align-items:center}#diag button.ico{background:transparent;border-color:#5d6864;color:#e8efe9}
 </style>
 <script>/* Read-only diagnostics, captured from page start. Shown only with ?diag=1. Not the full browser console. */
@@ -55,9 +70,11 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
 <div id="left">
   <div id="dock" role="toolbar" aria-label="Panel controls">
     <button id="ui-toggle" type="button" aria-pressed="false" aria-label="Hide all panels" title="Hide all panels to see the model (H)">Hide panels</button>
+    <button id="tour-replay" type="button" aria-label="Play the intro tour" title="Play the intro tour: geometry, landmarks, wind, flooding">Play intro</button>
     <button id="chip-panel" class="chip" type="button" hidden aria-label="Show the layers and landmarks panel" title="Show the layers and landmarks panel">Layers &amp; landmarks</button>
     <button id="chip-info" class="chip" type="button" hidden aria-label="Show the feature record" title="Show the feature record"><span id="chip-info-text">Record</span></button>
     <button id="chip-act" class="chip" type="button" hidden aria-label="Show the loading panel" title="Show the loading panel"><span id="chip-act-text"></span><span class="bar"><i id="chip-act-fill"></i></span></button>
+    <button id="chip-fields" class="chip" type="button" hidden aria-label="Show the simulations panel" title="Show the simulations panel">Simulations</button>
     <button id="chip-diag" class="chip" type="button" hidden aria-label="Show the diagnostics panel" title="Show the diagnostics panel">Diagnostics</button>
   </div>
   <div id="panel">
@@ -70,12 +87,43 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
     <div id="status"></div>
     <div class="note" id="note"></div>
   </div>
+  <div id="fields" role="group" aria-label="Simulations">
+    <div class="cardhead"><b>Simulations</b><div class="tools"><button id="min-fields" class="ico" type="button" aria-label="Minimise the simulations panel" title="Minimise this panel">&#8211;</button></div></div>
+    <label><input type="checkbox" id="fl-on"> Flooding (rainfall scenario)</label>
+    <div id="fl-ctl" class="simctl" hidden>
+      <div class="row"><button id="fl-play" type="button" aria-pressed="false" title="Play">Play</button><input id="fl-t" type="range" min="0" max="10800" step="30" value="0" aria-label="Flood scenario time"></div>
+      <div class="lab" id="fl-lab"></div>
+      <div class="legend"><span>2 cm</span><i class="ramp flood"></i><span>60 cm+</span></div>
+    </div>
+    <div class="note" id="fl-status"></div>
+    <label><input type="checkbox" id="wd-on"> Wind (surrogate model)</label>
+    <div id="wd-ctl" class="simctl" hidden>
+      <div class="row"><button id="wd-play" type="button" aria-pressed="false" title="Play">Play</button><input id="wd-k" type="range" min="0" max="0" step="1" value="0" aria-label="Wind model step"></div>
+      <div class="lab" id="wd-lab"></div>
+      <div class="legend"><span>slow</span><i class="ramp wind"></i><span>fast</span></div>
+    </div>
+    <div class="note" id="wd-status"></div>
+    <details class="note"><summary>About these simulations</summary>
+      <p><b>Flooding.</b> A rainfall scenario: 50 mm in 90 minutes, then 90 minutes of drainage (the design storm used for the group's South Kensington run, not a Bristol event). Shallow-water solver from the Physics-Grounded 4D World Model Framework, on the Environment Agency 2 m terrain at 8 m resolution with buildings as solid blocks. Sewers take 12 mm/h and green areas infiltrate 20 mm/h; rivers and the harbour take the outflow, but river levels and tides are not modelled. Illustrative only: not a flood forecast and not checked against Environment Agency flood maps.</p>
+      <p><b>Wind.</b> The framework's SCALED neural surrogate applied to the Bristol buildings with the terrain flattened. Streaks move with the horizontal wind at the stated height above the ground, speeded up for display. Wind direction and speed are what the model produces, not a Bristol weather record. Not validated against CFD or measurements.</p>
+    </details>
+  </div>
 </div>
 <div id="info" hidden>
   <div class="cardhead"><b id="info-title"></b><div class="tools"><button id="min-info" class="ico" type="button" aria-label="Minimise the feature record" title="Minimise this record">&#8211;</button><button id="close-info" class="ico" type="button" aria-label="Close the feature record" title="Close this record">&#215;</button></div></div>
   <div class="note" id="info-note"></div><table id="info-table"></table>
 </div>
 <div id="foot"></div>
+<div id="tour" hidden role="region" aria-label="Intro tour">
+  <div id="tour-steps" aria-hidden="true"></div>
+  <div class="tour-row">
+    <div class="tour-text" role="status" aria-live="polite"><b id="tour-title"></b><div id="tour-sub"></div></div>
+    <div class="tour-btns"><button id="tour-pause" type="button" aria-pressed="false" title="Pause or resume the tour (Space)">Pause</button><button id="tour-skip" type="button" title="Leave the tour and explore freely (Esc)">Skip intro</button></div>
+  </div>
+  <div id="tour-meta"></div>
+  <div class="legend" id="tour-legend" hidden><span id="tour-lo"></span><i id="tour-ramp" class="ramp"></i><span id="tour-hi"></span></div>
+  <div class="bar"><i id="tour-fill"></i></div>
+</div>
 <div id="act" role="status" aria-live="polite" hidden>
   <div class="cardhead"><div id="act-text"></div><div class="tools"><button id="min-act" class="ico" type="button" aria-label="Minimise the loading panel" title="Minimise the loading panel">&#8211;</button></div></div>
   <div class="bar"><i id="act-fill"></i></div><button id="act-retry" type="button" hidden>Retry the failed files</button>
@@ -91,6 +139,6 @@ function __viewerCodeFailed() { var b = document.getElementById('boot'); b.class
   document.getElementById('boot-msg').textContent = 'The viewer code did not load.'; document.getElementById('boot-sub').textContent = 'Check the connection, then retry.';
   var r = document.getElementById('boot-retry'); r.hidden = false; r.onclick = function () { location.reload(); }; }
 </script>
-<script type="module" src="./viewer.js?v=panels001-20261110" onerror="__viewerCodeFailed()"></script>
+<script type="module" src="./viewer.js?v=intro001-20261111" onerror="__viewerCodeFailed()"></script>
 </body>
 </html>

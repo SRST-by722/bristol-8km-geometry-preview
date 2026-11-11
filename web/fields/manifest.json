@@ -1,0 +1,627 @@
+{
+ "frame": "task-14 local frame (EPSG:32630, origin E527987.5380737204 N5700390.317169642); x east, y north",
+ "dtm": {
+  "grid": {
+   "x0": -3999.0,
+   "y0": -3999.0,
+   "cell": 8,
+   "nx": 999,
+   "ny": 999
+  },
+  "encoding": "cm + 2000, 16 bit in R (high byte) and G (low byte)",
+  "file": "dtm_8m.png",
+  "bytes": 1290239,
+  "sha256": "4345982ded1257634c8eaa48744eb721f5765456683c96f9442184ea74f07721",
+  "source": "EA LIDAR Composite DTM 2022 (OGL v3), pooled to the flood grid"
+ },
+ "flood": {
+  "label": "Flooding (rainfall scenario)",
+  "grid": {
+   "x0": -3999.0,
+   "y0": -3999.0,
+   "cell": 8,
+   "nx": 999,
+   "ny": 999
+  },
+  "encoding": "water depth in cm, 8 bit, clipped at 255 cm",
+  "frames": [
+   {
+    "file": "flood_000.png",
+    "bytes": 1048,
+    "sha256": "06b43ca5d9dbab98a926fb509ae0f056acfef27630af21ee7d705e4156cf0465",
+    "t_s": 0.8,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_001.png",
+    "bytes": 1048,
+    "sha256": "06b43ca5d9dbab98a926fb509ae0f056acfef27630af21ee7d705e4156cf0465",
+    "t_s": 180.562,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_002.png",
+    "bytes": 1149,
+    "sha256": "b216e8af709b415d94c68db2b0ab05c6d0fbb090fc821d970a0a65b5e84a98ca",
+    "t_s": 360.402,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_003.png",
+    "bytes": 2089,
+    "sha256": "880381d827764ac4fbaeb0ea386d5a4582b549c7609c35102e926e54f03bad75",
+    "t_s": 540.646,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_004.png",
+    "bytes": 8886,
+    "sha256": "8fb9844d32d7fe9a5acd072cf26871bdcef54d59527d43dec7f27225ad942088",
+    "t_s": 720.671,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_005.png",
+    "bytes": 19765,
+    "sha256": "3240a4dfec4226761ed34cbbb6fce269e33af17c880b599b3f3c744666956f21",
+    "t_s": 900.322,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_006.png",
+    "bytes": 43982,
+    "sha256": "017bd33c25f8719a16976f6f5f3d5ea69bef668801179e333a3bd83df891fe1a",
+    "t_s": 1080.091,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "flood_007.png",
+    "bytes": 68676,
+    "sha256": "f930f036b2849a3878617aa0e2cbe58c5d2f90f7fc9ac6b0f8bf9d3069eef62e",
+    "t_s": 1260.493,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "flood_008.png",
+    "bytes": 88183,
+    "sha256": "ca82e6ff9b087f4aafdf49fc82b8fd714357c7817dafa61c99e0a24892619dd4",
+    "t_s": 1440.774,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "flood_009.png",
+    "bytes": 103075,
+    "sha256": "03ea155522dc71c4ff023ec9659dc68502ee4ccf3479abfbe24d352390f28d0d",
+    "t_s": 1620.014,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "flood_010.png",
+    "bytes": 115670,
+    "sha256": "b0a4e52619b406f404c50c0dc50247a2975514447231e3834137dca3ca427ff3",
+    "t_s": 1800.426,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "flood_011.png",
+    "bytes": 180150,
+    "sha256": "fd2df3d8b6583a5f4956f3a3e16bb8009a8e2051e9e355a87641165b94d1fb26",
+    "t_s": 1980.779,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "flood_012.png",
+    "bytes": 217222,
+    "sha256": "f7096fd7f2d4a644f38656c5b75a1de2444b9277e7e817c6ca780e5581be85f6",
+    "t_s": 2160.502,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "flood_013.png",
+    "bytes": 239717,
+    "sha256": "bcfdc427a10e91cb8b3eed1ec330ed2cf6d95042f181ac343fd87835d71cbcda",
+    "t_s": 2340.0,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "flood_014.png",
+    "bytes": 256685,
+    "sha256": "ea48f3671dda4b411230fcd664d0fd6a5d41b972dc8e22436d8cad2a73d6feb7",
+    "t_s": 2520.365,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "flood_015.png",
+    "bytes": 272602,
+    "sha256": "697325c5591ae7088465dcead84917b8e85fc4800360bb5c1211f9be77752db3",
+    "t_s": 2700.436,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "flood_016.png",
+    "bytes": 261536,
+    "sha256": "cde4f3c1a5f4c8ab88ba878c981866329d2ee46fcae85e82c05f0421deb59841",
+    "t_s": 2880.389,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "flood_017.png",
+    "bytes": 259995,
+    "sha256": "c4e0b2496e08213da8aeb51fb7b03f6f2c6ea3293945ac84f8dd85ca34bde2bb",
+    "t_s": 3060.342,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "flood_018.png",
+    "bytes": 261346,
+    "sha256": "280628abc5d7776f0cd0329c4e8a56602ade2b619616c5f534a1058bab72d91f",
+    "t_s": 3240.295,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "flood_019.png",
+    "bytes": 264238,
+    "sha256": "97403660234ae48a0efb73f9d5925fec329efb0d24d6c46687f46cbac30af55c",
+    "t_s": 3420.248,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "flood_020.png",
+    "bytes": 268404,
+    "sha256": "9539debdddc6745f596629f9dc83afaedd0555f9147614e8cf3bdb8af4715f98",
+    "t_s": 3600.073,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "flood_021.png",
+    "bytes": 253713,
+    "sha256": "b79ed0462a1e2a134039fd3f7dc8e930af5f0e9943bf2738ee675aabe14b2d74",
+    "t_s": 3780.711,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "flood_022.png",
+    "bytes": 243103,
+    "sha256": "917953dfe213ae0f4d3920efaf0576d0e8f4deee8ca489eb029d9da2541c94df",
+    "t_s": 3960.002,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "flood_023.png",
+    "bytes": 235702,
+    "sha256": "d3236b497c8242b8e498ee9fec256ff831f02e518fac7aace16bee728a49f4c1",
+    "t_s": 4140.06,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "flood_024.png",
+    "bytes": 230774,
+    "sha256": "f7d19471ca9d897d42087be06a3e448ab2a6adf6954088c8dda17bd31720aed9",
+    "t_s": 4320.389,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "flood_025.png",
+    "bytes": 227386,
+    "sha256": "e370dbd747caf6024d42129d67b19b1d67f77df696f5191d010666940e815a96",
+    "t_s": 4500.39,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "flood_026.png",
+    "bytes": 219425,
+    "sha256": "18ac92dc5e41fe429dc6231bb31fa473de0d2cdbd1216cccd9da2c7498437a45",
+    "t_s": 4680.248,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_027.png",
+    "bytes": 212245,
+    "sha256": "dc6bf08ffd1fd487da97c209a5f6506de014ddb3cc56352f179defcc2f53d697",
+    "t_s": 4860.671,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_028.png",
+    "bytes": 206418,
+    "sha256": "4ded062f13a7a4a7f74c273e17c00599981773a5c2301747902644a3b5a20989",
+    "t_s": 5040.622,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_029.png",
+    "bytes": 201137,
+    "sha256": "955eca2817f71926295db5d9bc44b599972d88e30049134861e1575b7922faae",
+    "t_s": 5220.144,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_030.png",
+    "bytes": 197260,
+    "sha256": "bf7ec163e45033cc5f1b770f12763a4a9ddcc8c8c43001a92978bae0fb176a68",
+    "t_s": 5400.366,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "flood_031.png",
+    "bytes": 188727,
+    "sha256": "e239c60ac2adfe6895f36e4a4cb3f674b262a0254e6c39ec7fc996746e434488",
+    "t_s": 5580.416,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_032.png",
+    "bytes": 181817,
+    "sha256": "fab3ae1066bbd1e30e4cb5ce8dff7e0aaebcd2ae8bf23a8e1f9fffb0a7b33f8f",
+    "t_s": 5760.651,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_033.png",
+    "bytes": 176401,
+    "sha256": "c921bf2914c10fd3037f073df3c5794adc0534e03514aa7293c7d9fff1c9fde5",
+    "t_s": 5940.297,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_034.png",
+    "bytes": 172067,
+    "sha256": "48b6b5fbc95db9942ac5ea84a054ab43b83d71ddde02aeacf274d01cc73b983c",
+    "t_s": 6120.214,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_035.png",
+    "bytes": 168190,
+    "sha256": "c00357d86aff21bfb5ad97b082b282541dabc406b97cba26af6513ad686f742e",
+    "t_s": 6300.746,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_036.png",
+    "bytes": 165325,
+    "sha256": "26a959914bfded39e04d37d0311612bdb25c40799d5b061496f5191cc63dcdaa",
+    "t_s": 6480.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_037.png",
+    "bytes": 162844,
+    "sha256": "33e5e57fe48543bafabd8e6d5f96c0416936b68d7b8e4ed91dc0cc6249a82323",
+    "t_s": 6660.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_038.png",
+    "bytes": 160800,
+    "sha256": "410bbdf2ebf21febf8f48bd293da7920fb5b108cec9aaa459bf87c6d79dc2b43",
+    "t_s": 6840.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_039.png",
+    "bytes": 158925,
+    "sha256": "6dbfa7445bd1694fc61b521e42b7b3a59877727da151ab483d291c7a1329611b",
+    "t_s": 7020.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_040.png",
+    "bytes": 157307,
+    "sha256": "655266d246375dfc24d063613f9b48e24a50a65ee5c35d897a1b7b66594fff02",
+    "t_s": 7200.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_041.png",
+    "bytes": 155633,
+    "sha256": "f0f8121912e683ce90d30712b6cf60fbe901aee988ede45234c5e53cc3fb07a8",
+    "t_s": 7380.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_042.png",
+    "bytes": 153969,
+    "sha256": "084ccb4b70dc97ec11c533ed1e392f582cd86c8496ec3392dde59d07ead2d6a3",
+    "t_s": 7560.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_043.png",
+    "bytes": 152804,
+    "sha256": "4c620866cbb0b38c66943710d88f97e6918d6b3640282027ee900dfe27908b93",
+    "t_s": 7740.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_044.png",
+    "bytes": 151655,
+    "sha256": "16edcfe6b9cec448490f4cded912d1ab993581dcf24d4a8f31a4cd6045d61188",
+    "t_s": 7920.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_045.png",
+    "bytes": 150712,
+    "sha256": "f345b5809e633f5e261f25fd92803e7cb102b31b0b7b2b315f63e4787bba622f",
+    "t_s": 8100.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_046.png",
+    "bytes": 149818,
+    "sha256": "258c6783cba68dbfc5a1334ce89d67763b8deeabf4117cca9d28d4b08e5c2869",
+    "t_s": 8280.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_047.png",
+    "bytes": 148943,
+    "sha256": "55222efa9254a0a35c8abdcf22e487d066fecb9c2a58475e0d31992d3089cb1e",
+    "t_s": 8460.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_048.png",
+    "bytes": 148304,
+    "sha256": "16faf4d2b9eee09b674144219d25e5e85ed05873a326d65e93bbb918be5be77d",
+    "t_s": 8640.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_049.png",
+    "bytes": 147425,
+    "sha256": "4a993317e3c9f076fef3f2fb558523203bef17b3cbfd6557702a4746fd9f83c6",
+    "t_s": 8820.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_050.png",
+    "bytes": 146579,
+    "sha256": "f6bbde0741ecc5e930751cb95414ecf4cff67e6655fd9d49cbb18e535b66e3da",
+    "t_s": 9000.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_051.png",
+    "bytes": 145560,
+    "sha256": "5a5bd4c2ecf9babca8f1b4810cf12f52b795b03ddf894d7420cebf0d102694f8",
+    "t_s": 9180.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_052.png",
+    "bytes": 144912,
+    "sha256": "ce43c5898a59c218ebe6b77d15bf05e31f5efcb1cfa48f317c9ce62d3740432d",
+    "t_s": 9360.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_053.png",
+    "bytes": 144340,
+    "sha256": "eadb17650fdad55ca086a33a516ea4b86766fce12ba760a34bcdcdcaf0fbdfba",
+    "t_s": 9540.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_054.png",
+    "bytes": 143560,
+    "sha256": "eefbbf61887c060048162cde0b93f108f8f3c98bcf9bd47427a71376d0db9b77",
+    "t_s": 9720.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_055.png",
+    "bytes": 142915,
+    "sha256": "91e3bf19c109c9ff46b256a74a7aab309d85ed1398d9efc9157c2a8d1630ad20",
+    "t_s": 9900.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_056.png",
+    "bytes": 142188,
+    "sha256": "e85a1bdb70f3217173d9bbe7e8b0c65e67184c441a29b41263c0177488c62f86",
+    "t_s": 10080.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_057.png",
+    "bytes": 141644,
+    "sha256": "a76f1153581f47eac7f4afc2b653ccc182ee16dbb73c4cca57e5ce375376b258",
+    "t_s": 10260.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_058.png",
+    "bytes": 141127,
+    "sha256": "a4b99fb881d26646fd410ab88a36d44f002ad82b06462fb66a73d29231eee8c9",
+    "t_s": 10440.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_059.png",
+    "bytes": 140707,
+    "sha256": "58211ac3a583a2305d0f0da9ec50477bbc9b298d9f66cdee9bd00ca699201a40",
+    "t_s": 10620.225,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "flood_060.png",
+    "bytes": 139950,
+    "sha256": "ca3c0131e869a802b439d3b7a2f40027c7dcf557ce2994da449577762ed9abcb",
+    "t_s": 10800.0,
+    "rain_mm_h": 0.0
+   }
+  ],
+  "max": {
+   "file": "flood_max.png",
+   "bytes": 317416,
+   "sha256": "7fb0786e37f4bac81c14de0c2386a9f3380baa6aceda27b406b44b547a3760d7"
+  },
+  "scenario": {
+   "hyetograph_mm_h_15min_blocks": [
+    14.8,
+    29.6,
+    74.0,
+    44.4,
+    22.2,
+    14.8
+   ],
+   "total_rain_mm": 49.95,
+   "duration_h": 3.0,
+   "reference_event": "design storm copied from the South Kensington run (12 July 2021 London cloudburst type); not a Bristol event",
+   "sewer_capacity_mm_h": 12.0,
+   "infiltration_green_mm_h": 20.0,
+   "manning_n": {
+    "paved": 0.02,
+    "green": 0.05
+   },
+   "roof_runoff": "excess over sewer capacity routed to the nearest open ground cell",
+   "buildings": "solid raised blocks",
+   "boundary": "outer 2 cells and mapped water areas (OSM) absorb outflow; river levels and tides are not modelled",
+   "initial_state": "dry"
+  },
+  "solver": "vendor/flood_model.py = framework @587f3d9 src/urban_flow/physics/flood/model.py (unchanged)",
+  "summary": {
+   "steps": 14397,
+   "model_seconds": 10800.0,
+   "wall_seconds": 1808.9311227798462,
+   "seconds_per_step": 0.12564639327442795,
+   "volumes_m3": {
+    "rain_on_ground": 2480273.4288849975,
+    "roof_routed": 412589.11164769507,
+    "drained": 1291202.190167904,
+    "outflow": 312810.7105642706,
+    "neg_clamped": 6.942790602055135,
+    "stored_final": 1288919.375,
+    "balance_error": 76.67799008428119
+   },
+   "max_depth_m": 5.118690013885498,
+   "max_depth_p99_ground_m": 0.6582299470901489,
+   "area_max_depth_gt_10cm_ha": 436.1856,
+   "area_max_depth_gt_30cm_ha": 169.888
+  },
+  "note": "Illustrative design-storm scenario run with the framework shallow-water solver on the Bristol DTM and building footprints. Not a flood forecast; not checked against Environment Agency surface-water flood maps. Rivers and tides are not modelled."
+ },
+ "wind": {
+  "label": "Wind (surrogate model)",
+  "grid": {
+   "x0": -4096.0,
+   "y0": -4096.0,
+   "cell": 16.0,
+   "nx": 512,
+   "ny": 512
+  },
+  "height_above_ground_m": 12.0,
+  "encoding": "u, v in R, G: value = 128 + round(u / 1.5 * 127); B = 255 where building",
+  "scale_m_s": 1.5,
+  "frames": [
+   {
+    "file": "wind_000.png",
+    "bytes": 72742,
+    "sha256": "01b7b058e913f9490933e835c23a82f08e5f9abdee00f11299a7ce7ec7983230",
+    "step": 0
+   },
+   {
+    "file": "wind_004.png",
+    "bytes": 346496,
+    "sha256": "010a98ffb63ed65141dc156d489567f30c1decb2e97ca496d7bd2e98a14f0d80",
+    "step": 4
+   },
+   {
+    "file": "wind_008.png",
+    "bytes": 328874,
+    "sha256": "c09906d464e67a90da19d818508e868975c2ca8339a2eeac96c5a2dec97d9c16",
+    "step": 8
+   },
+   {
+    "file": "wind_012.png",
+    "bytes": 311999,
+    "sha256": "8f104d1bf25f70603eb68cbe77d3b9f7611ab61e5b930e36406d40d4cd6c9b9f",
+    "step": 12
+   },
+   {
+    "file": "wind_016.png",
+    "bytes": 305095,
+    "sha256": "7cbeaa7be75c1742228c2339bc97067b16cbea4450288871ff09c6050dc28ec1",
+    "step": 16
+   },
+   {
+    "file": "wind_020.png",
+    "bytes": 304434,
+    "sha256": "0bc5ad05bb6665521fabb311031c2bee985ddc3f58b1fc71c182b8bb3216e9ec",
+    "step": 20
+   },
+   {
+    "file": "wind_024.png",
+    "bytes": 308337,
+    "sha256": "e2d3415f7b07f28218cbd4ae36bbdf690e9d5d9ec21494d033aefb7f78cf69b3",
+    "step": 24
+   },
+   {
+    "file": "wind_028.png",
+    "bytes": 312050,
+    "sha256": "ee64737225015e85d61df978c3a05a64b799259e706c98e132bca9900dd67f9e",
+    "step": 28
+   },
+   {
+    "file": "wind_032.png",
+    "bytes": 314173,
+    "sha256": "8e1eab2b1a0efe264aee16613fe3e297e2a41713626d7333d1c5024d0be3ec59",
+    "step": 32
+   },
+   {
+    "file": "wind_036.png",
+    "bytes": 313615,
+    "sha256": "9be08e527b729517a73df014cf8a1cc2003a727a0e7c3c7c30ebd5ff2afd972e",
+    "step": 36
+   },
+   {
+    "file": "wind_040.png",
+    "bytes": 313958,
+    "sha256": "5bbab8c835a35cafb3d1ae5f1ad17f5ed4869c41e2bbbb321d8f47657935fd8f",
+    "step": 40
+   },
+   {
+    "file": "wind_044.png",
+    "bytes": 315598,
+    "sha256": "a865d304c9728584af5e5ce4103001af752c8fd121bfa1d445257c85f409dd2c",
+    "step": 44
+   },
+   {
+    "file": "wind_048.png",
+    "bytes": 318454,
+    "sha256": "48c7c6782932750957d53c3a6679680a4888a1650732dbd14a03882e9cab7f85",
+    "step": 48
+   },
+   {
+    "file": "wind_052.png",
+    "bytes": 320732,
+    "sha256": "4b27d8cceae88724363bde5688a670a339ef8f4c557eb9fae2146e1b104c4bd7",
+    "step": 52
+   },
+   {
+    "file": "wind_056.png",
+    "bytes": 322061,
+    "sha256": "3c8e2521d7a5cf61b9e39330b909d4408fc3a91d9041fea01e390cff31140a1e",
+    "step": 56
+   },
+   {
+    "file": "wind_060.png",
+    "bytes": 322083,
+    "sha256": "82df8f677578c71ed32726b15bd32d05d7a161e64552ea0e13ebda3dc9154691",
+    "step": 60
+   }
+  ],
+  "steps_total": 60,
+  "model": "acse-yl222/physics-grounded-4d-world-model-framework @587f3d9 src/urban_flow/physics/wind/scaled_latent.py (unchanged)",
+  "limits": [
+   "surrogate transfer to Bristol geometry; no CFD, no measured validation",
+   "terrain flattened; buildings as solid columns; no trees or bridges",
+   "inflow direction and magnitude are those learned by the model (not a Bristol wind condition)",
+   "domain top at 64 layers"
+  ],
+  "deviation_from_reference": "latent U-Net tiles of 128 cells instead of 256 (halo unchanged at 4); decoded tiles of 128 cells instead of 256 (latent halo unchanged at 4); more tile seams, same weights and operators",
+  "note": "SCALED neural surrogate of Yueyan Li's framework applied to the Bristol buildings with flattened terrain. Wind direction and speed are those the model produces, not a Bristol wind record. Not validated against CFD or measurements."
+ }
+}

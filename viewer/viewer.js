@@ -5,6 +5,8 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { createFields } from './fields.js?v=intro001-20261111';
+import { createTour } from './tour.js?v=intro001-20261111';
 
 window.__viewerStarted = true;
 const LAYERS = [
@@ -27,7 +29,7 @@ const mb = v => (v / 1e6).toFixed(v < 1e7 ? 1 : 0);
 // ---- panel controls. Each card (layers/landmarks, feature record, loading activity, diagnostics) can be minimised to a small chip
 // in the dock at the top left, and "Hide panels" puts all of them away at once. Only the user's clicks change these flags:
 // picking a feature, jumping to a landmark or a progress update never reopens a card the user has put away.
-const ui = { hideAll: QS.get('panels') === 'hidden', min: { panel: false, info: false, act: false, diag: false }, saved: null,
+const ui = { hideAll: QS.get('panels') === 'hidden', min: { panel: false, info: false, act: false, diag: false, fields: false }, saved: null,
   infoOpen: false, infoTitle: '', act: { on: false, text: '', short: '', frac: 0, err: false, retry: false } };
 function renderUI() {
   const h = ui.hideAll, m = ui.min, a = ui.act;
@@ -39,6 +41,7 @@ function renderUI() {
   $('chip-act').title = a.retry ? 'Some files did not load. Show the loading panel to retry' : 'Show the loading panel'; $('chip-act').setAttribute('aria-label', $('chip-act').title + ': ' + a.short);
   $('diag').hidden = !DIAG || h || m.diag; $('chip-diag').hidden = !DIAG || h || !m.diag; const dl = $('diagdl'); if (dl) dl.hidden = $('diag').hidden;
   $('foot').hidden = h;
+  $('fields').hidden = h || m.fields; $('chip-fields').hidden = h || !m.fields;
   const tg = $('ui-toggle'); tg.textContent = h ? 'Show panels' : 'Hide panels'; tg.setAttribute('aria-pressed', String(h));
   tg.title = h ? 'Show the panels again (H)' : 'Hide all panels to see the model (H)'; tg.setAttribute('aria-label', h ? 'Show the panels again' : 'Hide all panels');
 }
@@ -48,9 +51,9 @@ function toggleAll() { ui.hideAll = !ui.hideAll; renderUI(); }
 function openCard(k) { if (ui.hideAll) { ui.hideAll = false; for (const x of Object.keys(ui.min)) ui.min[x] = true; } ui.min[k] = false; renderUI(); }
 function closeInfo() { ui.infoOpen = false; renderUI(); }
 $('ui-toggle').onclick = toggleAll;
-for (const k of ['panel', 'info', 'act', 'diag']) { $('min-' + k).onclick = () => setMin(k, true); $('chip-' + k).onclick = () => openCard(k); }
+for (const k of ['panel', 'info', 'act', 'diag', 'fields']) { $('min-' + k).onclick = () => setMin(k, true); $('chip-' + k).onclick = () => openCard(k); }
 $('close-info').onclick = closeInfo;
-addEventListener('keydown', e => { if ((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) toggleAll(); });
+addEventListener('keydown', e => { if ((e.key === 'h' || e.key === 'H') && !document.body.classList.contains('touring') && !e.metaKey && !e.ctrlKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) toggleAll(); });
 renderUI();   // apply ?panels=hidden before anything loads; the start-up panel is not part of these controls
 
 // ---- start-up panel (in the page before this module loads) and activity bar
@@ -75,6 +78,9 @@ const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
 // Terrain keeps its stored normals. Everything else has no stored normals in the preview files and is shaded flat from the triangle itself.
 const matSmooth = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
 const matFlat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide, flatShading: true });
+// Objects standing above the ground (buildings, bridges, trees, hedges) get the flood colour only below the local water surface.
+const matRaised = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide, flatShading: true });
+const GROUND_GROUPS = new Set(['terrain', 'roads', 'rail', 'water', 'waterways', 'veg_areas']);
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
 
 function shown(o) { for (let p = o; p; p = p.parent) { if (!p.visible) return false; } return true; }
@@ -87,7 +93,7 @@ function namedParent(o) { for (let p = o; p; p = p.parent) if (p.name && !/^mesh
 function buildScene(gltf, kind, tileId) {
   const root = new THREE.Group(); root.position.copy(originOf(gltf)); root.userData.kind = kind; gltf.scene.updateMatrixWorld(true);
   for (const g of gltf.scene.children) g.traverse(o => { if (!o.isMesh) return;
-    const m = new THREE.Mesh(o.geometry, o.geometry.attributes.normal ? matSmooth : matFlat); m.matrixAutoUpdate = false; m.matrix.copy(o.matrixWorld);
+    const m = new THREE.Mesh(o.geometry, o.geometry.attributes.normal ? matSmooth : GROUND_GROUPS.has(g.name) ? matFlat : matRaised); m.matrixAutoUpdate = false; m.matrix.copy(o.matrixWorld);
     if (kind === 'ov') { m.name = namedParent(o); m.userData = { layer: GROUP_TO_LAYER[g.name] || g.name, ov: true, tile: m.name.slice(0, 6) }; state.ov[m.name] = m; }
     else { m.name = g.name; m.userData = { layer: (kind === 'b2' && g.name === 'buildings_b2') ? 'facade' : (GROUP_TO_LAYER[g.name] || g.name), tile: tileId, file: kind, group: g.name }; }
     root.add(m); state.pick.push(m); });
@@ -138,11 +144,14 @@ function retryFailed() { for (const j of state.jobs.values()) if (j.state === 'f
 
 // ---- what the current view needs
 function plan() {
-  const mf = state.manifest; if (!mf) return; const t = controls.target, camH = camera.position.y - t.y;
+  const mf = state.manifest; if (!mf) return; const t = controls.target;
+  const foci = state.planFocus || [{ x: t.x, z: t.z, h: camera.position.y - t.y }];   // normally the view target; during the intro tour, the tour's current and next views
   for (const ti of mf.tiles) {
-    const cx = (ti.bbox[0] + ti.bbox[2]) / 2, cz = -(ti.bbox[1] + ti.bbox[3]) / 2, d = Math.hypot(cx - t.x, cz - t.z), s = state.tiles[ti.id] ||= {};
-    const want = { base: d < R_BASE && camH < 3500, b1: d < R_BASE && camH < 3500, b2: d < R_B2 && camH < 900 };
-    const keep = { base: d < R_BASE * 1.15 && camH < 3850, b1: d < R_BASE * 1.15 && camH < 3850, b2: d < R_B2 * 1.25 && camH < 1000 };   // a little slack so tiles do not flicker at the edge
+    const cx = (ti.bbox[0] + ti.bbox[2]) / 2, cz = -(ti.bbox[1] + ti.bbox[3]) / 2, s = state.tiles[ti.id] ||= {};
+    const want = { base: false, b1: false, b2: false }, keep = { base: false, b1: false, b2: false }; let d = Infinity;
+    for (const f of foci) { const df = Math.hypot(cx - f.x, cz - f.z), camH = f.h; d = Math.min(d, df + (f.pr || 0));
+      if (df < R_BASE && camH < 3500) want.base = want.b1 = true; if (df < R_B2 && camH < 900) want.b2 = true;
+      if (df < R_BASE * 1.15 && camH < 3850) keep.base = keep.b1 = true; if (df < R_B2 * 1.25 && camH < 1000) keep.b2 = true; }   // a little slack so tiles do not flicker at the edge
     for (const L of ['base', 'b1', 'b2']) {
       const key = ti.id + ':' + L, job = state.jobs.get(key), url = ti.files[L]; if (!url) continue;
       // nearest tile first; its facade detail comes before the outer ring of mid-distance tiles
@@ -208,7 +217,7 @@ canvas.addEventListener('dblclick', async e => {
 function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
   bootSet('Reading the list of model files…', null);
-  const r = await fetch('manifest.json?v=perf001-20261110'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  const r = await fetch('manifest.json?v=intro001-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
   $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
   $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
   $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
@@ -221,7 +230,7 @@ async function init() {
   $('act-retry').onclick = retryFailed; renderUI();
   camera.position.set(...views['Overview'].slice(0, 3)); controls.target.set(0, 0, 0); controls.update(); if (!state.ticking) { state.ticking = true; tick(); }
   // 1. terrain overview: the first picture
-  const ov = mf.overview, tj = addJob('ov:terrain', ov.terrain.file, ov.terrain.bytes, 'ov', null, -1e9, root => { scene.add(root); state.jobs.delete('ov:terrain'); state.terrainReady = true; applyLayers(); mark('terrain_ready_ms'); boot.el.hidden = true; renderUI(); startBuildings(); });
+  const ov = mf.overview, tj = addJob('ov:terrain', ov.terrain.file, ov.terrain.bytes, 'ov', null, -1e9, root => { scene.add(root); state.jobs.delete('ov:terrain'); state.terrainReady = true; applyLayers(); mark('terrain_ready_ms'); boot.el.hidden = true; renderUI(); startBuildings(); if (TOUR_AUTO) tour.start(); });
   const watchTerrain = () => { const w = setInterval(() => {
     if (tj.state === 'queued') bootSet('Downloading the terrain overview', 0, tj.tries ? `retrying, attempt ${tj.tries + 1} of ${RETRIES + 1}` : `0 of ${mb(tj.bytes)} MB`);
     else if (tj.state === 'loading') bootSet('Downloading the terrain overview', tj.bytes ? tj.got / tj.bytes : null, `${mb(tj.got)} of ${mb(tj.bytes)} MB` + (tj.tries ? ` · attempt ${tj.tries + 1} of ${RETRIES + 1}` : ''));
@@ -237,7 +246,7 @@ async function init() {
     plan(); }
   if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
   // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
-  try { const ri = await fetch('./inspect_views.json'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
+  try { const ri = await fetch('./inspect_views.json?v=intro001-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
@@ -245,8 +254,45 @@ async function init() {
         infoBox(v.label, 'inspection view ' + (+bn.dataset.i + 1), Object.entries(v).filter(([k, x]) => k !== 'label' && x !== null && x !== undefined)); }); } } catch (e) { /* no inspection file */ }
   const cp = QS.get('cam'); if (cp) { const c = cp.split(',').map(Number); if (c.length === 6 && c.every(Number.isFinite)) fly(...c); }
 }
+// ---- simulations card: flooding (rainfall scenario) and wind (surrogate model)
+const fields = createFields({ scene, camera, controls, materials: [[matSmooth, false], [matFlat, false], [matRaised, true]],
+  onStatus: (k, msg, err) => { const e = $(k === 'flood' ? 'fl-status' : 'wd-status'); e.textContent = msg; e.classList.toggle('err', !!err); } });
+const sim = { flPlay: false, wdPlay: false, last: performance.now(), wdAcc: 0 };
+const fmtMin = s => `${Math.floor(s / 3600)}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}`;
+function floodLabel() { const f = fields.floodInfo(); $('fl-t').value = f.t; $('fl-lab').textContent = `${fmtMin(f.t)} of ${fmtMin(f.end || 10800)} h · rain ${f.rain} mm/h`; }
+function windLabel() { const w = fields.windInfo(); if (!w.n) return; $('wd-k').max = w.n - 1; $('wd-k').value = w.i; $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground`; }
+function setPlay(btn, on) { btn.textContent = on ? 'Pause' : 'Play'; btn.setAttribute('aria-pressed', String(on)); btn.title = on ? 'Pause' : 'Play'; }
+$('fl-on').onchange = async e => { const on = e.target.checked; $('fl-ctl').hidden = !on; if (!on) { sim.flPlay = false; setPlay($('fl-play'), false); }
+  try { await fields.setFlood(on); floodLabel(); } catch (err) { e.target.checked = false; $('fl-ctl').hidden = true; fields.setFlood(false); diagError('fields_flood', err, {}); } };
+$('wd-on').onchange = async e => { const on = e.target.checked; $('wd-ctl').hidden = !on; if (!on) { sim.wdPlay = false; setPlay($('wd-play'), false); }
+  try { await fields.setWind(on); windLabel(); } catch (err) { e.target.checked = false; $('wd-ctl').hidden = true; fields.setWind(false); diagError('fields_wind', err, {}); } };
+$('fl-t').oninput = e => { fields.setFloodTime(+e.target.value); floodLabel(); };
+$('fl-play').onclick = () => { sim.flPlay = !sim.flPlay; setPlay($('fl-play'), sim.flPlay); };
+$('wd-k').oninput = e => { fields.setWindFrame(+e.target.value); windLabel(); };
+$('wd-play').onclick = () => { sim.wdPlay = !sim.wdPlay; setPlay($('wd-play'), sim.wdPlay); };
+fields.manifest().then(m => { if (!m.flood) { $('fl-on').disabled = true; $('fl-status').textContent = 'Flood results are not in this build yet.'; }
+  if (!m.wind) { $('wd-on').disabled = true; $('wd-status').textContent = 'Wind results are not in this build yet.'; } })
+  .catch(e => { $('fl-on').disabled = $('wd-on').disabled = true; $('fl-status').textContent = 'Simulation results are not available (' + e.message + ').'; });
+// ---- intro tour (tour.js): geometry -> landmarks -> wind -> flooding -> free exploration
+const simApi = {
+  set: async (k, on) => { const e = $(k === 'wind' ? 'wd-on' : 'fl-on'); if (e.disabled || e.checked === on) return; e.checked = on; await e.onchange({ target: e }); },
+  play: (k, on) => { if (k === 'wind') { sim.wdPlay = on; setPlay($('wd-play'), on); } else { sim.flPlay = on; setPlay($('fl-play'), on); } },
+  floodTime: t => { fields.setFloodTime(t); floodLabel(); }, windFrame: i => { fields.setWindFrame(i); windLabel(); },
+  label: k => $(k === 'wind' ? 'wd-lab' : 'fl-lab').textContent,
+  trees: on => { for (const k of ['trees_mapped', 'trees_rows', 'canopy_illustrative', 'hedges']) { const e = $('layer-' + k); if (e && e.checked !== on) { e.checked = on; e.onchange(); } } } };
+const tour = createTour({ camera, controls, state, fields, sim: simApi, loadingText: () => (ui.act.on && batch.active ? ui.act.short : ''),
+  overviewReady: () => 'overview_ready_ms' in __diag.marks, setFog: on => { scene.fog.near = on ? 6000 : 1e6; scene.fog.far = on ? 14000 : 2e6; }, onActive: on => { document.body.classList.toggle('touring', on); if (on) closeInfo(); renderUI(); } });
+// Plays on opening the page unless a fixed camera is asked for (?cam=), the tour is switched off (?tour=0) or the system asks for reduced motion.
+const TOUR_AUTO = QS.get('tour') !== '0' && !QS.has('cam') && (QS.get('tour') === '1' || !matchMedia('(prefers-reduced-motion: reduce)').matches);
+$('tour-replay').onclick = () => tour.start();
+function simTick() {
+  const now = performance.now(), dt = Math.min(0.1, (now - sim.last) / 1000); sim.last = now;
+  if (sim.flPlay && fields.S.flood.loaded) { const f = fields.floodInfo(); let t = f.t + dt * 300; if (t > f.end) t = 0; fields.setFloodTime(t); floodLabel(); }   // 5 model minutes per second
+  if (sim.wdPlay && fields.S.wind.loaded) { sim.wdAcc += dt; if (sim.wdAcc > 0.7) { sim.wdAcc = 0; const w = fields.windInfo(); fields.setWindFrame((w.i + 1) % w.n); windLabel(); } }
+  fields.update();
+}
 let frames = 0, fpsT = performance.now(), fps = 0, lowFps = 0, first = true;
-function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, camera); frames++;
+function tick() { requestAnimationFrame(tick); if (tour.active()) tour.update(); else controls.update(); simTick(); renderer.render(scene, camera); frames++;
   if (first) { first = false; mark('first_frame_ms'); }
   const now = performance.now(); if (now - fpsT >= 1000) { fps = frames * 1000 / (now - fpsT); frames = 0; fpsT = now;
     if (!QS.has('pr') && state.terrainReady && !pending().live.length && document.visibilityState === 'visible') { lowFps = fps < 24 ? lowFps + 1 : 0;
@@ -269,6 +315,6 @@ function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el =
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'uwm_viewer_diagnostics.json'; a.click(); };
     $('diag').parentNode.insertBefore(b, $('diag').nextSibling); renderUI(); } }
 function diagError(type, e, ctx) { if (window.__diag) __diag.errors.push(Object.assign({ t_ms: Math.round(performance.now()), type, msg: String(e && e.message || e), stack: String(e && e.stack || '') }, ctx)); }
-window.uwmViewer = { fly, state, camera, controls, renderer, stats, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
+window.uwmViewer = { fly, state, camera, controls, renderer, stats, fields, tour, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
 const start = () => init().catch(e => { console.error(e); diagError('init', e, {}); bootFail('The viewer could not start (' + e.message + ').', start); });
 start();
