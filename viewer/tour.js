@@ -21,8 +21,9 @@ const SHOT_RATE = 0.05 / D2R, SHOT_DUR = 8;
 const WIND_DUR = 9.6, FLOOD_DUR = 9.5;   // s; CD timed wind about 9 s and flooding 9-10 s in Safari (16 and 61 frames here)
 // Priority landmarks, west to east (short flights): [look-at height above the landmark's ground, distance m, start bearing deg].
 // Bearing 0 puts the camera south of the landmark, looking north.
+const MALAGO_AZ = 30;
 const LANDMARKS = [['Clifton Suspension Bridge', 62, 640, -20], ['Cabot Tower', 18, 360, 140], ['Wills Memorial Building', 26, 360, 200],
-  ['Bristol Cathedral', 14, 360, 150], ['St Mary Redcliffe', 24, 400, 215]];
+  ['Bristol Cathedral', 14, 360, 150], ['St Mary Redcliffe', 24, 400, 215], ['Malago Road', 4, 560, MALAGO_AZ]];   // Malago Road: a road, shown with its ribbon (manifest landmark.line)
 const GROUPS = ['Geometry', 'Landmarks', 'Traffic', 'Wind', 'Temperature', 'Shade', 'Pollution', 'Flooding', 'Explore'];
 const G_TRAFFIC = 2, G_WIND = 3, G_TEMP = 4, G_SHADE = 5, G_POLL = 6, G_FLOOD = 7, G_EXPLORE = 8;
 const TEMP_DUR = 8, SHADE_DUR = 10, POLL_DUR = 10, RIVER_DUR = 11;
@@ -60,8 +61,9 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
       fly: 0, dur: OVERVIEW.dur, pose: orbit(0, 0, 0, OVERVIEW.dist, OVERVIEW.el, OVERVIEW.az0, OVERVIEW.rate),
       hold: () => !overviewReady(), holdMax: 25, holdText: 'Loading the whole-area building blocks…' });
     const lms = LANDMARKS.map(([n, h, d, az]) => [(mf.landmarks || []).find(l => l.name === n), h, d, az]).filter(x => x[0]);
-    lms.forEach(([l, h, d, az], k) => S.push({ group: 1, title: l.name, sub: `Landmark ${k + 1} of ${lms.length}`, fly: FLY_SHOT, dur: SHOT_DUR,
-      pose: orbit(l.x, (l.z || 0) + h, -l.y, d, 32, az, SHOT_RATE), ready: () => tileReady(l.x, -l.y), readyMax: 8 }));
+    lms.forEach(([l, h, d, az], k) => S.push({ group: 1, title: l.name, sub: `Landmark ${k + 1} of ${lms.length}` + (l.note ? ' · ' + l.note : ''), fly: FLY_SHOT, dur: SHOT_DUR,
+      pose: orbit(l.x, (l.z || 0) + h, -l.y, d, 32, az, SHOT_RATE), ready: () => tileReady(l.x, -l.y), readyMax: 8,
+      ...(l.line ? { enter: () => sim.highlight(l), exit: () => sim.highlight(null) } : {}) }));   // a landmark that is a line (a road) is marked while it is shown
     S.push({ group: G_TRAFFIC, title: 'Traffic · illustrative', sub: 'SUMO microsimulation with random car trips on the OpenStreetMap road network (left-hand traffic, guessed signal timings). Illustrative: not observed traffic and not the TSM model.',
       fly: FLY_SHOT, dur: TRAFFIC_DUR, pose: orbit(TRAFFIC_SHOT[0], 12, -TRAFFIC_SHOT[1], TRAFFIC_SHOT[2], TRAFFIC_SHOT[3], TRAFFIC_SHOT[4], SHOT_RATE),
       ready: () => sim.trafficLoaded(), readyMax: 15, readyText: 'Loading the traffic replay…',
@@ -126,7 +128,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     state.planFocus = s.focus(0);
   }
   function restoreLayers(keep) {   // after the tour: tree layers back on; fields off unless the user took over during one
-    sim.trees(true); sim.windMode('streaks');
+    sim.trees(true); sim.windMode('streaks'); sim.highlight(null);
     if (keep === 'traffic') sim.play('traffic', true); else sim.set('traffic', false);
     for (const k of ['shade', 'pollution', 'temperature']) { if (k === keep) sim.play(k, true); else sim.set(k, false); }
     if (keep !== 'flood') sim.floodScenario('rain');
@@ -151,7 +153,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     let fm = {}; try { fm = await fields.manifest(); } catch (e) { fm = {}; }
     const chapter = Number.isInteger(opts.chapter) && opts.chapter > 0 && opts.chapter < G_EXPLORE ? opts.chapter : null;
     const stages = stagesFor(mf, fm, chapter); if (T.active || (chapter != null && stages.length < 2)) return false;   // a chapter whose results are not in this build
-    T.chapter = chapter; el.skip.textContent = chapter == null ? 'Skip intro' : 'End chapter'; el.box.setAttribute('aria-label', chapter == null ? 'Intro tour' : 'Chapter: ' + GROUPS[chapter]);
+    T.chapter = chapter; sim.highlight(null); el.skip.textContent = chapter == null ? 'Skip intro' : 'End chapter'; el.box.setAttribute('aria-label', chapter == null ? 'Intro tour' : 'Chapter: ' + GROUPS[chapter]);
     clearTimeout(T.hintTimer); el.box.classList.remove('hint'); el.box.onclick = null;
     T.stages = stages; T.total = T.stages.reduce((n, s) => n + s.fly + s.dur, 0); T.done = 0; T.i = -1; T.paused = false; T.skipped = []; T.active = true; T.last = performance.now();
     el.pause.textContent = 'Pause'; el.pause.setAttribute('aria-pressed', 'false');

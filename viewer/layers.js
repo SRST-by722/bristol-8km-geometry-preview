@@ -4,7 +4,7 @@
 // green areas), like the flood layer of fields.js; this module chains its shader code after the one fields.js installs.
 import * as THREE from 'three';
 
-const V = 'ext003-20261112';
+const V = 'ext007-20261112';
 async function decodeGrey(url) {   // first channel of a PNG; first row = north
   const r = await fetch(url); if (!r.ok) throw new Error(url.split('/').pop() + ': HTTP ' + r.status);
   const blob = await r.blob(); let src;
@@ -46,7 +46,8 @@ vec3 scRamp(float s) { float t = clamp(s, 0.0, 1.0) * 4.0; int i = int(min(floor
     mat.needsUpdate = true;
   }
 
-  const S = { man: null, shade: { tex: [], loaded: false, loading: null, on: false, t: 0 }, scalar: { key: null, tex: {}, loaded: {}, loading: {}, t: 0 } };
+  const S = { man: null, shade: { tex: [], loaded: false, loading: null, on: false, t: 0 }, scalar: { key: null, tex: {}, loaded: {}, loading: {}, t: 0, variant: {} } };
+  const dk = key => S.scalar.variant[key] || key;   // data set behind a scalar map: the map's own key, or the variant chosen for it (task 20: pollution -> pollution_malago)
   let manP = null;
   const manifest = () => manP ||= fetch(base + 'manifest.json?v=' + V).then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => (S.man = m));
   const setGrid = (u, g) => u.value.set(g.x0, g.y0, g.nx * g.cell, g.ny * g.cell);
@@ -71,23 +72,26 @@ vec3 scRamp(float s) { float t = clamp(s, 0.0, 1.0) * 4.0; int i = int(min(floor
     return { h: S.shade.t, first: fr[0].local_h, last: fr[fr.length - 1].local_h, altitude: a.altitude_deg + (b.altitude_deg - a.altitude_deg) * mix, shaded: a.ground_shaded_fraction, date: S.man.shade.scenario?.date, tz: S.man.shade.scenario?.local_time }; }
 
   async function loadScalar(key, onProgress = () => {}) {
-    const C = S.scalar; if (C.loaded[key]) return; if (C.loading[key]) return C.loading[key];
-    C.loading[key] = (async () => { await manifest(); const m = S.man[key]; if (!m) throw new Error(`no ${key} results in this build`); let n = 0; C.tex[key] = [];
-      await Promise.all(m.frames.map(async (f, i) => { C.tex[key][i] = await decodeGrey(base + f.file + '?v=' + V); onProgress(++n, m.frames.length); }));
-      C.loaded[key] = true; })();
-    try { await C.loading[key]; } finally { C.loading[key] = null; }
+    await manifest(); const C = S.scalar, d = dk(key); if (C.loaded[d]) return; if (C.loading[d]) return C.loading[d];
+    C.loading[d] = (async () => { const m = S.man[d]; if (!m) throw new Error(`no ${d} results in this build`); let n = 0; const tex = [];
+      await Promise.all(m.frames.map(async (f, i) => { tex[i] = await decodeGrey(base + f.file + '?v=' + V); onProgress(++n, m.frames.length); }));
+      C.tex[d] = tex; C.loaded[d] = true; })();
+    try { await C.loading[d]; } finally { C.loading[d] = null; }
   }
   function useScalar(key) {   // which scalar map is shown (one at a time); null hides it
     const C = S.scalar; C.key = key; if (!key) { U.uScOn.value = 0; return; }
-    const m = S.man[key]; setGrid(U.uScGrid, m.grid); m.display.stops.forEach((c, i) => U.uScStops.value[i].set(c)); U.uScFloor.value = m.display.floor; U.uScAlpha.value = m.display.alpha;
+    const m = S.man[dk(key)]; setGrid(U.uScGrid, m.grid); m.display.stops.forEach((c, i) => U.uScStops.value[i].set(c)); U.uScFloor.value = m.display.floor; U.uScAlpha.value = m.display.alpha;
     U.uScOn.value = 1; setScalarTime(C.t);
   }
   function setScalarTime(t) {
-    const C = S.scalar; C.t = t; if (!C.key || !C.loaded[C.key]) return; const fr = S.man[C.key].frames, [i, j, mix] = pick(fr, t, 't_s');
-    U.uScA.value = C.tex[C.key][i]; U.uScB.value = C.tex[C.key][j]; U.uScMix.value = mix;
+    const C = S.scalar; C.t = t; if (!C.key || !C.loaded[dk(C.key)]) return; const d = dk(C.key), fr = S.man[d].frames, [i, j, mix] = pick(fr, t, 't_s');
+    U.uScA.value = C.tex[d][i]; U.uScB.value = C.tex[d][j]; U.uScMix.value = mix;
   }
-  function scalarInfo(key) { const m = S.man?.[key]; if (!m) return {}; const fr = m.frames; return { t: S.scalar.t, end: fr[fr.length - 1].t_s, start: fr[0].t_s, legend: m.display.legend, label: m.label }; }
+  function scalarInfo(key) { const m = S.man?.[dk(key)]; if (!m) return {}; const fr = m.frames; return { t: S.scalar.t, end: fr[fr.length - 1].t_s, start: fr[0].t_s, legend: m.display.legend, label: m.label, variant: S.scalar.variant[key] || null, cell: m.grid.cell }; }
 
   return { S, U, manifest, loadShade, setShadeTime, shadeInfo, setShade(on) { S.shade.on = on; U.uShOn.value = on ? 1 : 0; },
-    setShadeOpacity(v) { U.uShOn.value = v; }, loadScalar, useScalar, setScalarTime, scalarInfo, setScalarOpacity(v) { U.uScOn.value = v; } };
+    setShadeOpacity(v) { U.uShOn.value = v; }, loadScalar, useScalar, setScalarTime, scalarInfo, setScalarOpacity(v) { U.uScOn.value = v; },
+    // task 20: show another data set of the manifest in a scalar map (null = the map's own); false if the build does not have it
+    async setScalarVariant(key, dataKey) { await manifest(); if (dataKey && !S.man[dataKey]) return false; S.scalar.variant[key] = dataKey || null; return true; },
+    scalarVariant: key => S.scalar.variant[key] || null, scalarLoaded: key => !!S.scalar.loaded[dk(key)] };
 }

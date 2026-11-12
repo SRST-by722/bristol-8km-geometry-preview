@@ -1,0 +1,7 @@
+{
+ "label": "UAV deliveries (scheduler replay)",
+ "file": "uav_replay.json",
+ "bytes": 153399,
+ "sha256": "996db1f46ca8a37f99e168acb6fd33cf3465be45017f52cd03dbe296d40c68dd",
+ "model": "hexacopter_cargo.glb"
+}

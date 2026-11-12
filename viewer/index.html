@@ -114,6 +114,15 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
       <div class="lab" id="tr-lab"></div>
     </div>
     <div class="note" id="tr-status"></div>
+    <label><input type="checkbox" id="uv-on"> UAV deliveries (scheduler replay)</label>
+    <div id="uv-ctl" class="simctl" hidden>
+      <div class="row"><button id="uv-play" type="button" aria-pressed="false" title="Play">Play</button><input id="uv-t" type="range" min="0" max="240" step="0.25" value="0" aria-label="UAV replay time"><select id="uv-speed" aria-label="UAV replay speed"><option value="0.5">30×</option><option value="1" selected>60×</option><option value="4">240×</option></select></div>
+      <div class="lab" id="uv-lab"></div>
+      <div class="legend"><b style="color:#1f4e8c">H1…</b><span>hub</span><b style="color:#d9822b">C1…</b><span>collection</span><b style="color:#2e8b57">D1…</b><span>drop-off</span><b style="color:#b89400">●</b><span>UAV in flight</span></div>
+      <div class="row"><span class="lab" style="margin:0">Go to</span><select id="uv-go" aria-label="Go to a UAV station"><option value="">a station…</option></select></div>
+      <div class="lab" id="uv-run"></div>
+    </div>
+    <div class="note" id="uv-status"></div>
     <label><input type="checkbox" id="sh-on"> Shade (21 June, clear sky)</label>
     <div id="sh-ctl" class="simctl" hidden>
       <div class="row"><button id="sh-play" type="button" aria-pressed="false" title="Play">Play</button><input id="sh-t" type="range" min="5" max="21" step="0.25" value="5" aria-label="Time of day"></div>
@@ -131,13 +140,14 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
     <label><input type="checkbox" id="px-on"> Traffic NOx tracer (illustrative)</label>
     <div id="px-ctl" class="simctl" hidden>
       <div class="row"><button id="px-play" type="button" aria-pressed="false" title="Play">Play</button><input id="px-t" type="range" min="0" max="1800" step="30" value="0" aria-label="Tracer time"></div>
+      <div class="row"><span class="lab" style="margin:0">Area</span><select id="px-area" aria-label="Tracer area and cell size"><option value="city">Whole area · 8 m cells</option><option value="malago">Malago Road · 4 m cells</option></select></div>
       <div class="lab" id="px-lab"></div>
       <div class="legend"><span>low</span><i class="ramp nox"></i><span>high (log)</span></div>
     </div>
     <div class="note" id="px-status"></div>
     <label><input type="checkbox" id="fl-on"> Flooding (<span id="fl-about">rain storm</span>)</label>
     <div id="fl-ctl" class="simctl" hidden>
-      <div class="row"><select id="fl-scn" aria-label="Flood scenario"><option value="rain">Rain storm</option><option value="river">River inflow</option></select></div>
+      <div class="row"><select id="fl-scn" aria-label="Flood scenario"><option value="rain">Rain storm</option><option value="river">River inflow</option><option value="malago">Rain storm · Malago Road, 2 m</option></select></div>
       <div class="row"><button id="fl-play" type="button" aria-pressed="false" title="Play">Play</button><input id="fl-t" type="range" min="0" max="10800" step="30" value="0" aria-label="Flood scenario time"></div>
       <div class="lab" id="fl-lab"></div>
       <div class="legend"><span>2 cm</span><i class="ramp flood"></i><span>60 cm+</span></div>
@@ -146,6 +156,7 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
     <label><input type="checkbox" id="wd-on"> Wind (surrogate model)</label>
     <div id="wd-ctl" class="simctl" hidden>
       <div class="row"><button id="wd-play" type="button" aria-pressed="false" title="Play">Play</button><input id="wd-k" type="range" min="0" max="0" step="1" value="0" aria-label="Wind model step"></div>
+      <div class="row"><span class="lab" style="margin:0">Area</span><select id="wd-area" aria-label="Wind area and cell size"><option value="city">Whole area · 16 m pixels</option><option value="malago">Malago Road · 4 m cells</option></select></div>
       <div class="row" id="wd-hrow" hidden><span class="lab" style="margin:0">Height</span><input id="wd-h" type="range" min="0" max="0" step="1" value="0" aria-label="Wind height above ground"><span class="lab" id="wd-hv" style="margin:0;min-width:42px;text-align:right"></span></div>
       <div class="row"><span class="lab" style="margin:0">Show as</span><select id="wd-mode" aria-label="Wind display"><option value="streaks">moving streaks</option><option value="map">speed colours</option></select></div>
       <div class="lab" id="wd-lab"></div>
@@ -156,10 +167,14 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
       <p><b>Shade.</b> Sun and shadow on 21 June 2026 under a clear sky, every 30 minutes from 05:00 to 21:00 BST (sun position for the area centre). Framework solar model (shadow and sky-view networks, ASHRAE clear-sky irradiance) on a 4 m height field of the terrain and the buildings. Trees do not cast shadows here.</p>
       <p><b>Air temperature.</b> Yi Qi's 2-D temperature model from the framework, unchanged, driven by the lowest wind layer (4–12 m above the ground) on 8 m cells: its own summer-afternoon scenario (ambient 31.5 °C, heat sources on urban ground, cooling over green areas and in shade), with the sun of 21 June 14:00 BST. A parameterised model scenario, not a Bristol weather record.</p>
       <p><b>Traffic NOx tracer.</b> Each car of the traffic replay is a source at its position, with SUMO's built-in emission model (petrol Euro 4 car for every vehicle). The tracer is carried by the lowest wind layer, 4–12 m above the ground (speeds rescaled to a 2 m/s mean) with the framework's upwind transport solver, mixed over 10 m, for 30 minutes from clean air. Shown on a relative log scale; not a measured concentration, not PM2.5.</p>
+      <p id="about-malago"><b>Flooding, Malago Road at 2 m.</b> The same rain storm and solver on a 1 km square around Malago Road (a study area), on 2 m cells, the spacing of the Environment Agency terrain data, instead of cells pooled to 8 m. It is a separate small model: water from outside the square, including the upper River Malago, does not flow in, so it cannot be compared cell by cell with the 8 km layer. Illustrative; not compared with the Malago Road experiments.</p>
       <p id="about-river"><b>River inflow flooding.</b> An illustrative scenario: the River Avon entering at the east edge of the area with a flow rising to 800 m³/s in one hour, held for two hours and falling over one hour; no rain; free outflow at the edges; no tides. The terrain data record the water surface, not the river bed, so the channel carries too little water and flooding of the banks is exaggerated. Not a recorded event or a forecast.</p>
       <p><b>North arrow.</b> The arrow at the top right always points to true north. The model's map grid (EPSG:32630) is turned 0.3° from true north here, too small to see on the arrow.</p>
+      <p><b>UAV deliveries.</b> A replay of one run of the MFMU UAV scheduler (research preview) for 200 UAVs and 600 synthetic delivery requests over 240 slots of one minute. Stations (4 hubs, 8 collection, 12 drop-off) are a demonstration layout placed on green areas; they are not real or planned sites. Flights are drawn as straight lines between stations at 15 m/s with a display height above the ground; there is no routing, obstacle or airspace check, and the UAVs do not interact with the wind layer. The line under the slider states which scheduler backend produced the run.</p>
       <p><b>Traffic.</b> Illustrative only: a SUMO microsimulation with random passenger-car trips on the OpenStreetMap road network (left-hand traffic, signal timings guessed by the network converter), five minutes replayed in a loop after a ten-minute warm-up. It is not observed traffic, not traffic counts and not the group's traffic surrogate model (TSM). Cars follow the drawn road and bridge-deck surfaces; cars in tunnels and covered roads are not shown. Display after the framework's South Kensington traffic replay: the same 4.5 m sedan model at true size, and in distant views a traffic map of dots (white moving, amber stopped).</p>
       <p><b>Flooding.</b> A rainfall scenario: 50 mm in 90 minutes, then 90 minutes of drainage (the design storm used for the group's South Kensington run, not a Bristol event). Shallow-water solver from the Physics-Grounded 4D World Model Framework, on the Environment Agency 2 m terrain at 8 m resolution with buildings as solid blocks. Sewers take 12 mm/h and green areas infiltrate 20 mm/h; rivers and the harbour take the outflow, but river levels and tides are not modelled. Illustrative only: not a flood forecast and not checked against Environment Agency flood maps.</p>
+      <p id="about-nox-malago"><b>NOx tracer, Malago Road on 4 m cells.</b> The same illustrative tracer computed again for a 1 km square around Malago Road on 4 m cells, with the surrogate wind at its own cell size (4–12 m above the ground) and the same cars, emission model and assumptions. It is nested in the whole-area run: a 16 m ring around the square takes that run's values, so tracer from outside flows in; the ring is not shown. Individual buildings are obstacles here, where the 8 m run has blocks. The wind is a horizontal slice of a 3-D field, so tracer piles up where that slice converges, more sharply than on 8 m cells; values above the top of the colour scale are drawn in its last colour. Finer cells do not make this a more accurate concentration: it is a relative tracer, not measured or validated, and not compared with the Malago Road experiments.</p>
+      <p id="about-wind-malago"><b>Wind, Malago Road on 4 m cells.</b> The same surrogate result as the whole-area wind, shown for a 1 km square around Malago Road (a study area) on the model's own 4 m cells and 4 m thick layers, from 0–4 m to 64–68 m above the ground. The whole-area layers are these fields averaged over 2 × 2 × 2 cells and drawn on 16 m pixels. Nothing was computed again and no accuracy is added: flattened terrain, no trees or bridges, no CFD or measurements behind it, not compared with the Malago Road experiments.</p>
       <p><b>Wind.</b> The framework's SCALED neural surrogate applied to the Bristol buildings with the terrain flattened. Streaks move with the horizontal wind at the chosen height above the ground, speeded up for display; the speed colours show the same layer on the ground. The Height slider picks one of the saved model layers, each 8 m thick; colours and streak speeds use one scale for all heights. Earlier versions labelled the lowest layer (4–12 m above the ground) as 12 m; it is centred at 8 m. Wind direction and speed are what the model produces, not a Bristol weather record. Not validated against CFD or measurements.</p>
     </details>
   </div>
@@ -199,6 +214,6 @@ function __viewerCodeFailed() { var b = document.getElementById('boot'); b.class
   document.getElementById('boot-msg').textContent = 'The viewer code did not load.'; document.getElementById('boot-sub').textContent = 'Check the connection, then retry.';
   var r = document.getElementById('boot-retry'); r.hidden = false; r.onclick = function () { location.reload(); }; }
 </script>
-<script type="module" src="./viewer.js?v=ext003-20261112" onerror="__viewerCodeFailed()"></script>
+<script type="module" src="./viewer.js?v=ext007-20261112" onerror="__viewerCodeFailed()"></script>
 </body>
 </html>

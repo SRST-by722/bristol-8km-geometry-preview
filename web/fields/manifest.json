@@ -2963,5 +2963,2545 @@
    "land_max_depth_gt_50cm_ha": 164.6656,
    "land_area_ha": 4922.9568
   }
+ },
+ "flood_malago": {
+  "label": "Flooding (rain storm, Malago Road study area, 2 m)",
+  "grid": {
+   "x0": -555.0,
+   "y0": -2151.0,
+   "cell": 2,
+   "nx": 500,
+   "ny": 500
+  },
+  "encoding": "water depth in cm, 8 bit, clipped at 255 cm",
+  "dtm": {
+   "file": "malago_dtm_2m.png",
+   "bytes": 225543,
+   "sha256": "ec2723b9c7585f216f36cc84fcdaf382924e6030a99056ee8b1579e7a96806b3",
+   "encoding": "cm + 2000, 16 bit in R (high byte) and G (low byte)",
+   "source": "Environment Agency LIDAR Composite DTM 2022 (2 m), sampled bilinearly once from the British National Grid onto a 2 m grid of the local frame (same spacing as the source, no pooling); the ground heights used by this run"
+  },
+  "frames": [
+   {
+    "file": "malago_000.png",
+    "bytes": 322,
+    "sha256": "7c8603b15cf8268e6405ca558f7174fc22858a8721c6b84c213ba16aa152f17a",
+    "t_s": 0.3,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_001.png",
+    "bytes": 782,
+    "sha256": "459c2255bcc1337d3d01bf2839a844b96adedb6ec27ab219a1bb8c872361d3cf",
+    "t_s": 300.046,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_002.png",
+    "bytes": 5708,
+    "sha256": "52641ef63856e3b2b9cdcccde4c9aac04c5cbf3a1cce0011760a1625ecc2addb",
+    "t_s": 600.011,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_003.png",
+    "bytes": 9099,
+    "sha256": "88763d4092112ff2149421347165d643fed476162e4509cbdae02399a3c4d73c",
+    "t_s": 900.205,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_004.png",
+    "bytes": 19325,
+    "sha256": "eb7f33c9be6c977501fb9a8ef26099c64013e60216d99a1c2772f9402fd4958f",
+    "t_s": 1200.177,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "malago_005.png",
+    "bytes": 27095,
+    "sha256": "1819c3e0beb98cbb4c3f505b17f5cb5a121c205cfea68413b30065672b8dee73",
+    "t_s": 1500.177,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "malago_006.png",
+    "bytes": 33608,
+    "sha256": "e7b4015244b2127544d0e752e95b96e9189e18d66c2777730745e8ddfca2a951",
+    "t_s": 1800.177,
+    "rain_mm_h": 29.6
+   },
+   {
+    "file": "malago_007.png",
+    "bytes": 52933,
+    "sha256": "d0d90e1b9ea58e55ff6b5c421d3e93bd17a29afd9f48753f9ba4aa5d836c965f",
+    "t_s": 2100.177,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "malago_008.png",
+    "bytes": 60016,
+    "sha256": "a96697a8373ffe334b42234198c200ac8672c2ad3be341765c71742c2413ef41",
+    "t_s": 2400.177,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "malago_009.png",
+    "bytes": 64175,
+    "sha256": "9485df8f8e53a7b372ec5eb339137261623f13f6ddbd7b5022e13f77eaa0c012",
+    "t_s": 2700.177,
+    "rain_mm_h": 74.0
+   },
+   {
+    "file": "malago_010.png",
+    "bytes": 62422,
+    "sha256": "8ea53744778a785653e42c03b523b346b618f21234ae52a36b93364307a15223",
+    "t_s": 3000.177,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "malago_011.png",
+    "bytes": 63250,
+    "sha256": "9442ee304718ad5c24496c9fc6f4b3e0aa9c50413ae24bcb5cd6d669fd0a83c2",
+    "t_s": 3300.177,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "malago_012.png",
+    "bytes": 64354,
+    "sha256": "b3e92442d57558369d3aedb34a1d3b67dbb7549461048cea5a0be50c3ad79ab6",
+    "t_s": 3600.177,
+    "rain_mm_h": 44.4
+   },
+   {
+    "file": "malago_013.png",
+    "bytes": 60860,
+    "sha256": "ed5f3182c926af8319affea2c3453f173c29962135f3fcc9dc0a92406329d733",
+    "t_s": 3900.177,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "malago_014.png",
+    "bytes": 59491,
+    "sha256": "8c988f84882388633e465c270b26d110cdef8df9f009afa4b86d077585120292",
+    "t_s": 4200.177,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "malago_015.png",
+    "bytes": 58908,
+    "sha256": "67cacfcc8e68a9e7f32a1200ab41ef94b19039eb711a0c7556597c2b283f49f0",
+    "t_s": 4500.177,
+    "rain_mm_h": 22.2
+   },
+   {
+    "file": "malago_016.png",
+    "bytes": 56820,
+    "sha256": "021b20dd959cf5052d0dfe6f8afbf8164ed9a67dc0e5234c1388f39411de3c67",
+    "t_s": 4800.062,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_017.png",
+    "bytes": 55271,
+    "sha256": "2399b035106f0e74ea72920beea5786b154215914f995f10b1c81124206679c5",
+    "t_s": 5100.165,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_018.png",
+    "bytes": 54420,
+    "sha256": "15220c550e12d87a13ad8511b63abe35e444dbd35d96648afeaa5d7821bf3545",
+    "t_s": 5400.031,
+    "rain_mm_h": 14.8
+   },
+   {
+    "file": "malago_019.png",
+    "bytes": 52067,
+    "sha256": "4770e4ba551ba62f06d68c3f4616af0e4d1305d44ab9b21c0d120418e3706eed",
+    "t_s": 5700.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_020.png",
+    "bytes": 50556,
+    "sha256": "a386001bbcadf184a96d84ce43f55b0f2f181a7aad4e1a46fd4723a0ab88f795",
+    "t_s": 6000.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_021.png",
+    "bytes": 49380,
+    "sha256": "b83b44da7dd3d9d559655c6d61547877809f2ac2788f940fae20cbec1be94a04",
+    "t_s": 6300.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_022.png",
+    "bytes": 48427,
+    "sha256": "3d40616af2a1092ed843ed03d32de69fa9c92762315a54d50d481f4dc946139d",
+    "t_s": 6600.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_023.png",
+    "bytes": 47369,
+    "sha256": "997ade362c69c8b861da17bf534a823fcba8f4ce8ab6af82bdaf92c73ac68613",
+    "t_s": 6900.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_024.png",
+    "bytes": 46354,
+    "sha256": "528b58aa3e56de40a6ae6264b9cf1fd6605441948f7166df8cb5ae29fc62ee50",
+    "t_s": 7200.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_025.png",
+    "bytes": 45530,
+    "sha256": "04ca0a11665b20e1ff38dd719f2c18aa097e7ca393f66181c37cf1724c0e9f6b",
+    "t_s": 7500.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_026.png",
+    "bytes": 44637,
+    "sha256": "70d942e1160587c04571f4c5cd906824dcb3a0d9868652ced136f87329016e47",
+    "t_s": 7800.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_027.png",
+    "bytes": 43940,
+    "sha256": "acf128fa85c654300ba24b69e7b942cec5e4bbce9c6bd37ec151b1312f42b806",
+    "t_s": 8100.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_028.png",
+    "bytes": 43280,
+    "sha256": "ff9d43584925d0b9f379b1d2cf633045d3b4e014a97462fe4f4e209fc7e1e905",
+    "t_s": 8400.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_029.png",
+    "bytes": 42727,
+    "sha256": "a514b195740a8ef1667750fd64dc2b8ac87d6ad2b452c254dff171bf4fb2f002",
+    "t_s": 8700.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_030.png",
+    "bytes": 42255,
+    "sha256": "ec0f1cbbaf20047fe4af06153ce4ef2b6ceb93e8685e264f8683495a55348c3f",
+    "t_s": 9000.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_031.png",
+    "bytes": 41636,
+    "sha256": "cc6fda28bb76e271dcc469384e78d12a563e94d5574bf16b1d1b936da99ec3e7",
+    "t_s": 9300.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_032.png",
+    "bytes": 41184,
+    "sha256": "a26699b1e897526b32b5991572a8650f5da4c7d222c702ec5d743d4af20efcf9",
+    "t_s": 9600.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_033.png",
+    "bytes": 40759,
+    "sha256": "034556501f8368a99a5219382cccf6faf6ab709c8b5e0d4cb6de077a485f89f0",
+    "t_s": 9900.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_034.png",
+    "bytes": 40299,
+    "sha256": "54157107e3d23519f58068a8924dcab05db58e6941f696d8eeb948c5806e5c55",
+    "t_s": 10200.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_035.png",
+    "bytes": 39843,
+    "sha256": "7fa525cca1a38ba50d0b590d4ec7be94d9b87daf08311d5032d2d6f61694d3d9",
+    "t_s": 10500.031,
+    "rain_mm_h": 0.0
+   },
+   {
+    "file": "malago_036.png",
+    "bytes": 39393,
+    "sha256": "b145e932e5540893fca6cc478c54d7295106dfbca9ef96ce5799669907b3bcc4",
+    "t_s": 10800.0,
+    "rain_mm_h": 0.0
+   }
+  ],
+  "scenario": {
+   "hyetograph_mm_h_15min_blocks": [
+    14.8,
+    29.6,
+    74.0,
+    44.4,
+    22.2,
+    14.8
+   ],
+   "total_rain_mm": 49.95,
+   "duration_h": 3.0,
+   "reference_event": "design storm copied from the South Kensington run (12 July 2021 London cloudburst type); not a Bristol event",
+   "sewer_capacity_mm_h": 12.0,
+   "infiltration_green_mm_h": 20.0,
+   "manning_n": {
+    "paved": 0.02,
+    "green": 0.05
+   },
+   "roof_runoff": "excess over sewer capacity routed to the nearest open ground cell",
+   "buildings": "solid raised blocks",
+   "boundary": "stand-alone 1 km x 1 km model: the outer 2 cells and mapped water areas absorb outflow; no water enters from outside the square (the upstream River Malago catchment and street flow from the surrounding area are left out); river levels and tides are not modelled",
+   "initial_state": "dry"
+  },
+  "solver": "vendor/flood_model.py = framework @587f3d9 src/urban_flow/physics/flood/model.py (unchanged)",
+  "terrain": "Environment Agency LIDAR Composite DTM 2022 (2 m), sampled bilinearly once from the British National Grid onto a 2 m grid of the local frame (same spacing as the source, no pooling); buildings: OpenStreetMap footprints raised by max(height, 3 m) and solid",
+  "inputs": {
+   "grid": [
+    500,
+    500
+   ],
+   "cell_m": 2.0,
+   "x_centres_m": [
+    -554.0,
+    444.0
+   ],
+   "y_centres_m": [
+    -2150.0,
+    -1152.0
+   ],
+   "dtm_min_max_m_ODN": [
+    6.507843494415283,
+    41.038753509521484
+   ],
+   "buildings_touching": 3124,
+   "building_cells_pct": 27.49,
+   "green_cells_pct": 13.39,
+   "water_cells_pct": 0.01,
+   "dtm_source": "Environment Agency LIDAR Composite DTM 2022 (2 m), sampled bilinearly once from the British National Grid onto a 2 m grid of the local frame (same spacing as the source, no pooling)"
+  },
+  "summary": {
+   "steps": 36011,
+   "model_seconds": 10800.0,
+   "wall_seconds": 852.1039881706238,
+   "seconds_per_step": 0.02366232507869935,
+   "volumes_m3": {
+    "rain_on_ground": 36217.55352781006,
+    "roof_routed": 8781.62345436029,
+    "drained": 17632.883091762662,
+    "outflow": 9338.492466997355,
+    "neg_clamped": 0.0011995782116264544,
+    "stored_final": 18024.51171875,
+    "balance_error": -3.288505082120537
+   },
+   "max_depth_m": 1.9814189672470093,
+   "max_depth_p99_ground_m": 0.5352089405059814,
+   "area_max_depth_gt_10cm_ha": 9.1764,
+   "area_max_depth_gt_30cm_ha": 2.3988
+  },
+  "comparison_with_8m_model": {
+   "same_square": "ground cells with centres inside x -554..444, y -2150..-1152",
+   "8m_cells_of_the_8km_model": {
+    "cells_x": 124,
+    "cells_y": 125,
+    "x_centres": [
+     -547.0,
+     437.0
+    ],
+    "y_centres": [
+     -2147.0,
+     -1155.0
+    ],
+    "ground_ha": 66.31,
+    "max_depth_gt_10cm_ha": 14.61,
+    "max_depth_gt_30cm_ha": 5.96,
+    "max_depth_gt_1m_ha": 0.448,
+    "p99_max_depth_m": 0.89,
+    "max_depth_m": 1.96
+   },
+   "2m_cells_local_model": {
+    "cells_x": 500,
+    "cells_y": 500,
+    "x_centres": [
+     -554.0,
+     444.0
+    ],
+    "y_centres": [
+     -2150.0,
+     -1152.0
+    ],
+    "ground_ha": 72.51,
+    "max_depth_gt_10cm_ha": 9.18,
+    "max_depth_gt_30cm_ha": 2.4,
+    "max_depth_gt_1m_ha": 0.125,
+    "p99_max_depth_m": 0.532,
+    "max_depth_m": 1.98
+   },
+   "interior_more_than_100m_from_the_square_edge": {
+    "8m": {
+     "cells_x": 100,
+     "cells_y": 99,
+     "x_centres": [
+      -451.0,
+      341.0
+     ],
+     "y_centres": [
+      -2043.0,
+      -1259.0
+     ],
+     "ground_ha": 41.98,
+     "max_depth_gt_10cm_ha": 7.69,
+     "max_depth_gt_30cm_ha": 2.96,
+     "max_depth_gt_1m_ha": 0.198,
+     "p99_max_depth_m": 0.731,
+     "max_depth_m": 1.96
+    },
+    "2m": {
+     "cells_x": 400,
+     "cells_y": 400,
+     "x_centres": [
+      -454.0,
+      344.0
+     ],
+     "y_centres": [
+      -2050.0,
+      -1252.0
+     ],
+     "ground_ha": 45.94,
+     "max_depth_gt_10cm_ha": 6.45,
+     "max_depth_gt_30cm_ha": 1.86,
+     "max_depth_gt_1m_ha": 0.12,
+     "p99_max_depth_m": 0.599,
+     "max_depth_m": 1.98
+    }
+   },
+   "how_to_read": "The two runs differ in more than cell size. In the 8 km model water from the surrounding area flows into this square; the local model has no inflow across its edges and loses water there. The lower flooded area of the 2 m run is therefore not a measure of the effect of resolution alone."
+  },
+  "note": "The same design storm and solver as the 8 km flood layer, on 2 m cells for a 1 km square around Malago Road. Illustrative; not a forecast; not compared with the Malago Road experiments or with Environment Agency flood maps."
+ },
+ "wind_malago": {
+  "label": "Wind (surrogate model), Malago Road area on 4 m cells",
+  "grid": {
+   "x0": -560.0,
+   "y0": -2152.0,
+   "cell": 4.0,
+   "nx": 252,
+   "ny": 250
+  },
+  "encoding": "u, v in R, G: value = 128 + round(u / scale_m_s of the level * 127); B = 255 where building",
+  "steps_total": 60,
+  "levels": [
+   {
+    "height_m": 2.0,
+    "span_m": [
+     0.0,
+     4.0
+    ],
+    "fine_layer": 1,
+    "scale_m_s": 1.0,
+    "frames": [
+     {
+      "file": "windm_h002_000.png",
+      "bytes": 12429,
+      "sha256": "2eb2a2b05a44da51b6e20965379846c9c8174f72b8a719c62b73b47264967c54",
+      "step": 0
+     },
+     {
+      "file": "windm_h002_004.png",
+      "bytes": 77643,
+      "sha256": "6d22bdf716ce669ebca5939afce8062c4c0cf4111786d92cc23878b92bae3404",
+      "step": 4
+     },
+     {
+      "file": "windm_h002_008.png",
+      "bytes": 74463,
+      "sha256": "bf4eec8a6681e72a5cece0ffdb35f427ceee9729d484103969c94c7963c7b29b",
+      "step": 8
+     },
+     {
+      "file": "windm_h002_012.png",
+      "bytes": 69593,
+      "sha256": "6a83119ef6b763569b86d4f4e92d9eda00d59866dd887578881c6c1b0ffad7ea",
+      "step": 12
+     },
+     {
+      "file": "windm_h002_016.png",
+      "bytes": 66079,
+      "sha256": "13583d1e56ecc0c421a07484e6c406291c6a5ef14bc5ad43d53e181f92d4adbe",
+      "step": 16
+     },
+     {
+      "file": "windm_h002_020.png",
+      "bytes": 64573,
+      "sha256": "37e2d225aba54a2efb56fb34549e561f7558aa2e95cc82178440c8bd2550d089",
+      "step": 20
+     },
+     {
+      "file": "windm_h002_024.png",
+      "bytes": 64958,
+      "sha256": "4795f96f1720c41a098c092f7043e84712ed354163ee6fc2053339ffb465a95b",
+      "step": 24
+     },
+     {
+      "file": "windm_h002_028.png",
+      "bytes": 65383,
+      "sha256": "8c608ef4e326504d1a8a64b02b132c2dc111a8ca07859040dc20d265bad6ba76",
+      "step": 28
+     },
+     {
+      "file": "windm_h002_032.png",
+      "bytes": 64254,
+      "sha256": "024c33c2cf21a2c8d45da9f49c052d96dd529ded6f38b7eafc0f36c8864b223f",
+      "step": 32
+     },
+     {
+      "file": "windm_h002_036.png",
+      "bytes": 62314,
+      "sha256": "a2a2f919c1fbc6d620b39c920d19bb809f67126cd5e5c13574fc1dd6ea5be633",
+      "step": 36
+     },
+     {
+      "file": "windm_h002_040.png",
+      "bytes": 61989,
+      "sha256": "4609a0367ac54133485c68715e03435d44eed49071d02c8e25b1803217ab24dd",
+      "step": 40
+     },
+     {
+      "file": "windm_h002_044.png",
+      "bytes": 61843,
+      "sha256": "c7d90df59bb503fbaf7be17b71fb49bbaa0eb033a309346d504225bea5d07c3e",
+      "step": 44
+     },
+     {
+      "file": "windm_h002_048.png",
+      "bytes": 61652,
+      "sha256": "4c777865d81672dd5ce09522263cea4a785eb183fd1b4569c17f3c943556a209",
+      "step": 48
+     },
+     {
+      "file": "windm_h002_052.png",
+      "bytes": 61549,
+      "sha256": "86e76a904697b3eb50c9eba371ce6f16f154a4e7aa65833dd91465fe444f4f32",
+      "step": 52
+     },
+     {
+      "file": "windm_h002_056.png",
+      "bytes": 61693,
+      "sha256": "123c339b83168b613471f2bb17bab0d266c996dc49f172d370752b7062cf90e8",
+      "step": 56
+     },
+     {
+      "file": "windm_h002_060.png",
+      "bytes": 61615,
+      "sha256": "e00891436c1692cdcbb7653ac3ac9e15a8baf9a4c763df72dbc48cbf1f577211",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 6.0,
+    "span_m": [
+     4.0,
+     8.0
+    ],
+    "fine_layer": 2,
+    "scale_m_s": 1.0,
+    "frames": [
+     {
+      "file": "windm_h006_000.png",
+      "bytes": 10013,
+      "sha256": "07e85516d730e59a16d6d654cb1e87b92aa434cdd1f9b1fb96ea7232e5c4e14d",
+      "step": 0
+     },
+     {
+      "file": "windm_h006_004.png",
+      "bytes": 79737,
+      "sha256": "cf7e281412940b56d435ec63be8988b3bf6eea14b109fe9e0cab78968d9a16ae",
+      "step": 4
+     },
+     {
+      "file": "windm_h006_008.png",
+      "bytes": 76880,
+      "sha256": "7facc5d760abe53773273b8f905da2e78d91661cb55798fb733f0b2fd8250274",
+      "step": 8
+     },
+     {
+      "file": "windm_h006_012.png",
+      "bytes": 72392,
+      "sha256": "2ab92235b56cdff9980fe8dadf58b2333c87c9ce552bf6b6da1918018df7c395",
+      "step": 12
+     },
+     {
+      "file": "windm_h006_016.png",
+      "bytes": 69081,
+      "sha256": "e5215982e6261536cf0757b6184c9475b16b335e97b4080b4d2135eb1315f084",
+      "step": 16
+     },
+     {
+      "file": "windm_h006_020.png",
+      "bytes": 67636,
+      "sha256": "fea1ad627d220e6997dbf606ebe673778f1eca32f4bea563b7e580ddd1427dc5",
+      "step": 20
+     },
+     {
+      "file": "windm_h006_024.png",
+      "bytes": 68042,
+      "sha256": "bf27168240544b8bb8521eb3a70d8b0465627f030d9f830ed075f08381067697",
+      "step": 24
+     },
+     {
+      "file": "windm_h006_028.png",
+      "bytes": 68312,
+      "sha256": "ae65c1fe5b319a1b431360ef6de44f4aa20484fac8f9f3178ced6d0f6244e0f1",
+      "step": 28
+     },
+     {
+      "file": "windm_h006_032.png",
+      "bytes": 67566,
+      "sha256": "be45a89019eaa9bf7a64d6bbb93b5e3f910fab491b47109befbbd4b60a4a169b",
+      "step": 32
+     },
+     {
+      "file": "windm_h006_036.png",
+      "bytes": 65877,
+      "sha256": "dea349a25e09293339a7cabe2e8b1e638e42e65e1833983b389a09fd85233acb",
+      "step": 36
+     },
+     {
+      "file": "windm_h006_040.png",
+      "bytes": 65431,
+      "sha256": "f3628f32909d48ecb4a01e0d74d1035d791d49cba314d7e158667b3b4c7bbb60",
+      "step": 40
+     },
+     {
+      "file": "windm_h006_044.png",
+      "bytes": 65555,
+      "sha256": "ee43cdb493161a9b83792ef3e5a9a92d8fb8f638476257e9ba6e562644ec8191",
+      "step": 44
+     },
+     {
+      "file": "windm_h006_048.png",
+      "bytes": 65252,
+      "sha256": "c1bc2c13164b330be3687cb5687e6a69701095aea86e6d9e36b6eefe70cfd07a",
+      "step": 48
+     },
+     {
+      "file": "windm_h006_052.png",
+      "bytes": 65301,
+      "sha256": "b70d402fd5e44de7a02a7bac0886fb24f412cfd15e6234817bb9781bf05a5e7e",
+      "step": 52
+     },
+     {
+      "file": "windm_h006_056.png",
+      "bytes": 65441,
+      "sha256": "d58ae8072b623f0873f070db48e319c34a24f779c14763e150cc9f8a07791ddc",
+      "step": 56
+     },
+     {
+      "file": "windm_h006_060.png",
+      "bytes": 65431,
+      "sha256": "37b1eceacb6122a4aed3dbe0c6ba63becfc25b094aa12539e4b004278a5f3d67",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 10.0,
+    "span_m": [
+     8.0,
+     12.0
+    ],
+    "fine_layer": 3,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h010_000.png",
+      "bytes": 8343,
+      "sha256": "90cad68abf1c7b653215bdca0d607b522a15c33cbb3e6397abf62116c9948f57",
+      "step": 0
+     },
+     {
+      "file": "windm_h010_004.png",
+      "bytes": 72149,
+      "sha256": "c1fcef718f5d7785611439479bc4ef9a6516315db18a2286bb8290be209b150a",
+      "step": 4
+     },
+     {
+      "file": "windm_h010_008.png",
+      "bytes": 70088,
+      "sha256": "774dd71c45ff169f84821fb73aedf4c240bde48aea7b5ed434a154672842fb63",
+      "step": 8
+     },
+     {
+      "file": "windm_h010_012.png",
+      "bytes": 65586,
+      "sha256": "2ff15012dd4b0b8f1fe4e0287a051cd32a8a2377bedb3a9ec68baf8ab482305f",
+      "step": 12
+     },
+     {
+      "file": "windm_h010_016.png",
+      "bytes": 62077,
+      "sha256": "c80a06da3c2d31db873d0c1231b5b7f20e60c67168c501fce2d369e278693b5b",
+      "step": 16
+     },
+     {
+      "file": "windm_h010_020.png",
+      "bytes": 60522,
+      "sha256": "ae0f35aac56d4e6be6ba8c49c1916d397bb896f925e9b6781dde2c92bc279179",
+      "step": 20
+     },
+     {
+      "file": "windm_h010_024.png",
+      "bytes": 60972,
+      "sha256": "be370e7f31e7c0b868088ccc38835188a2f99a7b254db6bc812c2613306069d6",
+      "step": 24
+     },
+     {
+      "file": "windm_h010_028.png",
+      "bytes": 61590,
+      "sha256": "514d9e2be9287b3c8e87f526e501d433989e3762ca51b6a4f029f0b54843c125",
+      "step": 28
+     },
+     {
+      "file": "windm_h010_032.png",
+      "bytes": 60728,
+      "sha256": "06ea412d231c73ff29473564e380a7b4ab4baf0a303207f87dfaf9c318a83e28",
+      "step": 32
+     },
+     {
+      "file": "windm_h010_036.png",
+      "bytes": 59131,
+      "sha256": "e44bda6a7735bdb4d44029d27c62db3d3483ba08f2465293a5d543e71a568173",
+      "step": 36
+     },
+     {
+      "file": "windm_h010_040.png",
+      "bytes": 58472,
+      "sha256": "0db7aebd4fd43f1038611433a9a00bf5042d393442dc4809550bb5b5298bd80f",
+      "step": 40
+     },
+     {
+      "file": "windm_h010_044.png",
+      "bytes": 58412,
+      "sha256": "3d6154847c2fb49d41bd71721a3eed0cfe1d8412a9c5d83e35c173919b17fabc",
+      "step": 44
+     },
+     {
+      "file": "windm_h010_048.png",
+      "bytes": 58182,
+      "sha256": "9258c41eb2db366a5ac4bbaa2ce1bd1fbce41b952d6159fa7e2670e5844431d0",
+      "step": 48
+     },
+     {
+      "file": "windm_h010_052.png",
+      "bytes": 58360,
+      "sha256": "65c3e9f64a59ae0bfe5f3cfb227128d6c380e0051315dc9287ec11c7e750a00d",
+      "step": 52
+     },
+     {
+      "file": "windm_h010_056.png",
+      "bytes": 58412,
+      "sha256": "12cd5fe33e5e71ab43b93c7215c96ac3402ff42ea044f6b028e27b9cc77065fc",
+      "step": 56
+     },
+     {
+      "file": "windm_h010_060.png",
+      "bytes": 58162,
+      "sha256": "9f8f52170bb71807027d26016278b596a6bd4a24034a5f47c558e04be13673c9",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 14.0,
+    "span_m": [
+     12.0,
+     16.0
+    ],
+    "fine_layer": 4,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h014_000.png",
+      "bytes": 2231,
+      "sha256": "a321517ea4b4f54c7d52914e603e4c2535ec0085faff099f8f1c5d2394528914",
+      "step": 0
+     },
+     {
+      "file": "windm_h014_004.png",
+      "bytes": 59727,
+      "sha256": "b1ffe74a88478a513da5418caef7be2ea72424002b86f50dba65527bdfac9bf3",
+      "step": 4
+     },
+     {
+      "file": "windm_h014_008.png",
+      "bytes": 59948,
+      "sha256": "36c88341116226e5e77001384e0e80aef45d92aa5add3249c8d25a26c53cefad",
+      "step": 8
+     },
+     {
+      "file": "windm_h014_012.png",
+      "bytes": 57284,
+      "sha256": "37c992235ab78b7c7daf5fc91ef9bb1021600710bffebe4c4130e1eec8e7476b",
+      "step": 12
+     },
+     {
+      "file": "windm_h014_016.png",
+      "bytes": 56138,
+      "sha256": "1b478952523dca139c850fcd15da49f57a776a6ee8e50fb6e5f3add0982878c1",
+      "step": 16
+     },
+     {
+      "file": "windm_h014_020.png",
+      "bytes": 55831,
+      "sha256": "9879b2abb27b80fc697f9f100a219829983151c54569ca5fb6e6e3f405b880c3",
+      "step": 20
+     },
+     {
+      "file": "windm_h014_024.png",
+      "bytes": 56456,
+      "sha256": "b8153a156ec11a69c20177c954ea580b67a58a279b218ef5718294bbd9b2441c",
+      "step": 24
+     },
+     {
+      "file": "windm_h014_028.png",
+      "bytes": 56736,
+      "sha256": "860f4229b1707293627a905639693ff69653a16cde151c9c91102636a84dd9e9",
+      "step": 28
+     },
+     {
+      "file": "windm_h014_032.png",
+      "bytes": 55897,
+      "sha256": "4d052445b3bf9ffbfdcad76759765bf8bb78722b4f8d92c6e0c452c2deafd547",
+      "step": 32
+     },
+     {
+      "file": "windm_h014_036.png",
+      "bytes": 55263,
+      "sha256": "656e1b9c073aa364d22074d7c23929eb30e318133742bf8dbfd640432ae4b22e",
+      "step": 36
+     },
+     {
+      "file": "windm_h014_040.png",
+      "bytes": 54795,
+      "sha256": "02b8df8051286540557865fad423b0daa84d26f9f76be3ab8e46b7470e92e9b1",
+      "step": 40
+     },
+     {
+      "file": "windm_h014_044.png",
+      "bytes": 55060,
+      "sha256": "1a9c40e68b438e0eb809b9398441827a50a7167cec796ebea6100b79dd38a9bf",
+      "step": 44
+     },
+     {
+      "file": "windm_h014_048.png",
+      "bytes": 54458,
+      "sha256": "3e113d048f763a89cc4b7047380ee69bc5bca6d50444b08aa048ec53001eb4f7",
+      "step": 48
+     },
+     {
+      "file": "windm_h014_052.png",
+      "bytes": 54309,
+      "sha256": "f25e817d7b9ced540d8d679aea21f1f40a616e74b06972402e2521cb5901d95f",
+      "step": 52
+     },
+     {
+      "file": "windm_h014_056.png",
+      "bytes": 54115,
+      "sha256": "0be1d8134c27652b193b2a6971dfb806f13261edf91880d1a0e09c5de67fa297",
+      "step": 56
+     },
+     {
+      "file": "windm_h014_060.png",
+      "bytes": 54222,
+      "sha256": "52a6e269f481b22deba896978dfabd0eac1787d4e986a4f9553a8aa9b4b39aad",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 18.0,
+    "span_m": [
+     16.0,
+     20.0
+    ],
+    "fine_layer": 5,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h018_000.png",
+      "bytes": 1612,
+      "sha256": "2a0b52955584de98e7a5a320c2f9340d35522630213403c080dabc396c9544bc",
+      "step": 0
+     },
+     {
+      "file": "windm_h018_004.png",
+      "bytes": 44284,
+      "sha256": "4e152370dc4cbe28eed58e6eb0afe498a5195507b7f75c1ddf243548f83cadc9",
+      "step": 4
+     },
+     {
+      "file": "windm_h018_008.png",
+      "bytes": 46219,
+      "sha256": "93148a245d0389b60313af0f4ee90579f294c0fde6d1632cfdcc6857f109c18b",
+      "step": 8
+     },
+     {
+      "file": "windm_h018_012.png",
+      "bytes": 45324,
+      "sha256": "6ebde0d98847cce177e50ce3bbb9c925b912f5f9d341555da8e73f2795e2ad38",
+      "step": 12
+     },
+     {
+      "file": "windm_h018_016.png",
+      "bytes": 45830,
+      "sha256": "58092a0acc22b8b9a6115aceb9fb171d98237cebb4478839459b3684cc0efece",
+      "step": 16
+     },
+     {
+      "file": "windm_h018_020.png",
+      "bytes": 46763,
+      "sha256": "c59504f7ca67102dac21c2ea45424c015cc2196e5fef94a00ce2eb735c070fc9",
+      "step": 20
+     },
+     {
+      "file": "windm_h018_024.png",
+      "bytes": 47909,
+      "sha256": "0449ccc46a476c99ee12842b8a92b9999df7adf65a0750df2e636279e6836844",
+      "step": 24
+     },
+     {
+      "file": "windm_h018_028.png",
+      "bytes": 48350,
+      "sha256": "99c8f027c772d2887547542b0755020792d2c00c845ad1adb5b0f4941ab9be57",
+      "step": 28
+     },
+     {
+      "file": "windm_h018_032.png",
+      "bytes": 48254,
+      "sha256": "03b6a1491842bf0e6c417b54da8f1bf3d8d573999d643559bca2d5eca78f591c",
+      "step": 32
+     },
+     {
+      "file": "windm_h018_036.png",
+      "bytes": 48370,
+      "sha256": "3e60209452d82fa5418c4c47686568a5e19268b5009348dc57aa2ccb71bd489f",
+      "step": 36
+     },
+     {
+      "file": "windm_h018_040.png",
+      "bytes": 49086,
+      "sha256": "e65baf073209f0edc12ab550368bd23f4acbb5ca8059e0616437b864f1b6c848",
+      "step": 40
+     },
+     {
+      "file": "windm_h018_044.png",
+      "bytes": 49990,
+      "sha256": "27e85fcc8f56974b61c7d4089da2720c805488ab8cf98cdf88a7e7df140c2282",
+      "step": 44
+     },
+     {
+      "file": "windm_h018_048.png",
+      "bytes": 49886,
+      "sha256": "f31ada33006a613f5ce5fa502e1b54f2c9cd5fef56e42af54029bddbf69fb11b",
+      "step": 48
+     },
+     {
+      "file": "windm_h018_052.png",
+      "bytes": 49969,
+      "sha256": "3373fd1d7bb103a027124fba5d71ba32328484d8b5e1928cbe78853574f05fbb",
+      "step": 52
+     },
+     {
+      "file": "windm_h018_056.png",
+      "bytes": 49093,
+      "sha256": "ad918a60132adc5fe21d823e038b5c84b169b890ce9c1e04ec5cf725ed5f1b0c",
+      "step": 56
+     },
+     {
+      "file": "windm_h018_060.png",
+      "bytes": 49235,
+      "sha256": "9e741e9b5cbc080b94b91a6c2a04e7be9b1fb0f3d715d73df713bd5bc09e0c53",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 22.0,
+    "span_m": [
+     20.0,
+     24.0
+    ],
+    "fine_layer": 6,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h022_000.png",
+      "bytes": 1379,
+      "sha256": "6ac3ad14a09357104aac7390cd4853bc74da429a5eb578e8696113aaa30e0544",
+      "step": 0
+     },
+     {
+      "file": "windm_h022_004.png",
+      "bytes": 36093,
+      "sha256": "15f4dae3895abb48e63ac9ca027bf010b42a958ff25b33fd9d5bd244d0fface7",
+      "step": 4
+     },
+     {
+      "file": "windm_h022_008.png",
+      "bytes": 38035,
+      "sha256": "31df9d6221c7f3b97dfb7d8b82e36834adfe33f27694c0cb2caf8ab297c82c14",
+      "step": 8
+     },
+     {
+      "file": "windm_h022_012.png",
+      "bytes": 37849,
+      "sha256": "ede6e2c00f935ac7db06e616d8ea8d4d229cb4441f3af50e6ed9c858a0eca27e",
+      "step": 12
+     },
+     {
+      "file": "windm_h022_016.png",
+      "bytes": 39143,
+      "sha256": "b66e9a7b67edefe57ab97bbb37f1592d7679723a1bab89d546884d67dccf0633",
+      "step": 16
+     },
+     {
+      "file": "windm_h022_020.png",
+      "bytes": 40773,
+      "sha256": "8c4325d7488b3227998b6177d17d1a92a2d9033c63f62bb2d247da420c293bb9",
+      "step": 20
+     },
+     {
+      "file": "windm_h022_024.png",
+      "bytes": 42462,
+      "sha256": "258f4d4c43897ca2adfc6e3cf6745abe7ce45a7e5869b446905d491734849035",
+      "step": 24
+     },
+     {
+      "file": "windm_h022_028.png",
+      "bytes": 43771,
+      "sha256": "2073e47f73ca159c005c5f2e6ea831a06eb4dfbc238be72bef32c4cc14b52b67",
+      "step": 28
+     },
+     {
+      "file": "windm_h022_032.png",
+      "bytes": 44197,
+      "sha256": "1079d4de83c638d5f3bf34cfcde92c1e36128aaf0c1f641001b53a2f13a36b3b",
+      "step": 32
+     },
+     {
+      "file": "windm_h022_036.png",
+      "bytes": 44990,
+      "sha256": "9bb1b2111f0ac0b9bd0b735a8f350f120a1f6afcdb596dca6feac220038576f4",
+      "step": 36
+     },
+     {
+      "file": "windm_h022_040.png",
+      "bytes": 46692,
+      "sha256": "a7bfe887bca79b8e8d9b368d78fa7a9e2f88d7fa323fdb619c5020da17f469b8",
+      "step": 40
+     },
+     {
+      "file": "windm_h022_044.png",
+      "bytes": 47562,
+      "sha256": "e522576cb9770829f47978766d88d2cadfea9cf6ad02a72d86a714f54ec0e3ba",
+      "step": 44
+     },
+     {
+      "file": "windm_h022_048.png",
+      "bytes": 47959,
+      "sha256": "6cec2933b67124a3568c1f7d5e681055abc17649073d68c7990ac22adf164e03",
+      "step": 48
+     },
+     {
+      "file": "windm_h022_052.png",
+      "bytes": 48382,
+      "sha256": "57a6d3c5fa688a8206dddbef4746f7c704ab4db5e34951377a72bcc43fc5a8cc",
+      "step": 52
+     },
+     {
+      "file": "windm_h022_056.png",
+      "bytes": 47508,
+      "sha256": "ea5b681e96574598946f7892e9708b9c18547b4ec323c960e42c5c98e03f7d12",
+      "step": 56
+     },
+     {
+      "file": "windm_h022_060.png",
+      "bytes": 47341,
+      "sha256": "40e9966251621c51f4726a26f77e6d9095e75e492dd27cb24b9ba7284e37fb0b",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 26.0,
+    "span_m": [
+     24.0,
+     28.0
+    ],
+    "fine_layer": 7,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h026_000.png",
+      "bytes": 2006,
+      "sha256": "6e56e24674b469cab3f2b1936fb75a511fa945cefa1a16a65d1ff07457f585ff",
+      "step": 0
+     },
+     {
+      "file": "windm_h026_004.png",
+      "bytes": 31964,
+      "sha256": "2268ad2182b7c2b5cc54306e0e6acdff18475309005c8b5dc6dea4d8e8ff204d",
+      "step": 4
+     },
+     {
+      "file": "windm_h026_008.png",
+      "bytes": 32888,
+      "sha256": "81d000f0522775942884896bdf0e74f4a68d7bbb72f99733a688c42213b769b6",
+      "step": 8
+     },
+     {
+      "file": "windm_h026_012.png",
+      "bytes": 32889,
+      "sha256": "40bd5951cf134fabbe913bf6831a53e13cae27a26ad9d4913cba7b0fb96437ca",
+      "step": 12
+     },
+     {
+      "file": "windm_h026_016.png",
+      "bytes": 34537,
+      "sha256": "67d70fc0582eca806b9595aaf2d5adfecd0a18c71709176647dd7af9504932c5",
+      "step": 16
+     },
+     {
+      "file": "windm_h026_020.png",
+      "bytes": 36827,
+      "sha256": "97f75d4c698ebb1bbc518f39e6a77ec0ef6a0a0144d96ee961641a5259b19719",
+      "step": 20
+     },
+     {
+      "file": "windm_h026_024.png",
+      "bytes": 38743,
+      "sha256": "95b3b1686e51e85484b8a7e66af0130f92431b82790e792e0c3896affb9a0e83",
+      "step": 24
+     },
+     {
+      "file": "windm_h026_028.png",
+      "bytes": 40328,
+      "sha256": "cf4e1edf27c2f0d4f8b065e0535a7d1cdfa4453d642619d83234c5a52d85dd45",
+      "step": 28
+     },
+     {
+      "file": "windm_h026_032.png",
+      "bytes": 41952,
+      "sha256": "773bd47cc55c9910d21ea90627d184e6cba7abce4a39486df5f8e01db6b474ef",
+      "step": 32
+     },
+     {
+      "file": "windm_h026_036.png",
+      "bytes": 43331,
+      "sha256": "86b883a52b0a757addb5269e3401d85ddaee27ab4650d28d2b47844a71e021c0",
+      "step": 36
+     },
+     {
+      "file": "windm_h026_040.png",
+      "bytes": 45517,
+      "sha256": "ff208d6a1f1343c3b663474d334dbfc9196ae384d96c97d19fe6abdbe3115767",
+      "step": 40
+     },
+     {
+      "file": "windm_h026_044.png",
+      "bytes": 46760,
+      "sha256": "d344c8ac5eabb7e695dfd3c81bc06524dd96f9d071922b1a6610d34e1a08fbe0",
+      "step": 44
+     },
+     {
+      "file": "windm_h026_048.png",
+      "bytes": 47105,
+      "sha256": "e5ee884f4b3b78b06579906d69b749c40cb6087c9cd6c7ef4dcaccf901b3f472",
+      "step": 48
+     },
+     {
+      "file": "windm_h026_052.png",
+      "bytes": 47697,
+      "sha256": "eff07a8fecb478a5f8d57477c5f3704df46902ba72fea85b5fbe4d028cc34f59",
+      "step": 52
+     },
+     {
+      "file": "windm_h026_056.png",
+      "bytes": 47124,
+      "sha256": "f048e140ec76f426af4d69fae682d564b6575284815a21aaea4235a67b880867",
+      "step": 56
+     },
+     {
+      "file": "windm_h026_060.png",
+      "bytes": 46712,
+      "sha256": "f1df456214d89e553c17e7a47eb11d797c9d72f7e801c47d6a1ae244838d4107",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 30.0,
+    "span_m": [
+     28.0,
+     32.0
+    ],
+    "fine_layer": 8,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h030_000.png",
+      "bytes": 1375,
+      "sha256": "e61d7b6aa8547ff0de72a88115d3025680692525013cf94d256549138652ca44",
+      "step": 0
+     },
+     {
+      "file": "windm_h030_004.png",
+      "bytes": 28619,
+      "sha256": "2b5581b2bf27961e42914984f866fae523e4deb6d041b9d883ff489105a18542",
+      "step": 4
+     },
+     {
+      "file": "windm_h030_008.png",
+      "bytes": 29147,
+      "sha256": "da0a796195c2d17ec2c3b93a2a3c2c88c0f4b889444a94f500081e298b005622",
+      "step": 8
+     },
+     {
+      "file": "windm_h030_012.png",
+      "bytes": 29179,
+      "sha256": "1ace177fc3491c11d1c0a4ff531e257148e9a9aa3d66a650ec1aca18770981e5",
+      "step": 12
+     },
+     {
+      "file": "windm_h030_016.png",
+      "bytes": 30597,
+      "sha256": "d1bb0e08eab813babb99a304d867e497866ee2d2470ffc4fd60523187c7757b3",
+      "step": 16
+     },
+     {
+      "file": "windm_h030_020.png",
+      "bytes": 33329,
+      "sha256": "f0f75864ba5a5a5e5e2227849d63ee283f284647d34c7a5db6937f96153c5367",
+      "step": 20
+     },
+     {
+      "file": "windm_h030_024.png",
+      "bytes": 35733,
+      "sha256": "a36575141cdc5242c261eb62067366381e4adb5d3fcec7e5e2e7e12c16ae6a2d",
+      "step": 24
+     },
+     {
+      "file": "windm_h030_028.png",
+      "bytes": 37762,
+      "sha256": "dc9852e1d5542083a6ac9d1f3063780fc2671987532211f436b2dd5e8c769c77",
+      "step": 28
+     },
+     {
+      "file": "windm_h030_032.png",
+      "bytes": 40071,
+      "sha256": "d55dfca9ac97b794c8f0121c481143675a4ee7ce7013a279ab2d8f4c5211070f",
+      "step": 32
+     },
+     {
+      "file": "windm_h030_036.png",
+      "bytes": 42203,
+      "sha256": "4e702e8d47659417226bd888361df5fcbd5d46727effe0f78012f183f0a0d699",
+      "step": 36
+     },
+     {
+      "file": "windm_h030_040.png",
+      "bytes": 44747,
+      "sha256": "b8828b73f7dfe15c9cc5d291450f90bcbfa8d717da387004fe43e4a565c0dd26",
+      "step": 40
+     },
+     {
+      "file": "windm_h030_044.png",
+      "bytes": 45577,
+      "sha256": "88ca7d5317a27eb5e40155f38a068630bb246e5e92d4d9ad3247340dc1bb1fdd",
+      "step": 44
+     },
+     {
+      "file": "windm_h030_048.png",
+      "bytes": 46378,
+      "sha256": "f4b6d239f83689ff69ac75ddf0eea388f309cfa7eaad0a91808524f003147c3f",
+      "step": 48
+     },
+     {
+      "file": "windm_h030_052.png",
+      "bytes": 47304,
+      "sha256": "eb6847656ce9d6efacbe146f892582577237a9a433dc2de015e2ef73ce10977e",
+      "step": 52
+     },
+     {
+      "file": "windm_h030_056.png",
+      "bytes": 46508,
+      "sha256": "108edaa6022a87782e09085cd78e089fd2a3b415d14f44881c6ae87c49f89935",
+      "step": 56
+     },
+     {
+      "file": "windm_h030_060.png",
+      "bytes": 46450,
+      "sha256": "9b6130fa46d3ae10e133cc8bf94ebc760bd1554f6fd1bd8b1a1d202df368dcaa",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 34.0,
+    "span_m": [
+     32.0,
+     36.0
+    ],
+    "fine_layer": 9,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h034_000.png",
+      "bytes": 2240,
+      "sha256": "3eb785cffbeaffa94e924b2c7074f0563d31a3b231d820fe3629c7212970dbe0",
+      "step": 0
+     },
+     {
+      "file": "windm_h034_004.png",
+      "bytes": 25583,
+      "sha256": "fa9b0c017a181bcb4d2a15c2391a18e36cb898d584b29abea0d9342ef29448bf",
+      "step": 4
+     },
+     {
+      "file": "windm_h034_008.png",
+      "bytes": 25973,
+      "sha256": "3bc496964ed4d59e4d862d38dc5ab15a677ea5e29d56d9cc974dcfaa7f94dd74",
+      "step": 8
+     },
+     {
+      "file": "windm_h034_012.png",
+      "bytes": 25976,
+      "sha256": "f991732bd233795d1a1df1b97295d0fb4d19ffaec6e3a73288d6b30a7b7a20c2",
+      "step": 12
+     },
+     {
+      "file": "windm_h034_016.png",
+      "bytes": 27221,
+      "sha256": "e0763286f0feb6097556bd5dedf7049c9dfc4eed1676221ce763c258ebd7634e",
+      "step": 16
+     },
+     {
+      "file": "windm_h034_020.png",
+      "bytes": 30426,
+      "sha256": "7074a93307d56031ba5ae75052a957be5bbcde587616612ee5f074a73b994be0",
+      "step": 20
+     },
+     {
+      "file": "windm_h034_024.png",
+      "bytes": 33102,
+      "sha256": "e63af9c92bf9b2fcebbe629092c31545553e2fa0e0955c1577c2c481a9271d99",
+      "step": 24
+     },
+     {
+      "file": "windm_h034_028.png",
+      "bytes": 35497,
+      "sha256": "c4ecd54224fd31be037b7e32ed68eb26cdf568468035980ea99760ecc8003278",
+      "step": 28
+     },
+     {
+      "file": "windm_h034_032.png",
+      "bytes": 38318,
+      "sha256": "5930e1114b26a23c22eee726dd11a8c95c1c97a4dc91ddee3229b851bc22bbdb",
+      "step": 32
+     },
+     {
+      "file": "windm_h034_036.png",
+      "bytes": 41030,
+      "sha256": "d394991c55a0b0e6e88c40075d6639cb42987152d296882d415c367c2886107c",
+      "step": 36
+     },
+     {
+      "file": "windm_h034_040.png",
+      "bytes": 43830,
+      "sha256": "8f35a89eb64dadfcf6b713803d960c08bd4e118bd2d162aeeabba03cbecaed7f",
+      "step": 40
+     },
+     {
+      "file": "windm_h034_044.png",
+      "bytes": 44673,
+      "sha256": "bdcf986ce5c4754c2ee05945db97cb852d00db65d0df151c3641ed5791485b44",
+      "step": 44
+     },
+     {
+      "file": "windm_h034_048.png",
+      "bytes": 46002,
+      "sha256": "7aa34ba4c95b7bfd64dc9633316b92cba11bbacddcfafeade8b97edc9f8c6da3",
+      "step": 48
+     },
+     {
+      "file": "windm_h034_052.png",
+      "bytes": 47029,
+      "sha256": "1eb5b7f4b8c0e5441287003001aae06264adbde44e6c97b8dfd6851702139f9b",
+      "step": 52
+     },
+     {
+      "file": "windm_h034_056.png",
+      "bytes": 46088,
+      "sha256": "055666cf2d048217c33112bfe8af65b3dfe81b19c5b0304d133af9796dcfbba1",
+      "step": 56
+     },
+     {
+      "file": "windm_h034_060.png",
+      "bytes": 46380,
+      "sha256": "b9e93d1c050b8623408187ca83493523846856a5a6094cb37840c062c755c8a4",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 38.0,
+    "span_m": [
+     36.0,
+     40.0
+    ],
+    "fine_layer": 10,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h038_000.png",
+      "bytes": 1419,
+      "sha256": "21779e3cba6e97894783cf9c0a4a5c686d19687d17d4c07a07e68f7c4b266096",
+      "step": 0
+     },
+     {
+      "file": "windm_h038_004.png",
+      "bytes": 22752,
+      "sha256": "9e7ad91d3cf2084fe89a61d774f4946e641199c5e79b24caaeccb10ebf670a66",
+      "step": 4
+     },
+     {
+      "file": "windm_h038_008.png",
+      "bytes": 23148,
+      "sha256": "c3a035d7bebde31cfaad3e4bf285804588912fe4a55d93f8670ea9e196da7f3a",
+      "step": 8
+     },
+     {
+      "file": "windm_h038_012.png",
+      "bytes": 22991,
+      "sha256": "130bd8b7104525467d990cc74c4116b4bf5296788aa9df8905a6f31e203bb8d2",
+      "step": 12
+     },
+     {
+      "file": "windm_h038_016.png",
+      "bytes": 24296,
+      "sha256": "0fa08f89bf4d59da4ca4fd9b9f49b8f8fee2cea82ffd394bbe1276a75a4ce0ce",
+      "step": 16
+     },
+     {
+      "file": "windm_h038_020.png",
+      "bytes": 27542,
+      "sha256": "713c8407df41b5a018252f4aaa30a4a484221f35dd4930b20ffb8801149fd820",
+      "step": 20
+     },
+     {
+      "file": "windm_h038_024.png",
+      "bytes": 30453,
+      "sha256": "e75cb3f90ef231b487dda342edb798d206d46c6cf615fb95b459ad957de278b1",
+      "step": 24
+     },
+     {
+      "file": "windm_h038_028.png",
+      "bytes": 33207,
+      "sha256": "9e85af9559201511f67bb56ab0a31fb223fa2478d2f4a0165836eb815206408d",
+      "step": 28
+     },
+     {
+      "file": "windm_h038_032.png",
+      "bytes": 36420,
+      "sha256": "bc56b3d9df7c9008ab4ef5b8c815cb1c538b254645b7501211f96eaa1ba4710e",
+      "step": 32
+     },
+     {
+      "file": "windm_h038_036.png",
+      "bytes": 39559,
+      "sha256": "a6d127a2407a071664f9e0ad57baa2c45d97b7ddc0bf7e4270c3695dc83d8011",
+      "step": 36
+     },
+     {
+      "file": "windm_h038_040.png",
+      "bytes": 42635,
+      "sha256": "1c5396bf0c4e455606809d70f3aa8c52e48df4b6c78b80ccc1961766d99c6473",
+      "step": 40
+     },
+     {
+      "file": "windm_h038_044.png",
+      "bytes": 43688,
+      "sha256": "709cb2f871f2c25ee7f4dae0708bb2e9f0a9d691c65f0722f32f4389fea4fe1a",
+      "step": 44
+     },
+     {
+      "file": "windm_h038_048.png",
+      "bytes": 45196,
+      "sha256": "19ac77f6201d1f0e13a7b4605072ac6d6b9de9d7d2abde50dddb56f339ab32c9",
+      "step": 48
+     },
+     {
+      "file": "windm_h038_052.png",
+      "bytes": 46198,
+      "sha256": "a77bd31ab9674c4e0a204b17e5f4dbae49659c568168fa9ade1dfdc5c2592bb1",
+      "step": 52
+     },
+     {
+      "file": "windm_h038_056.png",
+      "bytes": 45614,
+      "sha256": "f7164f9150b57658274963bb66ef43cc97d393c7765f3c879322c12d54fe5e47",
+      "step": 56
+     },
+     {
+      "file": "windm_h038_060.png",
+      "bytes": 46270,
+      "sha256": "a73b3fdf63169ace82a7ceca3e6ca010b68d860f8ebf94e050c91f3846b4fd48",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 42.0,
+    "span_m": [
+     40.0,
+     44.0
+    ],
+    "fine_layer": 11,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h042_000.png",
+      "bytes": 2850,
+      "sha256": "e5d0ffcce266ab8e01d2d8d0a8c0bae30c9fb5da17c710e172e4edf2216c92b2",
+      "step": 0
+     },
+     {
+      "file": "windm_h042_004.png",
+      "bytes": 20494,
+      "sha256": "03640c0ca6b87b0c097c587ea81406d15aa1efed893c326ba3cf1efd922fb86f",
+      "step": 4
+     },
+     {
+      "file": "windm_h042_008.png",
+      "bytes": 20845,
+      "sha256": "d2956a59a3541982edc751f065518df7d5c183e39c8000bf3b10cee76977deb5",
+      "step": 8
+     },
+     {
+      "file": "windm_h042_012.png",
+      "bytes": 20766,
+      "sha256": "8c58248da458ed0e408c126ae07742c32482a906d1f7a500c76978f26fbce65f",
+      "step": 12
+     },
+     {
+      "file": "windm_h042_016.png",
+      "bytes": 22219,
+      "sha256": "cddc5b0bea1fd07b333c9136127eb9b422b4f0c811c3f2f97861c85638d8d2fe",
+      "step": 16
+     },
+     {
+      "file": "windm_h042_020.png",
+      "bytes": 25109,
+      "sha256": "06ef9870736607f72e7461200ae7aabc9c70e364cbddfd528d92b1dc01380442",
+      "step": 20
+     },
+     {
+      "file": "windm_h042_024.png",
+      "bytes": 28192,
+      "sha256": "76439ce249bda6033eaae89156c91dfa3e0e853e347347e01c17c6d3375e00db",
+      "step": 24
+     },
+     {
+      "file": "windm_h042_028.png",
+      "bytes": 31147,
+      "sha256": "df28fcebb52d3f10bb8369186fcafad390258685ca2198d1ec2ca96c52faacdf",
+      "step": 28
+     },
+     {
+      "file": "windm_h042_032.png",
+      "bytes": 34572,
+      "sha256": "8d6e0d5557f5303df5de2373299956d2715a9feb1f91d2a4b9908b55e4186c35",
+      "step": 32
+     },
+     {
+      "file": "windm_h042_036.png",
+      "bytes": 38168,
+      "sha256": "9b3d2ec7384a61eec8826ab33b889e15501c98304e6a77ce37c2b9f977caf6fc",
+      "step": 36
+     },
+     {
+      "file": "windm_h042_040.png",
+      "bytes": 41154,
+      "sha256": "feb650a7b5ae195ec4794e493dbfee2aeb1b64a58ecac78fd4a9795e903ae0a0",
+      "step": 40
+     },
+     {
+      "file": "windm_h042_044.png",
+      "bytes": 42684,
+      "sha256": "43ecc8643ff4b56e49a6f434811c0c87467f046ca28309887ba047102ce41fa9",
+      "step": 44
+     },
+     {
+      "file": "windm_h042_048.png",
+      "bytes": 44328,
+      "sha256": "f26d0a6984da28127fa4b74a30124957682708e09568fd96f100bcb8ca6deeec",
+      "step": 48
+     },
+     {
+      "file": "windm_h042_052.png",
+      "bytes": 45615,
+      "sha256": "0e43e38c5b6f7fcabd621be0bf483d414924d015033b81859bde4e8ca20f17a3",
+      "step": 52
+     },
+     {
+      "file": "windm_h042_056.png",
+      "bytes": 45178,
+      "sha256": "cc0a9eabc9af62506f62db860f5ca8bc0e7bc1c22f2b3518e35f51d556591690",
+      "step": 56
+     },
+     {
+      "file": "windm_h042_060.png",
+      "bytes": 46133,
+      "sha256": "77e6475e90ee7b1ccb1982e8c9cba300f2d7539d7c92b05eb3f1f27ccb30bd52",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 46.0,
+    "span_m": [
+     44.0,
+     48.0
+    ],
+    "fine_layer": 12,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h046_000.png",
+      "bytes": 2274,
+      "sha256": "70cc64f95e28a4495621d814e5029629a209417465b3c4014b2e2b9c4a5d1c14",
+      "step": 0
+     },
+     {
+      "file": "windm_h046_004.png",
+      "bytes": 18508,
+      "sha256": "797c33e4cf907caf79a7bbcaa1d7e4e01f7130490f31456cdb34f923a4cd0164",
+      "step": 4
+     },
+     {
+      "file": "windm_h046_008.png",
+      "bytes": 19021,
+      "sha256": "2884eac00a29a646643386fcd3a07c466a41861d0637c91a55aec48a76d4b3a8",
+      "step": 8
+     },
+     {
+      "file": "windm_h046_012.png",
+      "bytes": 18735,
+      "sha256": "98250be934837ad4030cac4d2a2846fa8a6cc60db7750b705599c5cb67047563",
+      "step": 12
+     },
+     {
+      "file": "windm_h046_016.png",
+      "bytes": 20330,
+      "sha256": "107a19dc34e4d06d9f7a07be4772f2d3d8dd4520ea0bfb56bf7ffe164ad358db",
+      "step": 16
+     },
+     {
+      "file": "windm_h046_020.png",
+      "bytes": 23185,
+      "sha256": "c36dc029c9ffabdf60dce4f9780e4b74a7cd892941a5eb71a258042d6d8ecbac",
+      "step": 20
+     },
+     {
+      "file": "windm_h046_024.png",
+      "bytes": 26187,
+      "sha256": "89baa218e43edc3bb002d722ae60cb06aeb858fe3ddf972491568bba4fbb9038",
+      "step": 24
+     },
+     {
+      "file": "windm_h046_028.png",
+      "bytes": 29112,
+      "sha256": "e574c7c0904f83d0f4b0e0b3b7662708fcd858ba3a5f2c6cdfa0fb262360515b",
+      "step": 28
+     },
+     {
+      "file": "windm_h046_032.png",
+      "bytes": 32663,
+      "sha256": "1db356783197bed2becd98c03e6bfd6a87313b20ea3e1bd48cef42764f17a783",
+      "step": 32
+     },
+     {
+      "file": "windm_h046_036.png",
+      "bytes": 36930,
+      "sha256": "8225964ed26ceaa27d463e6b55e72bb62e24b54142cda0159ec012800f3819be",
+      "step": 36
+     },
+     {
+      "file": "windm_h046_040.png",
+      "bytes": 39691,
+      "sha256": "20a7151121b6cb1dcf10ff503550176643489b0aa803c51bd8a9a1212af273f5",
+      "step": 40
+     },
+     {
+      "file": "windm_h046_044.png",
+      "bytes": 41873,
+      "sha256": "ca338e79060a9a62f372f05b61d87cc5e75e46a5955407ee3daa5cb9ad4ae6da",
+      "step": 44
+     },
+     {
+      "file": "windm_h046_048.png",
+      "bytes": 43405,
+      "sha256": "1a438ba451597fb15ebddb01f4db07e251fba87c20a7f6570d935c8bcfe7a727",
+      "step": 48
+     },
+     {
+      "file": "windm_h046_052.png",
+      "bytes": 45034,
+      "sha256": "b82402a966fc167726a9674dd29a406604d8b917911bd9552cb4eaab42820164",
+      "step": 52
+     },
+     {
+      "file": "windm_h046_056.png",
+      "bytes": 44808,
+      "sha256": "437af3c70b702aad913b4613babd923df3733dfff8b2b7db44ac414dcfae37ed",
+      "step": 56
+     },
+     {
+      "file": "windm_h046_060.png",
+      "bytes": 45845,
+      "sha256": "e349dc96939b619b6f043258d0b4272492e6ab83fb27049d4978d05c54dc8e40",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 50.0,
+    "span_m": [
+     48.0,
+     52.0
+    ],
+    "fine_layer": 13,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h050_000.png",
+      "bytes": 1532,
+      "sha256": "d0cf21d8a9cca7c24f370ea1018e98173487f9201bb099df99a964debe129249",
+      "step": 0
+     },
+     {
+      "file": "windm_h050_004.png",
+      "bytes": 17015,
+      "sha256": "45d26a3f98140cb54670d937a1bb6b45b63c4fe2782358e10eb4be1353ce68d2",
+      "step": 4
+     },
+     {
+      "file": "windm_h050_008.png",
+      "bytes": 17432,
+      "sha256": "c8f4d3800a1a7829d941e9ba151c638ddecb9ea0b7219aece8938b584afe506e",
+      "step": 8
+     },
+     {
+      "file": "windm_h050_012.png",
+      "bytes": 17104,
+      "sha256": "7e05bc1fb6e49f40ca91b824bab83f7ee359144366f6defe1687b3b745a6000a",
+      "step": 12
+     },
+     {
+      "file": "windm_h050_016.png",
+      "bytes": 18280,
+      "sha256": "30925f22cd745c8a8a6358f59fc6c2327308e7cc251eedd8891cab48ba2c3675",
+      "step": 16
+     },
+     {
+      "file": "windm_h050_020.png",
+      "bytes": 21398,
+      "sha256": "291cc6d3fe70cb8b2c124581bbe79f83f40bd3c0aa59d98d8d36b57123bc48ca",
+      "step": 20
+     },
+     {
+      "file": "windm_h050_024.png",
+      "bytes": 24357,
+      "sha256": "1c20f16291e7bd9f52fef9f1396ccf05d89ac9beda53b9336fd21de1ddab1d89",
+      "step": 24
+     },
+     {
+      "file": "windm_h050_028.png",
+      "bytes": 27387,
+      "sha256": "f98b89494d180d239f8c29eb9dc509b4873aaf58bfb669962a00834d35809b2b",
+      "step": 28
+     },
+     {
+      "file": "windm_h050_032.png",
+      "bytes": 30790,
+      "sha256": "96c74d9396a2a5a46e65c453936645d3d3c6829b4ee1aeb3ec192da169afb919",
+      "step": 32
+     },
+     {
+      "file": "windm_h050_036.png",
+      "bytes": 35402,
+      "sha256": "156a8fb66b3481814a3f9ea7055ec5a9251c45f2bd75a6dfabbd123e7930fbeb",
+      "step": 36
+     },
+     {
+      "file": "windm_h050_040.png",
+      "bytes": 38248,
+      "sha256": "3bd355b9cd4062ffe27ed8873ab6ba90dc30835000f516ac21a45bed74182fea",
+      "step": 40
+     },
+     {
+      "file": "windm_h050_044.png",
+      "bytes": 40623,
+      "sha256": "09d6ed5bdcf2c7f4b66fa95a85107c7f4481deeb95ff9c65f44144d10aa920d9",
+      "step": 44
+     },
+     {
+      "file": "windm_h050_048.png",
+      "bytes": 42622,
+      "sha256": "e64cdfb7aa4b59b91ed4c1b7c2cbe635b5b025ff50714d500db83a53fd58ead1",
+      "step": 48
+     },
+     {
+      "file": "windm_h050_052.png",
+      "bytes": 44431,
+      "sha256": "ce269f5b916db03da3e829effaba06500b1348eb332e98e3ea0f56c42b94490d",
+      "step": 52
+     },
+     {
+      "file": "windm_h050_056.png",
+      "bytes": 44374,
+      "sha256": "412d22f56510538af05515a4f1bd119f948f3cc96b91429823779411ac0582f1",
+      "step": 56
+     },
+     {
+      "file": "windm_h050_060.png",
+      "bytes": 45495,
+      "sha256": "06b48f4afdfa13dea7b3fc5cd3340acd999a3472ca630176a4aab28044adb78d",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 54.0,
+    "span_m": [
+     52.0,
+     56.0
+    ],
+    "fine_layer": 14,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h054_000.png",
+      "bytes": 1545,
+      "sha256": "f15bb134c5e847f3b9b6b2ca31d7e88a5d9ebd6ec568e0abb13076377bfafef4",
+      "step": 0
+     },
+     {
+      "file": "windm_h054_004.png",
+      "bytes": 15493,
+      "sha256": "5535e10064ab2974b3c6a4b1ba2115d76e2d18d4cc588aa78f09a4ff5f4898b4",
+      "step": 4
+     },
+     {
+      "file": "windm_h054_008.png",
+      "bytes": 15904,
+      "sha256": "8dc9c81e85fd8f792a5804561baa7413e89f9abaebd8f72494a8bc963d58f29a",
+      "step": 8
+     },
+     {
+      "file": "windm_h054_012.png",
+      "bytes": 15367,
+      "sha256": "915a4ca03f1a6de926601e134aa39bd49ff9454722b2d2dc59ee629c94f7d845",
+      "step": 12
+     },
+     {
+      "file": "windm_h054_016.png",
+      "bytes": 16708,
+      "sha256": "86cb6dbf4de132a034d22fa2cb20e62a56725da459c5efe332364840a3a9bfcd",
+      "step": 16
+     },
+     {
+      "file": "windm_h054_020.png",
+      "bytes": 19615,
+      "sha256": "32432d357f28f25be9c8982b39282793834aac3f17a5a5f6edfb33faf17a02c8",
+      "step": 20
+     },
+     {
+      "file": "windm_h054_024.png",
+      "bytes": 22572,
+      "sha256": "e7f39a7ce38f3921b79480f654a609eb8612008a83fd571ee381544efdee2e35",
+      "step": 24
+     },
+     {
+      "file": "windm_h054_028.png",
+      "bytes": 25489,
+      "sha256": "1b485a45323df3c6de4e4caf8c104adb52444b5babe8ce5109ec615b2d59b3ab",
+      "step": 28
+     },
+     {
+      "file": "windm_h054_032.png",
+      "bytes": 28999,
+      "sha256": "9c0009ddfe90f14a715c2d919255e6cc058733aa77afa964596dd94b8a02b216",
+      "step": 32
+     },
+     {
+      "file": "windm_h054_036.png",
+      "bytes": 33655,
+      "sha256": "6639c19610f5fcc9a8771429210c62b06c2f888a4421159c509d117392385825",
+      "step": 36
+     },
+     {
+      "file": "windm_h054_040.png",
+      "bytes": 36750,
+      "sha256": "19e1840a913ef19dd58a063b9e7aa49ad627844df26b9ae3197ea7ed9cb3f3b3",
+      "step": 40
+     },
+     {
+      "file": "windm_h054_044.png",
+      "bytes": 39479,
+      "sha256": "a68968ae406e47f227123f81fe59741af764c56ac9192503c2b4f912e60a9e4e",
+      "step": 44
+     },
+     {
+      "file": "windm_h054_048.png",
+      "bytes": 41615,
+      "sha256": "a1126aaa8338dce4bdebf9dd02b02c87dd8a3b723699099504dd409d8e902cc2",
+      "step": 48
+     },
+     {
+      "file": "windm_h054_052.png",
+      "bytes": 43513,
+      "sha256": "cd68d991d85481b8e9290340a3b0500040d8e2141240903c8b6bbc5ba61c7d2a",
+      "step": 52
+     },
+     {
+      "file": "windm_h054_056.png",
+      "bytes": 43824,
+      "sha256": "53df86f4f09b4ffec795ed0d72960b6c3316aba9fd15f0e7ca630b5874d113cc",
+      "step": 56
+     },
+     {
+      "file": "windm_h054_060.png",
+      "bytes": 44869,
+      "sha256": "b3496b03bb64347f9b28e730fd246b03c497d9719d33a1949fb8f01e0197748b",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 58.0,
+    "span_m": [
+     56.0,
+     60.0
+    ],
+    "fine_layer": 15,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h058_000.png",
+      "bytes": 1388,
+      "sha256": "f15a205bb9b4c1c5579f419be95555367c26d77c62c5911786b03c56d7d382ad",
+      "step": 0
+     },
+     {
+      "file": "windm_h058_004.png",
+      "bytes": 14088,
+      "sha256": "7fa6e7b9a594b96a35cf042d00b9f3f853945920216cf71fdd6f2235d673976a",
+      "step": 4
+     },
+     {
+      "file": "windm_h058_008.png",
+      "bytes": 14855,
+      "sha256": "0bc04a149a39211b5ec0fafc4e3a8d29e2f4302e295c5e97a1d2e6557259e7bd",
+      "step": 8
+     },
+     {
+      "file": "windm_h058_012.png",
+      "bytes": 13983,
+      "sha256": "5178c344196ae50960319bd640009995c5b4b900377f09612cca9eb62fc68dd2",
+      "step": 12
+     },
+     {
+      "file": "windm_h058_016.png",
+      "bytes": 15534,
+      "sha256": "f3f259c772065224ae0140892b229d063e4fa087991f68512c652ddbf793f87a",
+      "step": 16
+     },
+     {
+      "file": "windm_h058_020.png",
+      "bytes": 18166,
+      "sha256": "fe771c09b5398687b2c3fd9e8221cc8cb8f848d56d0a3228b8fc72d37fb9b8ed",
+      "step": 20
+     },
+     {
+      "file": "windm_h058_024.png",
+      "bytes": 21027,
+      "sha256": "dda7c0ff201f38b41ab79a35547cea4b42ee5599d6228d59ba4157189c88894d",
+      "step": 24
+     },
+     {
+      "file": "windm_h058_028.png",
+      "bytes": 23388,
+      "sha256": "8061376c28ec76722fcbcef10d931805194fff0dc1be489519226c99b1be7b4c",
+      "step": 28
+     },
+     {
+      "file": "windm_h058_032.png",
+      "bytes": 27418,
+      "sha256": "add31df28568a23143b6e2aa89c205b45c1927c69051931821803c9be90c2eb1",
+      "step": 32
+     },
+     {
+      "file": "windm_h058_036.png",
+      "bytes": 32188,
+      "sha256": "55796c4049a38bdf5304a34dc7cfb3c8caee0ba2244b79222fd47ac5ec21215c",
+      "step": 36
+     },
+     {
+      "file": "windm_h058_040.png",
+      "bytes": 35380,
+      "sha256": "1d7895af518b80bd27ec5995b63e45d8dc2b3f24fab835eec6275cb6b5ec99dc",
+      "step": 40
+     },
+     {
+      "file": "windm_h058_044.png",
+      "bytes": 38265,
+      "sha256": "d8e26dbe5aa6387199eb67d479a40f1a4b706b277964e2fc2c430821457c6fd7",
+      "step": 44
+     },
+     {
+      "file": "windm_h058_048.png",
+      "bytes": 40748,
+      "sha256": "97b8cef9dc3c32f27af9894b3df3585c7d59807b1f40e0bb868cffffa83838e9",
+      "step": 48
+     },
+     {
+      "file": "windm_h058_052.png",
+      "bytes": 42525,
+      "sha256": "d3656998d05799938b4debe9d0f729da85e9193e918f4d8681601edba1503197",
+      "step": 52
+     },
+     {
+      "file": "windm_h058_056.png",
+      "bytes": 43127,
+      "sha256": "00e13c7cfd4e9325cbd807e54e6999ec568df8eedc95edfc447e1d1413e91d99",
+      "step": 56
+     },
+     {
+      "file": "windm_h058_060.png",
+      "bytes": 44193,
+      "sha256": "0d7d3eba1e7bf1d2e3f7fe7368596e43a8ec921bb4335f16475ab4a67420f357",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 62.0,
+    "span_m": [
+     60.0,
+     64.0
+    ],
+    "fine_layer": 16,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h062_000.png",
+      "bytes": 1146,
+      "sha256": "1833efb0440154e687c74b79fdafc67705d930378820ac11a3c72edb55e495c3",
+      "step": 0
+     },
+     {
+      "file": "windm_h062_004.png",
+      "bytes": 13293,
+      "sha256": "03bf840a40b9d453cae4f2cf9457c9b928ba5d3feb0cb7ea2742ce08f01d7526",
+      "step": 4
+     },
+     {
+      "file": "windm_h062_008.png",
+      "bytes": 13867,
+      "sha256": "dc5919b71be84c24cf3edb19e73837498fd4b260dd3e70a492ec0f3cf95091cb",
+      "step": 8
+     },
+     {
+      "file": "windm_h062_012.png",
+      "bytes": 12607,
+      "sha256": "eab776a7a1651557987009a76311cef3594147e304de99dba5a8b343c9615e7d",
+      "step": 12
+     },
+     {
+      "file": "windm_h062_016.png",
+      "bytes": 14183,
+      "sha256": "6c88915f2714696b6d12c560a0699ca9bbca67385c57b20c3823a7a7003044a9",
+      "step": 16
+     },
+     {
+      "file": "windm_h062_020.png",
+      "bytes": 16813,
+      "sha256": "cf39d980599f2c47ec9e28d039c35af0ba72e6c73825fe62142a3afa7c8a755b",
+      "step": 20
+     },
+     {
+      "file": "windm_h062_024.png",
+      "bytes": 19649,
+      "sha256": "1428baf9769f54920c40c1b3493e52f81427e85d90be43998d654cdeef4132b0",
+      "step": 24
+     },
+     {
+      "file": "windm_h062_028.png",
+      "bytes": 21919,
+      "sha256": "f6c501e0865999d939ef1ff7ded5ed046346098b83dfea656ca1e6848fe2c6f5",
+      "step": 28
+     },
+     {
+      "file": "windm_h062_032.png",
+      "bytes": 26005,
+      "sha256": "13bb839b47ec961026179e6acb41d819b4788f5e0970d549a3e38e47e2399643",
+      "step": 32
+     },
+     {
+      "file": "windm_h062_036.png",
+      "bytes": 30484,
+      "sha256": "00486df3fe7660fe2037d781155be307ff0b461db54a07b59b96de2faeefa0db",
+      "step": 36
+     },
+     {
+      "file": "windm_h062_040.png",
+      "bytes": 34144,
+      "sha256": "6fbab67b6075068537d78f568cb8c781ae22f8f3c6a937d36318df043854df01",
+      "step": 40
+     },
+     {
+      "file": "windm_h062_044.png",
+      "bytes": 37039,
+      "sha256": "1ff76d45b7533574b994906d0bf81131de5e5066d975b0439a458cf81e73814a",
+      "step": 44
+     },
+     {
+      "file": "windm_h062_048.png",
+      "bytes": 39666,
+      "sha256": "818dfec7be0ad0772e6b7282cfe926ca8d30121c334150af56fd6759a8a90da6",
+      "step": 48
+     },
+     {
+      "file": "windm_h062_052.png",
+      "bytes": 41570,
+      "sha256": "ac18f9d37934d07d45bbdbf31b39cd9b874f5768a5cd92cbf366a7a54fc2f548",
+      "step": 52
+     },
+     {
+      "file": "windm_h062_056.png",
+      "bytes": 42604,
+      "sha256": "8982521042215449bd40e83a601f4d1802afc3c662278f2dbf8538b43448ff5b",
+      "step": 56
+     },
+     {
+      "file": "windm_h062_060.png",
+      "bytes": 43507,
+      "sha256": "81d3239470cb67c53e6111349271a69805a8f21832b72c5f5da1a79b0db93290",
+      "step": 60
+     }
+    ]
+   },
+   {
+    "height_m": 66.0,
+    "span_m": [
+     64.0,
+     68.0
+    ],
+    "fine_layer": 17,
+    "scale_m_s": 1.5,
+    "frames": [
+     {
+      "file": "windm_h066_000.png",
+      "bytes": 1173,
+      "sha256": "fce1d2c56ad24a7f2f572da0119ebd37e755b9b88e708beda65540afd9432470",
+      "step": 0
+     },
+     {
+      "file": "windm_h066_004.png",
+      "bytes": 12616,
+      "sha256": "c9b551cc468637b7c070ee747b1d55f80cb4ec07db28a3385c505f838e07bd1f",
+      "step": 4
+     },
+     {
+      "file": "windm_h066_008.png",
+      "bytes": 13142,
+      "sha256": "edb8c0746645d1fe2b4b7d9fb261c84289f988f9dddaa19a921a457745b9d1cd",
+      "step": 8
+     },
+     {
+      "file": "windm_h066_012.png",
+      "bytes": 11531,
+      "sha256": "a0eb0269a89fedce1cafc4ea39f70fd7a83bc42fdb6d7250012fee5294dd3c3a",
+      "step": 12
+     },
+     {
+      "file": "windm_h066_016.png",
+      "bytes": 12858,
+      "sha256": "d02c31eefa3987e21f3d678ea2749cf5865919bfb3c4b7c2309619486c62bc3f",
+      "step": 16
+     },
+     {
+      "file": "windm_h066_020.png",
+      "bytes": 15715,
+      "sha256": "7181f1996a672ad7d1f7f338539afc9f59de974e5bf7003707eee5c3f26a3b13",
+      "step": 20
+     },
+     {
+      "file": "windm_h066_024.png",
+      "bytes": 18296,
+      "sha256": "d280169af976bb5e076ee89e8e0682a61396ea1ae8c7c01e4b20ddfd689831b5",
+      "step": 24
+     },
+     {
+      "file": "windm_h066_028.png",
+      "bytes": 20628,
+      "sha256": "f62f83d5bb75b2951245bdeaa33a049d0493f90e89f4a2ecf9c4a7f902c6bc20",
+      "step": 28
+     },
+     {
+      "file": "windm_h066_032.png",
+      "bytes": 24643,
+      "sha256": "9d85a8c1807dfeaede761ebe88b9c26a38b52e37ac00952bdef67919bea8a587",
+      "step": 32
+     },
+     {
+      "file": "windm_h066_036.png",
+      "bytes": 28853,
+      "sha256": "27c18941e9e29acef97aa9bf95af2a964ed22efec3b471fb5aebf51ed762d242",
+      "step": 36
+     },
+     {
+      "file": "windm_h066_040.png",
+      "bytes": 32749,
+      "sha256": "7f00765ee867cc15a794287e01c8daa3a2b9818e3491f8bd56a4b647fb20e8c2",
+      "step": 40
+     },
+     {
+      "file": "windm_h066_044.png",
+      "bytes": 35908,
+      "sha256": "556f27dc16c26a799ea10e5c947497fd35126bf1de7285d8eb8f287c5758071f",
+      "step": 44
+     },
+     {
+      "file": "windm_h066_048.png",
+      "bytes": 38592,
+      "sha256": "8518cefd386871506fc789dc04b066b5d21bc4219ea0ddc43ba35d52ac8a92fb",
+      "step": 48
+     },
+     {
+      "file": "windm_h066_052.png",
+      "bytes": 40296,
+      "sha256": "ada0b3ab02c8bcdd4bf8976e3b8527d57dc390ff665a998b0a28129c28c87ae9",
+      "step": 52
+     },
+     {
+      "file": "windm_h066_056.png",
+      "bytes": 41563,
+      "sha256": "aeb547cd1a266668a64a9970d8cc7228700e5dfcd31cff5576ad2aa2851e1d69",
+      "step": 56
+     },
+     {
+      "file": "windm_h066_060.png",
+      "bytes": 42809,
+      "sha256": "d7d7dd08761a237d2ae1875aef23285628806f31598d0cdeef3b71fdafe8909b",
+      "step": 60
+     }
+    ]
+   }
+  ],
+  "default_level": 0,
+  "display_scale_m_s": 1.5,
+  "model": "acse-yl222/physics-grounded-4d-world-model-framework @587f3d9 src/urban_flow/physics/wind/scaled_latent.py (unchanged)",
+  "limits": [
+   "surrogate transfer to Bristol geometry; no CFD, no measured validation",
+   "terrain flattened; buildings as solid columns; no trees or bridges",
+   "inflow direction and magnitude are those learned by the model (not a Bristol wind condition)",
+   "domain top at 64 layers"
+  ],
+  "source": "the saved latent steps of the 8 km wind run decoded again and kept on the 4 m model cells for this area (decode_native_crop.py); no new model run; the 8 km layers on this page are the same fields averaged over 2 x 2 x 2 cells and shown on 16 m pixels",
+  "note": "Same surrogate result as the 8 km wind layers, shown without averaging: 4 m cells, 4 m thick layers from 0-4 m to 64-68 m above the ground. Flattened terrain in the model; bridges and trees are not obstacles. No CFD and no measurements behind it; not compared with the Malago Road experiments. Finer pixels show what the model produced at its own cell size; they do not add accuracy.",
+  "check": "averaging the 4 m cells over 2 x 2 x 2 reproduces the published 8 m layers in this height range (8 to 48 m and 64 m) to 0.0005 model units at every saved step (decode run metrics)"
+ },
+ "pollution_malago": {
+  "label": "Traffic NOx tracer (illustrative), Malago Road area on 4 m cells",
+  "grid": {
+   "x0": -544.0,
+   "y0": -2136.0,
+   "cell": 4.0,
+   "nx": 244,
+   "ny": 242
+  },
+  "encoding": "log10(c / 1.0 ug/m3) / log10(1000.0/1.0), 8 bit; c = NOx in a 10.0 m mixed layer under the stated assumptions",
+  "display": {
+   "stops": [
+    "#fff3b0",
+    "#f6c453",
+    "#e8833a",
+    "#c8432b",
+    "#7a1530"
+   ],
+   "floor": 0.12,
+   "alpha": 0.85,
+   "legend": [
+    "low",
+    "high (relative, log scale)"
+   ]
+  },
+  "frames": [
+   {
+    "file": "noxm_000.png",
+    "bytes": 640,
+    "sha256": "47d364540c99e094fa03221c6f01980393abf7afda600d656174cdf3931201ad",
+    "t_s": 2.5
+   },
+   {
+    "file": "noxm_001.png",
+    "bytes": 5731,
+    "sha256": "70239d1452abc469ac6c43e06baca5f8d59a884830709368d40e0277979f82f7",
+    "t_s": 60.0
+   },
+   {
+    "file": "noxm_002.png",
+    "bytes": 8011,
+    "sha256": "6b472a793446050bee09c58f3373315998ef56ec9eb15b92008255c7640579f4",
+    "t_s": 120.0
+   },
+   {
+    "file": "noxm_003.png",
+    "bytes": 9646,
+    "sha256": "74a03266291415c7a615045478e9e911b46879b041c31d9743c59a58aaaffb61",
+    "t_s": 180.0
+   },
+   {
+    "file": "noxm_004.png",
+    "bytes": 11101,
+    "sha256": "05b28968d30f0075568fae7b81be6afceffba56d776b1499acaec43e1beb8901",
+    "t_s": 240.0
+   },
+   {
+    "file": "noxm_005.png",
+    "bytes": 11695,
+    "sha256": "0e0309e906773a209d1b3fc8c15f8d61676924e280432c17927036a14d029d96",
+    "t_s": 300.0
+   },
+   {
+    "file": "noxm_006.png",
+    "bytes": 12593,
+    "sha256": "33940e60d1eac911468d1c2efd78520437f1df364d1c8225b75184169f728483",
+    "t_s": 360.0
+   },
+   {
+    "file": "noxm_007.png",
+    "bytes": 12774,
+    "sha256": "2d5b955cbdf33394d5f02d614e81d1df7a5da7348970d20e3f1ee7e022395ce8",
+    "t_s": 420.0
+   },
+   {
+    "file": "noxm_008.png",
+    "bytes": 13014,
+    "sha256": "664ce93678fa8cd8e8ab1b5590ed65cf9343d4a1e6c6e2dbbe64412b29ab9a20",
+    "t_s": 480.0
+   },
+   {
+    "file": "noxm_009.png",
+    "bytes": 13563,
+    "sha256": "5ae62c11463c628a363182bdf3d8bb1af680e3bdf99b6075c8628f1a8653d552",
+    "t_s": 540.0
+   },
+   {
+    "file": "noxm_010.png",
+    "bytes": 13574,
+    "sha256": "bd7eb1b0a56dbb4e185a3e97f96426b1cc38c48d2c5f7f4b4ef0b04c43ae223b",
+    "t_s": 600.0
+   },
+   {
+    "file": "noxm_011.png",
+    "bytes": 13981,
+    "sha256": "8d665eaadd4ed697d97d327f85b43630803c09959e3f074f84e390fdf5ad8d10",
+    "t_s": 660.0
+   },
+   {
+    "file": "noxm_012.png",
+    "bytes": 13823,
+    "sha256": "4d3ccef5287f1e64784b0c9c7dbb4f63ed87be1008ba3166122222bdcacd1a7b",
+    "t_s": 720.0
+   },
+   {
+    "file": "noxm_013.png",
+    "bytes": 13791,
+    "sha256": "7b912222f6087f50889121e361689cbea0f8fbaadbdd6f5ddefbc450df1e7191",
+    "t_s": 780.0
+   },
+   {
+    "file": "noxm_014.png",
+    "bytes": 14221,
+    "sha256": "6d4b95bab6f2d77786ad1244ca6aa14e2e9810f3b71a4c16c98b99e612b150c2",
+    "t_s": 840.0
+   },
+   {
+    "file": "noxm_015.png",
+    "bytes": 14190,
+    "sha256": "89f33df881fb6cd30114b5a485a5466b984d729144b69be3bcc3cf31199ea388",
+    "t_s": 900.0
+   },
+   {
+    "file": "noxm_016.png",
+    "bytes": 14510,
+    "sha256": "a51631db0bd875e6df7093479b4971f493e97c3b0bc36b62a19cc20f7d18a6bc",
+    "t_s": 960.0
+   },
+   {
+    "file": "noxm_017.png",
+    "bytes": 14297,
+    "sha256": "2cef01de12cb56b1ac6bab3c0af162640edea98c7adad5d1f1cbe43b07619989",
+    "t_s": 1020.0
+   },
+   {
+    "file": "noxm_018.png",
+    "bytes": 14191,
+    "sha256": "5f89b6a2a69ba243658df80bc8863b4d6d6854ccc50c7332ce61d878dfdf2117",
+    "t_s": 1080.0
+   },
+   {
+    "file": "noxm_019.png",
+    "bytes": 14536,
+    "sha256": "f1cfeabd7b5303885aaddd0f230254af96f02b7e159adb14725811f0be5f034e",
+    "t_s": 1140.0
+   },
+   {
+    "file": "noxm_020.png",
+    "bytes": 14536,
+    "sha256": "ebaffefe5da7fdfb234eb37497f025ff523e2aee6ac8e436b26bf4f097a37855",
+    "t_s": 1200.0
+   },
+   {
+    "file": "noxm_021.png",
+    "bytes": 14717,
+    "sha256": "c8b093d8dfd6a7a4451f0c8a339845a006a544fad18f426ef42867137de61525",
+    "t_s": 1260.0
+   },
+   {
+    "file": "noxm_022.png",
+    "bytes": 14534,
+    "sha256": "f43e28c91b2c22f7837e4e6826b4775bbd636867f97ff65bb21345a4ca5d8fca",
+    "t_s": 1320.0
+   },
+   {
+    "file": "noxm_023.png",
+    "bytes": 14439,
+    "sha256": "425dc9517a9b3d056d725238a1ee89626e4e5f548b19f7a7f816fc6258c973c5",
+    "t_s": 1380.0
+   },
+   {
+    "file": "noxm_024.png",
+    "bytes": 14752,
+    "sha256": "990d45c38a968d362e5e58174c253f94cb8cd28cb1b67fd17f37dfa2ed18a6a7",
+    "t_s": 1440.0
+   },
+   {
+    "file": "noxm_025.png",
+    "bytes": 14775,
+    "sha256": "186bbed28f5172367bd2914b8d6fef741ee5b9eb90c0b9521ddb4650563ff3a8",
+    "t_s": 1500.0
+   },
+   {
+    "file": "noxm_026.png",
+    "bytes": 14867,
+    "sha256": "ec1f63f33ef538540fe5c213f45570e74d68f41fa422af53ddfaa355fb33cb4a",
+    "t_s": 1560.0
+   },
+   {
+    "file": "noxm_027.png",
+    "bytes": 14711,
+    "sha256": "f5d1ad5df2184ba92f23f8b111b8378cf3ea4c7911e90868114d0de79c5bb0a0",
+    "t_s": 1620.0
+   },
+   {
+    "file": "noxm_028.png",
+    "bytes": 14545,
+    "sha256": "9d2ccbf93ab71c54acbbedf3d114e08942f03cae49db5a948d6a5d9b5fc58b2a",
+    "t_s": 1680.0
+   },
+   {
+    "file": "noxm_029.png",
+    "bytes": 14933,
+    "sha256": "f0ae7a34abcafbafc696b7746c74124a236801d58a20c1ec422a1f6528b31914",
+    "t_s": 1740.0
+   },
+   {
+    "file": "noxm_030.png",
+    "bytes": 14912,
+    "sha256": "13fcc2158c49b86fdffa0b1c22fc19590a93d64279c476d7f00b9b131104cb95",
+    "t_s": 1800.0
+   }
+  ],
+  "model": {
+   "transport": "framework @587f3d9 wind_pollution_code/.../physical_transport.py upwind_step (vendored unchanged)",
+   "emissions": "SUMO 1.28 built-in emission model, HBEFA4/PC_petrol_Euro-4 (default passenger type), NOx mg/s per car per second; task-17 replay, 300 s looped; 693 invalid SUMO values set to 0",
+   "wind": {
+    "source": "surrogate result on 4 m cells, mean of fine layers 2 and 3 (4-12 m above ground), step 60; column solid if either cell is solid",
+    "scale_factor_of_the_8m_run": 5.107911421790775,
+    "mean_open_m_s": 1.010818362236023
+   },
+   "mixing_height_m": 10.0,
+   "dt_s": 2.5,
+   "minutes": 30.0,
+   "solid_cells_pct": 28.96,
+   "nesting": {
+    "ring_m": 16.0,
+    "rule": "a 16 m ring around the area is set after every step to the 8 m solution of the 8 km tracer run, so tracer from outside flows in; the ring is not shown"
+   },
+   "units": "mg/m3 NOx under the stated assumptions; shown as a relative tracer"
+  },
+  "limits": [
+   "2-D single layer; no vertical mixing profile",
+   "no chemistry, deposition or background",
+   "one steady wind field from a surrogate model",
+   "emission model default petrol Euro-4 for every car; diesel / petrol split and particle attribution not yet done",
+   "not validated against measurements",
+   "nested: the ring is the 8 m solution; inflow is what the 8 m run carries to the edge",
+   "the wind is a horizontal slice of a 3-D field and is not free of divergence; the conservative 2-D scheme piles tracer up where that slice converges, more sharply on 4 m cells than on 8 m cells"
+  ],
+  "checks": {
+   "nesting_control": {
+    "what": "the same nested set-up run on 8 m cells with the 8 m wind must give back the 8 km run inside the ring",
+    "correlation": 0.9999294522205731,
+    "ratio_of_means": 0.9952310919761658,
+    "rms_difference_mg_m3": 0.002468438819050789,
+    "cells_8m": 5325
+   },
+   "against_8m_run": {
+    "cells_8m_compared": 5325,
+    "mean_this_run": 0.006021770182996988,
+    "mean_8m_run": 0.019238458946347237,
+    "ratio_of_means": 0.3130068778991699,
+    "correlation": 0.46564360449372016,
+    "rms_difference": 0.17226473987102509,
+    "max_abs_difference": 7.204588890075684,
+    "p99_8m_run": 0.3174511790275574,
+    "cells": "8 m cells wholly inside the ring, open in both runs, at the final time; this run averaged over 2 x 2 cells",
+    "how_to_read": "the 4 m run differs from the 8 m run in wind detail and in which cells are building (29 % of 4 m columns against 43 % of 8 m cells); the difference is not an error estimate of either"
+   },
+   "final_state": {
+    "mass_inside_mg": 72631.0986328125,
+    "emitted_inside_mg": 73225.14295578003,
+    "max_mg_m3": 22.91808319091797,
+    "share_of_mass_in_top_1pct_of_open_cells": 0.8537076140220209
+   }
+  },
+  "note": "The same illustrative tracer as the 8 km layer, computed again on 4 m cells for the Malago Road area with the surrogate wind at its own cell size. Relative tracer under stated assumptions; not a measured or validated concentration; not compared with the Malago Road experiments."
  }
 }

@@ -5,11 +5,12 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createFields } from './fields.js?v=ext003-20261112';
-import { createTour } from './tour.js?v=ext003-20261112';
-import { createCars } from './cars.js?v=ext003-20261112';
-import { createNorthArrow } from './north.js?v=ext003-20261112';
-import { createLayers } from './layers.js?v=ext003-20261112';
+import { createFields } from './fields.js?v=ext007-20261112';
+import { createTour } from './tour.js?v=ext007-20261112';
+import { createCars } from './cars.js?v=ext007-20261112';
+import { createUav } from './uav.js?v=ext007-20261112';
+import { createNorthArrow } from './north.js?v=ext007-20261112';
+import { createLayers } from './layers.js?v=ext007-20261112';
 
 window.__viewerStarted = true;
 const LAYERS = [
@@ -220,7 +221,7 @@ canvas.addEventListener('dblclick', async e => {
 function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
   bootSet('Reading the list of model files…', null);
-  const r = await fetch('manifest.json?v=ext003-20261112'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  const r = await fetch('manifest.json?v=ext007-20261112'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
   $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
   $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
   $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
@@ -229,7 +230,8 @@ async function init() {
   $('views').innerHTML = Object.keys(views).map(k => `<button data-v="${k}">${k}</button>`).join('');
   document.querySelectorAll('#views button').forEach(b => b.onclick = () => fly(...views[b.dataset.v]));
   $('landmarks').innerHTML = (mf.landmarks || []).map((l, i) => `<button data-i="${i}"${l.tier === 'priority' ? ' class="pri"' : ''}>${l.name}</button>`).join('') || '<span class="note">None listed</span>';
-  document.querySelectorAll('#landmarks button').forEach(b => b.onclick = () => { const l = mf.landmarks[+b.dataset.i]; const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); closeInfo(); });
+  document.querySelectorAll('#landmarks button').forEach(b => { const l = mf.landmarks[+b.dataset.i]; if (l.note) b.title = l.note;
+    b.onclick = () => { const z = l.z || 20; fly(l.x + 160, z + 140, -l.y + 220, l.x, z, -l.y); highlightLine(l.line ? l : null); closeInfo(); }; });
   $('act-retry').onclick = retryFailed; renderUI();
   camera.position.set(...views['Overview'].slice(0, 3)); controls.target.set(0, 0, 0); controls.update(); if (!state.ticking) { state.ticking = true; tick(); }
   // 1. terrain overview: the first picture
@@ -249,7 +251,7 @@ async function init() {
     plan(); }
   if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
   // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
-  try { const ri = await fetch('./inspect_views.json?v=ext003-20261112'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
+  try { const ri = await fetch('./inspect_views.json?v=ext007-20261112'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
@@ -263,15 +265,16 @@ const fields = createFields({ scene, camera, controls, materials: [[matSmooth, f
 const layers = createLayers({ materials: [[matSmooth, false], [matFlat, false], [matRaised, true]] });   // task 17: shade, NOx tracer, temperature (layers.js)
 const sim = { flPlay: false, wdPlay: false, trPlay: false, last: performance.now(), wdAcc: 0, trLabAcc: 0 };
 const cars = createCars({ scene, camera, controls });   // illustrative traffic (cars.js)
+const uav = createUav({ scene, camera });   // UAV deliveries: replay of a scheduler result (uav.js, task 21)
 const northArrow = createNorthArrow({ camera, controls, el: $('north') });   // permanent true-north arrow (north.js)
 const fmtMin = s => `${Math.floor(s / 3600)}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}`;
 function floodLabel() { const f = fields.floodInfo(); $('fl-t').max = f.end || 10800; $('fl-t').value = f.t;
-  $('fl-lab').textContent = `${fmtMin(f.t)} of ${fmtMin(f.end || 10800)} h · ` + (f.scenario === 'river' ? `river inflow ${Math.round(f.q ?? 0)} m³/s` : `rain ${f.rain} mm/h`); }
+  $('fl-lab').textContent = `${fmtMin(f.t)} of ${fmtMin(f.end || 10800)} h · ` + (f.scenario === 'river' ? `river inflow ${Math.round(f.q ?? 0)} m³/s` : `rain ${f.rain} mm/h`) + (f.scenario === 'malago' ? ' · 2 m cells, 1 km square' : ''); }
 // ---- task 17 layers: shade, NOx tracer, air temperature (layers.js); pollution and temperature share one map slot
 const fmtHM = h => `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.round((h % 1) * 60) % 60).padStart(2, '0')}`;
 function shadeLabel() { const i = layers.shadeInfo(); if (i.h == null) return; $('sh-t').value = i.h; $('sh-lab').textContent = `21 June · ${fmtHM(i.h)} BST · sun ${Math.max(0, i.altitude).toFixed(0)}° high`; }
 function scalarLabel(k) { const i = layers.scalarInfo(k); if (i.end == null) return; const el = $(k === 'pollution' ? 'px-t' : 'tp-t'); el.max = i.end; el.value = layers.S.scalar.t;
-  $(k === 'pollution' ? 'px-lab' : 'tp-lab').textContent = k === 'pollution' ? `${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min of traffic emissions` : `model time ${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min · 14:00 BST scenario`; }
+  $(k === 'pollution' ? 'px-lab' : 'tp-lab').textContent = k === 'pollution' ? `${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min of traffic emissions` + (i.variant ? ` · ${i.cell} m cells, 1 km square` : '') : `model time ${fmtMS(layers.S.scalar.t)} of ${fmtMS(i.end)} min · 14:00 BST scenario`; }
 async function scalarOn(k, on) {   // k = 'pollution' | 'temperature'
   const other = k === 'pollution' ? 'temperature' : 'pollution', ids = { pollution: ['px-on', 'px-ctl', 'px-play', 'px-status'], temperature: ['tp-on', 'tp-ctl', 'tp-play', 'tp-status'] }[k];
   $(ids[1]).hidden = !on; sim[k + 'Play'] = on; setPlay($(ids[2]), on);
@@ -287,19 +290,26 @@ $('sh-on').onchange = async e => { const on = e.target.checked; $('sh-ctl').hidd
 $('sh-t').oninput = e => { layers.setShadeTime(+e.target.value); shadeLabel(); };
 $('sh-play').onclick = () => { sim.shadePlay = !sim.shadePlay; setPlay($('sh-play'), sim.shadePlay); };
 $('px-on').onchange = e => scalarOn('pollution', e.target.checked);
+$('px-area').onchange = async e => { const ok = await layers.setScalarVariant('pollution', e.target.value === 'malago' ? 'pollution_malago' : null); const k = layers.scalarVariant('pollution') ? 'malago' : 'city'; e.target.value = k;   // an area that is not in this build falls back
+  if (ok && $('px-on').checked) await scalarOn('pollution', true);
+  if (k === 'malago' && e.isTrusted !== false && !tour.active()) fly(MALAGO[0] + 380, 520, MALAGO[1] + 600, MALAGO[0], 10, MALAGO[1]); };   // the 4 m tracer covers 1 km around Malago Road: go there
 $('tp-on').onchange = e => scalarOn('temperature', e.target.checked);
 $('px-t').oninput = e => { layers.setScalarTime(+e.target.value); scalarLabel('pollution'); };
 $('tp-t').oninput = e => { layers.setScalarTime(+e.target.value); scalarLabel('temperature'); };
 $('px-play').onclick = () => { sim.pollutionPlay = !sim.pollutionPlay; setPlay($('px-play'), sim.pollutionPlay); };
 $('tp-play').onclick = () => { sim.temperaturePlay = !sim.temperaturePlay; setPlay($('tp-play'), sim.temperaturePlay); };
 $('fl-scn').onchange = async e => { await fields.useFloodScenario(e.target.value); const k = fields.floodScenario(); e.target.value = k;   // a scenario that is not in this build falls back to the one shown
-  fields.setFloodTime(0); floodLabel(); $('fl-about').textContent = k === 'river' ? 'river inflow' : 'rain storm'; };
+  fields.setFloodTime(0); floodLabel(); $('fl-about').textContent = { river: 'river inflow', malago: 'rain storm, Malago Road at 2 m' }[k] ?? 'rain storm';
+  if (k === 'malago' && e.isTrusted !== false && !tour.active()) fly(MALAGO[0] + 420, 560, MALAGO[1] + 640, MALAGO[0], 10, MALAGO[1]); };   // the local model covers 1 km around Malago Road: go there
+const MALAGO = [-47.5, 1657.1];   // world x, z of the Malago Road midpoint (z = -local north)
 function windLabel() { const w = fields.windInfo(); if (!w.n) return; $('wd-k').max = w.n - 1; $('wd-k').value = w.i;
-  $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground` + (w.span ? ` (layer ${w.span[0]}–${w.span[1]} m)` : '');
+  $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground` + (w.span ? ` (layer ${w.span[0]}–${w.span[1]} m)` : '') + (w.area === 'malago' ? ` · ${w.cell} m cells, 1 km square` : ''); $('wd-area').value = w.area;
   const many = w.heights.length > 1; $('wd-hrow').hidden = !many; if (many && !sim.hDrag) { $('wd-h').max = w.heights.length - 1; $('wd-h').value = w.level; $('wd-hv').textContent = w.height + ' m'; } $('wd-mode').value = w.mode; }   // not while the height slider is being moved
 const fmtMS = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 function trafficLabel() { const c = cars.info(); if (!c.loaded) return; $('tr-t').max = c.seconds - 1; $('tr-t').value = Math.floor(c.t);
   $('tr-lab').textContent = `replay ${fmtMS(c.t)} of ${fmtMS(c.seconds)} · ${c.count.toLocaleString('en-GB')} cars (${c.moving.toLocaleString('en-GB')} moving)` + (c.mode === 'dots' ? ' · dots: white moving, amber stopped' : ''); }
+function uavLabel() { const u = uav.info(); if (!u.loaded) return; $('uv-t').max = u.slots; if (!sim.uvDrag) $('uv-t').value = u.t;
+  $('uv-lab').textContent = `slot ${Math.floor(u.t)} of ${u.slots} · ${fmtMin(u.t * u.slot_seconds)} of ${fmtMin(u.slots * u.slot_seconds)} h · ${u.airborne} of ${u.fleet} UAVs in flight · collected ${u.collected} · delivered ${u.delivered} of ${u.requests}`; }
 function setPlay(btn, on) { btn.textContent = on ? 'Pause' : 'Play'; btn.setAttribute('aria-pressed', String(on)); btn.title = on ? 'Pause' : 'Play'; }
 $('fl-on').onchange = async e => { const on = e.target.checked; $('fl-ctl').hidden = !on; if (!on) { sim.flPlay = false; setPlay($('fl-play'), false); }
   try { await fields.setFlood(on); floodLabel(); } catch (err) { e.target.checked = false; $('fl-ctl').hidden = true; fields.setFlood(false); diagError('fields_flood', err, {}); } };
@@ -312,6 +322,19 @@ $('tr-on').onchange = async e => { const on = e.target.checked; $('tr-ctl').hidd
 $('tr-t').oninput = e => { cars.setTime(+e.target.value); cars.update(); trafficLabel(); };
 $('tr-play').onclick = () => { sim.trPlay = !sim.trPlay; setPlay($('tr-play'), sim.trPlay); };
 $('tr-speed').onchange = e => cars.setSpeed(+e.target.value);
+$('uv-on').onchange = async e => { const on = e.target.checked; $('uv-ctl').hidden = !on; sim.uvPlay = on; setPlay($('uv-play'), on);
+  if (on) $('uv-status').textContent = 'Loading the UAV replay…';
+  try { await uav.setOn(on); $('uv-status').textContent = '';
+    if (uav.S.loaded && !$('uv-go').dataset.filled) { $('uv-go').dataset.filled = '1'; uav.stations().forEach((s, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${{ hub: 'H', collection: 'C', dropoff: 'D' }[s.type]}${parseInt(s.id.split('-')[1], 10)} · ${s.label}`; $('uv-go').append(o); });
+      const sc = uav.scheduler(), u = uav.info(); $('uv-run').textContent = `Scheduler run shown: backend ${sc.backend}, ${sc.validation.accepted} of ${u.requests} requests accepted, ${sc.validation.hard_violation_count} hard violations, `
+        + `${sc.mean_field_policy_consumed_count} owner decisions used mean-field guidance; ${u.used} of ${u.fleet} UAVs fly, at most ${u.max_airborne} at once.`; }
+    if (uav.S.on) uavLabel(); }
+  catch (err) { e.target.checked = false; $('uv-ctl').hidden = true; sim.uvPlay = false; uav.setOn(false); $('uv-status').textContent = 'The UAV replay did not load: ' + err.message; diagError('uav', err, {}); } };
+$('uv-t').oninput = e => { sim.uvDrag = true; uav.setTime(+e.target.value); uav.update(); sim.uvDrag = false; uavLabel(); };
+$('uv-play').onclick = () => { sim.uvPlay = !sim.uvPlay; setPlay($('uv-play'), sim.uvPlay); };
+$('uv-speed').onchange = e => uav.setSpeed(+e.target.value);
+$('uv-go').onchange = e => { const s = uav.stations()[+e.target.value]; if (e.target.value !== '' && s) fly(s.x + 40, s.z + 44, -s.y + 64, s.x, s.z + 13, -s.y); };   // pad, UAVs beside it and the 30 m marker in one view; the list keeps the station's name
+fetch('../web/uav/manifest.json', { method: 'HEAD' }).then(r => { if (!r.ok) throw 0; }).catch(() => { $('uv-on').disabled = true; $('uv-status').textContent = 'The UAV replay is not in this build.'; });
 $('fl-t').oninput = e => { fields.setFloodTime(+e.target.value); floodLabel(); };
 $('fl-play').onclick = () => { sim.flPlay = !sim.flPlay; setPlay($('fl-play'), sim.flPlay); };
 $('wd-k').oninput = e => { fields.setWindFrame(+e.target.value); windLabel(); };
@@ -319,17 +342,38 @@ $('wd-k').oninput = e => { fields.setWindFrame(+e.target.value); windLabel(); };
 $('wd-h').oninput = e => { sim.hDrag = true; const h = fields.windInfo().heights[+e.target.value]; if (h != null) $('wd-hv').textContent = h + ' m'; };
 $('wd-h').onchange = async e => { sim.hDrag = true; try { await fields.setWindLevel(+e.target.value); } catch (err) { diagError('fields_wind_level', err, {}); } sim.hDrag = false; windLabel(); };
 $('wd-mode').onchange = e => { fields.setWindMode(e.target.value); };
+$('wd-area').onchange = async e => { try { await fields.useWindArea(e.target.value); } catch (err) { diagError('fields_wind_area', err, {}); } const k = fields.windArea(); e.target.value = k; windLabel();   // an area that is not in this build falls back to the one shown
+  if (k === 'malago' && e.isTrusted !== false && !tour.active()) fly(MALAGO[0] + 380, 520, MALAGO[1] + 600, MALAGO[0], 10, MALAGO[1]); };   // the 4 m wind covers 1 km around Malago Road: go there
 $('wd-play').onclick = () => { sim.wdPlay = !sim.wdPlay; setPlay($('wd-play'), sim.wdPlay); };
 fields.manifest().then(m => { if (!m.flood) { $('fl-on').disabled = true; $('fl-status').textContent = 'Flood results are not in this build yet.'; }
+  if (!m.flood_malago) { const o = $('fl-scn').querySelector('option[value="malago"]'); o.disabled = true; o.textContent = 'Malago Road, 2 m (not in this build)'; const ab = $('about-malago'); if (ab) ab.hidden = true; }
   if (!m.flood_river) { const o = $('fl-scn').querySelector('option[value="river"]'); o.disabled = true; o.textContent = 'River inflow (not in this build)'; $('fl-scn').value = 'rain'; const ab = $('about-river'); if (ab) ab.hidden = true; }
-  if (!m.wind) { $('wd-on').disabled = true; $('wd-status').textContent = 'Wind results are not in this build yet.'; } })
+  if (!m.wind) { $('wd-on').disabled = true; $('wd-status').textContent = 'Wind results are not in this build yet.'; }
+  if (!m.pollution_malago) { const o = $('px-area').querySelector('option[value="malago"]'); o.disabled = true; o.textContent = 'Malago Road, 4 m (not in this build)'; const ab = $('about-nox-malago'); if (ab) ab.hidden = true; }
+  if (!m.wind_malago) { const o = $('wd-area').querySelector('option[value="malago"]'); o.disabled = true; o.textContent = 'Malago Road, 4 m (not in this build)'; const ab = $('about-wind-malago'); if (ab) ab.hidden = true; } })
   .catch(e => { $('fl-on').disabled = $('wd-on').disabled = true; $('fl-status').textContent = 'Simulation results are not available (' + e.message + ').'; });
 // ---- intro tour (tour.js): geometry -> landmarks -> traffic -> wind -> temperature -> shade -> pollution -> flooding -> free exploration
+// A landmark that is a line (a road): a flat ribbon over its centre line, shown while the tour visits it or after its button is pressed.
+let hiMesh = null;
+function highlightLine(l) {
+  if (hiMesh) { scene.remove(hiMesh); hiMesh.geometry.dispose(); hiMesh.material.dispose(); hiMesh = null; }
+  if (!l || !l.line || l.line.length < 2) return;
+  const P = l.line, half = (l.line_width_m ?? 14) / 2, pos = [], idx = [];
+  for (let i = 0; i < P.length; i++) { const a = P[Math.max(0, i - 1)], b = P[Math.min(P.length - 1, i + 1)]; let dx = b[0] - a[0], dy = b[1] - a[1]; const n = Math.hypot(dx, dy) || 1; dx /= n; dy /= n;
+    const [x, y, z] = P[i]; pos.push(x - dy * half, z + 0.9, -(y + dx * half), x + dy * half, z + 0.9, -(y - dx * half));   // world = (x, up, -y)
+    if (i) { const k = 2 * i; idx.push(k - 2, k - 1, k, k - 1, k + 1, k); } }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx);
+  hiMesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: 0xff7a1a, transparent: true, opacity: 0.6, depthWrite: false, side: THREE.DoubleSide, fog: false }));
+  hiMesh.name = 'landmark line: ' + l.name; hiMesh.renderOrder = 15; hiMesh.frustumCulled = false; scene.add(hiMesh);
+}
 const simApi = {
-  set: async (k, on) => { const e = $({ wind: 'wd-on', flood: 'fl-on', traffic: 'tr-on', shade: 'sh-on', pollution: 'px-on', temperature: 'tp-on' }[k]); if (e.disabled || e.checked === on) return; e.checked = on; await e.onchange({ target: e }); },
+  set: async (k, on) => { if (k === 'pollution' && on && layers.scalarVariant('pollution')) { const a = $('px-area'); a.value = 'city'; await a.onchange({ target: a, isTrusted: false }); }   // the tour shows the whole-area tracer
+    if (k === 'wind' && on && fields.windArea() !== 'city') { const a = $('wd-area'); a.value = 'city'; await a.onchange({ target: a, isTrusted: false }); }   // the tour shows the whole-area wind
+    const e = $({ wind: 'wd-on', flood: 'fl-on', traffic: 'tr-on', shade: 'sh-on', pollution: 'px-on', temperature: 'tp-on' }[k]); if (e.disabled || e.checked === on) return; e.checked = on; await e.onchange({ target: e }); },
   play: (k, on) => { const B = { shade: 'sh-play', pollution: 'px-play', temperature: 'tp-play' }[k]; if (B) { sim[k + 'Play'] = on; setPlay($(B), on); return; } if (k === 'wind') { sim.wdPlay = on; setPlay($('wd-play'), on); } else if (k === 'traffic') { sim.trPlay = on; setPlay($('tr-play'), on); } else { sim.flPlay = on; setPlay($('fl-play'), on); } },
   trafficLoaded: () => cars.S.loaded, trafficPreload: () => cars.load(), trafficTime: t => { cars.setTime(t); trafficLabel(); },
   floodTime: t => { fields.setFloodTime(t); floodLabel(); }, windFrame: i => { fields.setWindFrame(i); windLabel(); },
+  highlight: l => highlightLine(l),
   windLevel: async i => { try { await fields.setWindLevel(i); } finally { windLabel(); } }, windMode: m => { fields.setWindMode(m); $('wd-mode').value = m; },
   label: k => $({ wind: 'wd-lab', flood: 'fl-lab', traffic: 'tr-lab', shade: 'sh-lab', pollution: 'px-lab', temperature: 'tp-lab' }[k]).textContent,
   shadeTime: h => { layers.setShadeTime(h); shadeLabel(); }, scalarTime: (k, t) => { layers.setScalarTime(t); scalarLabel(k); },
@@ -359,8 +403,9 @@ function simTick() {
   if (sim.flPlay && fields.S.flood.loaded) { const f = fields.floodInfo(); let t = f.t + dt * 300; if (t > f.end) t = 0; fields.setFloodTime(t); floodLabel(); }   // 5 model minutes per second
   if (sim.wdPlay && fields.S.wind.loaded) { sim.wdAcc += dt; if (sim.wdAcc > 0.7) { sim.wdAcc = 0; const w = fields.windInfo(); fields.setWindFrame((w.i + 1) % w.n); windLabel(); } }
   if (sim.trPlay && cars.S.loaded) cars.advance(dt);
+  if (uav.S.on) { if (sim.uvPlay) uav.advance(dt); uav.update(); if ((sim.uvLabAcc = (sim.uvLabAcc || 0) + dt) > 0.25) { sim.uvLabAcc = 0; uavLabel(); } }
   if (sim.shadePlay && layers.S.shade.loaded) { let h = layers.S.shade.t + dt * 0.6; const i = layers.shadeInfo(); if (h > i.last) h = i.first; layers.setShadeTime(h); if ((sim.shAcc = (sim.shAcc || 0) + dt) > 0.25) { sim.shAcc = 0; shadeLabel(); } }   // 0.6 h per second
-  { const k = layers.S.scalar.key; if (k && sim[k + 'Play'] && layers.S.scalar.loaded[k]) { const i = layers.scalarInfo(k); let t = layers.S.scalar.t + dt * (k === 'pollution' ? 150 : 400); if (t > i.end) t = i.start; layers.setScalarTime(t); if ((sim.scAcc = (sim.scAcc || 0) + dt) > 0.25) { sim.scAcc = 0; scalarLabel(k); } } }
+  { const k = layers.S.scalar.key; if (k && sim[k + 'Play'] && layers.scalarLoaded(k)) { const i = layers.scalarInfo(k); let t = layers.S.scalar.t + dt * (k === 'pollution' ? 150 : 400); if (t > i.end) t = i.start; layers.setScalarTime(t); if ((sim.scAcc = (sim.scAcc || 0) + dt) > 0.25) { sim.scAcc = 0; scalarLabel(k); } } }
   cars.update(); if (cars.S.on && (sim.trLabAcc += dt) > 0.25) { sim.trLabAcc = 0; trafficLabel(); }
   fields.update();
 }
@@ -388,6 +433,6 @@ function showDiag() { const d = window.__diag || { marks: {}, errors: [] }, el =
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'uwm_viewer_diagnostics.json'; a.click(); };
     $('diag').parentNode.insertBefore(b, $('diag').nextSibling); renderUI(); } }
 function diagError(type, e, ctx) { if (window.__diag) __diag.errors.push(Object.assign({ t_ms: Math.round(performance.now()), type, msg: String(e && e.message || e), stack: String(e && e.stack || '') }, ctx)); }
-window.uwmViewer = { fly, state, camera, controls, renderer, stats, fields, tour, cars, layers, north: northArrow, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
+window.uwmViewer = { fly, state, camera, controls, renderer, stats, fields, tour, cars, uav, layers, north: northArrow, highlighted: () => hiMesh?.name ?? null, idle: () => !!state.terrainReady && !pending().live.length };   // hook for automated screenshots / checks
 const start = () => init().catch(e => { console.error(e); diagError('init', e, {}); bootFail('The viewer could not start (' + e.message + ').', start); });
 start();
