@@ -2,7 +2,9 @@
 // manifest.json, a DTM image on the flood grid, one depth image per flood frame, one u/v image per wind frame.
 // Flooding is painted onto the existing terrain, road, water and vegetation surfaces in the shader (water depth over the
 // DTM); building walls are painted only below the local water surface. Wind is shown as moving streaks at a fixed height
-// above the DTM, advected through the model's horizontal wind at that height.
+// above the DTM, advected through the model's horizontal wind at that height. The manifest may list several heights
+// (wind.levels, task 18); one is shown at a time, frames of a height are fetched when it is first chosen, and colours and
+// streak speeds use one scale for all heights (wind.display_scale_m_s).
 import * as THREE from 'three';
 
 const FLOOD_STOPS = ['#9fd8f2', '#4fb3e6', '#1e88d0', '#0d5fb0', '#083b85', '#041f52'];   // same ramp as the framework viewer
@@ -61,9 +63,9 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
     mat.needsUpdate = true;
   }
 
-  const S = { man: null, dtm: null, flood: { tex: [], t: 0, playing: false, loaded: false, loading: false }, wind: { frames: [], k: -1, on: false, loaded: false, loading: false, playing: false, fi: 0, mode: 'streaks', mapOpacity: 1 } };
+  const S = { man: null, dtm: null, flood: { tex: [], t: 0, playing: false, loaded: false, loading: false }, wind: { frames: [], k: -1, on: false, loaded: false, loading: false, playing: false, fi: 0, mode: 'streaks', mapOpacity: 1, levels: [], li: 0, want: 0, ds: 1, byLevel: {} } };
   let manP = null;
-  const manifest = () => manP ||= fetch(base + 'manifest.json?v=ext002-20261111').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => { m.flood_rain = m.flood; return (S.man = m); });   // task 17: flood_rain / flood_river scenarios share the flood slot
+  const manifest = () => manP ||= fetch(base + 'manifest.json?v=ext003-20261112').then(r => { if (!r.ok) throw new Error('fields manifest: HTTP ' + r.status); return r.json(); }).then(m => { m.flood_rain = m.flood; return (S.man = m); });   // task 17: flood_rain / flood_river scenarios share the flood slot
 
   async function loadDtm() {
     if (S.dtm) return S.dtm;
@@ -127,19 +129,29 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
     const W = S.wind; if (W.loaded || W.loading) return; W.loading = true;
     try {
       await manifest(); if (!S.man.wind) throw new Error('no wind results in this build');
-      await loadDtm(); const m = S.man.wind, sc = m.scale_m_s; let n = 0;
-      onStatus('wind', `Loading wind frames: 0 of ${m.frames.length}`);
-      await Promise.all(m.frames.map(async (f, i) => {
-        const img = await decodePNG(base + f.file), cnt = img.w * img.h, u = new Float32Array(cnt), v = new Float32Array(cnt), solid = new Uint8Array(cnt);
-        for (let k = 0; k < cnt; k++) { u[k] = (img.data[4 * k] - 128) / 127 * sc; v[k] = (img.data[4 * k + 1] - 128) / 127 * sc; solid[k] = img.data[4 * k + 2] > 127 ? 1 : 0; }
-        const sp = new Uint8Array(cnt * 2); for (let k = 0; k < cnt; k++) { sp[2 * k] = Math.min(255, Math.round(Math.hypot(u[k], v[k]) / sc * 255)); sp[2 * k + 1] = solid[k] * 255; }
-        const tx = new THREE.DataTexture(sp, img.w, img.h, THREE.RGFormat, THREE.UnsignedByteType); tx.minFilter = tx.magFilter = THREE.LinearFilter; tx.needsUpdate = true;
-        W.frames[i] = { u, v, solid, w: img.w, h: img.h, step: f.step, tex: tx }; onStatus('wind', `Loading wind frames: ${++n} of ${m.frames.length}`);
-      }));
+      await loadDtm(); const m = S.man.wind;
+      W.levels = m.levels?.length ? m.levels : [{ height_m: m.height_above_ground_m, scale_m_s: m.scale_m_s, frames: m.frames }];   // a build with one height
+      W.ds = m.display_scale_m_s ?? m.scale_m_s; W.li = W.want = Math.max(0, Math.min(W.levels.length - 1, m.default_level ?? 0));
+      const fr = await loadLevel(W.li);
       { const g = m.grid; U.uWGrid.value.set(g.x0, g.y0, g.nx * g.cell, g.ny * g.cell); }
-      W.loaded = true; W.fi = W.frames.length - 1; U.uWind.value = W.frames[W.fi].tex; for (let i = 0; i < N; i++) spawn(i, true); onStatus('wind', '');
+      W.frames = fr; W.loaded = true; W.fi = W.frames.length - 1; U.uWind.value = W.frames[W.fi].tex; for (let i = 0; i < N; i++) spawn(i, true); onStatus('wind', '');
     } catch (e) { onStatus('wind', 'The wind layer did not load (' + e.message + ').', true); throw e; }
     finally { W.loading = false; }
+  }
+  // Frames of one height: u, v for the streaks and a speed texture for the colour map. Speed colours use the display scale shared by all heights.
+  function loadLevel(li) {
+    const W = S.wind; if (W.byLevel[li]) return W.byLevel[li];
+    const lv = W.levels[li], sc = lv.scale_m_s, ds = W.ds, out = []; let n = 0; const what = W.levels.length > 1 ? ` at ${lv.height_m} m` : '';
+    onStatus('wind', `Loading wind frames${what}: 0 of ${lv.frames.length}`);
+    const p = Promise.all(lv.frames.map(async (f, i) => {
+      const img = await decodePNG(base + f.file), cnt = img.w * img.h, u = new Float32Array(cnt), v = new Float32Array(cnt), solid = new Uint8Array(cnt);
+      for (let k = 0; k < cnt; k++) { u[k] = (img.data[4 * k] - 128) / 127 * sc; v[k] = (img.data[4 * k + 1] - 128) / 127 * sc; solid[k] = img.data[4 * k + 2] > 127 ? 1 : 0; }
+      const sp = new Uint8Array(cnt * 2); for (let k = 0; k < cnt; k++) { sp[2 * k] = Math.min(255, Math.round(Math.hypot(u[k], v[k]) / ds * 255)); sp[2 * k + 1] = solid[k] * 255; }
+      const tx = new THREE.DataTexture(sp, img.w, img.h, THREE.RGFormat, THREE.UnsignedByteType); tx.minFilter = tx.magFilter = THREE.LinearFilter; tx.needsUpdate = true;
+      out[i] = { u, v, solid, w: img.w, h: img.h, step: f.step, tex: tx }; onStatus('wind', `Loading wind frames${what}: ${++n} of ${lv.frames.length}`);
+    })).then(() => { onStatus('wind', ''); return out; });
+    W.byLevel[li] = p; p.catch(() => { if (W.byLevel[li] === p) delete W.byLevel[li]; });   // a failed height can be tried again
+    return p;
   }
   function windAt(x, y) {
     const W = S.wind, fr = W.frames[W.fi]; if (!fr) return null; const g = S.man.wind.grid;
@@ -159,7 +171,7 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
     const now = performance.now(), dt = Math.min(0.1, (now - last) / 1000); last = now;
     const W = S.wind; if (!W.on || !W.loaded) return;
     // Display speed-up: the fastest wind crosses about 1/8 of the visible region per second; a streak shows the path of the last 0.6 s.
-    const R = region(), hAbove = S.man.wind.height_above_ground_m, sc = S.man.wind.scale_m_s, accel = R.r / (8 * sc);
+    const R = region(), hAbove = W.levels[W.li].height_m, sc = W.ds, accel = R.r / (8 * sc);   // one speed scale for all heights
     for (let i = 0; i < N; i++) {
       let x = P[3 * i], y = P[3 * i + 1]; const uv = windAt(x, y);
       age[i] += dt;
@@ -190,7 +202,14 @@ vec3 floodRamp(float d) { float t = clamp((d - uRange.x) / (uRange.y - uRange.x)
     setWindFrame(i) { const W = S.wind; if (!W.loaded) return; W.fi = Math.max(0, Math.min(W.frames.length - 1, i)); U.uWind.value = W.frames[W.fi].tex; },
     // 'streaks' (default, the Simulations card) or 'map' (speed colours on the ground, used by the intro tour's overhead view)
     setWindMode(mode) { const W = S.wind; W.mode = mode; lines.visible = W.on && mode !== 'map'; U.uWindOn.value = W.on && mode === 'map' ? W.mapOpacity : 0; },
-    windInfo() { const W = S.wind, f = W.frames[W.fi]; return { i: W.fi, n: W.frames.length, step: f?.step, total: S.man?.wind?.steps_total, height: S.man?.wind?.height_above_ground_m }; },
+    windInfo() { const W = S.wind, f = W.frames[W.fi], lv = W.levels[W.li]; return { i: W.fi, n: W.frames.length, step: f?.step, total: S.man?.wind?.steps_total, height: lv?.height_m ?? S.man?.wind?.height_above_ground_m,
+      span: lv?.span_m, level: W.li, heights: W.levels.map(l => l.height_m), mode: W.mode }; },
+    // show the wind at another height (index into wind.levels); its frames are fetched the first time. null = the build's default height.
+    async setWindLevel(li) { const W = S.wind; if (!W.loaded) return false; li = li == null ? Math.max(0, Math.min(W.levels.length - 1, S.man.wind.default_level ?? 0)) : Math.max(0, Math.min(W.levels.length - 1, Math.round(li)));
+      W.want = li; if (li === W.li) return true;
+      try { const fr = await loadLevel(li); if (W.want !== li) return false;   // another height was chosen meanwhile
+        W.li = li; W.frames = fr; W.fi = Math.min(W.fi, fr.length - 1); U.uWind.value = fr[W.fi].tex; return true; }
+      catch (e) { W.want = W.li; onStatus('wind', 'The wind at this height did not load (' + e.message + ').', true); throw e; } },
     manifest,
     preload: k => (k === 'wind' ? loadWind() : loadFlood()),   // fetch a layer's frames without showing it (used by the intro tour)
     setOpacity(k, v) { v = Math.max(0, Math.min(1, v)); if (k === 'flood') { U.uFloodFade.value = v; return; }   // tour cross-fades

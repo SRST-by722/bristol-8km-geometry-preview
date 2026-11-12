@@ -71,14 +71,14 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     S.push({ group: G_TRAFFIC, title: 'Traffic · whole area', sub: 'The same replay seen from above: white dots are moving cars, amber dots stopped ones. Illustrative random demand, not observed traffic.',
       fly: FLY_SHOT, dur: TRAFFIC_MAP_DUR, pose: top, overhead: true, enter: async () => { await sim.set('traffic', true); sim.play('traffic', true); },
       tick: () => sim.label('traffic'), exit: () => sim.set('traffic', false) });
-    if (fm.wind) S.push({ group: G_WIND, title: 'Wind speed · seen from above', sub: 'Learned surrogate model (SCALED) on the Bristol buildings, 12 m above the ground. Illustrative: flat terrain, the model\'s own wind direction, not validated.',
+    if (fm.wind) S.push({ group: G_WIND, title: 'Wind speed · seen from above', sub: 'Learned surrogate model (SCALED) on the Bristol buildings, 8 m above the ground. Illustrative: flat terrain, the model\'s own wind direction, not validated.',
       legend: ['wind', 'slow', 'fast'], fly: FLY_OVERHEAD, dur: WIND_DUR, pose: top,
       ready: () => fields.S.wind.loaded, readyMax: 20, readyText: 'Loading the wind results…',
-      enter: async () => { sim.trees(false); fields.setWindMode('map'); sim.windFrame(0); await sim.set('wind', true); fadeTo('wind', 1); },
+      enter: async () => { sim.trees(false); sim.windMode('map'); sim.windFrame(0); await sim.set('wind', true); await sim.windLevel(null); fadeTo('wind', 1); },   // the build's default height, whatever the panel showed
       tick: u => { const n = fields.windInfo().n || 1; sim.windFrame(Math.min(n - 1, Math.floor(u / WIND_DUR * n))); return sim.label('wind'); },
       exit: () => fadeTo('wind', 0) });
     if (fm.temperature) { const end = fm.temperature.frames[fm.temperature.frames.length - 1].t_s, r = fm.temperature.range_c;
-      S.push({ group: G_TEMP, title: 'Air temperature · 2-D model', sub: "Yi Qi's temperature model from the framework, driven by the 12 m wind: its summer-afternoon scenario with the sun of 21 June, 14:00 BST. A model scenario, not a weather record.",
+      S.push({ group: G_TEMP, title: 'Air temperature · 2-D model', sub: "Yi Qi's temperature model from the framework, driven by the wind 4–12 m above the ground: its summer-afternoon scenario with the sun of 21 June, 14:00 BST. A model scenario, not a weather record.",
         legend: ['temp', `${r[0].toFixed(1)} °C`, `${r[1].toFixed(1)} °C`], fly: FLY_OVERHEAD, dur: TEMP_DUR, pose: top, overhead: true,
         enter: async () => { sim.trees(false); await sim.set('temperature', true); sim.play('temperature', false); sim.scalarTime('temperature', 0); },
         tick: u => { sim.scalarTime('temperature', end * clamp01(u / TEMP_DUR)); return sim.label('temperature'); }, exit: () => sim.set('temperature', false) }); }
@@ -87,7 +87,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
       enter: async () => { sim.trees(true); await sim.set('shade', true); sim.play('shade', false); sim.shadeTime(5); },
       tick: u => { sim.shadeTime(5 + 16 * clamp01(u / SHADE_DUR)); return sim.label('shade'); }, exit: () => sim.set('shade', false) });
     if (fm.pollution) { const end = fm.pollution.frames[fm.pollution.frames.length - 1].t_s;
-      S.push({ group: G_POLL, title: 'Traffic pollution · illustrative tracer', sub: 'NOx from every car of the traffic replay (SUMO emission model), carried by the 12 m wind with the framework transport solver. Relative log scale; not measured, not PM2.5.',
+      S.push({ group: G_POLL, title: 'Traffic pollution · illustrative tracer', sub: 'NOx from every car of the traffic replay (SUMO emission model), carried by the wind 4–12 m above the ground with the framework transport solver. Relative log scale; not measured, not PM2.5.',
         legend: ['nox', 'low', 'high (log)'], fly: FLY_SHOT, dur: POLL_DUR, pose: () => ({ tx: 300, ty: 0, tz: 300, dist: 4300, el: 85 * D2R, az: 0 }), overhead: true,
         enter: async () => { sim.trees(false); await sim.set('pollution', true); sim.play('pollution', false); sim.scalarTime('pollution', 0); },
         tick: u => { sim.scalarTime('pollution', end * clamp01(u / POLL_DUR)); return sim.label('pollution'); }, exit: () => sim.set('pollution', false) }); }
@@ -126,7 +126,7 @@ export function createTour({ camera, controls, state, fields, sim, loadingText, 
     state.planFocus = s.focus(0);
   }
   function restoreLayers(keep) {   // after the tour: tree layers back on; fields off unless the user took over during one
-    sim.trees(true); fields.setWindMode('streaks');
+    sim.trees(true); sim.windMode('streaks');
     if (keep === 'traffic') sim.play('traffic', true); else sim.set('traffic', false);
     for (const k of ['shade', 'pollution', 'temperature']) { if (k === keep) sim.play(k, true); else sim.set(k, false); }
     if (keep !== 'flood') sim.floodScenario('rain');

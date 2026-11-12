@@ -14,7 +14,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const CAR_COLORS = ['#dae0e5', '#33516e', '#878b8c', '#48474a', '#842f2c', '#bcc4cd', '#d2c6a5', '#377175'];   // framework DEFAULT_CAR_COLORS
 const DOTS_FROM = 1600, MODELS_UNTIL = 2600;   // camera distance to the view target (m): dots beyond, models below (both in between)
-const V = 'ext002-20261111';
+const V = 'ext003-20261112';
 
 function dotTexture() {   // as the framework's traffic map dots
   const c = document.createElement('canvas'); c.width = c.height = 32; const g = c.getContext('2d');

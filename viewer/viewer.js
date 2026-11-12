@@ -5,11 +5,11 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createFields } from './fields.js?v=ext002-20261111';
-import { createTour } from './tour.js?v=ext002-20261111';
-import { createCars } from './cars.js?v=ext002-20261111';
-import { createNorthArrow } from './north.js?v=ext002-20261111';
-import { createLayers } from './layers.js?v=ext002-20261111';
+import { createFields } from './fields.js?v=ext003-20261112';
+import { createTour } from './tour.js?v=ext003-20261112';
+import { createCars } from './cars.js?v=ext003-20261112';
+import { createNorthArrow } from './north.js?v=ext003-20261112';
+import { createLayers } from './layers.js?v=ext003-20261112';
 
 window.__viewerStarted = true;
 const LAYERS = [
@@ -220,7 +220,7 @@ canvas.addEventListener('dblclick', async e => {
 function fly(px, py, pz, tx, ty, tz) { camera.position.set(px, py, pz); controls.target.set(tx, ty, tz); controls.update(); plan(); }
 async function init() {
   bootSet('Reading the list of model files…', null);
-  const r = await fetch('manifest.json?v=ext002-20261111'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
+  const r = await fetch('manifest.json?v=ext003-20261112'); if (!r.ok) throw new Error('manifest.json: HTTP ' + r.status); const mf = state.manifest = await r.json();
   $('sub').textContent = mf.subtitle; $('stats').innerHTML = mf.stats.map(s => `<div><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
   $('note').textContent = mf.note; $('foot').textContent = mf.attribution;
   $('layers').innerHTML = LAYERS.map(([k, n, c]) => `<label><input type="checkbox" id="layer-${k}" data-k="${k}" checked><span class="sw" style="background:${c}"></span>${n}</label>`).join('');
@@ -249,7 +249,7 @@ async function init() {
     plan(); }
   if (!state.planTimer) { state.planTimer = setInterval(plan, 400); controls.addEventListener('end', plan); }
   // Optional inspection views (inspect_views.json next to this file): fixed cameras for reproducible checks.
-  try { const ri = await fetch('./inspect_views.json?v=ext002-20261111'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
+  try { const ri = await fetch('./inspect_views.json?v=ext003-20261112'); if (ri.ok) { const iv = await ri.json(); const host = $('landmarks');
       const h = document.createElement('h2'); h.textContent = 'Inspection views'; const box = document.createElement('div'); box.id = 'inspect'; box.className = host.className;
       box.innerHTML = iv.views.map((v, i) => `<button data-i="${i}">${i + 1}. ${v.label}</button>`).join('');
       host.parentNode.insertBefore(h, host.nextSibling); h.parentNode.insertBefore(box, h.nextSibling);
@@ -294,7 +294,9 @@ $('px-play').onclick = () => { sim.pollutionPlay = !sim.pollutionPlay; setPlay($
 $('tp-play').onclick = () => { sim.temperaturePlay = !sim.temperaturePlay; setPlay($('tp-play'), sim.temperaturePlay); };
 $('fl-scn').onchange = async e => { await fields.useFloodScenario(e.target.value); const k = fields.floodScenario(); e.target.value = k;   // a scenario that is not in this build falls back to the one shown
   fields.setFloodTime(0); floodLabel(); $('fl-about').textContent = k === 'river' ? 'river inflow' : 'rain storm'; };
-function windLabel() { const w = fields.windInfo(); if (!w.n) return; $('wd-k').max = w.n - 1; $('wd-k').value = w.i; $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground`; }
+function windLabel() { const w = fields.windInfo(); if (!w.n) return; $('wd-k').max = w.n - 1; $('wd-k').value = w.i;
+  $('wd-lab').textContent = `model step ${w.step} of ${w.total ?? '?'} · ${w.height} m above ground` + (w.span ? ` (layer ${w.span[0]}–${w.span[1]} m)` : '');
+  const many = w.heights.length > 1; $('wd-hrow').hidden = !many; if (many && !sim.hDrag) { $('wd-h').max = w.heights.length - 1; $('wd-h').value = w.level; $('wd-hv').textContent = w.height + ' m'; } $('wd-mode').value = w.mode; }   // not while the height slider is being moved
 const fmtMS = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 function trafficLabel() { const c = cars.info(); if (!c.loaded) return; $('tr-t').max = c.seconds - 1; $('tr-t').value = Math.floor(c.t);
   $('tr-lab').textContent = `replay ${fmtMS(c.t)} of ${fmtMS(c.seconds)} · ${c.count.toLocaleString('en-GB')} cars (${c.moving.toLocaleString('en-GB')} moving)` + (c.mode === 'dots' ? ' · dots: white moving, amber stopped' : ''); }
@@ -313,6 +315,10 @@ $('tr-speed').onchange = e => cars.setSpeed(+e.target.value);
 $('fl-t').oninput = e => { fields.setFloodTime(+e.target.value); floodLabel(); };
 $('fl-play').onclick = () => { sim.flPlay = !sim.flPlay; setPlay($('fl-play'), sim.flPlay); };
 $('wd-k').oninput = e => { fields.setWindFrame(+e.target.value); windLabel(); };
+// Wind height: the slider shows the height while it is dragged; the frames of that height are fetched when it is released.
+$('wd-h').oninput = e => { sim.hDrag = true; const h = fields.windInfo().heights[+e.target.value]; if (h != null) $('wd-hv').textContent = h + ' m'; };
+$('wd-h').onchange = async e => { sim.hDrag = true; try { await fields.setWindLevel(+e.target.value); } catch (err) { diagError('fields_wind_level', err, {}); } sim.hDrag = false; windLabel(); };
+$('wd-mode').onchange = e => { fields.setWindMode(e.target.value); };
 $('wd-play').onclick = () => { sim.wdPlay = !sim.wdPlay; setPlay($('wd-play'), sim.wdPlay); };
 fields.manifest().then(m => { if (!m.flood) { $('fl-on').disabled = true; $('fl-status').textContent = 'Flood results are not in this build yet.'; }
   if (!m.flood_river) { const o = $('fl-scn').querySelector('option[value="river"]'); o.disabled = true; o.textContent = 'River inflow (not in this build)'; $('fl-scn').value = 'rain'; const ab = $('about-river'); if (ab) ab.hidden = true; }
@@ -324,6 +330,7 @@ const simApi = {
   play: (k, on) => { const B = { shade: 'sh-play', pollution: 'px-play', temperature: 'tp-play' }[k]; if (B) { sim[k + 'Play'] = on; setPlay($(B), on); return; } if (k === 'wind') { sim.wdPlay = on; setPlay($('wd-play'), on); } else if (k === 'traffic') { sim.trPlay = on; setPlay($('tr-play'), on); } else { sim.flPlay = on; setPlay($('fl-play'), on); } },
   trafficLoaded: () => cars.S.loaded, trafficPreload: () => cars.load(), trafficTime: t => { cars.setTime(t); trafficLabel(); },
   floodTime: t => { fields.setFloodTime(t); floodLabel(); }, windFrame: i => { fields.setWindFrame(i); windLabel(); },
+  windLevel: async i => { try { await fields.setWindLevel(i); } finally { windLabel(); } }, windMode: m => { fields.setWindMode(m); $('wd-mode').value = m; },
   label: k => $({ wind: 'wd-lab', flood: 'fl-lab', traffic: 'tr-lab', shade: 'sh-lab', pollution: 'px-lab', temperature: 'tp-lab' }[k]).textContent,
   shadeTime: h => { layers.setShadeTime(h); shadeLabel(); }, scalarTime: (k, t) => { layers.setScalarTime(t); scalarLabel(k); },
   floodScenario: async k => { const e = $('fl-scn'); if (e.value !== k) { e.value = k; await e.onchange({ target: e }); } },

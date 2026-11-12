@@ -70,7 +70,10 @@ body.touring #left,body.touring #info,body.touring #act,body.touring #foot{displ
 #north svg{display:block}#north .n-bg{fill:rgba(255,255,255,.93);stroke:#c9d1cd;stroke-width:1}#north .n-head{fill:#b3261e}#north .n-tail{fill:#8f9894}
 #north .n-lab{font:700 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;fill:#1f2724}#north.weak{opacity:.45}
 @media (min-width:701px){#info{top:80px;max-height:calc(60% - 66px)}}
-@media (max-width:700px){#left{right:80px}}
+@media (max-width:700px){#left{right:80px}
+  #fields{flex:0 1 auto;min-height:0;max-height:none}#panel{flex:0 1000 auto;min-height:40px}}   /* narrow: the Simulations card scrolls inside the column; the geometry card shrinks first */
+@media (max-width:700px) and (max-height:560px){#left{max-height:calc(100% - 28px)}}   /* short and narrow: the column may use the whole height */
+#fields,#panel{overscroll-behavior:contain}
 #diagdl{position:fixed;right:12px;bottom:6px;font:11px system-ui;padding:2px 8px}#diag{position:fixed;right:12px;bottom:30px;width:400px;max-width:calc(100% - 24px);max-height:50%;overflow:auto;background:rgba(20,26,24,.88);color:#e8efe9;border-radius:8px;padding:6px 8px 8px 10px}#diag-text{margin:0;font:11px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere}#diag .cardhead{color:#b9c6be;font-size:11px;align-items:center}#diag button.ico{background:transparent;border-color:#5d6864;color:#e8efe9}
 </style>
 <script>/* Read-only diagnostics, captured from page start. Shown only with ?diag=1. Not the full browser console. */
@@ -143,19 +146,21 @@ addEventListener('unhandledrejection', e => __diag.errors.push({ t_ms: Math.roun
     <label><input type="checkbox" id="wd-on"> Wind (surrogate model)</label>
     <div id="wd-ctl" class="simctl" hidden>
       <div class="row"><button id="wd-play" type="button" aria-pressed="false" title="Play">Play</button><input id="wd-k" type="range" min="0" max="0" step="1" value="0" aria-label="Wind model step"></div>
+      <div class="row" id="wd-hrow" hidden><span class="lab" style="margin:0">Height</span><input id="wd-h" type="range" min="0" max="0" step="1" value="0" aria-label="Wind height above ground"><span class="lab" id="wd-hv" style="margin:0;min-width:42px;text-align:right"></span></div>
+      <div class="row"><span class="lab" style="margin:0">Show as</span><select id="wd-mode" aria-label="Wind display"><option value="streaks">moving streaks</option><option value="map">speed colours</option></select></div>
       <div class="lab" id="wd-lab"></div>
       <div class="legend"><span>slow</span><i class="ramp wind"></i><span>fast</span></div>
     </div>
     <div class="note" id="wd-status"></div>
     <details class="note"><summary>About these simulations</summary>
       <p><b>Shade.</b> Sun and shadow on 21 June 2026 under a clear sky, every 30 minutes from 05:00 to 21:00 BST (sun position for the area centre). Framework solar model (shadow and sky-view networks, ASHRAE clear-sky irradiance) on a 4 m height field of the terrain and the buildings. Trees do not cast shadows here.</p>
-      <p><b>Air temperature.</b> Yi Qi's 2-D temperature model from the framework, unchanged, driven by the wind layer at 12 m on 8 m cells: its own summer-afternoon scenario (ambient 31.5 °C, heat sources on urban ground, cooling over green areas and in shade), with the sun of 21 June 14:00 BST. A parameterised model scenario, not a Bristol weather record.</p>
-      <p><b>Traffic NOx tracer.</b> Each car of the traffic replay is a source at its position, with SUMO's built-in emission model (petrol Euro 4 car for every vehicle). The tracer is carried by the 12 m wind (speeds rescaled to a 2 m/s mean) with the framework's upwind transport solver, mixed over 10 m, for 30 minutes from clean air. Shown on a relative log scale; not a measured concentration, not PM2.5.</p>
+      <p><b>Air temperature.</b> Yi Qi's 2-D temperature model from the framework, unchanged, driven by the lowest wind layer (4–12 m above the ground) on 8 m cells: its own summer-afternoon scenario (ambient 31.5 °C, heat sources on urban ground, cooling over green areas and in shade), with the sun of 21 June 14:00 BST. A parameterised model scenario, not a Bristol weather record.</p>
+      <p><b>Traffic NOx tracer.</b> Each car of the traffic replay is a source at its position, with SUMO's built-in emission model (petrol Euro 4 car for every vehicle). The tracer is carried by the lowest wind layer, 4–12 m above the ground (speeds rescaled to a 2 m/s mean) with the framework's upwind transport solver, mixed over 10 m, for 30 minutes from clean air. Shown on a relative log scale; not a measured concentration, not PM2.5.</p>
       <p id="about-river"><b>River inflow flooding.</b> An illustrative scenario: the River Avon entering at the east edge of the area with a flow rising to 800 m³/s in one hour, held for two hours and falling over one hour; no rain; free outflow at the edges; no tides. The terrain data record the water surface, not the river bed, so the channel carries too little water and flooding of the banks is exaggerated. Not a recorded event or a forecast.</p>
       <p><b>North arrow.</b> The arrow at the top right always points to true north. The model's map grid (EPSG:32630) is turned 0.3° from true north here, too small to see on the arrow.</p>
       <p><b>Traffic.</b> Illustrative only: a SUMO microsimulation with random passenger-car trips on the OpenStreetMap road network (left-hand traffic, signal timings guessed by the network converter), five minutes replayed in a loop after a ten-minute warm-up. It is not observed traffic, not traffic counts and not the group's traffic surrogate model (TSM). Cars follow the drawn road and bridge-deck surfaces; cars in tunnels and covered roads are not shown. Display after the framework's South Kensington traffic replay: the same 4.5 m sedan model at true size, and in distant views a traffic map of dots (white moving, amber stopped).</p>
       <p><b>Flooding.</b> A rainfall scenario: 50 mm in 90 minutes, then 90 minutes of drainage (the design storm used for the group's South Kensington run, not a Bristol event). Shallow-water solver from the Physics-Grounded 4D World Model Framework, on the Environment Agency 2 m terrain at 8 m resolution with buildings as solid blocks. Sewers take 12 mm/h and green areas infiltrate 20 mm/h; rivers and the harbour take the outflow, but river levels and tides are not modelled. Illustrative only: not a flood forecast and not checked against Environment Agency flood maps.</p>
-      <p><b>Wind.</b> The framework's SCALED neural surrogate applied to the Bristol buildings with the terrain flattened. Streaks move with the horizontal wind at the stated height above the ground, speeded up for display. Wind direction and speed are what the model produces, not a Bristol weather record. Not validated against CFD or measurements.</p>
+      <p><b>Wind.</b> The framework's SCALED neural surrogate applied to the Bristol buildings with the terrain flattened. Streaks move with the horizontal wind at the chosen height above the ground, speeded up for display; the speed colours show the same layer on the ground. The Height slider picks one of the saved model layers, each 8 m thick; colours and streak speeds use one scale for all heights. Earlier versions labelled the lowest layer (4–12 m above the ground) as 12 m; it is centred at 8 m. Wind direction and speed are what the model produces, not a Bristol weather record. Not validated against CFD or measurements.</p>
     </details>
   </div>
 </div>
@@ -194,6 +199,6 @@ function __viewerCodeFailed() { var b = document.getElementById('boot'); b.class
   document.getElementById('boot-msg').textContent = 'The viewer code did not load.'; document.getElementById('boot-sub').textContent = 'Check the connection, then retry.';
   var r = document.getElementById('boot-retry'); r.hidden = false; r.onclick = function () { location.reload(); }; }
 </script>
-<script type="module" src="./viewer.js?v=ext002-20261111" onerror="__viewerCodeFailed()"></script>
+<script type="module" src="./viewer.js?v=ext003-20261112" onerror="__viewerCodeFailed()"></script>
 </body>
 </html>

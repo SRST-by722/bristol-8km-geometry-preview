@@ -1,6 +1,6 @@
 # Bristol 8 km x 8 km - geometry with traffic, wind, temperature, shade, pollution and flooding (web preview)
 
-Release ext002-20261111.
+Release ext003-20261112.
 
 Interactive Three.js preview of a base/analysis-candidate geometry layer for central Bristol (EPSG:32630 local frame, 8 km x 8 km),
 with illustrative simulation layers: traffic, wind, air temperature, shade, a traffic NOx tracer and two flooding scenarios.
@@ -15,7 +15,7 @@ shade through a day, the NOx tracer, the rain flood and the river flood, then fr
 The order and camera transitions follow the South Kensington viewer of the Physics-Grounded 4D World Model Framework.
 Skip intro or Esc leaves it; dragging, scrolling or touching the model hands control to you at once; Space pauses; Play intro replays it.
 `?tour=0` (or a fixed `?cam=`) opens without the tour; the tour also does not start by itself when the system asks for reduced motion.
-In the tour, wind is shown as speed colours on the ground; in the Simulations panel it is shown as moving streaks.
+In the tour, wind is shown as speed colours on the ground; in the Simulations panel it can be shown as moving streaks or as speed colours, at a chosen height.
 
 **Chapters.** In free exploration the Chapters button (top left, next to Play intro) lists the seven chapters of the tour: Landmarks, Traffic, Wind,
 Temperature, Shade, Pollution and Flooding. Choosing one plays that chapter again with the same camera moves, layer animation and captions:
@@ -37,11 +37,12 @@ dots (white moving, amber stopped) from far away; cars in tunnels and on covered
 not traffic counts and not the TSM traffic model. Passenger cars only.
 
 **Wind.** The framework's SCALED neural surrogate (weights used on Bristol with Yueyan Li's agreement) applied to the Bristol buildings on 4 m cells
-with the terrain flattened; bridges and trees are not obstacles. Shown 12 m above the ground at 16 m resolution, 16 saved steps of 60.
+with the terrain flattened; bridges and trees are not obstacles. Shown at 16 m resolution, 16 saved steps of 60, at a height chosen with the Height slider in the Simulations panel: ten layers centred 8, 16, 24, 32, 40, 48, 64, 80, 96 and 120 m above the ground. Each height is one layer of the model grid, an 8 m thick average (for example 4 to 12 m for the 8 m layer); the ground is flat in the model, so heights are above local ground. Colours and streak speeds use one scale for all heights. The tour shows the 8 m layer.
+Correction: releases up to ext002 described the lowest layer as 12 m above the ground. The model grid has a solid ground slab below it, so that layer is 4 to 12 m above the ground, centred at 8 m. The data are unchanged; the air temperature and NOx layers were computed with this same layer and only its description changes.
 Wind direction and speed are what the model produces, not a Bristol weather record. Smaller model tiles than the
 reference setting were used to fit the shared GPU (more tile seams, same weights). Not validated against CFD or measurements.
 
-**Air temperature.** Yi Qi's 2-D temperature model from the framework, unchanged, driven by the 12 m wind above on 8 m cells. The scenario is
+**Air temperature.** Yi Qi's 2-D temperature model from the framework, unchanged, driven by the lowest wind layer above (4 to 12 m above the ground) on 8 m cells. The scenario is
 the model's own summer-afternoon default (ambient 31.5 C, parameterised heating over built areas and cooling over vegetation and shade) with
 the sun of 21 June, 14:00 BST at Bristol; 11 frames, 400 s apart. Colours span 31.0 to 32.4 C. It shows where the model makes air warmer or
 cooler; it is not an energy balance with Bristol weather and not a temperature record.
@@ -52,7 +53,7 @@ filled and narrow streets are blurred by the 4 m grid.
 
 **Traffic NOx tracer.** NOx emitted by the cars of the traffic run (SUMO's HBEFA 4 emission model with the same petrol Euro 4 car class for
 every vehicle), carried by one steady wind field with the framework's upwind transport step on 8 m cells in a single 10 m mixed layer for
-30 minutes. The wind is the 12 m surrogate field rescaled to a mean of 2 m/s. No background, chemistry, deposition or vertical profile.
+30 minutes. The wind is the lowest layer of the surrogate field (4 to 12 m above the ground) rescaled to a mean of 2 m/s. No background, chemistry, deposition or vertical profile.
 Shown on a relative logarithmic colour scale. It is a tracer of where traffic emissions would collect under these assumptions: not PM2.5,
 not an air-quality assessment, and very high values appear where the surrogate wind is nearly still. A diesel/petrol split and attribution
 to individual vehicles are not included.
@@ -111,5 +112,7 @@ Release intro001-20261111 (wind, rain flood, intro tour): display and interactio
 Release ext001-20261111 (traffic, north arrow, temperature, shade, NOx tracer, river flood): the review builds were checked by CD on Mac mini Safari from a local server in two rounds: the new tour stages, the layer switches, cars on the Cumberland Basin flyover, traffic speed, pause and seek, shadows at three times of day from one camera, both flood scenarios and the switch between them; about 60 frames per second in most sampled views (35 in one sample just after three layers were switched on) and zero captured page errors there. Not tested on a MacBook Air or over a slow network. These checks cover display only, not the physics; no layer has been compared with measurements.
 
 Release ext002-20261111 (chapter replay): checked by CO before release in headless Chromium with software rendering (not Safari): the Chapters menu; each of the seven chapters started from a different view and played to its end; End chapter, Esc and hand-over by drag; an immediate repeat; chapters after skipping the intro and after its natural end; a 390 px wide window; greyed-out chapters in a build without those results; zero page errors. On Mac mini Safari, CD played the intro and all seven chapters to their natural end from a local server and exercised Skip, Space, Esc, End chapter and hand-over by drag and by wheel (about 60 frames per second at the chapter ends). After that review the layout for short, narrow windows was corrected (the Chapters menu stays above the loading bar and scrolls if needed; the caption box keeps clear of the north arrow and scrolls inside when the window is short) and checked by CO in headless Chromium at seven window sizes from 320 x 480 to 1280 x 800, including 427 x 290. Not tested on a phone, a MacBook Air or a slow network.
+
+Release ext003-20261112 (wind height slider, speed colours in the panel, corrected height labels): no new model run was made. The 8 m layer is the one already published; 16 and 40 m come from slices saved during the original run; the other seven heights come from decoding the saved model steps again on the GPU workstation (run by CD; where both exist the two differ by at most 0.01 in model speed units, because the saved steps are stored at lower precision). The height reading was checked independently by CD against the model input code. On Mac mini Safari from a local server, CD checked a first build with three heights: switching height in both displays, changing height during playback, the Wind chapter returning to the 8 m layer, and a full intro run (about 60 frames per second, zero captured errors). Afterwards the remaining heights were added and the layout of the Simulations card in narrow windows was corrected (the card now scrolls inside the window); CO checked this in headless Chromium with software rendering at eight window sizes from 320 x 480 to 1280 x 800, including 427 x 290. Not tested on a phone, a MacBook Air or a slow network.
 
 `SOURCE_FREEZE_full_B8.json` describes the historical input freeze, not current deployed file hashes. `WEB_RELEASE_MANIFEST.json` (in the repository) lists the deployed release. Analysis masters and frozen outputs were not changed.
